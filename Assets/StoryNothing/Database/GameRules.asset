@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce3110b13d7064348aba29d41d691147, type: 3}
   m_Name: GameRules
   m_EditorClassIdentifier: 
-  playerMoveSpeed: 5
+  playerMoveSpeed: 10
   playerRotationSpeed: 10
