@@ -486,6 +486,7 @@ MonoBehaviour:
   playerPrefab: {fileID: 371794971035964122, guid: 50170205a970d0145aa0d6187c98bd70, type: 3}
   playerSpawnPoint: {fileID: 1185201358}
   playerParent: {fileID: 278307492}
+  fieldCameraControllerPrefab: {fileID: 245326261899897268, guid: a3cb88bf95918c74991c13e76a0b6ca8, type: 3}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

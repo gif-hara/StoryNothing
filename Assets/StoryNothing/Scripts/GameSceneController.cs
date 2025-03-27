@@ -14,9 +14,13 @@ namespace StoryNothing
         [SerializeField]
         private Transform playerParent;
 
+        [SerializeField]
+        private FieldCameraController fieldCameraControllerPrefab;
+
         private void Start()
         {
             Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation, playerParent);
+            Instantiate(fieldCameraControllerPrefab);
         }
     }
 }
