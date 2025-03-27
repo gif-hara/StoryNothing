@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace StoryNothing.ActorControllers.Interactables
 {
-    public interface IActorInteractable
+    public interface IGimmick
     {
         void Interact(Actor actor);
     }
