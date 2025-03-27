@@ -12,7 +12,7 @@ namespace StoryNothing.ActorControllers
         {
             actor.UpdateAsObservable()
                 .TakeUntil(cancellationToken)
-                .Subscribe(_ =>
+                .Subscribe(actor, static (_, actor) =>
                 {
                     var inputController = ServiceLocator.Resolve<InputController>();
                     var vector = inputController.InputActions.Player.Move.ReadValue<Vector2>();
