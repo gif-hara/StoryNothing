@@ -1,6 +1,6 @@
-using UnityEngine;
+using StoryNothing.ActorControllers;
 
-namespace StoryNothing.ActorControllers.Interactables
+namespace StoryNothing.GimmickControllers
 {
     public interface IGimmick
     {

@@ -1,8 +1,9 @@
 using R3;
 using R3.Triggers;
+using StoryNothing.ActorControllers;
 using UnityEngine;
 
-namespace StoryNothing.ActorControllers.Interactables
+namespace StoryNothing.GimmickControllers
 {
     public class Gimmick : MonoBehaviour, IGimmick
     {
