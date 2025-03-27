@@ -13,6 +13,8 @@ namespace StoryNothing.ActorControllers
 
         private Quaternion rotation;
 
+        private Vector3 gravity;
+
         public float MoveSpeed { get; set; }
 
         public float RotationSpeed { get; set; }
@@ -24,6 +26,16 @@ namespace StoryNothing.ActorControllers
                 .Subscribe((this, actor), static (_, t) =>
                 {
                     var (@this, actor) = t;
+                    if (!@this.characterController.isGrounded)
+                    {
+                        @this.gravity += Physics.gravity * Time.deltaTime;
+                        @this.characterController.Move(@this.gravity * Time.deltaTime);
+                    }
+                    else
+                    {
+                        @this.gravity = Vector3.zero;
+                    }
+
                     @this.characterController.Move(@this.moveVelocity * Time.deltaTime * @this.MoveSpeed);
                     @this.moveVelocity = Vector3.zero;
 
