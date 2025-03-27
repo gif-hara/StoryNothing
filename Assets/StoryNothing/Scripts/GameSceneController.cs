@@ -19,8 +19,9 @@ namespace StoryNothing
 
         private void Start()
         {
-            Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation, playerParent);
-            Instantiate(fieldCameraControllerPrefab);
+            var player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation, playerParent);
+            var fieldCameraController = Instantiate(fieldCameraControllerPrefab);
+            fieldCameraController.SetDefaultTrackingTarget(player.transform);
         }
     }
 }
