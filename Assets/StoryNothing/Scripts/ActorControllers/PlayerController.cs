@@ -10,12 +10,21 @@ namespace StoryNothing.ActorControllers
     {
         public static void Attach(Actor actor, CancellationToken cancellationToken)
         {
+            var inputController = ServiceLocator.Resolve<InputController>();
+            var fieldCameraController = ServiceLocator.Resolve<FieldCameraController>();
             actor.UpdateAsObservable()
-                .Subscribe(actor, static (_, actor) =>
+                .Subscribe((actor, inputController, fieldCameraController), static (_, t) =>
                 {
-                    var inputController = ServiceLocator.Resolve<InputController>();
-                    var vector = inputController.InputActions.Player.Move.ReadValue<Vector2>();
-                    actor.MovementController.Move(new Vector3(vector.x, 0, vector.y));
+                    var (actor, inputController, fieldCameraController) = t;
+                    var inputVector = inputController.InputActions.Player.Move.ReadValue<Vector2>();
+                    var cameraForward = fieldCameraController.ControlledCamera.transform.forward;
+                    cameraForward.y = 0;
+                    cameraForward.Normalize();
+                    var cameraRight = fieldCameraController.ControlledCamera.transform.right;
+                    cameraRight.y = 0;
+                    cameraRight.Normalize();
+                    var vector = (cameraForward * inputVector.y + cameraRight * inputVector.x).normalized;
+                    actor.MovementController.Move(new Vector3(vector.x, 0, vector.z));
                 })
                 .RegisterTo(cancellationToken);
         }
