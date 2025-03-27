@@ -2,12 +2,12 @@ namespace StoryNothing
 {
     public class InputController
     {
-        private SNInputActions inputActions;
+        public SNInputActions InputActions { get; }
 
         public InputController()
         {
-            inputActions = new SNInputActions();
-            inputActions.Enable();
+            InputActions = new SNInputActions();
+            InputActions.Enable();
         }
     }
 }
