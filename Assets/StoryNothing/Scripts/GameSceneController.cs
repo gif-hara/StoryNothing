@@ -25,6 +25,7 @@ namespace StoryNothing
             var player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation, playerParent);
             var fieldCameraController = Instantiate(fieldCameraControllerPrefab);
             fieldCameraController.SetDefaultTrackingTarget(player.transform);
+            ServiceLocator.Register(fieldCameraController, destroyCancellationToken);
             PlayerController.Attach(player, destroyCancellationToken);
         }
     }
