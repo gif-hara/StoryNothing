@@ -10,7 +10,7 @@ namespace StoryNothing.ActorControllers
 
         public ActorMovementController MovementController { get; private set; }
 
-        void Start()
+        void Awake()
         {
             MovementController = new ActorMovementController(this, characterController);
         }
