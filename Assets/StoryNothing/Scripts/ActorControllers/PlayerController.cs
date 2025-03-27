@@ -12,6 +12,9 @@ namespace StoryNothing.ActorControllers
         {
             var inputController = ServiceLocator.Resolve<InputController>();
             var fieldCameraController = ServiceLocator.Resolve<FieldCameraController>();
+            var gameRules = ServiceLocator.Resolve<GameRules>();
+            actor.MovementController.MoveSpeed = gameRules.PlayerMoveSpeed;
+            actor.MovementController.RotationSpeed = gameRules.PlayerRotationSpeed;
             actor.UpdateAsObservable()
                 .Subscribe((actor, inputController, fieldCameraController), static (_, t) =>
                 {

@@ -13,6 +13,10 @@ namespace StoryNothing.ActorControllers
 
         private Quaternion rotation;
 
+        public float MoveSpeed { get; set; }
+
+        public float RotationSpeed { get; set; }
+
         public ActorMovementController(Actor actor, OpenCharacterController characterController)
         {
             this.characterController = characterController;
@@ -20,10 +24,10 @@ namespace StoryNothing.ActorControllers
                 .Subscribe((this, actor), static (_, t) =>
                 {
                     var (@this, actor) = t;
-                    @this.characterController.Move(@this.moveVelocity * Time.deltaTime);
+                    @this.characterController.Move(@this.moveVelocity * Time.deltaTime * @this.MoveSpeed);
                     @this.moveVelocity = Vector3.zero;
 
-                    actor.transform.localRotation = Quaternion.Lerp(actor.transform.localRotation, @this.rotation, Time.deltaTime * 10);
+                    actor.transform.localRotation = Quaternion.Lerp(actor.transform.localRotation, @this.rotation, Time.deltaTime * @this.RotationSpeed);
                 })
                 .RegisterTo(actor.destroyCancellationToken);
         }
