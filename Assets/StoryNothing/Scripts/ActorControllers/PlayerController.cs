@@ -17,6 +17,10 @@ namespace StoryNothing.ActorControllers
                 {
                     var (actor, inputController, fieldCameraController) = t;
                     var inputVector = inputController.InputActions.Player.Move.ReadValue<Vector2>();
+                    if (inputVector.magnitude < 0.1f)
+                    {
+                        return;
+                    }
                     var cameraForward = fieldCameraController.ControlledCamera.transform.forward;
                     cameraForward.y = 0;
                     cameraForward.Normalize();
@@ -25,6 +29,7 @@ namespace StoryNothing.ActorControllers
                     cameraRight.Normalize();
                     var vector = (cameraForward * inputVector.y + cameraRight * inputVector.x).normalized;
                     actor.MovementController.Move(new Vector3(vector.x, 0, vector.z));
+                    actor.MovementController.Rotation(Quaternion.LookRotation(vector));
                 })
                 .RegisterTo(cancellationToken);
         }
