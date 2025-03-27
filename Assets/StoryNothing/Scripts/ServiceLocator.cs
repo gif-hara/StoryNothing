@@ -75,14 +75,28 @@ namespace HK
             return (T)namedServices[typeof(T)][name];
         }
 
-        public static T TryResolve<T>()
+        public static bool TryResolve<T>(out T service)
         {
-            return services.ContainsKey(typeof(T)) ? (T)services[typeof(T)] : default;
+            if (services.ContainsKey(typeof(T)))
+            {
+                service = (T)services[typeof(T)];
+                return true;
+            }
+
+            service = default;
+            return false;
         }
 
-        public static T TryResolve<T>(string name)
+        public static bool TryResolve<T>(string name, out T service)
         {
-            return namedServices.ContainsKey(typeof(T)) && namedServices[typeof(T)].ContainsKey(name) ? (T)namedServices[typeof(T)][name] : default;
+            if (namedServices.ContainsKey(typeof(T)) && namedServices[typeof(T)].ContainsKey(name))
+            {
+                service = (T)namedServices[typeof(T)][name];
+                return true;
+            }
+
+            service = default;
+            return false;
         }
 
         public static bool Contains<T>()
