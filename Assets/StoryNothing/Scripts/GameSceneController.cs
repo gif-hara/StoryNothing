@@ -1,3 +1,5 @@
+using System.ComponentModel.Design;
+using HK;
 using StoryNothing.ActorControllers;
 using UnityEngine;
 
@@ -19,9 +21,11 @@ namespace StoryNothing
 
         private void Start()
         {
+            ServiceLocator.Register(new InputController(), destroyCancellationToken);
             var player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation, playerParent);
             var fieldCameraController = Instantiate(fieldCameraControllerPrefab);
             fieldCameraController.SetDefaultTrackingTarget(player.transform);
+            PlayerController.Attach(player, destroyCancellationToken);
         }
     }
 }
