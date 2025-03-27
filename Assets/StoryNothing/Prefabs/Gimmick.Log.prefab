@@ -160,12 +160,44 @@ PrefabInstance:
       value: 830813600811843860
       objectReference: {fileID: 0}
     - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
+      propertyPath: onExitSequences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
+      propertyPath: onEnterSequences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
+      propertyPath: 'onExitSequences.Array.data[0]'
+      value: 830813600811843865
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
+      propertyPath: 'onEnterSequences.Array.data[0]'
+      value: 830813600811843864
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
       propertyPath: 'managedReferences[830813600811843860]'
+      value: UnitySequencerSystem UnitySequencerSystem.StandardSequences.Log
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
+      propertyPath: 'managedReferences[830813600811843864]'
+      value: UnitySequencerSystem UnitySequencerSystem.StandardSequences.Log
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
+      propertyPath: 'managedReferences[830813600811843865]'
       value: UnitySequencerSystem UnitySequencerSystem.StandardSequences.Log
       objectReference: {fileID: 0}
     - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
       propertyPath: managedReferences[830813600811843860].message
       value: Hello Gimmick!
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
+      propertyPath: managedReferences[830813600811843864].message
+      value: Enter
+      objectReference: {fileID: 0}
+    - target: {fileID: 4463362851177902426, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
+      propertyPath: managedReferences[830813600811843865].message
+      value: Exit
       objectReference: {fileID: 0}
     - target: {fileID: 5052878636063166620, guid: 57c5e84ef51169b4996cbac739763428, type: 3}
       propertyPath: m_LocalPosition.x
