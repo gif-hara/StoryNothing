@@ -8,6 +8,9 @@ namespace StoryNothing
     public class GameSceneController : MonoBehaviour
     {
         [SerializeField]
+        private GameRules gameRules;
+
+        [SerializeField]
         private Actor playerPrefab;
 
         [SerializeField]
@@ -21,6 +24,7 @@ namespace StoryNothing
 
         private void Start()
         {
+            ServiceLocator.Register(gameRules, destroyCancellationToken);
             ServiceLocator.Register(new InputController(), destroyCancellationToken);
             var player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation, playerParent);
             var fieldCameraController = Instantiate(fieldCameraControllerPrefab);

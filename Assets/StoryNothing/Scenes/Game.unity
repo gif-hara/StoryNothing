@@ -483,6 +483,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c130f5776a937904f90392d07cb9f3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameRules: {fileID: 11400000, guid: 9b458a6891cc9b845873f3a7ea3d5f68, type: 2}
   playerPrefab: {fileID: 371794971035964122, guid: 50170205a970d0145aa0d6187c98bd70, type: 3}
   playerSpawnPoint: {fileID: 1185201358}
   playerParent: {fileID: 278307492}
