@@ -1,12 +1,18 @@
+using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using R3;
 using R3.Triggers;
 using StoryNothing.ActorControllers;
 using UnityEngine;
+using UnitySequencerSystem;
 
 namespace StoryNothing.GimmickControllers
 {
     public class Gimmick : MonoBehaviour, IGimmick
     {
+        [SerializeReference, SubclassSelector]
+        private List<ISequence> sequences;
+
         void Start()
         {
             this.OnTriggerEnterAsObservable()
@@ -23,6 +29,10 @@ namespace StoryNothing.GimmickControllers
 
         public void Interact(Actor actor)
         {
+            var container = new Container();
+            container.Register("Actor", actor);
+            var sequencer = new Sequencer(container, sequences);
+            sequencer.PlayAsync(destroyCancellationToken).Forget();
         }
     }
 }
