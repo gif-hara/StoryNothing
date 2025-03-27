@@ -11,13 +11,13 @@ namespace StoryNothing.ActorControllers
         public static void Attach(Actor actor, CancellationToken cancellationToken)
         {
             actor.UpdateAsObservable()
-                .TakeUntil(cancellationToken)
                 .Subscribe(actor, static (_, actor) =>
                 {
                     var inputController = ServiceLocator.Resolve<InputController>();
                     var vector = inputController.InputActions.Player.Move.ReadValue<Vector2>();
                     actor.MovementController.Move(new Vector3(vector.x, 0, vector.y));
-                });
+                })
+                .RegisterTo(cancellationToken);
         }
     }
 }
