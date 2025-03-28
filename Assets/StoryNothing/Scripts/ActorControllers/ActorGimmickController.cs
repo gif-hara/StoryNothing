@@ -3,22 +3,22 @@ using Cysharp.Threading.Tasks;
 
 namespace StoryNothing.ActorControllers
 {
-    public class ActorInteractController
+    public class ActorGimmickController
     {
         private Actor actor;
 
         private int currentTarget = -1;
 
-        private List<Gimmick> interactables = new();
+        private List<Gimmick> gimmicks = new();
 
-        public ActorInteractController(Actor actor)
+        public ActorGimmickController(Actor actor)
         {
             this.actor = actor;
         }
 
         public async UniTask AddInteractableAsync(Gimmick gimmick)
         {
-            interactables.Add(gimmick);
+            gimmicks.Add(gimmick);
             await gimmick.PlayEnterSequencesAsync(actor);
             if (currentTarget == -1)
             {
@@ -29,7 +29,7 @@ namespace StoryNothing.ActorControllers
 
         public async UniTask RemoveInteractableAsync(Gimmick gimmick)
         {
-            var index = interactables.FindIndex(x => x == gimmick);
+            var index = gimmicks.FindIndex(x => x == gimmick);
             if (index == -1)
             {
                 return;
@@ -42,14 +42,14 @@ namespace StoryNothing.ActorControllers
                 await gimmick.PlayUnfocusedSequencesAsync(actor);
             }
 
-            interactables.RemoveAt(index);
+            gimmicks.RemoveAt(index);
 
             if (index <= currentTarget)
             {
                 currentTarget -= 1;
                 if (currentTarget >= 0)
                 {
-                    await interactables[currentTarget].PlayFocusedSequencesAsync(actor);
+                    await gimmicks[currentTarget].PlayFocusedSequencesAsync(actor);
                 }
             }
         }
@@ -60,7 +60,7 @@ namespace StoryNothing.ActorControllers
             {
                 return;
             }
-            await interactables[currentTarget].PlayInteractSequencesAsync(actor);
+            await gimmicks[currentTarget].PlayInteractSequencesAsync(actor);
         }
 
 
@@ -73,11 +73,11 @@ namespace StoryNothing.ActorControllers
 
             if (currentTarget != -1)
             {
-                interactables[currentTarget].PlayUnfocusedSequencesAsync(actor).Forget();
+                gimmicks[currentTarget].PlayUnfocusedSequencesAsync(actor).Forget();
             }
 
             currentTarget = index;
-            interactables[currentTarget].PlayFocusedSequencesAsync(actor).Forget();
+            gimmicks[currentTarget].PlayFocusedSequencesAsync(actor).Forget();
         }
     }
 }

@@ -33,7 +33,7 @@ namespace StoryNothing
                     var actor = other.attachedRigidbody.GetComponent<Actor>();
                     if (actor != null)
                     {
-                        actor.InteractController.AddInteractableAsync(@this).Forget();
+                        actor.GimmickController.AddInteractableAsync(@this).Forget();
                     }
                 })
                 .RegisterTo(destroyCancellationToken);
@@ -44,7 +44,7 @@ namespace StoryNothing
                     var actor = other.attachedRigidbody.GetComponent<Actor>();
                     if (actor != null)
                     {
-                        actor.InteractController.RemoveInteractableAsync(@this).Forget();
+                        actor.GimmickController.RemoveInteractableAsync(@this).Forget();
                     }
                 })
                 .RegisterTo(destroyCancellationToken);
