@@ -1,4 +1,5 @@
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using HK;
 using R3;
 using R3.Triggers;
@@ -13,6 +14,7 @@ namespace StoryNothing.ActorControllers
             var inputController = ServiceLocator.Resolve<InputController>();
             var fieldCameraController = ServiceLocator.Resolve<FieldCameraController>();
             var gameRules = ServiceLocator.Resolve<GameRules>();
+            cancellationToken = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, actor.destroyCancellationToken).Token;
             actor.MovementController.MoveSpeed = gameRules.PlayerMoveSpeed;
             actor.MovementController.RotationSpeed = gameRules.PlayerRotationSpeed;
             actor.UpdateAsObservable()
@@ -33,6 +35,12 @@ namespace StoryNothing.ActorControllers
                     var vector = (cameraForward * inputVector.y + cameraRight * inputVector.x).normalized;
                     actor.MovementController.Move(new Vector3(vector.x, 0, vector.z));
                     actor.MovementController.Rotation(Quaternion.LookRotation(vector));
+                })
+                .RegisterTo(cancellationToken);
+            inputController.InputActions.Player.Interact.OnPerformedAsObservable()
+                .Subscribe(actor, static (_, actor) =>
+                {
+                    actor.GimmickController.InteractAsync().Forget();
                 })
                 .RegisterTo(cancellationToken);
         }
