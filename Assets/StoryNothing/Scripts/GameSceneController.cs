@@ -26,6 +26,7 @@ namespace StoryNothing
         {
             ServiceLocator.Register(gameRules, destroyCancellationToken);
             ServiceLocator.Register(new InputController(), destroyCancellationToken);
+            ServiceLocator.Register(new UserData(), destroyCancellationToken);
             var player = Instantiate(playerPrefab, playerSpawnPoint.position, playerSpawnPoint.rotation, playerParent);
             var fieldCameraController = Instantiate(fieldCameraControllerPrefab);
             fieldCameraController.SetDefaultTrackingTarget(player.transform);
