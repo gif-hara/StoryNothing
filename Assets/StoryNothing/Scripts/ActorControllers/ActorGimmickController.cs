@@ -9,6 +9,8 @@ namespace StoryNothing.ActorControllers
 
         private int currentTarget = -1;
 
+        private bool isInteracting = false;
+
         private List<Gimmick> gimmicks = new();
 
         public ActorGimmickController(Actor actor)
@@ -56,11 +58,13 @@ namespace StoryNothing.ActorControllers
 
         public async UniTask InteractAsync()
         {
-            if (currentTarget == -1)
+            if (currentTarget == -1 || isInteracting)
             {
                 return;
             }
+            isInteracting = true;
             await gimmicks[currentTarget].PlayInteractSequencesAsync(actor);
+            isInteracting = false;
         }
 
 
