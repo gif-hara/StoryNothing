@@ -1,7 +1,9 @@
 using System;
+using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
+using UnitySequencerSystem;
 
 namespace StoryNothing
 {
@@ -9,7 +11,7 @@ namespace StoryNothing
     {
         public string Id { get; }
 
-        public Func<UniTask> OnEnteredAsync { get; set; }
+        public List<ISequence> OnEnteredSequences { get; set; }
 
         public Func<UniTask> OnExitedAsync { get; set; }
 

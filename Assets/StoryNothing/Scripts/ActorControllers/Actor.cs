@@ -15,7 +15,7 @@ namespace StoryNothing.ActorControllers
         void Awake()
         {
             MovementController = new ActorMovementController(this, characterController);
-            InteractController = new ActorInteractController();
+            InteractController = new ActorInteractController(this);
         }
     }
 }

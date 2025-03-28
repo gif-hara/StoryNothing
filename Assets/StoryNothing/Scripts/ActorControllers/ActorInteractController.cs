@@ -5,36 +5,42 @@ namespace StoryNothing.ActorControllers
 {
     public class ActorInteractController
     {
+        private Actor actor;
+
         private int currentTarget = -1;
 
-        private List<Interactable> interactables = new();
+        private List<Gimmick> interactables = new();
 
-        public async UniTask AddInteractableAsync(Interactable interactable)
+        public ActorInteractController(Actor actor)
         {
-            interactables.Add(interactable);
-            await interactables[currentTarget].OnEnteredAsync.Invoke();
+            this.actor = actor;
+        }
+
+        public async UniTask AddInteractableAsync(Gimmick gimmick)
+        {
+            interactables.Add(gimmick);
+            await gimmick.PlayEnterSequencesAsync(actor);
             if (currentTarget == -1)
             {
                 currentTarget = 0;
-                await interactables[currentTarget].OnFocusedAsync.Invoke();
+                await gimmick.PlayFocusedSequencesAsync(actor);
             }
         }
 
-        public async UniTask RemoveInteractableAsync(string id)
+        public async UniTask RemoveInteractableAsync(Gimmick gimmick)
         {
-            var index = interactables.FindIndex(x => x.Id == id);
+            var index = interactables.FindIndex(x => x == gimmick);
             if (index == -1)
             {
                 return;
             }
 
-            await interactables[index].OnExitedAsync.Invoke();
+            await gimmick.PlayExitSequencesAsync(actor);
 
             if (index == currentTarget)
             {
-                await interactables[index].OnUnfocusedAsync.Invoke();
+                await gimmick.PlayUnfocusedSequencesAsync(actor);
             }
-
 
             interactables.RemoveAt(index);
 
@@ -43,7 +49,7 @@ namespace StoryNothing.ActorControllers
                 currentTarget -= 1;
                 if (currentTarget >= 0)
                 {
-                    await interactables[currentTarget].OnFocusedAsync.Invoke();
+                    await interactables[currentTarget].PlayFocusedSequencesAsync(actor);
                 }
             }
         }
@@ -54,15 +60,24 @@ namespace StoryNothing.ActorControllers
             {
                 return;
             }
-            await interactables[currentTarget].OnInteractedAsync.Invoke();
+            await interactables[currentTarget].PlayInteractSequencesAsync(actor);
         }
 
 
         public void ChangeTarget(int index)
         {
-            interactables[currentTarget].OnUnfocusedAsync.Invoke();
+            if (currentTarget == index)
+            {
+                return;
+            }
+
+            if (currentTarget != -1)
+            {
+                interactables[currentTarget].PlayUnfocusedSequencesAsync(actor).Forget();
+            }
+
             currentTarget = index;
-            interactables[currentTarget].OnFocusedAsync.Invoke();
+            interactables[currentTarget].PlayFocusedSequencesAsync(actor).Forget();
         }
     }
 }

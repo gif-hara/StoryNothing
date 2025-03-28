@@ -16,6 +16,15 @@ namespace StoryNothing
         [SerializeReference, SubclassSelector]
         private List<ISequence> onExitSequences;
 
+        [SerializeReference, SubclassSelector]
+        private List<ISequence> onFocusedSequences;
+
+        [SerializeReference, SubclassSelector]
+        private List<ISequence> onUnfocusedSequences;
+
+        [SerializeReference, SubclassSelector]
+        private List<ISequence> onInteractSequences;
+
         void Start()
         {
             this.OnTriggerEnterAsObservable()
@@ -24,7 +33,7 @@ namespace StoryNothing
                     var actor = other.attachedRigidbody.GetComponent<Actor>();
                     if (actor != null)
                     {
-                        @this.PlaySequences(@this.onEnterSequences);
+                        actor.InteractController.AddInteractableAsync(@this).Forget();
                     }
                 })
                 .RegisterTo(destroyCancellationToken);
@@ -35,19 +44,44 @@ namespace StoryNothing
                     var actor = other.attachedRigidbody.GetComponent<Actor>();
                     if (actor != null)
                     {
-                        @this.PlaySequences(@this.onExitSequences);
+                        actor.InteractController.RemoveInteractableAsync(@this).Forget();
                     }
                 })
                 .RegisterTo(destroyCancellationToken);
         }
 
-        private void PlaySequences(List<ISequence> sequences)
+        public UniTask PlayEnterSequencesAsync(Actor actor)
+        {
+            return PlaySequencesAsync(actor, onEnterSequences);
+        }
+
+        public UniTask PlayExitSequencesAsync(Actor actor)
+        {
+            return PlaySequencesAsync(actor, onExitSequences);
+        }
+
+        public UniTask PlayFocusedSequencesAsync(Actor actor)
+        {
+            return PlaySequencesAsync(actor, onFocusedSequences);
+        }
+
+        public UniTask PlayUnfocusedSequencesAsync(Actor actor)
+        {
+            return PlaySequencesAsync(actor, onUnfocusedSequences);
+        }
+
+        public UniTask PlayInteractSequencesAsync(Actor actor)
+        {
+            return PlaySequencesAsync(actor, onInteractSequences);
+        }
+
+        private UniTask PlaySequencesAsync(Actor actor, List<ISequence> sequences)
         {
             var container = new Container();
-            container.Register("Actor", GetComponent<Actor>());
+            container.Register("Actor", actor);
             container.Register("Gimmick", this);
             var sequencer = new Sequencer(container, sequences);
-            sequencer.PlayAsync(destroyCancellationToken).Forget();
+            return sequencer.PlayAsync(destroyCancellationToken);
         }
     }
 }
