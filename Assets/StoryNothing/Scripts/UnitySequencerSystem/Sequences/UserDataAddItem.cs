@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
@@ -6,6 +7,7 @@ using UnitySequencerSystem;
 
 namespace StoryNothing
 {
+    [Serializable]
     public class UserDataAddItem : ISequence
     {
         [SerializeField]
