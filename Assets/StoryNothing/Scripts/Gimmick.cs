@@ -6,7 +6,7 @@ using StoryNothing.ActorControllers;
 using UnityEngine;
 using UnitySequencerSystem;
 
-namespace StoryNothing.GimmickControllers
+namespace StoryNothing
 {
     public class Gimmick : MonoBehaviour
     {
