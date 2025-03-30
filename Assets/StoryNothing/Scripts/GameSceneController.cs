@@ -1,7 +1,12 @@
 using System.ComponentModel.Design;
+using Cysharp.Threading.Tasks;
 using HK;
+using R3;
+using R3.Triggers;
 using StoryNothing.ActorControllers;
+using StoryNothing.BattleSystems;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace StoryNothing
 {
@@ -22,6 +27,8 @@ namespace StoryNothing
         [SerializeField]
         private FieldCameraController fieldCameraControllerPrefab;
 
+        private BattleController battleController;
+
         private void Start()
         {
             ServiceLocator.Register(gameRules, destroyCancellationToken);
@@ -32,6 +39,26 @@ namespace StoryNothing
             fieldCameraController.SetDefaultTrackingTarget(player.transform);
             ServiceLocator.Register(fieldCameraController, destroyCancellationToken);
             PlayerController.Attach(player, destroyCancellationToken);
+
+            this.UpdateAsObservable()
+                .Subscribe(this, static (_, @this) =>
+                {
+                    if (Keyboard.current.digit1Key.wasPressedThisFrame)
+                    {
+                        @this.BeginBattleAsync().Forget();
+                    }
+                })
+                .RegisterTo(destroyCancellationToken);
+        }
+
+        private UniTask BeginBattleAsync()
+        {
+            if (battleController != null)
+            {
+                return UniTask.CompletedTask;
+            }
+            battleController = new BattleController();
+            return battleController.BeginAsync();
         }
     }
 }
