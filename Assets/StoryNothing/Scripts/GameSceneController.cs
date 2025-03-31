@@ -27,6 +27,9 @@ namespace StoryNothing
         [SerializeField]
         private FieldCameraController fieldCameraControllerPrefab;
 
+        [SerializeField]
+        private HKUIDocument battleDocumentPrefab;
+
         private BattleController battleController;
 
         private void Start()
@@ -51,14 +54,15 @@ namespace StoryNothing
                 .RegisterTo(destroyCancellationToken);
         }
 
-        private UniTask BeginBattleAsync()
+        private async UniTask BeginBattleAsync()
         {
             if (battleController != null)
             {
-                return UniTask.CompletedTask;
+                return;
             }
             battleController = new BattleController();
-            return battleController.BeginAsync();
+            await battleController.BeginAsync(battleDocumentPrefab);
+            battleController = null;
         }
     }
 }

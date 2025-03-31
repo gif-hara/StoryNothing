@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3154690894855592657}
   - component: {fileID: 4303057670530004016}
   - component: {fileID: 3638467433929474574}
+  - component: {fileID: 4714837244518537179}
   m_Layer: 0
   m_Name: UI.Base
   m_TagString: Untagged
@@ -83,3 +84,16 @@ MonoBehaviour:
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
   m_PresetInfoIsWorld: 0
+--- !u!114 &4714837244518537179
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8316915584728943080}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d7d06ef08483646a65a6deff93f625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements: []
