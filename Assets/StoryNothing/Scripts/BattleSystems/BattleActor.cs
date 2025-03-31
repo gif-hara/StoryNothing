@@ -4,14 +4,11 @@ namespace StoryNothing.BattleSystems
 {
     public class BattleActor
     {
-        public string Name { get; set; }
+        public BattleActorSpec Spec { get; private set; }
 
-        public int HitPoint { get; set; }
-
-        public BattleActor(string name, int hitPoint)
+        public BattleActor(BattleActorSpec spec)
         {
-            Name = name;
-            HitPoint = hitPoint;
+            Spec = spec;
         }
     }
 }

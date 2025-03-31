@@ -5,14 +5,16 @@ using UnityEngine;
 namespace StoryNothing.BattleSystems
 {
     [Serializable]
-    public class BattleDebugData
+    public class BattleDebugData : IBattleSetupData
     {
         [SerializeField]
-        private List<BattleActorSpec> players = new();
-        public List<BattleActorSpec> Players => players;
+        private List<BattleActorSpec> playerActorSpecs = new();
 
         [SerializeField]
-        private List<BattleActorSpec> enemies = new();
-        public List<BattleActorSpec> Enemies => enemies;
+        private List<BattleActorSpec> enemyActorSpecs = new();
+
+        public Party PlayerParty => new(playerActorSpecs);
+
+        public Party EnemyParty => new(enemyActorSpecs);
     }
 }

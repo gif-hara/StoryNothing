@@ -28,6 +28,9 @@ namespace StoryNothing
         private FieldCameraController fieldCameraControllerPrefab;
 
         [SerializeField]
+        private BattleDebugData battleDebugData;
+
+        [SerializeField]
         private HKUIDocument battleDocumentPrefab;
 
         private BattleController battleController;
@@ -60,7 +63,7 @@ namespace StoryNothing
             {
                 return;
             }
-            battleController = new BattleController();
+            battleController = new BattleController(battleDebugData);
             await battleController.BeginAsync(battleDocumentPrefab);
             battleController = null;
         }
