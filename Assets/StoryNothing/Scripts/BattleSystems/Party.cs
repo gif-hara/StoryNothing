@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using JetBrains.Annotations;
 using UnityEngine;
 
 namespace StoryNothing.BattleSystems
@@ -10,6 +12,14 @@ namespace StoryNothing.BattleSystems
         [SerializeField]
         private List<BattleActor> actors = new();
         public List<BattleActor> Actors => actors;
+
+        public bool IsDeadAll => actors.All(actor => actor.IsDead);
+
+        [CanBeNull]
+        public BattleActor GetMovableActor()
+        {
+            return actors.Find(actor => actor.BehaviourGauge >= 1f && !actor.IsDead);
+        }
 
         public Party()
         {

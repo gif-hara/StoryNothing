@@ -1160,6 +1160,37 @@ MonoBehaviour:
   playerSpawnPoint: {fileID: 1185201358}
   playerParent: {fileID: 278307492}
   fieldCameraControllerPrefab: {fileID: 245326261899897268, guid: a3cb88bf95918c74991c13e76a0b6ca8, type: 3}
+  battleDebugData:
+    playerActorSpecs:
+    - name: Player1
+      hitPoint: 100
+      physicalAttack: 10
+      magicAttack: 0
+      physicalDefense: 0
+      magicDefense: 0
+      speed: 0
+    - name: Player2
+      hitPoint: 100
+      physicalAttack: 10
+      magicAttack: 0
+      physicalDefense: 0
+      magicDefense: 0
+      speed: 0
+    enemyActorSpecs:
+    - name: Enemy1
+      hitPoint: 100
+      physicalAttack: 10
+      magicAttack: 0
+      physicalDefense: 0
+      magicDefense: 0
+      speed: 0
+    - name: Enemy2
+      hitPoint: 100
+      physicalAttack: 10
+      magicAttack: 0
+      physicalDefense: 0
+      magicDefense: 0
+      speed: 0
   battleDocumentPrefab: {fileID: 6311622362524346932, guid: 4698b97a9716ba143a6923e9d812550d, type: 3}
 --- !u!1 &832575517
 GameObject:

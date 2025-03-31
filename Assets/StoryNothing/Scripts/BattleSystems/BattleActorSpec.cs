@@ -6,32 +6,32 @@ namespace StoryNothing.BattleSystems
     [Serializable]
     public class BattleActorSpec
     {
-        [SerializeField]
-        private string name;
-        public string Name => name;
+        public string name;
 
-        [SerializeField]
-        private int hitPoint;
-        public int HitPoint => hitPoint;
+        public int hitPoint;
 
-        [SerializeField]
-        private int physicalAttack;
-        public int PhysicalAttack => physicalAttack;
+        public int physicalAttack;
 
-        [SerializeField]
-        private int magicAttack;
-        public int MagicAttack => magicAttack;
+        public int magicAttack;
 
-        [SerializeField]
-        private int physicalDefense;
-        public int PhysicalDefense => physicalDefense;
+        public int physicalDefense;
 
-        [SerializeField]
-        private int magicDefense;
-        public int MagicDefense => magicDefense;
+        public int magicDefense;
 
-        [SerializeField]
-        private int speed;
-        public int Speed => speed;
+        public int speed;
+
+        public BattleActorSpec Clone()
+        {
+            return new BattleActorSpec
+            {
+                name = name,
+                hitPoint = hitPoint,
+                physicalAttack = physicalAttack,
+                magicAttack = magicAttack,
+                physicalDefense = physicalDefense,
+                magicDefense = magicDefense,
+                speed = speed
+            };
+        }
     }
 }
