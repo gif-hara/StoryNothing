@@ -1,4 +1,7 @@
+using Cysharp.Threading.Tasks;
 using HK;
+using StoryNothing.AreaControllers;
+using TNRD;
 using UnityEngine;
 
 namespace StoryNothing
@@ -9,9 +12,12 @@ namespace StoryNothing
         private GameRules gameRules;
 
         [SerializeField]
+        private AreaData initialAreaData;
+
+        [SerializeField]
         private HKUIDocument backgroundDocument;
 
-        private void Start()
+        private async UniTaskVoid Start()
         {
             ServiceLocator.Register(gameRules, destroyCancellationToken);
             ServiceLocator.Register(new InputController(), destroyCancellationToken);
@@ -20,6 +26,11 @@ namespace StoryNothing
             var uiViewBackground = new UIViewBackground(backgroundDocument);
             uiViewBackground.Setup(destroyCancellationToken);
             uiViewBackground.Open();
+
+            foreach (var enterArea in initialAreaData.EnterAreaList)
+            {
+                await enterArea.Value.EnterAsync(destroyCancellationToken);
+            }
         }
     }
 }
