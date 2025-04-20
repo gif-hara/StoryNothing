@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 
 namespace StoryNothing.AreaControllers.EnterAreaEvents
 {
-    public class AnyClick : IEnterAreaEvent
+    public class AnyClick : IGameEvent
     {
         public async UniTask EnterAsync(IGameController gameController, CancellationToken cancellationToken)
         {

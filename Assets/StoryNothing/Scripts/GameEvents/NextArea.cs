@@ -4,23 +4,22 @@ using UnityEngine;
 
 namespace StoryNothing.AreaControllers.EnterAreaEvents
 {
-    public class Log : IEnterAreaEvent
+    public class NextArea : IGameEvent
     {
         [SerializeField]
-        private string message;
-
-        public Log()
+        private AreaData nextAreaData;
+        public NextArea()
         {
         }
 
-        public Log(string logMessage)
+        public NextArea(AreaData nextAreaData)
         {
-            this.message = logMessage;
+            this.nextAreaData = nextAreaData;
         }
 
         public UniTask EnterAsync(IGameController gameController, CancellationToken cancellationToken)
         {
-            Debug.Log(message);
+            gameController.SetNextArea(nextAreaData);
             return UniTask.CompletedTask;
         }
     }

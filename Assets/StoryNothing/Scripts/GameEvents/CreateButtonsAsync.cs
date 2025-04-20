@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace StoryNothing.AreaControllers.EnterAreaEvents
 {
-    public class CreateButtonsAsync : IEnterAreaEvent
+    public class CreateButtonsAsync : IGameEvent
     {
         [SerializeField]
         private List<CreateButtonData> buttonDatabase = new();

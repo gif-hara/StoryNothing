@@ -3,7 +3,7 @@ using Cysharp.Threading.Tasks;
 
 namespace StoryNothing.AreaControllers.EnterAreaEvents
 {
-    public interface IEnterAreaEvent
+    public interface IGameEvent
     {
         UniTask EnterAsync(IGameController gameController, CancellationToken cancellationToken);
     }
