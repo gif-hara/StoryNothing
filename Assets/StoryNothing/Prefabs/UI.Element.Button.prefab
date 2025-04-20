@@ -92,8 +92,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -299,7 +299,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1081286946982385325, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 180
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 1081286946982385325, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -359,6 +359,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 857872386943831576, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
       insertIndex: -1
       addedObject: {fileID: 644937999244747542}
+    - targetCorrespondingSourceObject: {fileID: 857872386943831576, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7120499969031714504}
   m_SourcePrefab: {fileID: 100100000, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
 --- !u!224 &2962471664303219086 stripped
 RectTransform:
@@ -387,3 +390,23 @@ MonoBehaviour:
     overrideName: Text
   - document: {fileID: 4895501654780721810}
     overrideName: 
+--- !u!114 &7120499969031714504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3313126037054142779}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 306cc8c2b49d7114eaa3623786fc2126, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IgnoreLayout: 0
+  m_MinWidth: -1
+  m_MinHeight: -1
+  m_PreferredWidth: -1
+  m_PreferredHeight: 50
+  m_FlexibleWidth: -1
+  m_FlexibleHeight: -1
+  m_LayoutPriority: 1

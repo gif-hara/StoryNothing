@@ -17,6 +17,8 @@ namespace StoryNothing
 
         private HKUIDocument areaButtonsDocument;
 
+        private Transform buttonParent;
+
         private HKUIDocument buttonPrefab;
 
         public UIViewGame(HKUIDocument backgroundDocumentPrefab)
@@ -29,6 +31,7 @@ namespace StoryNothing
             document = Object.Instantiate(documentPrefab);
             document.gameObject.SetActive(true);
             areaButtonsDocument = document.Q<HKUIDocument>("Area.Buttons");
+            buttonParent = areaButtonsDocument.Q<Transform>("Parent.Buttons");
             buttonPrefab = areaButtonsDocument.Q<HKUIDocument>("Prefab.Button");
             cancellationToken.RegisterWithoutCaptureExecutionContext(() =>
             {
@@ -71,7 +74,7 @@ namespace StoryNothing
             return await UniTask.WhenAny(buttonTexts
                 .Select(x =>
                 {
-                    var button = Object.Instantiate(buttonPrefab, areaButtonsDocument.transform);
+                    var button = Object.Instantiate(buttonPrefab, buttonParent);
                     button.Q<TMP_Text>("Text").text = x;
                     return button.Q<Button>("Button").OnClickAsync();
                 })
@@ -80,9 +83,9 @@ namespace StoryNothing
 
         public void DestroyButtonAll()
         {
-            for (var i = 0; i < areaButtonsDocument.transform.childCount; i++)
+            for (var i = 0; i < buttonParent.childCount; i++)
             {
-                var child = areaButtonsDocument.transform.GetChild(i);
+                var child = buttonParent.GetChild(i);
                 if (child != null)
                 {
                     Object.Destroy(child.gameObject);
