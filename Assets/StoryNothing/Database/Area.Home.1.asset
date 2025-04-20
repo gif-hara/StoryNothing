@@ -41,4 +41,4 @@ MonoBehaviour:
     - rid: 5862467810798600497
       type: {class: NextArea, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
       data:
-        nextAreaData: {fileID: 11400000, guid: bbf3262cd75b5ae4f96508ea25e79a6c, type: 2}
+        nextAreaData: {fileID: 11400000, guid: 329deb05824e8b14c9026518d0882453, type: 2}

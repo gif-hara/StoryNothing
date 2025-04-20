@@ -14,7 +14,7 @@ namespace StoryNothing
         public string ButtonText => buttonText;
 
         [SerializeField]
-        private List<SerializableInterface<IEnterAreaEvent>> onClickEvents = new();
-        public List<SerializableInterface<IEnterAreaEvent>> OnClickEvents => onClickEvents;
+        private List<SerializableInterface<IGameEvent>> onClickEvents = new();
+        public List<SerializableInterface<IGameEvent>> OnClickEvents => onClickEvents;
     }
 }

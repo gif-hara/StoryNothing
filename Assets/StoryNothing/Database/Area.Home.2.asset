@@ -20,11 +20,7 @@ MonoBehaviour:
   - mode: 1
     unityReference: {fileID: 0}
     rawReference:
-      rid: 5862467810798600469
-  - mode: 1
-    unityReference: {fileID: 0}
-    rawReference:
-      rid: 5862467810798600478
+      rid: 5862467810798600495
   references:
     version: 2
     RefIds:
@@ -32,10 +28,17 @@ MonoBehaviour:
       type: {class: Log, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
       data:
         message: Hello Home.2
-    - rid: 5862467810798600469
-      type: {class: AnyClick, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
-      data: 
-    - rid: 5862467810798600478
+    - rid: 5862467810798600495
+      type: {class: CreateButtonsAsync, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
+      data:
+        buttonDatabase:
+        - buttonText: To Home.1
+          onClickEvents:
+          - mode: 1
+            unityReference: {fileID: 0}
+            rawReference:
+              rid: 5862467810798600497
+    - rid: 5862467810798600497
       type: {class: NextArea, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
       data:
         nextAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}

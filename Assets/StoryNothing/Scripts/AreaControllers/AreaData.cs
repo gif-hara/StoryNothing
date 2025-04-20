@@ -9,7 +9,7 @@ namespace StoryNothing.AreaControllers
     public class AreaData : ScriptableObject
     {
         [SerializeField]
-        private List<SerializableInterface<IEnterAreaEvent>> enterAreaList = new();
-        public List<SerializableInterface<IEnterAreaEvent>> EnterAreaList => enterAreaList;
+        private List<SerializableInterface<IGameEvent>> enterAreaList = new();
+        public List<SerializableInterface<IGameEvent>> EnterAreaList => enterAreaList;
     }
 }
