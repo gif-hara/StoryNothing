@@ -6,13 +6,13 @@ using UnityEngine;
 
 namespace StoryNothing
 {
-    public class UIViewBackground
+    public class UIViewGame
     {
         public readonly HKUIDocument backgroundDocumentPrefab;
 
         private HKUIDocument backgroundDocument;
 
-        public UIViewBackground(HKUIDocument backgroundDocumentPrefab)
+        public UIViewGame(HKUIDocument backgroundDocumentPrefab)
         {
             this.backgroundDocumentPrefab = backgroundDocumentPrefab;
         }

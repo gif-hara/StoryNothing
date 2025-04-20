@@ -16,7 +16,7 @@ namespace StoryNothing
         private AreaData initialAreaData;
 
         [SerializeField]
-        private HKUIDocument backgroundDocument;
+        private HKUIDocument gameDocument;
 
         private AreaData areaData;
 
@@ -32,9 +32,9 @@ namespace StoryNothing
             ServiceLocator.Register(new InputController(), destroyCancellationToken);
             ServiceLocator.Register(new UserData(), destroyCancellationToken);
 
-            var uiViewBackground = new UIViewBackground(backgroundDocument);
-            uiViewBackground.Setup(destroyCancellationToken);
-            uiViewBackground.Open();
+            var uiViewGame = new UIViewGame(gameDocument);
+            uiViewGame.Setup(destroyCancellationToken);
+            uiViewGame.Open();
             areaData = initialAreaData;
 
             while (!destroyCancellationToken.IsCancellationRequested)
