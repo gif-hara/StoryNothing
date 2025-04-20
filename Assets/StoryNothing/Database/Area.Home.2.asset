@@ -44,7 +44,7 @@ MonoBehaviour:
           - mode: 1
             unityReference: {fileID: 0}
             rawReference:
-              rid: 5862467819113283666
+              rid: 5862467819113283691
           onPointerEnterEvents: []
           onPointerExitEvents: []
         - buttonText: Log
@@ -80,11 +80,10 @@ MonoBehaviour:
       type: {class: Log, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
       data:
         message: OnPointerExit
-    - rid: 5862467819113283666
-      type: {class: NextArea, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
-      data:
-        nextAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}
     - rid: 5862467819113283688
       type: {class: Constant, ns: StoryNothing.GameConditions, asm: Assembly-CSharp}
       data:
         value: 0
+    - rid: 5862467819113283691
+      type: {class: NextAreaAsHome, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data: 

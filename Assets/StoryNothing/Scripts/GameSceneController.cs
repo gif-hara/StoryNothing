@@ -18,6 +18,9 @@ namespace StoryNothing
         private AreaData initialAreaData;
 
         [SerializeField]
+        private AreaData homeAreaData;
+
+        [SerializeField]
         private HKUIDocument gameDocument;
 
         private AreaData areaData;
@@ -61,6 +64,11 @@ namespace StoryNothing
             currentAreaScope?.Cancel();
             currentAreaScope?.Dispose();
             currentAreaScope = null;
+        }
+
+        public void SetNextAreaAsHome()
+        {
+            SetNextArea(homeAreaData);
         }
 
         public List<Button> CreateButtons(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)

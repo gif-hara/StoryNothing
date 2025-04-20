@@ -165,6 +165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gameRules: {fileID: 11400000, guid: 9b458a6891cc9b845873f3a7ea3d5f68, type: 2}
   initialAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}
+  homeAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}
   gameDocument: {fileID: 3289035906143699718, guid: 9f4cbc8663573c541a2cd7cd1757f1f5, type: 3}
 --- !u!1 &832575517
 GameObject:
