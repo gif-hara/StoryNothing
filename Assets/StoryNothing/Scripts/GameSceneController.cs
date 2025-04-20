@@ -17,6 +17,8 @@ namespace StoryNothing
         [SerializeField]
         private HKUIDocument backgroundDocument;
 
+        private AreaData nextAreaData;
+
         private async UniTaskVoid Start()
         {
             ServiceLocator.Register(gameRules, destroyCancellationToken);
@@ -27,9 +29,14 @@ namespace StoryNothing
             uiViewBackground.Setup(destroyCancellationToken);
             uiViewBackground.Open();
 
-            foreach (var enterArea in initialAreaData.EnterAreaList)
+            while (!destroyCancellationToken.IsCancellationRequested)
             {
-                await enterArea.Value.EnterAsync(destroyCancellationToken);
+                foreach (var enterArea in initialAreaData.EnterAreaList)
+                {
+                    await enterArea.Value.EnterAsync(destroyCancellationToken);
+                }
+
+                await UniTask.WaitWhile(this, @this => @this.nextAreaData == null, cancellationToken: destroyCancellationToken);
             }
         }
     }
