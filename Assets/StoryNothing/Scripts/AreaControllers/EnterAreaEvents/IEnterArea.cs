@@ -1,9 +1,9 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 
-namespace StoryNothing.AreaControllers
+namespace StoryNothing.AreaControllers.EnterAreaEvents
 {
-    public interface IEnterArea
+    public interface IEnterAreaEvent
     {
         UniTask EnterAsync(CancellationToken cancellationToken);
     }
