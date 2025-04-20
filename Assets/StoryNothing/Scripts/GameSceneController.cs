@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
 using StoryNothing.AreaControllers;
@@ -20,11 +22,7 @@ namespace StoryNothing
 
         private AreaData areaData;
 
-        public void SetNextArea(AreaData areaData)
-        {
-            Assert.IsNotNull(areaData, "AreaData cannot be null.");
-            this.areaData = areaData;
-        }
+        private UIViewGame uiViewGame;
 
         private async UniTaskVoid Start()
         {
@@ -32,7 +30,7 @@ namespace StoryNothing
             ServiceLocator.Register(new InputController(), destroyCancellationToken);
             ServiceLocator.Register(new UserData(), destroyCancellationToken);
 
-            var uiViewGame = new UIViewGame(gameDocument);
+            uiViewGame = new UIViewGame(gameDocument);
             uiViewGame.Setup(destroyCancellationToken);
             uiViewGame.Open();
             areaData = initialAreaData;
@@ -48,6 +46,22 @@ namespace StoryNothing
 
                 await UniTask.WaitWhile(this, @this => @this.areaData == null, cancellationToken: destroyCancellationToken);
             }
+        }
+
+        public void SetNextArea(AreaData areaData)
+        {
+            Assert.IsNotNull(areaData, "AreaData cannot be null.");
+            this.areaData = areaData;
+        }
+
+        public UniTask<int> CreateButtonsAsync(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
+        {
+            return uiViewGame.CreateButtonsAsync(buttonTexts, cancellationToken);
+        }
+
+        public void DestroyButtonAll()
+        {
+            uiViewGame.DestroyButtonAll();
         }
     }
 }

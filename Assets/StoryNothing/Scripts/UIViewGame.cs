@@ -58,7 +58,7 @@ namespace StoryNothing
             document.gameObject.SetActive(false);
         }
 
-        public async UniTask<int> CreateButtons(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
+        public async UniTask<int> CreateButtonsAsync(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
         {
             if (buttonTexts == null)
             {
