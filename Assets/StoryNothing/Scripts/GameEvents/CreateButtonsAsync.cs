@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using MH3;
 using UnityEngine;
 
 namespace StoryNothing.GameEvents
@@ -22,22 +23,32 @@ namespace StoryNothing.GameEvents
 
         public async UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
-            var result = await gameController.CreateButtonsAsync(buttonDatabase.Select(data => data.ButtonText), cancellationToken);
-            if (result < 0 || result >= buttonDatabase.Count)
+            var buttons = gameController.CreateButtons(buttonDatabase.Select(data => data.ButtonText), cancellationToken);
+            while (!cancellationToken.IsCancellationRequested)
             {
-                Debug.LogError($"Invalid button index: {result}");
-                return;
-            }
-            for (var i = 0; i < buttonDatabase[result].OnClickEvents.Count; i++)
-            {
-                var e = buttonDatabase[result].OnClickEvents[i];
-                if (e == null || e.Value == null)
+                var (index, behavior) = await buttons.GetBehaviourAsync(cancellationToken);
+                var button = buttons[index];
+                if (behavior == Define.ButtonBehavior.OnClick)
                 {
-                    Debug.LogError($"Button {i} is null.");
-                    continue;
+                    foreach (var i in buttonDatabase[index].OnClickEvents)
+                    {
+                        await i.Value.InvokeAsync(gameController, cancellationToken);
+                    }
                 }
-
-                await e.Value.InvokeAsync(gameController, cancellationToken);
+                else if (behavior == Define.ButtonBehavior.OnPointerEnter)
+                {
+                    foreach (var i in buttonDatabase[index].OnPointerEnterEvents)
+                    {
+                        await i.Value.InvokeAsync(gameController, cancellationToken);
+                    }
+                }
+                else if (behavior == Define.ButtonBehavior.OnPointerExit)
+                {
+                    foreach (var i in buttonDatabase[index].OnPointerExitEvents)
+                    {
+                        await i.Value.InvokeAsync(gameController, cancellationToken);
+                    }
+                }
             }
         }
     }

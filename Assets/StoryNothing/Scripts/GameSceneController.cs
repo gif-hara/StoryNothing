@@ -5,6 +5,7 @@ using HK;
 using StoryNothing.AreaControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 
 namespace StoryNothing
 {
@@ -23,6 +24,8 @@ namespace StoryNothing
 
         private UIViewGame uiViewGame;
 
+        private CancellationTokenSource currentAreaScope;
+
         private async UniTaskVoid Start()
         {
             ServiceLocator.Register(gameRules, destroyCancellationToken);
@@ -34,16 +37,19 @@ namespace StoryNothing
             uiViewGame.Open();
             areaData = initialAreaData;
 
-            while (!destroyCancellationToken.IsCancellationRequested)
+            while (!destroyCancellationToken.IsCancellationRequested || areaData != null)
             {
+                currentAreaScope = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
                 var currentAreaData = areaData;
                 areaData = null;
-                foreach (var enterArea in currentAreaData.EnterAreaList)
+                foreach (var i in currentAreaData.EnterAreaList)
                 {
-                    await enterArea.Value.InvokeAsync(this, destroyCancellationToken);
+                    await i.Value.InvokeAsync(this, currentAreaScope.Token);
                 }
-
-                await UniTask.WaitWhile(this, @this => @this.areaData == null, cancellationToken: destroyCancellationToken);
+                if (currentAreaScope != null)
+                {
+                    await UniTask.WaitUntilCanceled(currentAreaScope.Token);
+                }
             }
         }
 
@@ -51,11 +57,15 @@ namespace StoryNothing
         {
             Assert.IsNotNull(areaData, "AreaData cannot be null.");
             this.areaData = areaData;
+            DestroyButtonAll();
+            currentAreaScope?.Cancel();
+            currentAreaScope?.Dispose();
+            currentAreaScope = null;
         }
 
-        public UniTask<int> CreateButtonsAsync(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
+        public List<Button> CreateButtons(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
         {
-            return uiViewGame.CreateButtonsAsync(buttonTexts, cancellationToken);
+            return uiViewGame.CreateButtons(buttonTexts, cancellationToken);
         }
 
         public void DestroyButtonAll()

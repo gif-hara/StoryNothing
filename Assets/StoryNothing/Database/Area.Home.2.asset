@@ -12,7 +12,63 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69950f192f8dcb04facea297eb2e5a9f, type: 3}
   m_Name: Area.Home.2
   m_EditorClassIdentifier: 
-  enterAreaList: []
+  enterAreaList:
+  - mode: 1
+    unityReference: {fileID: 0}
+    rawReference:
+      rid: 5862467819113283661
+  - mode: 1
+    unityReference: {fileID: 0}
+    rawReference:
+      rid: 5862467819113283662
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5862467819113283661
+      type: {class: AddMessageAsync, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data:
+        message: "\u3053\u3053\u306FHome.2\u3060"
+    - rid: 5862467819113283662
+      type: {class: CreateButtonsAsync, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data:
+        buttonDatabase:
+        - buttonText: To Home.1
+          onClickEvents:
+          - mode: 1
+            unityReference: {fileID: 0}
+            rawReference:
+              rid: 5862467819113283666
+          onPointerEnterEvents: []
+          onPointerExitEvents: []
+        - buttonText: Log
+          onClickEvents:
+          - mode: 1
+            unityReference: {fileID: 0}
+            rawReference:
+              rid: 5862467819113283663
+          onPointerEnterEvents:
+          - mode: 1
+            unityReference: {fileID: 0}
+            rawReference:
+              rid: 5862467819113283664
+          onPointerExitEvents:
+          - mode: 1
+            unityReference: {fileID: 0}
+            rawReference:
+              rid: 5862467819113283665
+    - rid: 5862467819113283663
+      type: {class: Log, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data:
+        message: OnClick
+    - rid: 5862467819113283664
+      type: {class: Log, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data:
+        message: OnPointerEnter
+    - rid: 5862467819113283665
+      type: {class: Log, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data:
+        message: OnPointerExit
+    - rid: 5862467819113283666
+      type: {class: NextArea, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data:
+        nextAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}

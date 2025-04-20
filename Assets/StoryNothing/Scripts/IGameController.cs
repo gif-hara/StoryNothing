@@ -1,8 +1,8 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using StoryNothing.AreaControllers;
+using UnityEngine.UI;
 
 namespace StoryNothing
 {
@@ -10,7 +10,7 @@ namespace StoryNothing
     {
         void SetNextArea(AreaData areaData);
 
-        UniTask<int> CreateButtonsAsync(IEnumerable<string> buttonTexts, CancellationToken cancellationToken);
+        List<Button> CreateButtons(IEnumerable<string> buttonTexts, CancellationToken cancellationToken);
 
         void DestroyButtonAll();
 

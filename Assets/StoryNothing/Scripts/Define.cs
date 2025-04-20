@@ -7,8 +7,8 @@ namespace StoryNothing
         public enum ButtonBehavior
         {
             OnClick,
-            OnHover,
-            OnHoverExit,
+            OnPointerEnter,
+            OnPointerExit,
         }
     }
 }

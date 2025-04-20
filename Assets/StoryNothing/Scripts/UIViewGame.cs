@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
@@ -71,24 +72,24 @@ namespace StoryNothing
             document.gameObject.SetActive(false);
         }
 
-        public async UniTask<int> CreateButtonsAsync(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
+        public List<Button> CreateButtons(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
         {
             if (buttonTexts == null)
             {
                 Debug.LogError("Button texts cannot be null.");
-                return -1;
+                return null;
             }
 
             DestroyButtonAll();
 
-            return await UniTask.WhenAny(buttonTexts
+            return buttonTexts
                 .Select(x =>
                 {
                     var button = UnityEngine.Object.Instantiate(buttonPrefab, buttonParent);
                     button.Q<TMP_Text>("Text").text = x;
-                    return button.Q<Button>("Button").OnClickAsync();
+                    return button.Q<Button>("Button");
                 })
-            );
+                .ToList();
         }
 
         public void DestroyButtonAll()
