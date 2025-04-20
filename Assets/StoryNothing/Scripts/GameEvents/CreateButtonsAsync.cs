@@ -28,26 +28,16 @@ namespace StoryNothing.GameEvents
             {
                 var (index, behavior) = await buttons.GetBehaviourAsync(cancellationToken);
                 var button = buttons[index];
-                if (behavior == Define.ButtonBehavior.OnClick)
+                var events = behavior switch
                 {
-                    foreach (var i in buttonDatabase[index].OnClickEvents)
-                    {
-                        await i.Value.InvokeAsync(gameController, cancellationToken);
-                    }
-                }
-                else if (behavior == Define.ButtonBehavior.OnPointerEnter)
+                    Define.ButtonBehavior.OnClick => buttonDatabase[index].OnClickEvents,
+                    Define.ButtonBehavior.OnPointerEnter => buttonDatabase[index].OnPointerEnterEvents,
+                    Define.ButtonBehavior.OnPointerExit => buttonDatabase[index].OnPointerExitEvents,
+                    _ => throw new System.Exception("Invalid behavior.")
+                };
+                foreach (var i in events)
                 {
-                    foreach (var i in buttonDatabase[index].OnPointerEnterEvents)
-                    {
-                        await i.Value.InvokeAsync(gameController, cancellationToken);
-                    }
-                }
-                else if (behavior == Define.ButtonBehavior.OnPointerExit)
-                {
-                    foreach (var i in buttonDatabase[index].OnPointerExitEvents)
-                    {
-                        await i.Value.InvokeAsync(gameController, cancellationToken);
-                    }
+                    await i.Value.InvokeAsync(gameController, cancellationToken);
                 }
             }
         }
