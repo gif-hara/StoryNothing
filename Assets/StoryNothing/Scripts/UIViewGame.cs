@@ -104,17 +104,16 @@ namespace StoryNothing
             }
         }
 
-        public UniTask CreateMessageAsync(string message, CancellationToken cancellationToken)
+        public void CreateMessage(string message, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(message))
             {
                 Debug.LogError("Message cannot be null or empty.");
-                return UniTask.CompletedTask;
+                return;
             }
 
             var messageDocument = UnityEngine.Object.Instantiate(messagePrefab, messageParent);
             messageDocument.Q<TMP_Text>("Text").text = message;
-            return UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: cancellationToken);
         }
     }
 }

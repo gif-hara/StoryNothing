@@ -1,8 +1,6 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using StoryNothing.AreaControllers;
 using UnityEngine;
-using UnityEngine.Assertions;
 
 namespace StoryNothing.GameEvents
 {
@@ -22,8 +20,8 @@ namespace StoryNothing.GameEvents
 
         public UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
-            Assert.IsNotNull(gameController, "GameController cannot be null.");
-            return gameController.AddMessageAsync(message, cancellationToken);
+            gameController.AddMessage(message, cancellationToken);
+            return UniTask.CompletedTask;
         }
     }
 }

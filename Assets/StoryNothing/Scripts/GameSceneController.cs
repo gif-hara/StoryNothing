@@ -73,9 +73,9 @@ namespace StoryNothing
             uiViewGame.DestroyButtonAll();
         }
 
-        public async UniTask AddMessageAsync(string message, CancellationToken cancellationToken)
+        public void AddMessage(string message, CancellationToken cancellationToken)
         {
-            await uiViewGame.CreateMessageAsync(message, cancellationToken);
+            uiViewGame.CreateMessage(message, cancellationToken);
         }
     }
 }

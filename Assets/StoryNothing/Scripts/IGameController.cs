@@ -14,6 +14,6 @@ namespace StoryNothing
 
         void DestroyButtonAll();
 
-        UniTask AddMessageAsync(string message, CancellationToken cancellationToken);
+        void AddMessage(string message, CancellationToken cancellationToken);
     }
 }
