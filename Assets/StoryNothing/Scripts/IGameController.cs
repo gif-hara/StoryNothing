@@ -13,5 +13,7 @@ namespace StoryNothing
         UniTask<int> CreateButtonsAsync(IEnumerable<string> buttonTexts, CancellationToken cancellationToken);
 
         void DestroyButtonAll();
+
+        UniTask AddMessageAsync(string message, CancellationToken cancellationToken);
     }
 }

@@ -12,7 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69950f192f8dcb04facea297eb2e5a9f, type: 3}
   m_Name: Area.Home.1
   m_EditorClassIdentifier: 
-  enterAreaList: []
+  enterAreaList:
+  - mode: 1
+    unityReference: {fileID: 0}
+    rawReference:
+      rid: 5862467819113283656
   references:
     version: 2
-    RefIds: []
+    RefIds:
+    - rid: 5862467819113283656
+      type: {class: AddMessageAsync, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data:
+        message: "\u3053\u3053\u306FHome.1\u3060"

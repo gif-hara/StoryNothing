@@ -9,6 +9,7 @@ namespace StoryNothing.GameEvents
     {
         [SerializeField]
         private AreaData nextAreaData;
+
         public NextArea()
         {
         }

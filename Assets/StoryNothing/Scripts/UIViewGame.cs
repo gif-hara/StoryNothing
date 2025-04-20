@@ -103,7 +103,7 @@ namespace StoryNothing
             }
         }
 
-        public UniTask CreateMessage(string message, CancellationToken cancellationToken)
+        public UniTask CreateMessageAsync(string message, CancellationToken cancellationToken)
         {
             if (string.IsNullOrEmpty(message))
             {
