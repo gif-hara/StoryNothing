@@ -3,10 +3,11 @@ using HK;
 using StoryNothing.AreaControllers;
 using TNRD;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace StoryNothing
 {
-    public class GameSceneController : MonoBehaviour
+    public class GameSceneController : MonoBehaviour, IGameController
     {
         [SerializeField]
         private GameRules gameRules;
@@ -18,6 +19,12 @@ namespace StoryNothing
         private HKUIDocument backgroundDocument;
 
         private AreaData nextAreaData;
+
+        public void SetNextArea(AreaData areaData)
+        {
+            Assert.IsNotNull(areaData, "AreaData cannot be null.");
+            nextAreaData = areaData;
+        }
 
         private async UniTaskVoid Start()
         {
