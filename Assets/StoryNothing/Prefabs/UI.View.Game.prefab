@@ -138,6 +138,7 @@ GameObject:
   - component: {fileID: 6513504685886562216}
   - component: {fileID: 7710791392020609935}
   - component: {fileID: 6071097949169805343}
+  - component: {fileID: 8830171274079765522}
   m_Layer: 0
   m_Name: Area.Messages
   m_TagString: Untagged
@@ -217,6 +218,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Padding: {x: 0, y: 0, z: 0, w: 0}
   m_Softness: {x: 0, y: 20}
+--- !u!114 &8830171274079765522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4715964304346072553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d7d06ef08483646a65a6deff93f625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements:
+  - document: {fileID: 7920593591971024034, guid: 206066130923d2443a980eebc14bb5a0, type: 3}
+    overrideName: Prefab.Message
+  - document: {fileID: 7471225409248706403}
+    overrideName: Parent.Message
 --- !u!1 &4799576849959802709
 GameObject:
   m_ObjectHideFlags: 0
@@ -988,12 +1006,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: elements.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: elements.Array.data[0].document
       value: 
       objectReference: {fileID: 5839346973464189049}
+    - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
+      propertyPath: elements.Array.data[1].document
+      value: 
+      objectReference: {fileID: 4715964304346072553}
     - target: {fileID: 8316915584728943080, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: m_Name
       value: UI.View.Game

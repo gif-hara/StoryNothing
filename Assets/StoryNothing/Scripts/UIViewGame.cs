@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -21,6 +22,12 @@ namespace StoryNothing
 
         private HKUIDocument buttonPrefab;
 
+        private HKUIDocument areaMessageDocument;
+
+        private Transform messageParent;
+
+        private HKUIDocument messagePrefab;
+
         public UIViewGame(HKUIDocument backgroundDocumentPrefab)
         {
             this.documentPrefab = backgroundDocumentPrefab;
@@ -28,11 +35,14 @@ namespace StoryNothing
 
         public void Setup(CancellationToken cancellationToken)
         {
-            document = Object.Instantiate(documentPrefab);
+            document = UnityEngine.Object.Instantiate(documentPrefab);
             document.gameObject.SetActive(true);
             areaButtonsDocument = document.Q<HKUIDocument>("Area.Buttons");
             buttonParent = areaButtonsDocument.Q<Transform>("Parent.Buttons");
             buttonPrefab = areaButtonsDocument.Q<HKUIDocument>("Prefab.Button");
+            areaMessageDocument = document.Q<HKUIDocument>("Area.Messages");
+            messageParent = areaMessageDocument.Q<Transform>("Parent.Message");
+            messagePrefab = areaMessageDocument.Q<HKUIDocument>("Prefab.Message");
             cancellationToken.RegisterWithoutCaptureExecutionContext(() =>
             {
                 document.DestroySafe();
@@ -74,7 +84,7 @@ namespace StoryNothing
             return await UniTask.WhenAny(buttonTexts
                 .Select(x =>
                 {
-                    var button = Object.Instantiate(buttonPrefab, buttonParent);
+                    var button = UnityEngine.Object.Instantiate(buttonPrefab, buttonParent);
                     button.Q<TMP_Text>("Text").text = x;
                     return button.Q<Button>("Button").OnClickAsync();
                 })
@@ -88,9 +98,22 @@ namespace StoryNothing
                 var child = buttonParent.GetChild(i);
                 if (child != null)
                 {
-                    Object.Destroy(child.gameObject);
+                    UnityEngine.Object.Destroy(child.gameObject);
                 }
             }
+        }
+
+        public UniTask CreateMessage(string message, CancellationToken cancellationToken)
+        {
+            if (string.IsNullOrEmpty(message))
+            {
+                Debug.LogError("Message cannot be null or empty.");
+                return UniTask.CompletedTask;
+            }
+
+            var messageDocument = UnityEngine.Object.Instantiate(messagePrefab, messageParent);
+            messageDocument.Q<TMP_Text>("Text").text = message;
+            return UniTask.Delay(TimeSpan.FromSeconds(1.0f), cancellationToken: cancellationToken);
         }
     }
 }
