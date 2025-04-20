@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using StoryNothing.GameConditions;
 using StoryNothing.GameEvents;
 using TNRD;
 using UnityEngine;
@@ -12,6 +13,10 @@ namespace StoryNothing
         [SerializeField]
         private string buttonText = string.Empty;
         public string ButtonText => buttonText;
+
+        [SerializeField]
+        private SerializableInterface<IGameCondition> canCreate = new();
+        public SerializableInterface<IGameCondition> CanCreate => canCreate;
 
         [SerializeField]
         private List<SerializableInterface<IGameEvent>> onClickEvents = new();

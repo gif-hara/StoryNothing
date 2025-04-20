@@ -24,6 +24,8 @@ MonoBehaviour:
   references:
     version: 2
     RefIds:
+    - rid: -2
+      type: {class: , ns: , asm: }
     - rid: 5862467819113283661
       type: {class: AddMessageAsync, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
       data:
@@ -33,6 +35,11 @@ MonoBehaviour:
       data:
         buttonDatabase:
         - buttonText: To Home.1
+          canCreate:
+            mode: 0
+            unityReference: {fileID: 0}
+            rawReference:
+              rid: -2
           onClickEvents:
           - mode: 1
             unityReference: {fileID: 0}
@@ -41,6 +48,11 @@ MonoBehaviour:
           onPointerEnterEvents: []
           onPointerExitEvents: []
         - buttonText: Log
+          canCreate:
+            mode: 1
+            unityReference: {fileID: 0}
+            rawReference:
+              rid: 5862467819113283688
           onClickEvents:
           - mode: 1
             unityReference: {fileID: 0}
@@ -72,3 +84,7 @@ MonoBehaviour:
       type: {class: NextArea, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
       data:
         nextAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}
+    - rid: 5862467819113283688
+      type: {class: Constant, ns: StoryNothing.GameConditions, asm: Assembly-CSharp}
+      data:
+        value: 0

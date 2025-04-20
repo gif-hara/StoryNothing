@@ -23,7 +23,10 @@ namespace StoryNothing.GameEvents
 
         public async UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
-            var buttons = gameController.CreateButtons(buttonDatabase.Select(data => data.ButtonText), cancellationToken);
+            var createButtons = buttonDatabase
+                .Where(data => data.CanCreate.EvaluateSafe(gameController))
+                .Select(data => data.ButtonText);
+            var buttons = gameController.CreateButtons(createButtons, cancellationToken);
             while (!cancellationToken.IsCancellationRequested)
             {
                 var (index, behavior) = await buttons.GetBehaviourAsync(cancellationToken);
