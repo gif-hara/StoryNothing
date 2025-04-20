@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using StoryNothing.AreaControllers.EnterAreaEvents;
+using StoryNothing.GameEvents;
 using TNRD;
 using UnityEngine;
 

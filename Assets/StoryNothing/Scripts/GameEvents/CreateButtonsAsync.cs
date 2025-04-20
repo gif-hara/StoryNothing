@@ -4,7 +4,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace StoryNothing.AreaControllers.EnterAreaEvents
+namespace StoryNothing.GameEvents
 {
     public class CreateButtonsAsync : IGameEvent
     {

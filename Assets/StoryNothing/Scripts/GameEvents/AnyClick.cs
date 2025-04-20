@@ -2,7 +2,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine.InputSystem;
 
-namespace StoryNothing.AreaControllers.EnterAreaEvents
+namespace StoryNothing.GameEvents
 {
     public class AnyClick : IGameEvent
     {

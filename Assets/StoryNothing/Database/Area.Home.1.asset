@@ -12,33 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69950f192f8dcb04facea297eb2e5a9f, type: 3}
   m_Name: Area.Home.1
   m_EditorClassIdentifier: 
-  enterAreaList:
-  - mode: 1
-    unityReference: {fileID: 0}
-    rawReference:
-      rid: 5862467810798600468
-  - mode: 1
-    unityReference: {fileID: 0}
-    rawReference:
-      rid: 5862467810798600495
+  enterAreaList: []
   references:
     version: 2
-    RefIds:
-    - rid: 5862467810798600468
-      type: {class: Log, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
-      data:
-        message: Hello Home.1
-    - rid: 5862467810798600495
-      type: {class: CreateButtonsAsync, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
-      data:
-        buttonDatabase:
-        - buttonText: To Home.2
-          onClickEvents:
-          - mode: 1
-            unityReference: {fileID: 0}
-            rawReference:
-              rid: 5862467810798600497
-    - rid: 5862467810798600497
-      type: {class: NextArea, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
-      data:
-        nextAreaData: {fileID: 11400000, guid: 329deb05824e8b14c9026518d0882453, type: 2}
+    RefIds: []
