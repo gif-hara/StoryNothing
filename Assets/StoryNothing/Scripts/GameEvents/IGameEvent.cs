@@ -5,6 +5,6 @@ namespace StoryNothing.AreaControllers.EnterAreaEvents
 {
     public interface IGameEvent
     {
-        UniTask EnterAsync(IGameController gameController, CancellationToken cancellationToken);
+        UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken);
     }
 }

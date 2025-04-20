@@ -20,7 +20,7 @@ namespace StoryNothing.AreaControllers.EnterAreaEvents
             this.buttonDatabase = buttonDatabase;
         }
 
-        public async UniTask EnterAsync(IGameController gameController, CancellationToken cancellationToken)
+        public async UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
             var result = await gameController.CreateButtonsAsync(buttonDatabase.Select(data => data.ButtonText), cancellationToken);
             if (result < 0 || result >= buttonDatabase.Count)
@@ -37,7 +37,7 @@ namespace StoryNothing.AreaControllers.EnterAreaEvents
                     continue;
                 }
 
-                await e.Value.EnterAsync(gameController, cancellationToken);
+                await e.Value.InvokeAsync(gameController, cancellationToken);
             }
         }
     }

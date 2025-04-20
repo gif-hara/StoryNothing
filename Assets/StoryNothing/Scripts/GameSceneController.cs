@@ -3,7 +3,6 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
 using StoryNothing.AreaControllers;
-using TNRD;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -41,7 +40,7 @@ namespace StoryNothing
                 areaData = null;
                 foreach (var enterArea in currentAreaData.EnterAreaList)
                 {
-                    await enterArea.Value.EnterAsync(this, destroyCancellationToken);
+                    await enterArea.Value.InvokeAsync(this, destroyCancellationToken);
                 }
 
                 await UniTask.WaitWhile(this, @this => @this.areaData == null, cancellationToken: destroyCancellationToken);

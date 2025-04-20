@@ -6,7 +6,7 @@ namespace StoryNothing.AreaControllers.EnterAreaEvents
 {
     public class AnyClick : IGameEvent
     {
-        public async UniTask EnterAsync(IGameController gameController, CancellationToken cancellationToken)
+        public async UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
             await UniTask.WaitUntil(() => Mouse.current.leftButton.wasPressedThisFrame, cancellationToken: cancellationToken);
         }

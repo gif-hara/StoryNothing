@@ -18,7 +18,7 @@ namespace StoryNothing.AreaControllers.EnterAreaEvents
             this.message = logMessage;
         }
 
-        public UniTask EnterAsync(IGameController gameController, CancellationToken cancellationToken)
+        public UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
             Debug.Log(message);
             return UniTask.CompletedTask;

@@ -17,7 +17,7 @@ namespace StoryNothing.AreaControllers.EnterAreaEvents
             this.nextAreaData = nextAreaData;
         }
 
-        public UniTask EnterAsync(IGameController gameController, CancellationToken cancellationToken)
+        public UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
             gameController.SetNextArea(nextAreaData);
             return UniTask.CompletedTask;
