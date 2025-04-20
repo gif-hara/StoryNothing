@@ -16,11 +16,11 @@ MonoBehaviour:
   - mode: 1
     unityReference: {fileID: 0}
     rawReference:
-      rid: 5862467810798600460
+      rid: 5862467810798600465
   references:
     version: 2
     RefIds:
-    - rid: 5862467810798600460
-      type: {class: EnterAreaLog, ns: StoryNothing.AreaControllers, asm: Assembly-CSharp}
+    - rid: 5862467810798600465
+      type: {class: Log, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
       data:
         message: Hello

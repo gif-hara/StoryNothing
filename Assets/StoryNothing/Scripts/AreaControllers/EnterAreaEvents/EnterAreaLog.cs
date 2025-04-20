@@ -2,18 +2,18 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
-namespace StoryNothing.AreaControllers
+namespace StoryNothing.AreaControllers.EnterAreaEvents
 {
-    public class EnterAreaLog : IEnterArea
+    public class Log : IEnterAreaEvent
     {
         [SerializeField]
         private string message;
 
-        public EnterAreaLog()
+        public Log()
         {
         }
 
-        public EnterAreaLog(string logMessage)
+        public Log(string logMessage)
         {
             this.message = logMessage;
         }
