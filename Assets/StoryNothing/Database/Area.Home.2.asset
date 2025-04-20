@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69950f192f8dcb04facea297eb2e5a9f, type: 3}
-  m_Name: Area.Home.1
+  m_Name: Area.Home.2
   m_EditorClassIdentifier: 
   enterAreaList:
   - mode: 1
@@ -24,18 +24,18 @@ MonoBehaviour:
   - mode: 1
     unityReference: {fileID: 0}
     rawReference:
-      rid: 5862467810798600476
+      rid: 5862467810798600478
   references:
     version: 2
     RefIds:
     - rid: 5862467810798600468
       type: {class: Log, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
       data:
-        message: Hello Home.1
+        message: Hello Home.2
     - rid: 5862467810798600469
       type: {class: AnyClick, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
       data: 
-    - rid: 5862467810798600476
+    - rid: 5862467810798600478
       type: {class: NextArea, ns: StoryNothing.AreaControllers.EnterAreaEvents, asm: Assembly-CSharp}
       data:
-        nextAreaData: {fileID: 11400000, guid: bbf3262cd75b5ae4f96508ea25e79a6c, type: 2}
+        nextAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}
