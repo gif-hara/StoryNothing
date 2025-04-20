@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using HK;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace StoryNothing
@@ -7,14 +9,17 @@ namespace StoryNothing
     /// <summary>
     /// 採集ポイント
     /// </summary>
+    [Serializable]
     public class CollectionSpot
     {
         /// <summary>
         /// 採集可能回数
         /// </summary>
+        [SerializeField]
         private int count;
 
-        private readonly List<ItemWeight> itemWeights;
+        [SerializeField]
+        private List<ItemWeight> itemWeights;
 
         public CollectionSpot(int count, List<ItemWeight> itemWeights)
         {
