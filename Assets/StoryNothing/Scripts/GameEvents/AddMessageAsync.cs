@@ -20,7 +20,7 @@ namespace StoryNothing.GameEvents
 
         public UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
-            gameController.AddMessage(message, cancellationToken);
+            gameController.AddMessage(message);
             return UniTask.CompletedTask;
         }
     }

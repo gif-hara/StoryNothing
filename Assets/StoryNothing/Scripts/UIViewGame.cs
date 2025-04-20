@@ -104,7 +104,7 @@ namespace StoryNothing
             }
         }
 
-        public void CreateMessage(string message, CancellationToken cancellationToken)
+        public void CreateMessage(string message)
         {
             if (string.IsNullOrEmpty(message))
             {

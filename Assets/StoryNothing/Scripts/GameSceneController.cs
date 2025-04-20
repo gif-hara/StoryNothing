@@ -83,9 +83,9 @@ namespace StoryNothing
             uiViewGame.DestroyButtonAll();
         }
 
-        public void AddMessage(string message, CancellationToken cancellationToken)
+        public void AddMessage(string message)
         {
-            uiViewGame.CreateMessage(message, cancellationToken);
+            uiViewGame.CreateMessage(message);
         }
 
         public void SetupCollectionSpot(List<CollectionSpot> collectionSpots)
