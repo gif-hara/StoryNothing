@@ -18,12 +18,12 @@ namespace StoryNothing
         [SerializeField]
         private HKUIDocument backgroundDocument;
 
-        private AreaData nextAreaData;
+        private AreaData areaData;
 
         public void SetNextArea(AreaData areaData)
         {
             Assert.IsNotNull(areaData, "AreaData cannot be null.");
-            nextAreaData = areaData;
+            this.areaData = areaData;
         }
 
         private async UniTaskVoid Start()
@@ -35,15 +35,18 @@ namespace StoryNothing
             var uiViewBackground = new UIViewBackground(backgroundDocument);
             uiViewBackground.Setup(destroyCancellationToken);
             uiViewBackground.Open();
+            areaData = initialAreaData;
 
             while (!destroyCancellationToken.IsCancellationRequested)
             {
-                foreach (var enterArea in initialAreaData.EnterAreaList)
+                var currentAreaData = areaData;
+                areaData = null;
+                foreach (var enterArea in currentAreaData.EnterAreaList)
                 {
-                    await enterArea.Value.EnterAsync(destroyCancellationToken);
+                    await enterArea.Value.EnterAsync(this, destroyCancellationToken);
                 }
 
-                await UniTask.WaitWhile(this, @this => @this.nextAreaData == null, cancellationToken: destroyCancellationToken);
+                await UniTask.WaitWhile(this, @this => @this.areaData == null, cancellationToken: destroyCancellationToken);
             }
         }
     }
