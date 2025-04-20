@@ -16,5 +16,11 @@ namespace StoryNothing
         void DestroyButtonAll();
 
         void AddMessage(string message, CancellationToken cancellationToken);
+
+        void SetupCollectionSpot(List<CollectionSpot> collectionSpots);
+
+        int Collection(int collectionId);
+
+        bool CanCollection(int collectionId);
     }
 }

@@ -29,6 +29,8 @@ namespace StoryNothing
 
         private CancellationTokenSource currentAreaScope;
 
+        private List<CollectionSpot> collectionSpots = new();
+
         private async UniTaskVoid Start()
         {
             ServiceLocator.Register(gameRules, destroyCancellationToken);
@@ -84,6 +86,25 @@ namespace StoryNothing
         public void AddMessage(string message, CancellationToken cancellationToken)
         {
             uiViewGame.CreateMessage(message, cancellationToken);
+        }
+
+        public void SetupCollectionSpot(List<CollectionSpot> collectionSpots)
+        {
+            this.collectionSpots = collectionSpots;
+        }
+
+        public int Collection(int collectionId)
+        {
+            Assert.IsTrue(collectionId >= 0 && collectionId < collectionSpots.Count, "Collection ID is out of range.");
+            var collectionSpot = collectionSpots[collectionId];
+            return collectionSpot.Collection();
+        }
+
+        public bool CanCollection(int collectionId)
+        {
+            Assert.IsTrue(collectionId >= 0 && collectionId < collectionSpots.Count, "Collection ID is out of range.");
+            var collectionSpot = collectionSpots[collectionId];
+            return collectionSpot.CanCollection();
         }
     }
 }
