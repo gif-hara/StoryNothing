@@ -31,12 +31,14 @@ namespace StoryNothing
 
         private List<CollectionSpot> collectionSpots = new();
 
+        private UserData userData;
+
         private async UniTaskVoid Start()
         {
             ServiceLocator.Register(gameRules, destroyCancellationToken);
             ServiceLocator.Register(new InputController(), destroyCancellationToken);
-            ServiceLocator.Register(new UserData(), destroyCancellationToken);
 
+            userData = new UserData();
             uiViewGame = new UIViewGame(gameDocument);
             uiViewGame.Setup(destroyCancellationToken);
             uiViewGame.Open();
@@ -97,7 +99,9 @@ namespace StoryNothing
         {
             Assert.IsTrue(collectionId >= 0 && collectionId < collectionSpots.Count, "Collection ID is out of range.");
             var collectionSpot = collectionSpots[collectionId];
-            return collectionSpot.Collection();
+            var result = collectionSpot.Collection();
+            userData.AddItem(result, 1);
+            return result;
         }
 
         public bool CanCollection(int collectionId)
