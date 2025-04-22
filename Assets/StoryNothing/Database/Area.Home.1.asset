@@ -57,10 +57,14 @@ MonoBehaviour:
           - mode: 1
             unityReference: {fileID: 0}
             rawReference:
-              rid: 5862467819113283666
+              rid: 5862467861352808448
           onPointerEnterEvents: []
           onPointerExitEvents: []
     - rid: 5862467819113283666
+      type: {class: NextArea, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      data:
+        nextAreaData: {fileID: 11400000, guid: 0e744ce2d4b9e174192a4f4bc75e62e5, type: 2}
+    - rid: 5862467861352808448
       type: {class: NextArea, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
       data:
         nextAreaData: {fileID: 11400000, guid: a0f3373b33962a74c8fda47fdaa5ff86, type: 2}
