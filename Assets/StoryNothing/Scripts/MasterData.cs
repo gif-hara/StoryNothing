@@ -16,6 +16,10 @@ namespace MH3
     public sealed class MasterData : ScriptableObject
     {
         [SerializeField]
+        private ItemSpec.DictionaryList itemSpecs;
+        public ItemSpec.DictionaryList ItemSpecs => itemSpecs;
+
+        [SerializeField]
         private WeaponSpec.DictionaryList weaponSpecs;
         public WeaponSpec.DictionaryList WeaponSpecs => weaponSpecs;
 
@@ -38,12 +42,14 @@ namespace MH3
                 Debug.Log("Begin MasterData Update");
                 var masterDataNames = new[]
                 {
+                    "ItemSpec",
                     "WeaponSpec",
                 };
                 var database = await UniTask.WhenAll(
                     masterDataNames.Select(GoogleSpreadSheetDownloader.DownloadAsync)
                 );
-                weaponSpecs.Set(JsonHelper.FromJson<WeaponSpec>(database[0]));
+                itemSpecs.Set(JsonHelper.FromJson<ItemSpec>(database[0]));
+                weaponSpecs.Set(JsonHelper.FromJson<WeaponSpec>(database[1]));
                 EditorUtility.SetDirty(this);
                 AssetDatabase.SaveAssets();
                 Debug.Log("End MasterData Update");
@@ -60,6 +66,25 @@ namespace MH3
             }
         }
 #endif
+
+        [Serializable]
+        public class ItemSpec
+        {
+
+            public int Id;
+
+            public string Name;
+
+            public string Description;
+
+            [Serializable]
+            public class DictionaryList : DictionaryList<int, ItemSpec>
+            {
+                public DictionaryList() : base(x => x.Id)
+                {
+                }
+            }
+        }
 
         [Serializable]
         public class WeaponSpec

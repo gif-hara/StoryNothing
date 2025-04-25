@@ -12,6 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b33cf68ff9bec4da0a1091ed64792e, type: 3}
   m_Name: MasterData
   m_EditorClassIdentifier: 
+  itemSpecs:
+    list:
+    - Id: 101001
+      Name: "\u85AC\u8349"
+      Description: "\u6226\u95D8\u3067\u4F7F\u7528\u53EF\u80FD\u3002\u81EA\u5206\u306EHP\u309220\u56DE\u5FA9\u3059\u308B\u3002"
+    - Id: 102001
+      Name: "\u9244\u306E\u5263"
+      Description: "\u9244\u306E\u5263\u306E\u8AAC\u660E\u3002"
   weaponSpecs:
     list:
     - Id: 0
