@@ -2,15 +2,22 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
+using MH3;
+using R3;
+using R3.Triggers;
 using StoryNothing.AreaControllers;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace StoryNothing
 {
     public class GameSceneController : MonoBehaviour, IGameController
     {
+        [SerializeField]
+        private MasterData masterData;
+
         [SerializeField]
         private GameRules gameRules;
 
@@ -35,6 +42,7 @@ namespace StoryNothing
 
         private async UniTaskVoid Start()
         {
+            ServiceLocator.Register(masterData, destroyCancellationToken);
             ServiceLocator.Register(gameRules, destroyCancellationToken);
             ServiceLocator.Register(new InputController(), destroyCancellationToken);
 
@@ -43,6 +51,22 @@ namespace StoryNothing
             uiViewGame.Setup(destroyCancellationToken);
             uiViewGame.Open();
             areaData = initialAreaData;
+
+#if DEBUG
+            this.UpdateAsObservable()
+                .Subscribe(_ =>
+                {
+                    if (Keyboard.current.f1Key.wasPressedThisFrame)
+                    {
+                        foreach (var i in masterData.ItemSpecs.List)
+                        {
+                            userData.AddItem(i.Id, 99);
+                        }
+                        Debug.Log($"[DEBUG] Add Item");
+                    }
+                })
+                .RegisterTo(destroyCancellationToken);
+#endif
 
             while (!destroyCancellationToken.IsCancellationRequested || areaData != null)
             {
