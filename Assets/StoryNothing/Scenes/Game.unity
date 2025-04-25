@@ -163,6 +163,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c130f5776a937904f90392d07cb9f3d8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  masterData: {fileID: 11400000, guid: e7d875bf0eaf8bd4aaa4a7d2a9adcd30, type: 2}
   gameRules: {fileID: 11400000, guid: 9b458a6891cc9b845873f3a7ea3d5f68, type: 2}
   initialAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}
   homeAreaData: {fileID: 11400000, guid: 46bce20d68093bc4691b3c4272ca9e24, type: 2}
