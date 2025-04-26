@@ -68,7 +68,7 @@ namespace StoryNothing
                 .RegisterTo(destroyCancellationToken);
 #endif
 
-            while (!destroyCancellationToken.IsCancellationRequested || areaData != null)
+            while (this != null && !destroyCancellationToken.IsCancellationRequested || areaData != null)
             {
                 currentAreaScope = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
                 var currentAreaData = areaData;
@@ -81,6 +81,8 @@ namespace StoryNothing
                 {
                     await UniTask.WaitUntilCanceled(currentAreaScope.Token);
                 }
+                currentAreaScope?.Cancel();
+                currentAreaScope?.Dispose();
             }
         }
 
