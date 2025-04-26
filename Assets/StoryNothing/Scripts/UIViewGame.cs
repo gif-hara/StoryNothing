@@ -30,11 +30,11 @@ namespace StoryNothing
 
         private HKUIDocument messagePrefab;
 
-        private List<HKUIDocument> buttonParents = new();
+        private readonly List<HKUIDocument> buttonParents = new();
 
-        public UIViewGame(HKUIDocument backgroundDocumentPrefab)
+        public UIViewGame(HKUIDocument documentPrefab)
         {
-            this.documentPrefab = backgroundDocumentPrefab;
+            this.documentPrefab = documentPrefab;
         }
 
         public void Setup(CancellationToken cancellationToken)
