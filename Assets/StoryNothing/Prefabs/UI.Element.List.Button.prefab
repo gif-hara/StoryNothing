@@ -641,12 +641,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9135699644371828493, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
       propertyPath: elements.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 9135699644371828493, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
       propertyPath: elements.Array.data[0].document
       value: 
       objectReference: {fileID: 6982961391336956371}
+    - target: {fileID: 9135699644371828493, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
+      propertyPath: elements.Array.data[1].document
+      value: 
+      objectReference: {fileID: 2288426323233146968}
+    - target: {fileID: 9135699644371828493, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
+      propertyPath: elements.Array.data[2].document
+      value: 
+      objectReference: {fileID: 8611309217934991483}
+    - target: {fileID: 9135699644371828493, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
+      propertyPath: elements.Array.data[1].overrideName
+      value: Button.Back
+      objectReference: {fileID: 0}
+    - target: {fileID: 9135699644371828493, guid: 10a2031dc9cd93f48aa4b881fe36713d, type: 3}
+      propertyPath: elements.Array.data[2].overrideName
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -787,7 +803,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3313126037054142779, guid: 75aec3af226e9c54d9705518c35bcb87, type: 3}
       propertyPath: m_Name
-      value: UI.Element.Button
+      value: UI.Element.Button.Back
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -797,5 +813,10 @@ PrefabInstance:
 --- !u!224 &1955786295833170157 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2962471664303219086, guid: 75aec3af226e9c54d9705518c35bcb87, type: 3}
+  m_PrefabInstance: {fileID: 3618792995899486563}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &2288426323233146968 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3313126037054142779, guid: 75aec3af226e9c54d9705518c35bcb87, type: 3}
   m_PrefabInstance: {fileID: 3618792995899486563}
   m_PrefabAsset: {fileID: 0}

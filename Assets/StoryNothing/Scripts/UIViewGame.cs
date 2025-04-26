@@ -77,9 +77,9 @@ namespace StoryNothing
 
         public void PushButtons(IEnumerable<CreateButtonData> buttonDatabase, IGameController gameController, CancellationToken cancellationToken)
         {
-            var parent = Object.Instantiate(buttonListPrefab, areaButtonsDocument.transform);
-            var content = parent.Q<Transform>("Content");
-            buttonParents.Add(parent);
+            var parentDocument = Object.Instantiate(buttonListPrefab, areaButtonsDocument.transform);
+            var content = parentDocument.Q<Transform>("Content");
+            buttonParents.Add(parentDocument);
             foreach (var data in buttonDatabase)
             {
                 var buttonDocument = UnityEngine.Object.Instantiate(buttonPrefab, content);
@@ -116,6 +116,16 @@ namespace StoryNothing
                     })
                     .RegisterTo(cancellationToken);
             }
+            parentDocument.Q("Area.BackButton").SetActive(buttonParents.Count > 1);
+            parentDocument
+                .Q<HKUIDocument>("Button.Back")
+                .Q<Button>("Button")
+                .OnClickAsObservable()
+                .Subscribe(this, static (_, @this) =>
+                {
+                    @this.PopButtons();
+                })
+                .RegisterTo(cancellationToken);
         }
 
         public void PopButtons()
