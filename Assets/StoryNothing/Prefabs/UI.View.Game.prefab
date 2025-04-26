@@ -333,6 +333,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   elements:
   - document: {fileID: 9133817016765766198}
+    overrideName: Back
+  - document: {fileID: 1938124670841098889}
     overrideName: Item
 --- !u!1 &5839346973464189049
 GameObject:
@@ -1381,6 +1383,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0991ca69d971352458a9d21ab2d887f2, type: 3}
+--- !u!1 &1938124670841098889 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5691104060785105960, guid: 0991ca69d971352458a9d21ab2d887f2, type: 3}
+  m_PrefabInstance: {fileID: 6061641564319813281}
+  m_PrefabAsset: {fileID: 0}
 --- !u!224 &2162814985919924796 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5340312747288593565, guid: 0991ca69d971352458a9d21ab2d887f2, type: 3}
@@ -1480,7 +1487,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: elements.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: elements.Array.data[0].document
@@ -1490,6 +1497,10 @@ PrefabInstance:
       propertyPath: elements.Array.data[1].document
       value: 
       objectReference: {fileID: 4715964304346072553}
+    - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
+      propertyPath: elements.Array.data[2].document
+      value: 
+      objectReference: {fileID: 2469588071044481737}
     - target: {fileID: 8316915584728943080, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: m_Name
       value: UI.View.Game

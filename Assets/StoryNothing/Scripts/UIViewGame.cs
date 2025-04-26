@@ -41,7 +41,7 @@ namespace StoryNothing
 
         public void Setup(CancellationToken cancellationToken)
         {
-            document = UnityEngine.Object.Instantiate(documentPrefab);
+            document = Object.Instantiate(documentPrefab);
             document.gameObject.SetActive(true);
             areaButtonsDocument = document.Q<HKUIDocument>("Area.Buttons");
             buttonListPrefab = areaButtonsDocument.Q<HKUIDocument>("Prefab.List");
@@ -49,6 +49,26 @@ namespace StoryNothing
             areaMessageDocument = document.Q<HKUIDocument>("Area.Messages");
             messageParent = areaMessageDocument.Q<Transform>("Parent.Message");
             messagePrefab = areaMessageDocument.Q<HKUIDocument>("Prefab.Message");
+            var areaSystemsDocument = document.Q<HKUIDocument>("Area.Systems");
+            var systemDefaultDocument = areaSystemsDocument.Q<HKUIDocument>("Default");
+            systemDefaultDocument
+                .Q<HKUIDocument>("Back")
+                .Q<Button>("Button")
+                .OnClickAsObservable()
+                .Subscribe(_ =>
+                {
+                    Debug.Log("Back");
+                })
+                .RegisterTo(cancellationToken);
+            systemDefaultDocument
+                .Q<HKUIDocument>("Item")
+                .Q<Button>("Button")
+                .OnClickAsObservable()
+                .Subscribe(_ =>
+                {
+                    Debug.Log("Item");
+                })
+                .RegisterTo(cancellationToken);
             cancellationToken.RegisterWithoutCaptureExecutionContext(() =>
             {
                 document.DestroySafe();
