@@ -116,16 +116,6 @@ namespace StoryNothing
                     })
                     .RegisterTo(cancellationToken);
             }
-            parentDocument.Q("Area.BackButton").SetActive(buttonParents.Count > 1);
-            parentDocument
-                .Q<HKUIDocument>("Button.Back")
-                .Q<Button>("Button")
-                .OnClickAsObservable()
-                .Subscribe(this, static (_, @this) =>
-                {
-                    @this.PopButtons();
-                })
-                .RegisterTo(cancellationToken);
         }
 
         public void PopButtons()
