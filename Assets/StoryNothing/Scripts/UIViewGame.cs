@@ -55,23 +55,11 @@ namespace StoryNothing
 
         public void Open()
         {
-            if (document == null)
-            {
-                Debug.LogError("Background document is not set up.");
-                return;
-            }
-
             document.gameObject.SetActive(true);
         }
 
         public void Close()
         {
-            if (document == null)
-            {
-                Debug.LogError("Background document is not set up.");
-                return;
-            }
-
             document.gameObject.SetActive(false);
         }
 
