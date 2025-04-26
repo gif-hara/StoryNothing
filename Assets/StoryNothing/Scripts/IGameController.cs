@@ -11,7 +11,7 @@ namespace StoryNothing
 
         void SetNextAreaAsHome();
 
-        List<Button> CreateButtons(IEnumerable<string> buttonTexts, CancellationToken cancellationToken);
+        void PushButtons(IEnumerable<CreateButtonData> buttonDatabase, CancellationToken cancellationToken);
 
         void DestroyButtonAll();
 

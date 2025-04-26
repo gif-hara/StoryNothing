@@ -99,9 +99,9 @@ namespace StoryNothing
             SetNextArea(homeAreaData);
         }
 
-        public List<Button> CreateButtons(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
+        public void PushButtons(IEnumerable<CreateButtonData> buttonDatabase, CancellationToken cancellationToken)
         {
-            return uiViewGame.CreateButtons(buttonTexts, cancellationToken);
+            uiViewGame.PushButtons(buttonDatabase, this, cancellationToken);
         }
 
         public void DestroyButtonAll()

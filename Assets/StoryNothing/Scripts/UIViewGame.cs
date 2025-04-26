@@ -1,10 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
 using MH3;
+using R3;
+using R3.Triggers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,7 +19,7 @@ namespace StoryNothing
 
         private HKUIDocument areaButtonsDocument;
 
-        private Transform buttonParent;
+        private HKUIDocument buttonListPrefab;
 
         private HKUIDocument buttonPrefab;
 
@@ -28,6 +28,8 @@ namespace StoryNothing
         private Transform messageParent;
 
         private HKUIDocument messagePrefab;
+
+        private List<HKUIDocument> buttonParents = new();
 
         public UIViewGame(HKUIDocument backgroundDocumentPrefab)
         {
@@ -39,7 +41,7 @@ namespace StoryNothing
             document = UnityEngine.Object.Instantiate(documentPrefab);
             document.gameObject.SetActive(true);
             areaButtonsDocument = document.Q<HKUIDocument>("Area.Buttons");
-            buttonParent = areaButtonsDocument.Q<Transform>("Parent.Buttons");
+            buttonListPrefab = areaButtonsDocument.Q<HKUIDocument>("Prefab.List");
             buttonPrefab = areaButtonsDocument.Q<HKUIDocument>("Prefab.Button");
             areaMessageDocument = document.Q<HKUIDocument>("Area.Messages");
             messageParent = areaMessageDocument.Q<Transform>("Parent.Message");
@@ -72,36 +74,57 @@ namespace StoryNothing
             document.gameObject.SetActive(false);
         }
 
-        public List<Button> CreateButtons(IEnumerable<string> buttonTexts, CancellationToken cancellationToken)
+        public void PushButtons(IEnumerable<CreateButtonData> buttonDatabase, IGameController gameController, CancellationToken cancellationToken)
         {
-            if (buttonTexts == null)
+            var parent = Object.Instantiate(buttonListPrefab, areaButtonsDocument.transform);
+            var content = parent.Q<Transform>("Content");
+            buttonParents.Add(parent);
+            foreach (var data in buttonDatabase)
             {
-                Debug.LogError("Button texts cannot be null.");
-                return null;
+                var buttonDocument = UnityEngine.Object.Instantiate(buttonPrefab, content);
+                buttonDocument.Q<TMP_Text>("Text").text = data.ButtonText;
+                var button = buttonDocument.Q<Button>("Button");
+                button.OnClickAsObservable()
+                    .Subscribe((data, gameController, cancellationToken), static (_, t) =>
+                    {
+                        var (data, gameController, cancellationToken) = t;
+                        foreach (var e in data.OnClickEvents)
+                        {
+                            e.Value.InvokeAsync(gameController, cancellationToken).Forget();
+                        }
+                    })
+                    .RegisterTo(cancellationToken);
+                button.OnPointerEnterAsObservable()
+                    .Subscribe((data, gameController, cancellationToken), static (_, t) =>
+                    {
+                        var (data, gameController, cancellationToken) = t;
+                        foreach (var e in data.OnPointerEnterEvents)
+                        {
+                            e.Value.InvokeAsync(gameController, cancellationToken).Forget();
+                        }
+                    })
+                    .RegisterTo(cancellationToken);
+                button.OnPointerExitAsObservable()
+                    .Subscribe((data, gameController, cancellationToken), static (_, t) =>
+                    {
+                        var (data, gameController, cancellationToken) = t;
+                        foreach (var e in data.OnPointerExitEvents)
+                        {
+                            e.Value.InvokeAsync(gameController, cancellationToken).Forget();
+                        }
+                    })
+                    .RegisterTo(cancellationToken);
             }
-
-            DestroyButtonAll();
-
-            return buttonTexts
-                .Select(x =>
-                {
-                    var button = UnityEngine.Object.Instantiate(buttonPrefab, buttonParent);
-                    button.Q<TMP_Text>("Text").text = x;
-                    return button.Q<Button>("Button");
-                })
-                .ToList();
         }
 
         public void DestroyButtonAll()
         {
-            for (var i = 0; i < buttonParent.childCount; i++)
+            foreach (var parent in buttonParents)
             {
-                var child = buttonParent.GetChild(i);
-                if (child != null)
-                {
-                    UnityEngine.Object.Destroy(child.gameObject);
-                }
+                parent.DestroySafe();
             }
+
+            buttonParents.Clear();
         }
 
         public void CreateMessage(string message)

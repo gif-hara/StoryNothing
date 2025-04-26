@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
-using MH3;
 using UnityEngine;
 
 namespace StoryNothing.GameEvents
@@ -21,28 +19,10 @@ namespace StoryNothing.GameEvents
             this.buttonDatabase = buttonDatabase;
         }
 
-        public async UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
+        public UniTask InvokeAsync(IGameController gameController, CancellationToken cancellationToken)
         {
-            var createButtons = buttonDatabase
-                .Where(data => data.CanCreate.EvaluateSafe(gameController))
-                .Select(data => data.ButtonText);
-            var buttons = gameController.CreateButtons(createButtons, cancellationToken);
-            while (!cancellationToken.IsCancellationRequested)
-            {
-                var (index, behavior) = await buttons.GetBehaviourAsync(cancellationToken);
-                var button = buttons[index];
-                var events = behavior switch
-                {
-                    Define.ButtonBehavior.OnClick => buttonDatabase[index].OnClickEvents,
-                    Define.ButtonBehavior.OnPointerEnter => buttonDatabase[index].OnPointerEnterEvents,
-                    Define.ButtonBehavior.OnPointerExit => buttonDatabase[index].OnPointerExitEvents,
-                    _ => throw new System.Exception("Invalid behavior.")
-                };
-                foreach (var i in events)
-                {
-                    await i.Value.InvokeAsync(gameController, cancellationToken);
-                }
-            }
+            gameController.PushButtons(buttonDatabase, cancellationToken);
+            return UniTask.CompletedTask;
         }
     }
 }
