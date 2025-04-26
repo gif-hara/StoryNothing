@@ -31,7 +31,7 @@ MonoBehaviour:
       data:
         message: "\u3053\u3053\u306FHome.1\u3060"
     - rid: 5862467819113283662
-      type: {class: CreateButtonsAsync, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
+      type: {class: PushButtonsAsync, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
       data:
         buttonDatabase:
         - buttonText: To Home.2

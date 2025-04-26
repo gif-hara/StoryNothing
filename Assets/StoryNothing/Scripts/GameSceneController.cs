@@ -104,6 +104,11 @@ namespace StoryNothing
             uiViewGame.PushButtons(buttonDatabase, this, cancellationToken);
         }
 
+        public void PopButtons()
+        {
+            uiViewGame.PopButtons();
+        }
+
         public void DestroyButtonAll()
         {
             uiViewGame.DestroyButtonAll();

@@ -1,7 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
 using StoryNothing.AreaControllers;
-using UnityEngine.UI;
 
 namespace StoryNothing
 {
@@ -12,6 +11,8 @@ namespace StoryNothing
         void SetNextAreaAsHome();
 
         void PushButtons(IEnumerable<CreateButtonData> buttonDatabase, CancellationToken cancellationToken);
+
+        void PopButtons();
 
         void DestroyButtonAll();
 

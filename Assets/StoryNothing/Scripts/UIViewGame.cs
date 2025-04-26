@@ -7,6 +7,7 @@ using R3;
 using R3.Triggers;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 namespace StoryNothing
@@ -115,6 +116,14 @@ namespace StoryNothing
                     })
                     .RegisterTo(cancellationToken);
             }
+        }
+
+        public void PopButtons()
+        {
+            Assert.IsTrue(buttonParents.Count > 0, "No button parents to pop.");
+            var parent = buttonParents[^1];
+            buttonParents.RemoveAt(buttonParents.Count - 1);
+            parent.DestroySafe();
         }
 
         public void DestroyButtonAll()

@@ -5,16 +5,16 @@ using UnityEngine;
 
 namespace StoryNothing.GameEvents
 {
-    public class CreateButtonsAsync : IGameEvent
+    public class PushButtonsAsync : IGameEvent
     {
         [SerializeField]
         private List<CreateButtonData> buttonDatabase = new();
 
-        public CreateButtonsAsync()
+        public PushButtonsAsync()
         {
         }
 
-        public CreateButtonsAsync(List<CreateButtonData> buttonDatabase)
+        public PushButtonsAsync(List<CreateButtonData> buttonDatabase)
         {
             this.buttonDatabase = buttonDatabase;
         }
