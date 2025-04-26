@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
@@ -114,9 +115,17 @@ namespace StoryNothing
             var parentDocument = Object.Instantiate(buttonListPrefab, areaButtonsDocument.transform);
             var content = parentDocument.Q<Transform>("Content");
             buttonParents.Add(parentDocument);
+            buttonDatabase = buttonDatabase.Where(x =>
+            {
+                if (x.CanCreate == null || x.CanCreate.Value == null)
+                {
+                    return true;
+                }
+                return x.CanCreate.Value.Evaluate(gameController);
+            });
             foreach (var data in buttonDatabase)
             {
-                var buttonDocument = UnityEngine.Object.Instantiate(buttonPrefab, content);
+                var buttonDocument = Object.Instantiate(buttonPrefab, content);
                 buttonDocument.Q<TMP_Text>("Text").text = data.ButtonText;
                 var button = buttonDocument.Q<Button>("Button");
                 button.OnClickAsObservable()
