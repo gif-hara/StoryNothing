@@ -48,7 +48,7 @@ namespace StoryNothing
 
             userData = new UserData();
             uiViewGame = new UIViewGame(gameDocument);
-            uiViewGame.Setup(destroyCancellationToken);
+            uiViewGame.Setup(this, destroyCancellationToken);
             uiViewGame.Open();
             areaData = initialAreaData;
 
@@ -149,8 +149,14 @@ namespace StoryNothing
 
         public IEnumerable<CreateButtonData> CreateUserDataItemsButtonDatabase()
         {
-            var userData = ServiceLocator.Resolve<UserData>();
-            return new List<CreateButtonData>();
+            var buttonDatabase = new List<CreateButtonData>();
+            foreach (var item in userData.Items)
+            {
+                var itemSpec = masterData.ItemSpecs.Get(item.Key);
+                var buttonData = new CreateButtonData(itemSpec.Name);
+                buttonDatabase.Add(buttonData);
+            }
+            return buttonDatabase;
         }
     }
 }

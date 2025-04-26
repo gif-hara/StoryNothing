@@ -8,7 +8,6 @@ using R3;
 using R3.Triggers;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Assertions;
 using UnityEngine.UI;
 
 namespace StoryNothing
@@ -31,6 +30,8 @@ namespace StoryNothing
 
         private HKUIDocument messagePrefab;
 
+        private Button backButton;
+
         private readonly List<HKUIDocument> buttonParents = new();
 
         private bool isButtonsNoStack = false;
@@ -40,7 +41,7 @@ namespace StoryNothing
             this.documentPrefab = documentPrefab;
         }
 
-        public void Setup(CancellationToken cancellationToken)
+        public void Setup(IGameController gameController, CancellationToken cancellationToken)
         {
             document = Object.Instantiate(documentPrefab);
             document.gameObject.SetActive(true);
@@ -52,22 +53,22 @@ namespace StoryNothing
             messagePrefab = areaMessageDocument.Q<HKUIDocument>("Prefab.Message");
             var areaSystemsDocument = document.Q<HKUIDocument>("Area.Systems");
             var systemDefaultDocument = areaSystemsDocument.Q<HKUIDocument>("Default");
-            systemDefaultDocument
-                .Q<HKUIDocument>("Back")
-                .Q<Button>("Button")
+            backButton = systemDefaultDocument.Q<HKUIDocument>("Back").Q<Button>("Button");
+            backButton
                 .OnClickAsObservable()
-                .Subscribe(_ =>
+                .Subscribe(gameController, static (_, gameController) =>
                 {
-                    Debug.Log("Back");
+                    gameController.PopButtons();
                 })
                 .RegisterTo(cancellationToken);
             systemDefaultDocument
                 .Q<HKUIDocument>("Item")
                 .Q<Button>("Button")
                 .OnClickAsObservable()
-                .Subscribe(_ =>
+                .Subscribe((gameController, cancellationToken), static (_, t) =>
                 {
-                    Debug.Log("Item");
+                    var (gameController, cancellationToken) = t;
+                    gameController.PushButtonsNoStack(gameController.CreateUserDataItemsButtonDatabase(), cancellationToken);
                 })
                 .RegisterTo(cancellationToken);
             cancellationToken.RegisterWithoutCaptureExecutionContext(() =>
@@ -91,6 +92,7 @@ namespace StoryNothing
             DestroyNoStackButtonParent();
             isButtonsNoStack = false;
             CreateButtons(buttonDatabase, gameController, cancellationToken);
+            backButton.gameObject.SetActive(buttonParents.Count > 1);
         }
 
         public void PushButtonsNoStack(IEnumerable<CreateButtonData> buttonDatabase, IGameController gameController, CancellationToken cancellationToken)
@@ -98,6 +100,7 @@ namespace StoryNothing
             DestroyNoStackButtonParent();
             isButtonsNoStack = true;
             CreateButtons(buttonDatabase, gameController, cancellationToken);
+            backButton.gameObject.SetActive(buttonParents.Count > 1);
         }
 
         private void DestroyNoStackButtonParent()
@@ -163,10 +166,15 @@ namespace StoryNothing
 
         public void PopButtons()
         {
-            Assert.IsTrue(buttonParents.Count > 0, "No button parents to pop.");
+            if (buttonParents.Count <= 1)
+            {
+                return;
+            }
+            isButtonsNoStack = false;
             var parent = buttonParents[^1];
             buttonParents.RemoveAt(buttonParents.Count - 1);
             parent.DestroySafe();
+            backButton.gameObject.SetActive(buttonParents.Count > 1);
         }
 
         public void DestroyButtonAll()

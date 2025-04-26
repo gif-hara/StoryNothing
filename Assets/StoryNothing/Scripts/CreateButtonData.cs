@@ -29,5 +29,20 @@ namespace StoryNothing
         [SerializeField]
         private List<SerializableInterface<IGameEvent>> onPointerExitEvents = new();
         public List<SerializableInterface<IGameEvent>> OnPointerExitEvents => onPointerExitEvents;
+
+        public CreateButtonData(
+            string buttonText,
+            SerializableInterface<IGameCondition> canCreate = null,
+            List<SerializableInterface<IGameEvent>> onClickEvents = null,
+            List<SerializableInterface<IGameEvent>> onPointerEnterEvents = null,
+            List<SerializableInterface<IGameEvent>> onPointerExitEvents = null
+            )
+        {
+            this.buttonText = buttonText;
+            this.canCreate = canCreate ?? new SerializableInterface<IGameCondition>();
+            this.onClickEvents = onClickEvents ?? new List<SerializableInterface<IGameEvent>>();
+            this.onPointerEnterEvents = onPointerEnterEvents ?? new List<SerializableInterface<IGameEvent>>();
+            this.onPointerExitEvents = onPointerExitEvents ?? new List<SerializableInterface<IGameEvent>>();
+        }
     }
 }
