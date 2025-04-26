@@ -25,5 +25,7 @@ namespace StoryNothing
         int Collection(int collectionId);
 
         bool CanCollection(int collectionId);
+
+        IEnumerable<CreateButtonData> CreateUserDataItemsButtonDatabase();
     }
 }

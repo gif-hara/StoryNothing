@@ -146,5 +146,11 @@ namespace StoryNothing
             var collectionSpot = collectionSpots[collectionId];
             return collectionSpot.CanCollection();
         }
+
+        public IEnumerable<CreateButtonData> CreateUserDataItemsButtonDatabase()
+        {
+            var userData = ServiceLocator.Resolve<UserData>();
+            return new List<CreateButtonData>();
+        }
     }
 }

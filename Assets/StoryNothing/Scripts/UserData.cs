@@ -4,40 +4,40 @@ namespace StoryNothing
 {
     public class UserData
     {
-        private readonly Dictionary<int, int> inventory = new();
+        public readonly Dictionary<int, int> Items = new();
 
         public void AddItem(int itemId, int count)
         {
-            if (inventory.ContainsKey(itemId))
+            if (Items.ContainsKey(itemId))
             {
-                inventory[itemId] += count;
+                Items[itemId] += count;
             }
             else
             {
-                inventory[itemId] = count;
+                Items[itemId] = count;
             }
         }
 
         public void RemoveItem(int itemId, int count)
         {
-            if (inventory.ContainsKey(itemId))
+            if (Items.ContainsKey(itemId))
             {
-                inventory[itemId] -= count;
-                if (inventory[itemId] <= 0)
+                Items[itemId] -= count;
+                if (Items[itemId] <= 0)
                 {
-                    inventory.Remove(itemId);
+                    Items.Remove(itemId);
                 }
             }
         }
 
         public int GetItemCount(int itemId)
         {
-            return inventory.ContainsKey(itemId) ? inventory[itemId] : 0;
+            return Items.ContainsKey(itemId) ? Items[itemId] : 0;
         }
 
         public bool SatisfactionCheck(int itemId, int count)
         {
-            return inventory.ContainsKey(itemId) && inventory[itemId] >= count;
+            return Items.ContainsKey(itemId) && Items[itemId] >= count;
         }
     }
 }
