@@ -106,6 +106,11 @@ namespace StoryNothing
             uiViewGame.PushButtons(buttonDatabase, this, cancellationToken);
         }
 
+        public void PushButtonsNoStack(IEnumerable<CreateButtonData> buttonDatabase, CancellationToken cancellationToken)
+        {
+            uiViewGame.PushButtonsNoStack(buttonDatabase, this, cancellationToken);
+        }
+
         public void PopButtons()
         {
             uiViewGame.PopButtons();

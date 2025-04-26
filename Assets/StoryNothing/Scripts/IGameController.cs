@@ -12,6 +12,8 @@ namespace StoryNothing
 
         void PushButtons(IEnumerable<CreateButtonData> buttonDatabase, CancellationToken cancellationToken);
 
+        void PushButtonsNoStack(IEnumerable<CreateButtonData> buttonDatabase, CancellationToken cancellationToken);
+
         void PopButtons();
 
         void DestroyButtonAll();

@@ -32,6 +32,8 @@ namespace StoryNothing
 
         private readonly List<HKUIDocument> buttonParents = new();
 
+        private bool isButtonsNoStack = false;
+
         public UIViewGame(HKUIDocument documentPrefab)
         {
             this.documentPrefab = documentPrefab;
@@ -64,6 +66,30 @@ namespace StoryNothing
         }
 
         public void PushButtons(IEnumerable<CreateButtonData> buttonDatabase, IGameController gameController, CancellationToken cancellationToken)
+        {
+            DestroyNoStackButtonParent();
+            isButtonsNoStack = false;
+            CreateButtons(buttonDatabase, gameController, cancellationToken);
+        }
+
+        public void PushButtonsNoStack(IEnumerable<CreateButtonData> buttonDatabase, IGameController gameController, CancellationToken cancellationToken)
+        {
+            DestroyNoStackButtonParent();
+            isButtonsNoStack = true;
+            CreateButtons(buttonDatabase, gameController, cancellationToken);
+        }
+
+        private void DestroyNoStackButtonParent()
+        {
+            if (isButtonsNoStack)
+            {
+                var buttonParent = buttonParents[^1];
+                buttonParent.DestroySafe();
+                buttonParents.RemoveAt(buttonParents.Count - 1);
+            }
+        }
+
+        private void CreateButtons(IEnumerable<CreateButtonData> buttonDatabase, IGameController gameController, CancellationToken cancellationToken)
         {
             var parentDocument = Object.Instantiate(buttonListPrefab, areaButtonsDocument.transform);
             var content = parentDocument.Q<Transform>("Content");
