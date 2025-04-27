@@ -71,9 +71,9 @@ MonoBehaviour:
         - collectionNumberMin: 1
           collectionNumberMax: 3
           itemWeights:
-          - itemId: 10101
+          - itemId: 101001
             weight: 100
-          - itemId: 10102
+          - itemId: 102001
             weight: 100
     - rid: 5862467819113283717
       type: {class: Collection, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
