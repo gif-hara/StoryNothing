@@ -71,6 +71,15 @@ namespace StoryNothing
                     gameController.PushButtonsNoStack(gameController.CreateUserDataItemsButtonDatabase(), cancellationToken);
                 })
                 .RegisterTo(cancellationToken);
+            systemDefaultDocument
+                .Q<HKUIDocument>("ToHome")
+                .Q<Button>("Button")
+                .OnClickAsObservable()
+                .Subscribe(gameController, static (_, gameController) =>
+                {
+                    gameController.SetNextAreaAsHome();
+                })
+                .RegisterTo(cancellationToken);
             cancellationToken.RegisterWithoutCaptureExecutionContext(() =>
             {
                 document.DestroySafe();
@@ -105,6 +114,11 @@ namespace StoryNothing
 
         private void DestroyNoStackButtonParent()
         {
+            if (buttonParents.Count <= 0)
+            {
+                return;
+            }
+
             if (isButtonsNoStack)
             {
                 var buttonParent = buttonParents[^1];

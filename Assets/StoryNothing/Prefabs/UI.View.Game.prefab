@@ -336,6 +336,8 @@ MonoBehaviour:
     overrideName: Back
   - document: {fileID: 1938124670841098889}
     overrideName: Item
+  - document: {fileID: 8383129640721174115}
+    overrideName: ToHome
 --- !u!1 &5839346973464189049
 GameObject:
   m_ObjectHideFlags: 0
@@ -1026,7 +1028,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5691104060785105960, guid: 0991ca69d971352458a9d21ab2d887f2, type: 3}
       propertyPath: m_Name
-      value: UI.Element.Button.Icon.2
+      value: UI.Element.Button.Icon.ToHome
       objectReference: {fileID: 0}
     - target: {fileID: 8438690862153567894, guid: 0991ca69d971352458a9d21ab2d887f2, type: 3}
       propertyPath: m_text
@@ -1040,6 +1042,11 @@ PrefabInstance:
 --- !u!224 &8120162913684707030 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5340312747288593565, guid: 0991ca69d971352458a9d21ab2d887f2, type: 3}
+  m_PrefabInstance: {fileID: 4227761861939614283}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8383129640721174115 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5691104060785105960, guid: 0991ca69d971352458a9d21ab2d887f2, type: 3}
   m_PrefabInstance: {fileID: 4227761861939614283}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5514335364536961396
