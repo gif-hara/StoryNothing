@@ -16,7 +16,7 @@ MonoBehaviour:
     list:
     - Id: 101001
       Name: "\u8D64\u8272\u306E\u5C0F\u3055\u306A\u30D4\u30FC\u30B9"
-  <BoardSpecs>k__BackingField:
+  <SkillBoardSpecs>k__BackingField:
     list:
     - Id: 10101
       X: 4

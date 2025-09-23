@@ -4,7 +4,7 @@ using HK;
 namespace StoryNothing.MasterDataSystems
 {
     [Serializable]
-    public sealed class BoardSpec
+    public sealed class SkillBoardSpec
     {
         public int Id;
 
@@ -15,7 +15,7 @@ namespace StoryNothing.MasterDataSystems
         public int HoleCount;
 
         [Serializable]
-        public sealed class DictionaryList : DictionaryList<int, BoardSpec>
+        public sealed class DictionaryList : DictionaryList<int, SkillBoardSpec>
         {
             public DictionaryList() : base(x => x.Id)
             {
