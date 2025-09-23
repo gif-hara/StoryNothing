@@ -1,19 +1,16 @@
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
-namespace StoryNothing
+namespace StoryNothing.InstanceData
 {
-    public class InstanceSkillBoard : MonoBehaviour
+    [Serializable]
+    public sealed class InstanceSkillBoard
     {
-        // Start is called once before the first execution of Update after the MonoBehaviour is created
-        void Start()
-        {
-        
-        }
+        [field: SerializeField]
+        public int MasterDataSkillBoardId { get; private set; }
 
-        // Update is called once per frame
-        void Update()
-        {
-        
-        }
+        [field: SerializeField]
+        public List<Vector2Int> Holes { get; private set; } = new();
     }
 }
