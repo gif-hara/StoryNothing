@@ -6,7 +6,6 @@ namespace StoryNothing.MasterDataSystems
     [Serializable]
     public class ItemSpec
     {
-
         public int Id;
 
         public string Name;
