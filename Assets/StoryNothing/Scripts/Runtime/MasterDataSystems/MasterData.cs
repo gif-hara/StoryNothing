@@ -19,6 +19,9 @@ namespace StoryNothing.MasterDataSystems
         private ItemSpec.DictionaryList itemSpecs;
         public ItemSpec.DictionaryList ItemSpecs => itemSpecs;
 
+        [field: SerializeField]
+        public BoardSpec.DictionaryList BoardSpecs { get; private set; }
+
 #if UNITY_EDITOR
         [ContextMenu("Update")]
         private async void UpdateMasterData()
@@ -39,11 +42,13 @@ namespace StoryNothing.MasterDataSystems
                 var masterDataNames = new[]
                 {
                     "ItemSpec",
+                    "BoardSpec",
                 };
                 var database = await UniTask.WhenAll(
                     masterDataNames.Select(GoogleSpreadSheetDownloader.DownloadAsync)
                 );
                 itemSpecs.Set(JsonHelper.FromJson<ItemSpec>(database[0]));
+                BoardSpecs.Set(JsonHelper.FromJson<BoardSpec>(database[1]));
                 EditorUtility.SetDirty(this);
                 AssetDatabase.SaveAssets();
                 Debug.Log("End MasterData Update");
