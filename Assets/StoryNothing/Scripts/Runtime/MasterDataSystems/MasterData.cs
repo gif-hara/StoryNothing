@@ -19,10 +19,6 @@ namespace StoryNothing.MasterDataSystems
         private ItemSpec.DictionaryList itemSpecs;
         public ItemSpec.DictionaryList ItemSpecs => itemSpecs;
 
-        [SerializeField]
-        private WeaponSpec.DictionaryList weaponSpecs;
-        public WeaponSpec.DictionaryList WeaponSpecs => weaponSpecs;
-
 #if UNITY_EDITOR
         [ContextMenu("Update")]
         private async void UpdateMasterData()
@@ -43,13 +39,11 @@ namespace StoryNothing.MasterDataSystems
                 var masterDataNames = new[]
                 {
                     "ItemSpec",
-                    "WeaponSpec",
                 };
                 var database = await UniTask.WhenAll(
                     masterDataNames.Select(GoogleSpreadSheetDownloader.DownloadAsync)
                 );
                 itemSpecs.Set(JsonHelper.FromJson<ItemSpec>(database[0]));
-                weaponSpecs.Set(JsonHelper.FromJson<WeaponSpec>(database[1]));
                 EditorUtility.SetDirty(this);
                 AssetDatabase.SaveAssets();
                 Debug.Log("End MasterData Update");
