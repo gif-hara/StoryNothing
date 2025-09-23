@@ -13,9 +13,9 @@ namespace StoryNothing.MasterDataSystems
         public int Y;
 
         [Serializable]
-        public sealed class DictionaryList : DictionaryList<int, SkillPieceCell>
+        public sealed class Group : Group<int, SkillPieceCell>
         {
-            public DictionaryList() : base(x => x.Id)
+            public Group() : base(x => x.Id)
             {
             }
         }
