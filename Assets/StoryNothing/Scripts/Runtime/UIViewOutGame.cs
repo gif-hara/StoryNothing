@@ -56,7 +56,7 @@ namespace StoryNothing.UIViews
 
         private HKUIDocument CreateListContent(string text)
         {
-            var instance = UnityEngine.Object.Instantiate(listContentPrefab, listParent);
+            var instance = Object.Instantiate(listContentPrefab, listParent);
             instance.Q<TMP_Text>("Text").SetText(text);
             return instance;
         }
