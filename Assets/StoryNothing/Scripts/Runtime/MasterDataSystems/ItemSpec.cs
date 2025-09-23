@@ -11,8 +11,6 @@ namespace StoryNothing.MasterDataSystems
 
         public string Name;
 
-        public string Description;
-
         [Serializable]
         public class DictionaryList : DictionaryList<int, ItemSpec>
         {
