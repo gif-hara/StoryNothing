@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Threading;
+using R3;
 using StoryNothing.AreaControllers;
 
 namespace StoryNothing
@@ -27,5 +28,10 @@ namespace StoryNothing
         bool CanCollection(int collectionId);
 
         IEnumerable<CreateButtonData> CreateUserDataItemsButtonDatabase();
+
+        /// <summary>
+        /// 何かしらゲームの状態に変更があった際のイベント
+        /// </summary>
+        Observable<Unit> UpdateGameState { get; }
     }
 }

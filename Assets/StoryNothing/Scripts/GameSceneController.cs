@@ -40,6 +40,9 @@ namespace StoryNothing
 
         private UserData userData;
 
+        private Subject<Unit> updateGameState = new();
+        public Observable<Unit> UpdateGameState => updateGameState;
+
         private async UniTaskVoid Start()
         {
             ServiceLocator.Register(masterData, destroyCancellationToken);

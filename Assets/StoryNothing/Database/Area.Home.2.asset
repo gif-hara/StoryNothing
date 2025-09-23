@@ -47,43 +47,6 @@ MonoBehaviour:
               rid: 5862467819113283691
           onPointerEnterEvents: []
           onPointerExitEvents: []
-        - buttonText: Log
-          canCreate:
-            mode: 1
-            unityReference: {fileID: 0}
-            rawReference:
-              rid: 5862467819113283688
-          onClickEvents:
-          - mode: 1
-            unityReference: {fileID: 0}
-            rawReference:
-              rid: 5862467819113283663
-          onPointerEnterEvents:
-          - mode: 1
-            unityReference: {fileID: 0}
-            rawReference:
-              rid: 5862467819113283664
-          onPointerExitEvents:
-          - mode: 1
-            unityReference: {fileID: 0}
-            rawReference:
-              rid: 5862467819113283665
-    - rid: 5862467819113283663
-      type: {class: Log, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
-      data:
-        message: OnClick
-    - rid: 5862467819113283664
-      type: {class: Log, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
-      data:
-        message: OnPointerEnter
-    - rid: 5862467819113283665
-      type: {class: Log, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
-      data:
-        message: OnPointerExit
-    - rid: 5862467819113283688
-      type: {class: Constant, ns: StoryNothing.GameConditions, asm: Assembly-CSharp}
-      data:
-        value: 0
     - rid: 5862467819113283691
       type: {class: NextAreaAsHome, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
       data: 

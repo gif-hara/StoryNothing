@@ -132,14 +132,6 @@ namespace StoryNothing
             var parentDocument = Object.Instantiate(buttonListPrefab, areaButtonsDocument.transform);
             var content = parentDocument.Q<Transform>("Content");
             buttonParents.Add(parentDocument);
-            buttonDatabase = buttonDatabase.Where(x =>
-            {
-                if (x.CanCreate == null || x.CanCreate.Value == null)
-                {
-                    return true;
-                }
-                return x.CanCreate.Value.Evaluate(gameController);
-            });
             foreach (var data in buttonDatabase)
             {
                 var buttonDocument = Object.Instantiate(buttonPrefab, content);
@@ -154,7 +146,7 @@ namespace StoryNothing
                             e.Value.InvokeAsync(gameController, cancellationToken).Forget();
                         }
                     })
-                    .RegisterTo(cancellationToken);
+                    .RegisterTo(button.destroyCancellationToken);
                 button.OnPointerEnterAsObservable()
                     .Subscribe((data, gameController, cancellationToken), static (_, t) =>
                     {
@@ -164,7 +156,7 @@ namespace StoryNothing
                             e.Value.InvokeAsync(gameController, cancellationToken).Forget();
                         }
                     })
-                    .RegisterTo(cancellationToken);
+                    .RegisterTo(button.destroyCancellationToken);
                 button.OnPointerExitAsObservable()
                     .Subscribe((data, gameController, cancellationToken), static (_, t) =>
                     {
@@ -174,7 +166,7 @@ namespace StoryNothing
                             e.Value.InvokeAsync(gameController, cancellationToken).Forget();
                         }
                     })
-                    .RegisterTo(cancellationToken);
+                    .RegisterTo(button.destroyCancellationToken);
             }
         }
 

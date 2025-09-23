@@ -15,8 +15,8 @@ namespace StoryNothing
         public string ButtonText => buttonText;
 
         [SerializeField]
-        private SerializableInterface<IGameCondition> canCreate = new();
-        public SerializableInterface<IGameCondition> CanCreate => canCreate;
+        private SerializableInterface<IGameCondition> isEnable = new();
+        public SerializableInterface<IGameCondition> IsEnable => isEnable;
 
         [SerializeField]
         private List<SerializableInterface<IGameEvent>> onClickEvents = new();
@@ -39,7 +39,7 @@ namespace StoryNothing
             )
         {
             this.buttonText = buttonText;
-            this.canCreate = canCreate ?? new SerializableInterface<IGameCondition>();
+            this.isEnable = canCreate ?? new SerializableInterface<IGameCondition>();
             this.onClickEvents = onClickEvents ?? new List<SerializableInterface<IGameEvent>>();
             this.onPointerEnterEvents = onPointerEnterEvents ?? new List<SerializableInterface<IGameEvent>>();
             this.onPointerExitEvents = onPointerExitEvents ?? new List<SerializableInterface<IGameEvent>>();

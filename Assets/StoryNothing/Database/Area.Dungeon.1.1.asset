@@ -51,19 +51,6 @@ MonoBehaviour:
               rid: 5862467819113283717
           onPointerEnterEvents: []
           onPointerExitEvents: []
-        - buttonText: "\u30DB\u30FC\u30E0\u3078"
-          canCreate:
-            mode: 0
-            unityReference: {fileID: 0}
-            rawReference:
-              rid: -2
-          onClickEvents:
-          - mode: 1
-            unityReference: {fileID: 0}
-            rawReference:
-              rid: 5862467819113283718
-          onPointerEnterEvents: []
-          onPointerExitEvents: []
     - rid: 5862467819113283716
       type: {class: SetupCollectionSpot, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
       data:
@@ -79,6 +66,3 @@ MonoBehaviour:
       type: {class: Collection, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
       data:
         collectionId: 0
-    - rid: 5862467819113283718
-      type: {class: NextAreaAsHome, ns: StoryNothing.GameEvents, asm: Assembly-CSharp}
-      data: 
