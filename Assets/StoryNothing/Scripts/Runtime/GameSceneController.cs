@@ -1,8 +1,10 @@
+using Cysharp.Threading.Tasks;
 using HK;
 using R3;
 using R3.Triggers;
 using StoryNothing.InstanceData;
 using StoryNothing.MasterDataSystems;
+using StoryNothing.UIViews;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -14,7 +16,7 @@ namespace StoryNothing
         private MasterData masterData;
 
         [SerializeField]
-        private HKUIDocument gameDocument;
+        private HKUIDocument outGameDocument;
 
         [field: SerializeField]
         private int initialSkillBoardMasterDataId = 0;
@@ -24,7 +26,7 @@ namespace StoryNothing
         private Subject<Unit> updateGameState = new();
         public Observable<Unit> UpdateGameState => updateGameState;
 
-        private void Start()
+        private async UniTaskVoid Start()
         {
             ServiceLocator.Register(masterData, destroyCancellationToken);
 
@@ -47,6 +49,9 @@ namespace StoryNothing
                 })
                 .RegisterTo(destroyCancellationToken);
 #endif
+
+            var uiViewOutGame = new UIViewOutGame(outGameDocument);
+            await uiViewOutGame.BeginAsync(destroyCancellationToken);
         }
     }
 }
