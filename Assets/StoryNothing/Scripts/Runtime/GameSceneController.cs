@@ -50,7 +50,7 @@ namespace StoryNothing
                 .RegisterTo(destroyCancellationToken);
 #endif
 
-            var uiViewOutGame = new UIViewOutGame(outGameDocument);
+            var uiViewOutGame = new UIViewOutGame(outGameDocument, userData);
             await uiViewOutGame.BeginAsync(destroyCancellationToken);
         }
     }
