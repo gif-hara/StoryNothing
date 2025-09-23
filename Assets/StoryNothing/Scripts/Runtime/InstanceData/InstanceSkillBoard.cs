@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using HK;
 using StoryNothing.MasterDataSystems;
 using UnityEngine;
 
@@ -17,6 +18,10 @@ namespace StoryNothing.InstanceData
         [field: SerializeField]
         public List<Vector2Int> Holes { get; private set; } = new();
 
+        public SkillBoardSpec SkillBoardSpec => ServiceLocator.Resolve<MasterData>().SkillBoardSpecs.Get(SkillBoardMasterDataId);
+
+        public string Name => SkillBoardSpec.Name;
+
         public InstanceSkillBoard(int instanceId, int masterDataSkillBoardId, List<Vector2Int> holes = null)
         {
             InstanceId = instanceId;
@@ -24,13 +29,19 @@ namespace StoryNothing.InstanceData
             Holes = holes ?? new List<Vector2Int>();
         }
 
-        public static InstanceSkillBoard Create(MasterData masterData, int instanceId, int skillBoardMasterDataId)
+        public static InstanceSkillBoard Create(int instanceId, int skillBoardMasterDataId)
         {
             var holes = new List<Vector2Int>();
-            var skillBoardSpec = masterData.SkillBoardSpecs.Get(skillBoardMasterDataId);
+            var skillBoardSpec = ServiceLocator.Resolve<MasterData>().SkillBoardSpecs.Get(skillBoardMasterDataId);
             for (int i = 0; i < skillBoardSpec.HoleCount; i++)
             {
-                holes.Add(new Vector2Int(UnityEngine.Random.Range(0, skillBoardSpec.X), UnityEngine.Random.Range(0, skillBoardSpec.Y)));
+                var hole = new Vector2Int(UnityEngine.Random.Range(0, skillBoardSpec.X), UnityEngine.Random.Range(0, skillBoardSpec.Y));
+                if (holes.Contains(hole))
+                {
+                    i--;
+                    continue;
+                }
+                holes.Add(hole);
             }
             return new InstanceSkillBoard(instanceId, skillBoardMasterDataId, holes);
         }

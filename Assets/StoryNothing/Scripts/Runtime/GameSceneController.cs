@@ -34,7 +34,7 @@ namespace StoryNothing
 
             // とりあえずスキルボードを作る
             {
-                var instanceSkillBoard = InstanceSkillBoard.Create(masterData, userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
+                var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
                 userData.SkillBoards.Add(instanceSkillBoard);
                 userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
             }
