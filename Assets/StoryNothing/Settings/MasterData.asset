@@ -23,3 +23,33 @@ MonoBehaviour:
       X: 4
       Y: 4
       HoleCount: 1
+  <SkillPieceSpecs>k__BackingField:
+    list:
+    - Id: 10101
+      Name: "\u5C0F\u3055\u306A\u30D4\u30FC\u30B9"
+    - Id: 10102
+      Name: "\u5C0F\u3055\u306A\u30D4\u30FC\u30B9"
+  <SkillPieceCells>k__BackingField:
+    list:
+    - Key: 10101
+      Value:
+      - Id: 10101
+        X: 0
+        Y: 0
+      - Id: 10101
+        X: 1
+        Y: 0
+      - Id: 10101
+        X: 2
+        Y: 0
+    - Key: 10102
+      Value:
+      - Id: 10102
+        X: 0
+        Y: 0
+      - Id: 10102
+        X: 1
+        Y: 0
+      - Id: 10102
+        X: 0
+        Y: 1
