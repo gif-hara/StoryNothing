@@ -14,6 +14,9 @@ namespace StoryNothing
         [field: SerializeField]
         public int AddInstanceSkillBoardCount { get; private set; } = 0;
 
+        [field: SerializeField]
+        public int EquipInstanceSkillBoardId { get; set; } = -1;
+
         public void AddSkillBoard(InstanceSkillBoard skillBoard)
         {
             SkillBoards.Add(skillBoard);
