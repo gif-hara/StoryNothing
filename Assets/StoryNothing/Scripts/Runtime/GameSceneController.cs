@@ -1,6 +1,7 @@
 using HK;
 using R3;
 using R3.Triggers;
+using StoryNothing.InstanceData;
 using StoryNothing.MasterDataSystems;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -15,6 +16,9 @@ namespace StoryNothing
         [SerializeField]
         private HKUIDocument gameDocument;
 
+        [field: SerializeField]
+        private int initialSkillBoardMasterDataId = 0;
+
         private UserData userData;
 
         private Subject<Unit> updateGameState = new();
@@ -25,6 +29,13 @@ namespace StoryNothing
             ServiceLocator.Register(masterData, destroyCancellationToken);
 
             userData = new UserData();
+
+            // とりあえずスキルボードを作る
+            {
+                var instanceSkillBoard = InstanceSkillBoard.Create(masterData, userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
+                userData.SkillBoards.Add(instanceSkillBoard);
+                userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
+            }
 
 #if DEBUG
             this.UpdateAsObservable()
