@@ -15,9 +15,8 @@ namespace StoryNothing.MasterDataSystems
     [CreateAssetMenu(fileName = "MasterData", menuName = "StoryNothing/MasterData")]
     public sealed class MasterData : ScriptableObject
     {
-        [SerializeField]
-        private ItemSpec.DictionaryList itemSpecs;
-        public ItemSpec.DictionaryList ItemSpecs => itemSpecs;
+        [field: SerializeField]
+        public ItemSpec.DictionaryList ItemSpecs { get; private set; }
 
         [field: SerializeField]
         public BoardSpec.DictionaryList BoardSpecs { get; private set; }
@@ -47,7 +46,7 @@ namespace StoryNothing.MasterDataSystems
                 var database = await UniTask.WhenAll(
                     masterDataNames.Select(GoogleSpreadSheetDownloader.DownloadAsync)
                 );
-                itemSpecs.Set(JsonHelper.FromJson<ItemSpec>(database[0]));
+                ItemSpecs.Set(JsonHelper.FromJson<ItemSpec>(database[0]));
                 BoardSpecs.Set(JsonHelper.FromJson<BoardSpec>(database[1]));
                 EditorUtility.SetDirty(this);
                 AssetDatabase.SaveAssets();

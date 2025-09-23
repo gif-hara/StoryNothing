@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82b33cf68ff9bec4da0a1091ed64792e, type: 3}
   m_Name: MasterData
   m_EditorClassIdentifier: 
-  itemSpecs:
+  <ItemSpecs>k__BackingField:
     list:
     - Id: 101001
       Name: "\u8D64\u8272\u306E\u5C0F\u3055\u306A\u30D4\u30FC\u30B9"
