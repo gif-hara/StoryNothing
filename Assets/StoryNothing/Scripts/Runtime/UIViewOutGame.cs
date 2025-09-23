@@ -67,6 +67,12 @@ namespace StoryNothing.UIViews
 
         private UniTask StateChangeSkillBoardAsync(CancellationToken cancellationToken)
         {
+            var contents = new List<HKUIDocument>();
+            for (var i = 0; i < userData.SkillBoards.Count; i++)
+            {
+                var content = CreateListContent(userData.SkillBoards[i].Name);
+                contents.Add(content);
+            }
             return UniTask.Never(cancellationToken);
         }
 
