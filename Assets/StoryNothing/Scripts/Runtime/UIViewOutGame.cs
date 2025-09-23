@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
@@ -40,19 +39,15 @@ namespace StoryNothing.UIViews
             document.gameObject.SetActive(true);
             while (!cancellationToken.IsCancellationRequested)
             {
-                var contents = new List<HKUIDocument>();
-                var tasks = new List<UniTask>();
-                var changeSkillBoardContent = CreateListContent("スキルボード変更");
-                var selectBattleContent = CreateListContent("闘技場へ");
-                contents.Add(changeSkillBoardContent);
-                contents.Add(selectBattleContent);
-                tasks.Add(GetButton(changeSkillBoardContent).OnClickAsync(cancellationToken));
-                tasks.Add(GetButton(selectBattleContent).OnClickAsync(cancellationToken));
-                var result = await UniTask.WhenAny(tasks);
-                foreach (var content in contents)
-                {
-                    Object.Destroy(content.gameObject);
-                }
+                var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                var result = await UniTask.WhenAny(
+                    GetHKButton(CreateListContent("スキルボード変更", scope.Token))
+                        .OnClickAsync(cancellationToken),
+                    GetHKButton(CreateListContent("闘技場へ", scope.Token))
+                        .OnClickAsync(cancellationToken)
+                );
+                scope.Cancel();
+                scope.Dispose();
                 switch (result)
                 {
                     case 0:
@@ -65,15 +60,16 @@ namespace StoryNothing.UIViews
             }
         }
 
-        private UniTask StateChangeSkillBoardAsync(CancellationToken cancellationToken)
+        private async UniTask StateChangeSkillBoardAsync(CancellationToken cancellationToken)
         {
-            var contents = new List<HKUIDocument>();
-            for (var i = 0; i < userData.SkillBoards.Count; i++)
-            {
-                var content = CreateListContent(userData.SkillBoards[i].Name);
-                contents.Add(content);
-            }
-            return UniTask.Never(cancellationToken);
+            var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            var result = await UniTask.WhenAny(
+                userData.SkillBoards.Select(x => GetHKButton(CreateListContent(x.Name, scope.Token)).OnClickAsync(cancellationToken))
+            );
+            var selectedSkillBoard = userData.SkillBoards[result];
+            userData.EquipInstanceSkillBoardId = selectedSkillBoard.InstanceId;
+            scope.Cancel();
+            scope.Dispose();
         }
 
         private UniTask StateSelectBattleAsync(CancellationToken cancellationToken)
@@ -81,16 +77,17 @@ namespace StoryNothing.UIViews
             return UniTask.Never(cancellationToken);
         }
 
-        private HKUIDocument CreateListContent(string text)
+        private HKUIDocument CreateListContent(string text, CancellationToken cancellationToken)
         {
             var instance = Object.Instantiate(listContentPrefab, listParent);
             instance.Q<TMP_Text>("Text").SetText(text);
+            cancellationToken.RegisterWithoutCaptureExecutionContext(() => Object.Destroy(instance.gameObject));
             return instance;
         }
 
-        private static Button GetButton(HKUIDocument document)
+        private static HKButton GetHKButton(HKUIDocument document)
         {
-            return document.Q<Button>("Button");
+            return new HKButton(document.Q<Button>("Button"));
         }
     }
 }
