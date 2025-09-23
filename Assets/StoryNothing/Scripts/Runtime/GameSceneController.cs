@@ -1,6 +1,3 @@
-using System.Collections.Generic;
-using System.Threading;
-using Cysharp.Threading.Tasks;
 using HK;
 using R3;
 using R3.Triggers;
@@ -17,10 +14,6 @@ namespace StoryNothing
 
         [SerializeField]
         private HKUIDocument gameDocument;
-
-        private CancellationTokenSource currentAreaScope;
-
-        private List<CollectionSpot> collectionSpots = new();
 
         private UserData userData;
 
