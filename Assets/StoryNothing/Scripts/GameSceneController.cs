@@ -47,7 +47,6 @@ namespace StoryNothing
         {
             ServiceLocator.Register(masterData, destroyCancellationToken);
             ServiceLocator.Register(gameRules, destroyCancellationToken);
-            ServiceLocator.Register(new InputController(), destroyCancellationToken);
 
             userData = new UserData();
             uiViewGame = new UIViewGame(gameDocument);
