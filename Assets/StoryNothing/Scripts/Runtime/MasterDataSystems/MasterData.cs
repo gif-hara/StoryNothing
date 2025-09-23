@@ -7,7 +7,7 @@ using R3;
 using UnityEditor;
 using UnityEngine;
 
-namespace MH3
+namespace StoryNothing.MasterDataSystems
 {
     /// <summary>
     /// 
