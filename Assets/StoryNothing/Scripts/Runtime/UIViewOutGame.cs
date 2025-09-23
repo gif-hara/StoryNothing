@@ -1,6 +1,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
+using StoryNothing.InstanceData;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,6 +17,8 @@ namespace StoryNothing.UIViews
         private readonly Transform listParent;
 
         private readonly HKUIDocument listContentPrefab;
+
+        private InstanceSkillBoard selectedInstanceSkillBoard;
 
         public UIViewOutGame(HKUIDocument document, UserData userData)
         {
@@ -43,6 +46,8 @@ namespace StoryNothing.UIViews
                 var result = await UniTask.WhenAny(
                     GetHKButton(CreateListContent("スキルボード変更", scope.Token))
                         .OnClickAsync(cancellationToken),
+                    GetHKButton(CreateListContent("スキルボード編集", scope.Token))
+                        .OnClickAsync(cancellationToken),
                     GetHKButton(CreateListContent("闘技場へ", scope.Token))
                         .OnClickAsync(cancellationToken)
                 );
@@ -51,25 +56,44 @@ namespace StoryNothing.UIViews
                 switch (result)
                 {
                     case 0:
-                        await StateChangeSkillBoardAsync(cancellationToken);
+                        await StateSelectEquipSkillBoardAsync(cancellationToken);
                         break;
                     case 1:
+                        await StateSelectEditSkillBoardAsync(cancellationToken);
+                        break;
+                    case 2:
                         await StateSelectBattleAsync(cancellationToken);
                         break;
                 }
             }
         }
 
-        private async UniTask StateChangeSkillBoardAsync(CancellationToken cancellationToken)
+        private async UniTask StateSelectEquipSkillBoardAsync(CancellationToken cancellationToken)
         {
             var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var result = await UniTask.WhenAny(
                 userData.SkillBoards.Select(x => GetHKButton(CreateListContent(x.Name, scope.Token)).OnClickAsync(cancellationToken))
             );
-            var selectedSkillBoard = userData.SkillBoards[result];
-            userData.EquipInstanceSkillBoardId = selectedSkillBoard.InstanceId;
+            userData.EquipInstanceSkillBoardId = userData.SkillBoards[result].InstanceId;
             scope.Cancel();
             scope.Dispose();
+        }
+
+        private async UniTask StateSelectEditSkillBoardAsync(CancellationToken cancellationToken)
+        {
+            var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            var result = await UniTask.WhenAny(
+                userData.SkillBoards.Select(x => GetHKButton(CreateListContent(x.Name, scope.Token)).OnClickAsync(cancellationToken))
+            );
+            selectedInstanceSkillBoard = userData.SkillBoards[result];
+            scope.Cancel();
+            scope.Dispose();
+            await StateEditSkillBoardAsync(cancellationToken);
+        }
+
+        private UniTask StateEditSkillBoardAsync(CancellationToken cancellationToken)
+        {
+            return UniTask.Never(cancellationToken);
         }
 
         private UniTask StateSelectBattleAsync(CancellationToken cancellationToken)
