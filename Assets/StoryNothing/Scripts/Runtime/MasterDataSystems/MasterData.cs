@@ -60,21 +60,5 @@ namespace StoryNothing.MasterDataSystems
             }
         }
 #endif
-
-        [Serializable]
-        public class WeaponSpec
-        {
-            public int Id;
-
-            public string Name;
-
-            [Serializable]
-            public class DictionaryList : DictionaryList<int, WeaponSpec>
-            {
-                public DictionaryList() : base(x => x.Id)
-                {
-                }
-            }
-        }
     }
 }
