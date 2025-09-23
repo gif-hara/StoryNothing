@@ -32,11 +32,6 @@ namespace StoryNothing
                 {
                     if (Keyboard.current.f1Key.wasPressedThisFrame)
                     {
-                        foreach (var i in masterData.ItemSpecs.List)
-                        {
-                            userData.AddItem(i.Id, 99);
-                        }
-                        Debug.Log($"[DEBUG] Add Item");
                     }
                 })
                 .RegisterTo(destroyCancellationToken);
