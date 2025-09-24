@@ -19,6 +19,12 @@ namespace StoryNothing
 
         private InstanceSkillBoard cachedEquipInstanceSkillBoard;
 
+        public void AddInstanceSkillBoard(InstanceSkillBoard instanceSkillBoard)
+        {
+            SkillBoards.Add(instanceSkillBoard);
+            AddInstanceSkillBoardCount++;
+        }
+
         public void SetEquipInstanceSkillBoard(int instanceId)
         {
             EquipInstanceSkillBoardId = instanceId;
@@ -27,6 +33,7 @@ namespace StoryNothing
 
         public InstanceSkillBoard GetEquipInstanceSkillBoard()
         {
+            Debug.Log(EquipInstanceSkillBoardId);
             return cachedEquipInstanceSkillBoard ??= SkillBoards.Find(x => x.InstanceId == EquipInstanceSkillBoardId);
         }
     }
