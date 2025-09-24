@@ -362,6 +362,7 @@ GameObject:
   - component: {fileID: 7673786541342011473}
   - component: {fileID: 2473533375432070443}
   - component: {fileID: 2000878761211283144}
+  - component: {fileID: 3352522530912639363}
   m_Layer: 0
   m_Name: Area.SkillBoard
   m_TagString: Untagged
@@ -441,6 +442,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &3352522530912639363
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6288283049764722211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d5d7d06ef08483646a65a6deff93f625, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  elements:
+  - document: {fileID: 3583405159426117714}
+    overrideName: 
 --- !u!1 &7516354472760198558
 GameObject:
   m_ObjectHideFlags: 0
