@@ -33,7 +33,6 @@ namespace StoryNothing
 
         public InstanceSkillBoard GetEquipInstanceSkillBoard()
         {
-            Debug.Log(EquipInstanceSkillBoardId);
             return cachedEquipInstanceSkillBoard ??= SkillBoards.Find(x => x.InstanceId == EquipInstanceSkillBoardId);
         }
     }
