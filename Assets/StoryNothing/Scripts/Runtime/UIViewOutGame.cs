@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
@@ -18,7 +19,13 @@ namespace StoryNothing.UIViews
 
         private readonly HKUIDocument listContentPrefab;
 
+        private readonly RectTransform skillBoardBackground;
+
+        private readonly HKUIDocument skillPiecePrefab;
+
         private InstanceSkillBoard selectedInstanceSkillBoard;
+
+        private readonly List<UIElementSkillPiece> holeElements = new();
 
         public UIViewOutGame(HKUIDocument document, UserData userData)
         {
@@ -30,6 +37,12 @@ namespace StoryNothing.UIViews
                 .Q<Transform>("Content");
             listContentPrefab = this.document
                 .Q<HKUIDocument>("UI.Element.Button");
+            skillBoardBackground = this.document
+                .Q<HKUIDocument>("Area.Center")
+                .Q<HKUIDocument>("Area.SkillBoard")
+                .Q<RectTransform>("Background");
+            skillPiecePrefab = this.document
+                .Q<HKUIDocument>("UI.Element.SkillPiece");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -43,6 +56,7 @@ namespace StoryNothing.UIViews
             while (!cancellationToken.IsCancellationRequested)
             {
                 var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                SetSkillBoard(userData.GetEquipInstanceSkillBoard());
                 var result = await UniTask.WhenAny(
                     GetHKButton(CreateListContent("スキルボード変更", scope.Token))
                         .OnClickAsync(cancellationToken),
@@ -74,7 +88,7 @@ namespace StoryNothing.UIViews
             var result = await UniTask.WhenAny(
                 userData.SkillBoards.Select(x => GetHKButton(CreateListContent(x.Name, scope.Token)).OnClickAsync(cancellationToken))
             );
-            userData.EquipInstanceSkillBoardId = userData.SkillBoards[result].InstanceId;
+            userData.SetEquipInstanceSkillBoard(userData.SkillBoards[result].InstanceId);
             scope.Cancel();
             scope.Dispose();
         }
@@ -113,6 +127,27 @@ namespace StoryNothing.UIViews
                 }
             });
             return instance;
+        }
+
+        private void SetSkillBoard(InstanceSkillBoard instanceSkillBoard)
+        {
+            foreach (var element in holeElements)
+            {
+                element.Dispose();
+            }
+            holeElements.Clear();
+            skillBoardBackground.sizeDelta = new Vector2(
+                instanceSkillBoard.SkillBoardSpec.X * 100,
+                instanceSkillBoard.SkillBoardSpec.Y * 100
+                );
+            foreach (var hole in instanceSkillBoard.Holes)
+            {
+                Debug.Log($"Hole: {hole}");
+                var instance = new UIElementSkillPiece(Object.Instantiate(skillPiecePrefab, skillBoardBackground));
+                instance.SetPosition(hole, instanceSkillBoard.SkillBoardSpec.X, instanceSkillBoard.SkillBoardSpec.Y);
+                instance.SetBackgroundColor(Define.SkillPieceColor.Gray);
+                holeElements.Add(instance);
+            }
         }
 
         private static HKButton GetHKButton(HKUIDocument document)

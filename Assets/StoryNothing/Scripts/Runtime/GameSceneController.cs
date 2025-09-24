@@ -36,7 +36,7 @@ namespace StoryNothing
             {
                 var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
                 userData.SkillBoards.Add(instanceSkillBoard);
-                userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
+                userData.SetEquipInstanceSkillBoard(instanceSkillBoard.InstanceId);
             }
 
 #if DEBUG
