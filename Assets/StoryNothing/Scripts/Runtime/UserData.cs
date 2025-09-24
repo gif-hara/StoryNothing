@@ -15,6 +15,19 @@ namespace StoryNothing
         public int AddInstanceSkillBoardCount { get; private set; } = 0;
 
         [field: SerializeField]
-        public int EquipInstanceSkillBoardId { get; set; } = -1;
+        public int EquipInstanceSkillBoardId { get; private set; } = -1;
+
+        private InstanceSkillBoard cachedEquipInstanceSkillBoard;
+
+        public void SetEquipInstanceSkillBoard(int instanceId)
+        {
+            EquipInstanceSkillBoardId = instanceId;
+            cachedEquipInstanceSkillBoard = SkillBoards.Find(x => x.InstanceId == instanceId);
+        }
+
+        public InstanceSkillBoard GetEquipInstanceSkillBoard()
+        {
+            return cachedEquipInstanceSkillBoard ??= SkillBoards.Find(x => x.InstanceId == EquipInstanceSkillBoardId);
+        }
     }
 }
