@@ -10,12 +10,12 @@ namespace StoryNothing.InstanceData
         public int InstanceId { get; private set; }
 
         [field: SerializeField]
-        public int SkillPeaceMasterDataId { get; private set; }
+        public int SkillPeaceSpecMasterDataId { get; private set; }
 
-        public InstanceSkillPeace(int instanceId, int masterDataSkillPeaceId)
+        public InstanceSkillPeace(int instanceId, int skillPeaceSpecMasterDataId)
         {
             InstanceId = instanceId;
-            SkillPeaceMasterDataId = masterDataSkillPeaceId;
+            SkillPeaceSpecMasterDataId = skillPeaceSpecMasterDataId;
         }
     }
 }
