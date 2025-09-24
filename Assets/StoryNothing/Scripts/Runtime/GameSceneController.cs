@@ -18,6 +18,9 @@ namespace StoryNothing
         [SerializeField]
         private HKUIDocument outGameDocument;
 
+        [SerializeField]
+        private PlayerInput playerInput;
+
         [field: SerializeField]
         private int initialSkillBoardMasterDataId = 0;
 
@@ -56,7 +59,7 @@ namespace StoryNothing
                 .RegisterTo(destroyCancellationToken);
 #endif
 
-            var uiViewOutGame = new UIViewOutGame(outGameDocument, userData);
+            var uiViewOutGame = new UIViewOutGame(outGameDocument, userData, playerInput);
             await uiViewOutGame.BeginAsync(destroyCancellationToken);
         }
     }
