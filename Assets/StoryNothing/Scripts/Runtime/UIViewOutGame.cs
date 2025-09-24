@@ -105,7 +105,13 @@ namespace StoryNothing.UIViews
         {
             var instance = Object.Instantiate(listContentPrefab, listParent);
             instance.Q<TMP_Text>("Text").SetText(text);
-            cancellationToken.RegisterWithoutCaptureExecutionContext(() => Object.Destroy(instance.gameObject));
+            cancellationToken.RegisterWithoutCaptureExecutionContext(() =>
+            {
+                if (instance != null)
+                {
+                    Object.Destroy(instance.gameObject);
+                }
+            });
             return instance;
         }
 
