@@ -10,5 +10,11 @@ namespace StoryNothing
             OnPointerEnter,
             OnPointerExit,
         }
+
+        public enum SkillPieceColor
+        {
+            Gray,
+            Red,
+        }
     }
 }
