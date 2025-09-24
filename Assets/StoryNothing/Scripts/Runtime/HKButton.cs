@@ -15,10 +15,10 @@ namespace StoryNothing
             Button = button;
         }
 
-        public HKButton OnPointerEnter(System.Action action)
+        public HKButton OnPointerEnter(System.Action<HKButton> action)
         {
             Button.OnPointerEnterAsObservable()
-                .Subscribe(action, static (_, action) => action())
+                .Subscribe((this, action), static (_, t) => t.action(t.Item1))
                 .RegisterTo(Button.destroyCancellationToken);
             return this;
         }
