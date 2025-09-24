@@ -2,9 +2,11 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
+using R3;
 using StoryNothing.InstanceData;
 using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 namespace StoryNothing.UIViews
@@ -14,6 +16,8 @@ namespace StoryNothing.UIViews
         private readonly HKUIDocument document;
 
         private readonly UserData userData;
+
+        private readonly PlayerInput playerInput;
 
         private readonly Transform listParent;
 
@@ -27,10 +31,11 @@ namespace StoryNothing.UIViews
 
         private readonly List<UIElementSkillPiece> holeElements = new();
 
-        public UIViewOutGame(HKUIDocument document, UserData userData)
+        public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput)
         {
             this.document = document;
             this.userData = userData;
+            this.playerInput = playerInput;
             listParent = this.document
                 .Q<HKUIDocument>("Area.Left")
                 .Q<HKUIDocument>("List")
@@ -86,12 +91,22 @@ namespace StoryNothing.UIViews
         {
             var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var result = await UniTask.WhenAny(
-                userData.SkillBoards.Select(x =>
-                    CreateHKButton(CreateListContent(x.Name, scope.Token))
-                        .OnPointerEnter(hkButton => SetSkillBoard(x))
-                        .OnClickAsync(cancellationToken))
+                UniTask.WhenAny(
+                    userData.SkillBoards.Select(x =>
+                        CreateHKButton(CreateListContent(x.Name, scope.Token))
+                            .OnPointerEnter(hkButton => SetSkillBoard(x))
+                            .OnClickAsync(cancellationToken)
+                )),
+                playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(cancellationToken).AsUniTask()
             );
-            userData.SetEquipInstanceSkillBoard(userData.SkillBoards[result].InstanceId);
+            if (result.winArgumentIndex == 0)
+            {
+                userData.SetEquipInstanceSkillBoard(userData.SkillBoards[result.result1].InstanceId);
+            }
+            else if (result.winArgumentIndex == 1)
+            {
+                SetSkillBoard(userData.GetEquipInstanceSkillBoard());
+            }
             scope.Cancel();
             scope.Dispose();
         }
