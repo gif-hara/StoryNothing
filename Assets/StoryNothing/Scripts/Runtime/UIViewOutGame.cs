@@ -53,16 +53,16 @@ namespace StoryNothing.UIViews
         private async UniTask StateRootAsync(CancellationToken cancellationToken)
         {
             document.gameObject.SetActive(true);
+            SetSkillBoard(userData.GetEquipInstanceSkillBoard());
             while (!cancellationToken.IsCancellationRequested)
             {
                 var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-                SetSkillBoard(userData.GetEquipInstanceSkillBoard());
                 var result = await UniTask.WhenAny(
-                    GetHKButton(CreateListContent("スキルボード変更", scope.Token))
+                    CreateHKButton(CreateListContent("スキルボード変更", scope.Token))
                         .OnClickAsync(cancellationToken),
-                    GetHKButton(CreateListContent("スキルボード編集", scope.Token))
+                    CreateHKButton(CreateListContent("スキルボード編集", scope.Token))
                         .OnClickAsync(cancellationToken),
-                    GetHKButton(CreateListContent("闘技場へ", scope.Token))
+                    CreateHKButton(CreateListContent("闘技場へ", scope.Token))
                         .OnClickAsync(cancellationToken)
                 );
                 scope.Cancel();
@@ -86,7 +86,10 @@ namespace StoryNothing.UIViews
         {
             var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var result = await UniTask.WhenAny(
-                userData.SkillBoards.Select(x => GetHKButton(CreateListContent(x.Name, scope.Token)).OnClickAsync(cancellationToken))
+                userData.SkillBoards.Select(x =>
+                    CreateHKButton(CreateListContent(x.Name, scope.Token))
+                        .OnPointerEnter(hkButton => SetSkillBoard(x))
+                        .OnClickAsync(cancellationToken))
             );
             userData.SetEquipInstanceSkillBoard(userData.SkillBoards[result].InstanceId);
             scope.Cancel();
@@ -97,7 +100,7 @@ namespace StoryNothing.UIViews
         {
             var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var result = await UniTask.WhenAny(
-                userData.SkillBoards.Select(x => GetHKButton(CreateListContent(x.Name, scope.Token)).OnClickAsync(cancellationToken))
+                userData.SkillBoards.Select(x => CreateHKButton(CreateListContent(x.Name, scope.Token)).OnClickAsync(cancellationToken))
             );
             selectedInstanceSkillBoard = userData.SkillBoards[result];
             scope.Cancel();
@@ -142,7 +145,6 @@ namespace StoryNothing.UIViews
                 );
             foreach (var hole in instanceSkillBoard.Holes)
             {
-                Debug.Log($"Hole: {hole}");
                 var instance = new UIElementSkillPiece(Object.Instantiate(skillPiecePrefab, skillBoardBackground));
                 instance.SetPosition(hole, instanceSkillBoard.SkillBoardSpec.X, instanceSkillBoard.SkillBoardSpec.Y);
                 instance.SetBackgroundColor(Define.SkillPieceColor.Gray);
@@ -150,7 +152,7 @@ namespace StoryNothing.UIViews
             }
         }
 
-        private static HKButton GetHKButton(HKUIDocument document)
+        private static HKButton CreateHKButton(HKUIDocument document)
         {
             return new HKButton(document.Q<Button>("Button"));
         }
