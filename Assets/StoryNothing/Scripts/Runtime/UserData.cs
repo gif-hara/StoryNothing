@@ -12,12 +12,20 @@ namespace StoryNothing
 
         public int AddInstanceSkillBoardCount { get; private set; } = 0;
 
+        public int AddInstanceSkillPieceCount { get; private set; } = 0;
+
         public int EquipInstanceSkillBoardId { get; set; } = -1;
 
         public void AddInstanceSkillBoard(InstanceSkillBoard instanceSkillBoard)
         {
             SkillBoards.Add(instanceSkillBoard.InstanceId, instanceSkillBoard);
             AddInstanceSkillBoardCount++;
+        }
+
+        public void AddInstanceSkillPiece(InstanceSkillPiece instanceSkillPiece)
+        {
+            SkillPieces.Add(instanceSkillPiece.InstanceId, instanceSkillPiece);
+            AddInstanceSkillPieceCount++;
         }
 
         public InstanceSkillBoard GetEquipInstanceSkillBoard()
