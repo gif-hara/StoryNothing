@@ -320,6 +320,7 @@ MonoBehaviour:
   outGameDocument: {fileID: 2096770642}
   playerInput: {fileID: 682451005}
   initialSkillBoardMasterDataId: 10101
+  initialSkillPieceMasterDataIds: 7527000076270000
 --- !u!1 &682451003
 GameObject:
   m_ObjectHideFlags: 0
