@@ -24,6 +24,9 @@ namespace StoryNothing
         [field: SerializeField]
         private int initialSkillBoardMasterDataId = 0;
 
+        [field: SerializeField]
+        private int[] initialSkillPieceMasterDataIds;
+
         private UserData userData;
 
         private Subject<Unit> updateGameState = new();
@@ -44,6 +47,22 @@ namespace StoryNothing
                     if (userData.EquipInstanceSkillBoardId == -1)
                     {
                         userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
+                    }
+                }
+            }
+
+            // とりあえずスキルピースを作る
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    foreach (var initialSkillPieceMasterDataId in initialSkillPieceMasterDataIds)
+                    {
+                        if (initialSkillPieceMasterDataId < 0)
+                        {
+                            continue;
+                        }
+                        var instanceSkillPiece = InstanceSkillPiece.Create(userData.AddInstanceSkillPieceCount, initialSkillPieceMasterDataId);
+                        userData.AddInstanceSkillPiece(instanceSkillPiece);
                     }
                 }
             }
