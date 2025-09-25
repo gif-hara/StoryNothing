@@ -4,18 +4,18 @@ using UnityEngine;
 namespace StoryNothing.InstanceData
 {
     [Serializable]
-    public sealed class InstanceSkillPeace
+    public sealed class InstanceSkillPiece
     {
         [field: SerializeField]
         public int InstanceId { get; private set; }
 
         [field: SerializeField]
-        public int SkillPeaceSpecMasterDataId { get; private set; }
+        public int SkillPieceSpecMasterDataId { get; private set; }
 
-        public InstanceSkillPeace(int instanceId, int skillPeaceSpecMasterDataId)
+        public InstanceSkillPiece(int instanceId, int skillPieceSpecMasterDataId)
         {
             InstanceId = instanceId;
-            SkillPeaceSpecMasterDataId = skillPeaceSpecMasterDataId;
+            SkillPieceSpecMasterDataId = skillPieceSpecMasterDataId;
         }
     }
 }

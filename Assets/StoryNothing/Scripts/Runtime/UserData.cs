@@ -8,6 +8,8 @@ namespace StoryNothing
     {
         public Dictionary<int, InstanceSkillBoard> SkillBoards { get; private set; } = new();
 
+        public Dictionary<int, InstanceSkillPiece> SkillPieces { get; private set; } = new();
+
         public int AddInstanceSkillBoardCount { get; private set; } = 0;
 
         public int EquipInstanceSkillBoardId { get; set; } = -1;
