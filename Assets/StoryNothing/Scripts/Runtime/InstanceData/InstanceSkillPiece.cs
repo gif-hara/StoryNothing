@@ -17,5 +17,10 @@ namespace StoryNothing.InstanceData
             InstanceId = instanceId;
             SkillPieceSpecMasterDataId = skillPieceSpecMasterDataId;
         }
+
+        public static InstanceSkillPiece Create(int instanceId, int skillPieceSpecMasterDataId)
+        {
+            return new InstanceSkillPiece(instanceId, skillPieceSpecMasterDataId);
+        }
     }
 }
