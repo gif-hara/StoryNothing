@@ -43,7 +43,7 @@ namespace StoryNothing
                     userData.AddInstanceSkillBoard(instanceSkillBoard);
                     if (userData.EquipInstanceSkillBoardId == -1)
                     {
-                        userData.SetEquipInstanceSkillBoard(instanceSkillBoard.InstanceId);
+                        userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
                     }
                 }
             }

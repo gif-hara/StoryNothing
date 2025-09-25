@@ -1,39 +1,28 @@
-using System;
 using System.Collections.Generic;
 using StoryNothing.InstanceData;
-using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace StoryNothing
 {
-    [Serializable]
     public sealed class UserData
     {
-        [field: SerializeField]
-        public List<InstanceSkillBoard> SkillBoards { get; private set; } = new();
+        public Dictionary<int, InstanceSkillBoard> SkillBoards { get; private set; } = new();
 
-        [field: SerializeField]
         public int AddInstanceSkillBoardCount { get; private set; } = 0;
 
-        [field: SerializeField]
-        public int EquipInstanceSkillBoardId { get; private set; } = -1;
-
-        private InstanceSkillBoard cachedEquipInstanceSkillBoard;
+        public int EquipInstanceSkillBoardId { get; set; } = -1;
 
         public void AddInstanceSkillBoard(InstanceSkillBoard instanceSkillBoard)
         {
-            SkillBoards.Add(instanceSkillBoard);
+            SkillBoards.Add(instanceSkillBoard.InstanceId, instanceSkillBoard);
             AddInstanceSkillBoardCount++;
-        }
-
-        public void SetEquipInstanceSkillBoard(int instanceId)
-        {
-            EquipInstanceSkillBoardId = instanceId;
-            cachedEquipInstanceSkillBoard = SkillBoards.Find(x => x.InstanceId == instanceId);
         }
 
         public InstanceSkillBoard GetEquipInstanceSkillBoard()
         {
-            return cachedEquipInstanceSkillBoard ??= SkillBoards.Find(x => x.InstanceId == EquipInstanceSkillBoardId);
+            var result = SkillBoards.TryGetValue(EquipInstanceSkillBoardId, out var skillBoard) ? skillBoard : null;
+            Assert.IsNotNull(result, $"EquipInstanceSkillBoard is null: {EquipInstanceSkillBoardId}");
+            return result;
         }
     }
 }

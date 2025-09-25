@@ -93,15 +93,15 @@ namespace StoryNothing.UIViews
             var result = await UniTask.WhenAny(
                 UniTask.WhenAny(
                     userData.SkillBoards.Select(x =>
-                        CreateHKButton(CreateListContent(x.Name, scope.Token))
-                            .OnPointerEnter(hkButton => SetSkillBoard(x))
+                        CreateHKButton(CreateListContent(x.Value.Name, scope.Token))
+                            .OnPointerEnter(hkButton => SetSkillBoard(x.Value))
                             .OnClickAsync(cancellationToken)
                 )),
                 playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(cancellationToken).AsUniTask()
             );
             if (result.winArgumentIndex == 0)
             {
-                userData.SetEquipInstanceSkillBoard(userData.SkillBoards[result.result1].InstanceId);
+                userData.EquipInstanceSkillBoardId = userData.SkillBoards[result.result1].InstanceId;
             }
             else if (result.winArgumentIndex == 1)
             {
@@ -115,7 +115,7 @@ namespace StoryNothing.UIViews
         {
             var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var result = await UniTask.WhenAny(
-                userData.SkillBoards.Select(x => CreateHKButton(CreateListContent(x.Name, scope.Token)).OnClickAsync(cancellationToken))
+                userData.SkillBoards.Select(x => CreateHKButton(CreateListContent(x.Value.Name, scope.Token)).OnClickAsync(cancellationToken))
             );
             selectedInstanceSkillBoard = userData.SkillBoards[result];
             scope.Cancel();
