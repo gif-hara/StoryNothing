@@ -25,7 +25,7 @@ namespace StoryNothing.UIViews
 
         private readonly RectTransform skillBoardBackground;
 
-        private readonly HKUIDocument skillPiecePrefab;
+        private readonly HKUIDocument cellPrefab;
 
         private readonly List<UIElementSkillPiece> holeElements = new();
 
@@ -44,8 +44,8 @@ namespace StoryNothing.UIViews
                 .Q<HKUIDocument>("Area.Center")
                 .Q<HKUIDocument>("Area.SkillBoard")
                 .Q<RectTransform>("Background");
-            skillPiecePrefab = this.document
-                .Q<HKUIDocument>("UI.Element.SkillPiece");
+            cellPrefab = this.document
+                .Q<HKUIDocument>("UI.Element.Cell");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -160,7 +160,7 @@ namespace StoryNothing.UIViews
                 );
             foreach (var hole in instanceSkillBoard.Holes)
             {
-                var instance = new UIElementSkillPiece(Object.Instantiate(skillPiecePrefab, skillBoardBackground));
+                var instance = new UIElementSkillPiece(Object.Instantiate(cellPrefab, skillBoardBackground));
                 instance.SetPosition(hole, instanceSkillBoard.SkillBoardSpec.X, instanceSkillBoard.SkillBoardSpec.Y);
                 instance.SetBackgroundColor(Define.SkillPieceColor.Gray);
                 holeElements.Add(instance);
