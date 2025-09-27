@@ -123,27 +123,56 @@ namespace StoryNothing.UIViews
 
         private async UniTask StateEditSkillBoardAsync(CancellationToken cancellationToken)
         {
-            var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var uiElementSkillPiece = new UIElementSkillPiece(Object.Instantiate(skillPiecePrefab, skillBoardArea.transform));
-            uiElementSkillPiece.SetPositionInCenter();
-            skillBoardBlackout.SetActive(true);
-            var result = await UniTask.WhenAny(
-                UniTask.WhenAny(
-                    userData.SkillPieces.Select(x =>
-                        CreateHKButton(CreateListContent(x.Value.Name, scope.Token))
-                            .OnPointerEnter(_ => uiElementSkillPiece.Setup(x.Value.SkillPieceCellSpec.CellPoints))
-                            .OnClickAsync(cancellationToken)
-                )),
-                playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(cancellationToken).AsUniTask()
-            );
-            if (result.winArgumentIndex == 0)
+            while (!cancellationToken.IsCancellationRequested)
             {
-                Debug.Log("選択されたスキルピース: " + userData.SkillPieces[result.result1].Name);
+                var selectEditModeScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                uiElementSkillPiece.SetPositionInCenter();
+                skillBoardBlackout.SetActive(true);
+                var selectEditModeResult = await UniTask.WhenAny(
+                    UniTask.WhenAny(
+                        userData.SkillPieces.Select(x =>
+                            CreateHKButton(CreateListContent(x.Value.Name, selectEditModeScope.Token))
+                                .OnPointerEnter(_ => uiElementSkillPiece.Setup(x.Value))
+                                .OnClickAsync(selectEditModeScope.Token)
+                    )),
+                    playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(selectEditModeScope.Token).AsUniTask()
+                );
+                selectEditModeScope.Cancel();
+                selectEditModeScope.Dispose();
+                if (selectEditModeResult.winArgumentIndex == 0)
+                {
+                    var skillPiecePlacementScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                    Mouse.current.WarpCursorPosition(uiElementSkillPiece.WorldToScreenPoint());
+                    Observable.EveryUpdate()
+                        .Subscribe(uiElementSkillPiece, static (_, uiElementSkillPiece) =>
+                        {
+                            uiElementSkillPiece.SetPositionFromMouse();
+                        })
+                    .RegisterTo(skillPiecePlacementScope.Token);
+                    var skillPiecePlacementResult = await UniTask.WhenAny(
+                        playerInput.actions["UI/Submit"].OnPerformedAsObservable().FirstAsync(skillPiecePlacementScope.Token).AsUniTask(),
+                        playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(skillPiecePlacementScope.Token).AsUniTask()
+                    );
+                    if (skillPiecePlacementResult.winArgumentIndex == 0)
+                    {
+                        Debug.Log("スキルピース配置確定");
+                    }
+                    else if (skillPiecePlacementResult.winArgumentIndex == 1)
+                    {
+                        Debug.Log("スキルピース配置キャンセル");
+                    }
+                    skillPiecePlacementScope.Cancel();
+                    skillPiecePlacementScope.Dispose();
+                }
+                else if (selectEditModeResult.winArgumentIndex == 1)
+                {
+                    Debug.Log("スキルボード編集キャンセル");
+                    break;
+                }
             }
             uiElementSkillPiece.Dispose();
             skillBoardBlackout.SetActive(false);
-            scope.Cancel();
-            scope.Dispose();
         }
 
         private UniTask StateSelectBattleAsync(CancellationToken cancellationToken)
