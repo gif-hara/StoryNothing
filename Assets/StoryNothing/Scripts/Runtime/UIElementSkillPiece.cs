@@ -2,7 +2,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using HK;
+using StoryNothing.InstanceData;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace StoryNothing
 {
@@ -29,8 +31,9 @@ namespace StoryNothing
             UnityEngine.Object.Destroy(document.gameObject);
         }
 
-        public void Setup(List<Vector2Int> cellPoints)
+        public void Setup(InstanceSkillPiece instanceSkillPiece)
         {
+            var cellPoints = instanceSkillPiece.SkillPieceCellSpec.CellPoints;
             foreach (var cell in cells)
             {
                 cell.Dispose();
@@ -45,23 +48,36 @@ namespace StoryNothing
                 cell.SetPosition(cellPoint, xMax, yMax);
                 cells.Add(cell);
             }
-        }
-
-        public void SetBackgroundColor(Define.SkillPieceColor colorType)
-        {
             foreach (var cell in cells)
             {
-                cell.SetBackgroundColor(colorType);
+                cell.SetBackgroundColor(instanceSkillPiece.ColorType);
             }
+        }
+
+        public void SetPositionFromMouse()
+        {
+            Vector2 localPoint;
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(
+                rectTransform.parent as RectTransform,
+                Mouse.current.position.ReadValue(),
+                null,
+                out localPoint);
+            rectTransform.localPosition = localPoint;
         }
 
         public void SetPosition(Vector2Int index, int xMax, int yMax)
         {
             rectTransform.localPosition = new Vector3(index.x * 100 - (xMax * 100) / 2 + 50, index.y * 100 - (yMax * 100) / 2 + 50, 0);
         }
+
         public void SetPositionInCenter()
         {
             rectTransform.localPosition = Vector3.zero;
+        }
+
+        public Vector3 WorldToScreenPoint()
+        {
+            return RectTransformUtility.WorldToScreenPoint(null, rectTransform.position);
         }
     }
 }
