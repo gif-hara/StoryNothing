@@ -1,4 +1,6 @@
 using System;
+using HK;
+using StoryNothing.MasterDataSystems;
 using UnityEngine;
 
 namespace StoryNothing.InstanceData
@@ -11,6 +13,10 @@ namespace StoryNothing.InstanceData
 
         [field: SerializeField]
         public int SkillPieceSpecMasterDataId { get; private set; }
+
+        public SkillPieceSpec SkillPieceSpec => ServiceLocator.Resolve<MasterData>().SkillPieceSpecs.Get(SkillPieceSpecMasterDataId);
+
+        public string Name => SkillPieceSpec.Name;
 
         public InstanceSkillPiece(int instanceId, int skillPieceSpecMasterDataId)
         {
