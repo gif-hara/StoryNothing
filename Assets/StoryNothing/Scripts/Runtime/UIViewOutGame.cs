@@ -78,7 +78,7 @@ namespace StoryNothing.UIViews
                         await StateSelectEquipSkillBoardAsync(cancellationToken);
                         break;
                     case 1:
-                        await StateSelectEditSkillBoardAsync(cancellationToken);
+                        await StateEditSkillBoardAsync(cancellationToken);
                         break;
                     case 2:
                         await StateSelectBattleAsync(cancellationToken);
@@ -111,21 +111,16 @@ namespace StoryNothing.UIViews
             scope.Dispose();
         }
 
-        private async UniTask StateSelectEditSkillBoardAsync(CancellationToken cancellationToken)
+        private async UniTask StateEditSkillBoardAsync(CancellationToken cancellationToken)
         {
             var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var result = await UniTask.WhenAny(
-                userData.SkillBoards.Select(x => CreateHKButton(CreateListContent(x.Value.Name, scope.Token)).OnClickAsync(cancellationToken))
+                userData.SkillPieces.Select(x => CreateHKButton(CreateListContent(x.Value.Name, scope.Token)).OnClickAsync(cancellationToken))
             );
             selectedInstanceSkillBoard = userData.SkillBoards[result];
             scope.Cancel();
             scope.Dispose();
             await StateEditSkillBoardAsync(cancellationToken);
-        }
-
-        private UniTask StateEditSkillBoardAsync(CancellationToken cancellationToken)
-        {
-            return UniTask.Never(cancellationToken);
         }
 
         private UniTask StateSelectBattleAsync(CancellationToken cancellationToken)
