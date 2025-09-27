@@ -27,8 +27,6 @@ namespace StoryNothing.UIViews
 
         private readonly HKUIDocument skillPiecePrefab;
 
-        private InstanceSkillBoard selectedInstanceSkillBoard;
-
         private readonly List<UIElementSkillPiece> holeElements = new();
 
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput)
@@ -115,12 +113,19 @@ namespace StoryNothing.UIViews
         {
             var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var result = await UniTask.WhenAny(
-                userData.SkillPieces.Select(x => CreateHKButton(CreateListContent(x.Value.Name, scope.Token)).OnClickAsync(cancellationToken))
+                UniTask.WhenAny(
+                    userData.SkillPieces.Select(x =>
+                        CreateHKButton(CreateListContent(x.Value.Name, scope.Token))
+                            .OnClickAsync(cancellationToken)
+                )),
+                playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(cancellationToken).AsUniTask()
             );
-            selectedInstanceSkillBoard = userData.SkillBoards[result];
+            if (result.winArgumentIndex == 0)
+            {
+                Debug.Log("選択されたスキルピース: " + userData.SkillPieces[result.result1].Name);
+            }
             scope.Cancel();
             scope.Dispose();
-            await StateEditSkillBoardAsync(cancellationToken);
         }
 
         private UniTask StateSelectBattleAsync(CancellationToken cancellationToken)
