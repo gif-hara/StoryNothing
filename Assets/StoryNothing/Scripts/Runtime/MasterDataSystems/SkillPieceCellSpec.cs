@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using HK;
+using UnityEngine;
 
 namespace StoryNothing.MasterDataSystems
 {
@@ -9,6 +12,8 @@ namespace StoryNothing.MasterDataSystems
         public int Id;
 
         public int GroupId;
+
+        public List<Vector2Int> CellPoints => ServiceLocator.Resolve<MasterData>().SkillPieceCellPoints.Get(Id).Select(x => new Vector2Int(x.X, x.Y)).ToList();
 
         [Serializable]
         public sealed class DictionaryList : DictionaryList<int, SkillPieceCellSpec>
