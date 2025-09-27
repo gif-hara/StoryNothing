@@ -8,9 +8,7 @@ namespace StoryNothing.MasterDataSystems
     {
         public int Id;
 
-        public int X;
-
-        public int Y;
+        public int GroupId;
 
         [Serializable]
         public sealed class DictionaryList : DictionaryList<int, SkillPieceCellSpec>
