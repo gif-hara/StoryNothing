@@ -1,5 +1,6 @@
 using System;
 using HK;
+using UnityEngine;
 
 namespace StoryNothing.MasterDataSystems
 {
@@ -15,6 +16,8 @@ namespace StoryNothing.MasterDataSystems
         public int Y;
 
         public int HoleCount;
+
+        public Vector2Int Size => new(X, Y);
 
         [Serializable]
         public sealed class DictionaryList : DictionaryList<int, SkillBoardSpec>
