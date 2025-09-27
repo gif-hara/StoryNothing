@@ -10,6 +10,8 @@ namespace StoryNothing.MasterDataSystems
 
         public string Name;
 
+        public int SkillPieceCellSpecGroupId;
+
         [Serializable]
         public sealed class DictionaryList : DictionaryList<int, SkillPieceSpec>
         {
