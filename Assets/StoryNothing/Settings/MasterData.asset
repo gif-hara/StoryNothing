@@ -39,3 +39,41 @@ MonoBehaviour:
       GroupId: 3
     - Id: 10201
       GroupId: 4
+  <SkillPieceCellPoints>k__BackingField:
+    list:
+    - Key: 10101
+      Value:
+      - Id: 10101
+        X: 0
+        Y: 0
+      - Id: 10101
+        X: 1
+        Y: 0
+      - Id: 10101
+        X: 2
+        Y: 0
+    - Key: 10102
+      Value:
+      - Id: 10102
+        X: 0
+        Y: 0
+      - Id: 10102
+        X: 1
+        Y: 0
+      - Id: 10102
+        X: 0
+        Y: 1
+    - Key: 10201
+      Value:
+      - Id: 10201
+        X: 0
+        Y: 0
+      - Id: 10201
+        X: 1
+        Y: 0
+      - Id: 10201
+        X: 2
+        Y: 0
+      - Id: 10201
+        X: 3
+        Y: 0
