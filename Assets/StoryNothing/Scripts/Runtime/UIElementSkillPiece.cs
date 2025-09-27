@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace StoryNothing
 {
-    public readonly struct UIElementSkillPiece : IDisposable
+    public readonly struct UIElementCell : IDisposable
     {
         private readonly HKUIDocument document;
 
@@ -13,7 +13,7 @@ namespace StoryNothing
 
         private readonly RectTransform rectTransform;
 
-        public UIElementSkillPiece(HKUIDocument document)
+        public UIElementCell(HKUIDocument document)
         {
             this.document = document;
             backgroundImage = document.Q<Image>("Background");

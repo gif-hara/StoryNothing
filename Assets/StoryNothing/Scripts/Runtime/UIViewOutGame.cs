@@ -27,7 +27,7 @@ namespace StoryNothing.UIViews
 
         private readonly HKUIDocument cellPrefab;
 
-        private readonly List<UIElementSkillPiece> holeElements = new();
+        private readonly List<UIElementCell> holeElements = new();
 
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput)
         {
@@ -160,7 +160,7 @@ namespace StoryNothing.UIViews
                 );
             foreach (var hole in instanceSkillBoard.Holes)
             {
-                var instance = new UIElementSkillPiece(Object.Instantiate(cellPrefab, skillBoardBackground));
+                var instance = new UIElementCell(Object.Instantiate(cellPrefab, skillBoardBackground));
                 instance.SetPosition(hole, instanceSkillBoard.SkillBoardSpec.X, instanceSkillBoard.SkillBoardSpec.Y);
                 instance.SetBackgroundColor(Define.SkillPieceColor.Gray);
                 holeElements.Add(instance);
