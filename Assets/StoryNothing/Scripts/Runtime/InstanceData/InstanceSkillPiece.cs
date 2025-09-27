@@ -18,17 +18,26 @@ namespace StoryNothing.InstanceData
         [field: SerializeField]
         public int SkillPieceCellSpecMasterDataId { get; private set; }
 
+        [field: SerializeField]
+        public Define.SkillPieceColor ColorType { get; private set; }
+
         public SkillPieceSpec SkillPieceSpec => ServiceLocator.Resolve<MasterData>().SkillPieceSpecs.Get(SkillPieceSpecMasterDataId);
 
         public SkillPieceCellSpec SkillPieceCellSpec => ServiceLocator.Resolve<MasterData>().SkillPieceCellSpecs.Get(SkillPieceCellSpecMasterDataId);
 
         public string Name => SkillPieceSpec.Name;
 
-        public InstanceSkillPiece(int instanceId, int skillPieceSpecMasterDataId, int skillPieceCellSpecMasterDataId = 0)
+        public InstanceSkillPiece(
+            int instanceId,
+            int skillPieceSpecMasterDataId,
+            int skillPieceCellSpecMasterDataId,
+            Define.SkillPieceColor colorType
+            )
         {
             InstanceId = instanceId;
             SkillPieceSpecMasterDataId = skillPieceSpecMasterDataId;
             SkillPieceCellSpecMasterDataId = skillPieceCellSpecMasterDataId;
+            ColorType = colorType;
         }
 
         public static InstanceSkillPiece Create(int instanceId, int skillPieceSpecMasterDataId)
@@ -39,7 +48,7 @@ namespace StoryNothing.InstanceData
                 .Where(x => x.GroupId == skillPieceSpec.SkillPieceCellSpecGroupId)
                 .OrderBy(_ => Guid.NewGuid())
                 .First();
-            return new InstanceSkillPiece(instanceId, skillPieceSpecMasterDataId, skillPieceCellSpec.Id);
+            return new InstanceSkillPiece(instanceId, skillPieceSpecMasterDataId, skillPieceCellSpec.Id, Define.SkillPieceColor.Red);
         }
     }
 }
