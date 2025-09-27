@@ -143,11 +143,16 @@ namespace StoryNothing.UIViews
                 if (selectEditModeResult.winArgumentIndex == 0)
                 {
                     var skillPiecePlacementScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                    var skillPiece = userData.SkillPieces[selectEditModeResult.result1];
+                    skillBoardBlackout.SetActive(false);
+                    var skillPieceSize = skillPiece.SkillPieceCellSpec.Size;
                     Mouse.current.WarpCursorPosition(uiElementSkillPiece.WorldToScreenPoint());
                     Observable.EveryUpdate()
-                        .Subscribe(uiElementSkillPiece, static (_, uiElementSkillPiece) =>
+                        .Subscribe((uiElementSkillPiece, userData, skillPieceSize), static (_, t) =>
                         {
-                            uiElementSkillPiece.SetPositionFromMouse();
+                            var (uiElementSkillPiece, userData, skillPieceSize) = t;
+                            var skillBoard = userData.GetEquipInstanceSkillBoard();
+                            uiElementSkillPiece.SetPositionFromMouse(new Vector2(0.0f, 0.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
                         })
                     .RegisterTo(skillPiecePlacementScope.Token);
                     var skillPiecePlacementResult = await UniTask.WhenAny(
