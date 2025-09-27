@@ -54,20 +54,48 @@ namespace StoryNothing
             }
         }
 
-        public void SetPositionFromMouse()
+        public Vector2Int GetPositionIndexFromMousePosition(Vector2Int skillboardSize, Vector2Int skillPieceSize)
         {
-            Vector2 localPoint;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 rectTransform.parent as RectTransform,
                 Mouse.current.position.ReadValue(),
                 null,
-                out localPoint);
-            rectTransform.localPosition = localPoint;
+                out Vector2 localPoint);
+            var result = new Vector2Int(
+                Mathf.Clamp(Mathf.FloorToInt((localPoint.x + (skillboardSize.x * 100) / 2) / 100), 0, skillboardSize.x - 1),
+                Mathf.Clamp(Mathf.FloorToInt((localPoint.y + (skillboardSize.y * 100) / 2) / 100), 0, skillboardSize.y - 1)
+                );
+            var skillPieceCenterIndex = new Vector2Int(skillPieceSize.x / 2, skillPieceSize.y / 2);
+            if (result.x - skillPieceCenterIndex.x < 0)
+            {
+                result.x = skillPieceCenterIndex.x;
+            }
+            if (result.x + (skillPieceSize.x - skillPieceCenterIndex.x - 1) >= skillboardSize.x)
+            {
+                result.x = skillboardSize.x - (skillPieceSize.x - skillPieceCenterIndex.x - 1) - 1;
+            }
+            if (result.y - skillPieceCenterIndex.y < 0)
+            {
+                result.y = skillPieceCenterIndex.y;
+            }
+            if (result.y + (skillPieceSize.y - skillPieceCenterIndex.y - 1) >= skillboardSize.y)
+            {
+                result.y = skillboardSize.y - (skillPieceSize.y - skillPieceCenterIndex.y - 1) - 1;
+            }
+
+            return result;
         }
 
-        public void SetPosition(Vector2Int index, int xMax, int yMax)
+        public void SetPositionFromMouse(Vector2 offset, Vector2Int skillboardSize, Vector2Int skillPieceSize)
         {
-            rectTransform.localPosition = new Vector3(index.x * 100 - (xMax * 100) / 2 + 50, index.y * 100 - (yMax * 100) / 2 + 50, 0);
+            var positionIndex = GetPositionIndexFromMousePosition(skillboardSize, skillPieceSize);
+            SetPosition(positionIndex, skillboardSize);
+            rectTransform.localPosition += (Vector3)offset;
+        }
+
+        public void SetPosition(Vector2Int positionIndex, Vector2Int skillboardSize)
+        {
+            rectTransform.localPosition = new Vector3(positionIndex.x * 100 - (skillboardSize.x * 100) / 2 + 50, positionIndex.y * 100 - (skillboardSize.y * 100) / 2 + 50, 0);
         }
 
         public void SetPositionInCenter()
