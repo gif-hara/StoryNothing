@@ -23,9 +23,15 @@ namespace StoryNothing.UIViews
 
         private readonly HKUIDocument listContentPrefab;
 
+        private readonly HKUIDocument skillBoardArea;
+
         private readonly RectTransform skillBoardBackground;
 
+        private readonly GameObject skillBoardBlackout;
+
         private readonly HKUIDocument cellPrefab;
+
+        private readonly HKUIDocument skillPiecePrefab;
 
         private readonly List<UIElementCell> holeElements = new();
 
@@ -40,12 +46,18 @@ namespace StoryNothing.UIViews
                 .Q<Transform>("Content");
             listContentPrefab = this.document
                 .Q<HKUIDocument>("UI.Element.Button");
-            skillBoardBackground = this.document
+            skillBoardArea = this.document
                 .Q<HKUIDocument>("Area.Center")
-                .Q<HKUIDocument>("Area.SkillBoard")
+                .Q<HKUIDocument>("Area.SkillBoard");
+            skillBoardBackground = skillBoardArea
                 .Q<RectTransform>("Background");
+            skillBoardBlackout = skillBoardArea
+                .Q("Blackout");
+            skillBoardBlackout.SetActive(false);
             cellPrefab = this.document
                 .Q<HKUIDocument>("UI.Element.Cell");
+            skillPiecePrefab = this.document
+                .Q<HKUIDocument>("UI.Element.SkillPiece");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -112,10 +124,14 @@ namespace StoryNothing.UIViews
         private async UniTask StateEditSkillBoardAsync(CancellationToken cancellationToken)
         {
             var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+            var uiElementSkillPiece = new UIElementSkillPiece(Object.Instantiate(skillPiecePrefab, skillBoardArea.transform));
+            uiElementSkillPiece.SetPositionInCenter();
+            skillBoardBlackout.SetActive(true);
             var result = await UniTask.WhenAny(
                 UniTask.WhenAny(
                     userData.SkillPieces.Select(x =>
                         CreateHKButton(CreateListContent(x.Value.Name, scope.Token))
+                            .OnPointerEnter(_ => uiElementSkillPiece.Setup(x.Value.SkillPieceCellSpec.CellPoints))
                             .OnClickAsync(cancellationToken)
                 )),
                 playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(cancellationToken).AsUniTask()
@@ -124,6 +140,8 @@ namespace StoryNothing.UIViews
             {
                 Debug.Log("選択されたスキルピース: " + userData.SkillPieces[result.result1].Name);
             }
+            uiElementSkillPiece.Dispose();
+            skillBoardBlackout.SetActive(false);
             scope.Cancel();
             scope.Dispose();
         }
