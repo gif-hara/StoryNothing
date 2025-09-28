@@ -133,7 +133,7 @@ namespace StoryNothing.UIViews
                     UniTask.WhenAny(
                         userData.SkillPieces.Select(x =>
                             CreateHKButton(CreateListContent(x.Value.Name, selectEditModeScope.Token))
-                                .OnPointerEnter(_ => uiElementSkillPiece.Setup(x.Value))
+                                .OnPointerEnter(_ => uiElementSkillPiece.Setup(x.Value, 0))
                                 .OnClickAsync(selectEditModeScope.Token)
                     )),
                     playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(selectEditModeScope.Token).AsUniTask()
@@ -145,27 +145,37 @@ namespace StoryNothing.UIViews
                     var skillPiecePlacementScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                     var skillPiece = userData.SkillPieces[selectEditModeResult.result1];
                     skillBoardBlackout.SetActive(false);
-                    var skillPieceSize = skillPiece.SkillPieceCellSpec.Size;
+                    var rotationIndex = 0;
+                    var skillPieceSize = skillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
                     Mouse.current.WarpCursorPosition(uiElementSkillPiece.WorldToScreenPoint());
-                    Observable.EveryUpdate()
-                        .Subscribe((uiElementSkillPiece, userData, skillPieceSize), static (_, t) =>
+                    while (!skillPiecePlacementScope.IsCancellationRequested)
+                    {
+                        await UniTask.Yield(PlayerLoopTiming.Update, skillPiecePlacementScope.Token);
+                        var scrollValue = playerInput.actions["UI/ScrollWheel"].ReadValue<Vector2>().y;
+                        if (scrollValue > 0.1f)
                         {
-                            var (uiElementSkillPiece, userData, skillPieceSize) = t;
-                            var skillBoard = userData.GetEquipInstanceSkillBoard();
-                            uiElementSkillPiece.SetPositionFromMouse(new Vector2(0.0f, 0.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
-                        })
-                    .RegisterTo(skillPiecePlacementScope.Token);
-                    var skillPiecePlacementResult = await UniTask.WhenAny(
-                        playerInput.actions["UI/Submit"].OnPerformedAsObservable().FirstAsync(skillPiecePlacementScope.Token).AsUniTask(),
-                        playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(skillPiecePlacementScope.Token).AsUniTask()
-                    );
-                    if (skillPiecePlacementResult.winArgumentIndex == 0)
-                    {
-                        Debug.Log("スキルピース配置確定");
-                    }
-                    else if (skillPiecePlacementResult.winArgumentIndex == 1)
-                    {
-                        Debug.Log("スキルピース配置キャンセル");
+                            rotationIndex = (rotationIndex + 1) % 4;
+                            skillPieceSize = skillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
+                            uiElementSkillPiece.Setup(skillPiece, rotationIndex);
+                        }
+                        else if (scrollValue < -0.1f)
+                        {
+                            rotationIndex = (rotationIndex + 3) % 4;
+                            skillPieceSize = skillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
+                            uiElementSkillPiece.Setup(skillPiece, rotationIndex);
+                        }
+                        var skillBoard = userData.GetEquipInstanceSkillBoard();
+                        uiElementSkillPiece.SetPositionFromMouse(new Vector2(0.0f, 0.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
+                        if (playerInput.actions["UI/Submit"].WasPerformedThisFrame())
+                        {
+                            Debug.Log($"スキルピース配置: {uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize)}");
+                            break;
+                        }
+                        if (playerInput.actions["UI/Cancel"].WasPerformedThisFrame())
+                        {
+                            Debug.Log("スキルピース配置キャンセル");
+                            break;
+                        }
                     }
                     skillPiecePlacementScope.Cancel();
                     skillPiecePlacementScope.Dispose();
