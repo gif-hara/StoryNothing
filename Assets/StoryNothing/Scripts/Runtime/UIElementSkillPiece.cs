@@ -31,9 +31,9 @@ namespace StoryNothing
             UnityEngine.Object.Destroy(document.gameObject);
         }
 
-        public void Setup(InstanceSkillPiece instanceSkillPiece)
+        public void Setup(InstanceSkillPiece instanceSkillPiece, int rotationIndex)
         {
-            var cellPoints = instanceSkillPiece.SkillPieceCellSpec.CellPoints;
+            var cellPoints = instanceSkillPiece.SkillPieceCellSpec.GetCellPoints(rotationIndex);
             foreach (var cell in cells)
             {
                 cell.Dispose();
