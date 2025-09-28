@@ -22,7 +22,7 @@ namespace StoryNothing
         private PlayerInput playerInput;
 
         [field: SerializeField]
-        private int initialSkillBoardMasterDataId = 0;
+        private int[] initialSkillBoardMasterDataIds;
 
         [field: SerializeField]
         private int[] initialSkillPieceMasterDataIds;
@@ -42,11 +42,28 @@ namespace StoryNothing
             {
                 for (int i = 0; i < 10; i++)
                 {
-                    var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
-                    userData.AddInstanceSkillBoard(instanceSkillBoard);
-                    if (userData.EquipInstanceSkillBoardId == -1)
+                    foreach (var initialSkillBoardMasterDataId in initialSkillBoardMasterDataIds)
                     {
-                        userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
+                        if (initialSkillBoardMasterDataId < 0)
+                        {
+                            continue;
+                        }
+                        var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
+                        userData.AddInstanceSkillBoard(instanceSkillBoard);
+                        if (userData.EquipInstanceSkillBoardId == -1)
+                        {
+                            userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
+                        }
+                    }
+                }
+            }
+
+            // とりあえずスキルピースを作る
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    foreach (var initialSkillPieceMasterDataId in initialSkillPieceMasterDataIds)
+                    {
                     }
                 }
             }
