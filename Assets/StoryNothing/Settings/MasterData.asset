@@ -23,6 +23,11 @@ MonoBehaviour:
       X: 4
       Y: 4
       HoleCount: 1
+    - Id: 10201
+      Name: "\u5927\u304D\u306A\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
+      X: 5
+      Y: 5
+      HoleCount: 2
   <SkillPieceSpecs>k__BackingField:
     list:
     - Id: 10101
