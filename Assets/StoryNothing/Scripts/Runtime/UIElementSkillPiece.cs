@@ -89,21 +89,22 @@ namespace StoryNothing
         public void SetPositionFromMouse(Vector2 offset, Vector2Int skillboardSize, Vector2Int skillPieceSize)
         {
             var positionIndex = GetPositionIndexFromMousePosition(skillboardSize, skillPieceSize);
-            SetPosition(positionIndex, skillboardSize);
-            if (skillPieceSize.x % 2 == 0)
-            {
-                offset.x -= 50;
-            }
-            if (skillPieceSize.y % 2 == 0)
-            {
-                offset.y -= 50;
-            }
+            SetPosition(positionIndex, skillboardSize, skillPieceSize);
             rectTransform.localPosition += (Vector3)offset;
         }
 
-        public void SetPosition(Vector2Int positionIndex, Vector2Int skillboardSize)
+        public void SetPosition(Vector2Int positionIndex, Vector2Int skillboardSize, Vector2Int skillPieceSize)
         {
-            rectTransform.localPosition = new Vector3(positionIndex.x * 100 - (skillboardSize.x * 100) / 2 + 50, positionIndex.y * 100 - (skillboardSize.y * 100) / 2 + 50, 0);
+            var result = new Vector3(positionIndex.x * 100 - (skillboardSize.x * 100) / 2 + 50, positionIndex.y * 100 - (skillboardSize.y * 100) / 2 + 50, 0);
+            if (skillPieceSize.x % 2 == 0)
+            {
+                result.x -= 50;
+            }
+            if (skillPieceSize.y % 2 == 0)
+            {
+                result.y -= 50;
+            }
+            rectTransform.localPosition = result;
         }
 
         public void SetPositionInCenter()
