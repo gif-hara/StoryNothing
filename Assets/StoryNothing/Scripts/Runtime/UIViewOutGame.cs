@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -125,7 +126,7 @@ namespace StoryNothing.UIViews
 
         private async UniTask StateEditSkillBoardAsync(CancellationToken cancellationToken)
         {
-            var uiElementSkillPiece = new UIElementSkillPiece(Object.Instantiate(skillPiecePrefab, skillBoardArea.transform));
+            var uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, skillBoardArea.transform));
             while (!cancellationToken.IsCancellationRequested)
             {
                 var selectEditModeScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -167,7 +168,7 @@ namespace StoryNothing.UIViews
                             uiElementSkillPiece.Setup(skillPiece, rotationIndex);
                         }
                         var skillBoard = userData.GetEquipInstanceSkillBoard();
-                        uiElementSkillPiece.SetPositionFromMouse(new Vector2(0.0f, 0.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
+                        uiElementSkillPiece.SetPositionFromMouse(new Vector2(-20.0f, 20.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
                         if (playerInput.actions["UI/Submit"].WasPerformedThisFrame())
                         {
                             if (!skillBoard.CanPlacementSkillPiece(userData, skillPiece, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex))
@@ -179,6 +180,8 @@ namespace StoryNothing.UIViews
                                 skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex);
                                 Debug.Log("スキルピース配置");
                                 SetSkillBoard(skillBoard);
+                                uiElementSkillPiece.Clear();
+                                await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: skillPiecePlacementScope.Token);
                                 break;
                             }
                         }
@@ -208,13 +211,13 @@ namespace StoryNothing.UIViews
 
         private HKUIDocument CreateListContent(string text, CancellationToken cancellationToken)
         {
-            var instance = Object.Instantiate(listContentPrefab, listParent);
+            var instance = UnityEngine.Object.Instantiate(listContentPrefab, listParent);
             instance.Q<TMP_Text>("Text").SetText(text);
             cancellationToken.RegisterWithoutCaptureExecutionContext(() =>
             {
                 if (instance != null)
                 {
-                    Object.Destroy(instance.gameObject);
+                    UnityEngine.Object.Destroy(instance.gameObject);
                 }
             });
             return instance;
@@ -238,7 +241,7 @@ namespace StoryNothing.UIViews
                 );
             foreach (var hole in instanceSkillBoard.Holes)
             {
-                var instance = new UIElementCell(Object.Instantiate(cellPrefab, skillBoardBackground));
+                var instance = new UIElementCell(UnityEngine.Object.Instantiate(cellPrefab, skillBoardBackground));
                 instance.SetPosition(hole, instanceSkillBoard.SkillBoardSpec.X, instanceSkillBoard.SkillBoardSpec.Y);
                 instance.SetBackgroundColor(Define.SkillPieceColor.Gray);
                 holeElements.Add(instance);
@@ -246,7 +249,7 @@ namespace StoryNothing.UIViews
             foreach (var placementSkillPiece in instanceSkillBoard.PlacementSkillPieces)
             {
                 var instanceSkillPiece = userData.GetInstanceSkillPiece(placementSkillPiece.InstanceSkillPieceId);
-                var uiElementSkillPiece = new UIElementSkillPiece(Object.Instantiate(skillPiecePrefab, skillBoardBackground));
+                var uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, skillBoardBackground));
                 uiElementSkillPiece.Setup(instanceSkillPiece, placementSkillPiece.RotationIndex);
                 uiElementSkillPiece.SetPosition(placementSkillPiece.PositionIndex, instanceSkillBoard.SkillBoardSpec.Size, instanceSkillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex));
                 skillPieceElements.Add(uiElementSkillPiece);
