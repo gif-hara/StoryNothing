@@ -89,6 +89,11 @@ namespace StoryNothing.InstanceData
             PlacementSkillPieces.Add(new PlacementSkillPiece(instanceSkillPieceId, positionIndex, rotationIndex));
         }
 
+        public void RemovePlacementSkillPiece(int instanceSkillPieceId)
+        {
+            PlacementSkillPieces.RemoveAll(x => x.InstanceSkillPieceId == instanceSkillPieceId);
+        }
+
         [Serializable]
         public class PlacementSkillPiece
         {
@@ -106,6 +111,21 @@ namespace StoryNothing.InstanceData
                 InstanceSkillPieceId = instanceSkillPieceId;
                 PositionIndex = positionIndex;
                 RotationIndex = rotationIndex;
+            }
+
+            public bool ContainsPositionIndex(Vector2Int positionIndex, UserData userData)
+            {
+                var instanceSkillPiece = userData.GetInstanceSkillPiece(InstanceSkillPieceId);
+                var cellPoints = instanceSkillPiece.SkillPieceCellSpec.GetCellPoints(RotationIndex);
+                foreach (var cellPoint in cellPoints)
+                {
+                    var boardPosition = PositionIndex + cellPoint - new Vector2Int(instanceSkillPiece.SkillPieceCellSpec.GetSize(RotationIndex).x / 2, instanceSkillPiece.SkillPieceCellSpec.GetSize(RotationIndex).y / 2);
+                    if (boardPosition == positionIndex)
+                    {
+                        return true;
+                    }
+                }
+                return false;
             }
         }
     }
