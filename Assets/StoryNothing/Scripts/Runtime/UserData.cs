@@ -34,5 +34,12 @@ namespace StoryNothing
             Assert.IsNotNull(result, $"EquipInstanceSkillBoard is null: {EquipInstanceSkillBoardId}");
             return result;
         }
+
+        public InstanceSkillPiece GetInstanceSkillPiece(int instanceId)
+        {
+            var result = SkillPieces.TryGetValue(instanceId, out var skillPiece) ? skillPiece : null;
+            Assert.IsNotNull(result, $"InstanceSkillPiece is null: {instanceId}");
+            return result;
+        }
     }
 }
