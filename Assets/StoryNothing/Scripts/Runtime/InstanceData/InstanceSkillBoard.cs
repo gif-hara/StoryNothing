@@ -18,6 +18,9 @@ namespace StoryNothing.InstanceData
         [field: SerializeField]
         public List<Vector2Int> Holes { get; private set; } = new();
 
+        [field: SerializeField]
+        public List<PlacementSkillPiece> PlacementSkillPieces { get; private set; } = new();
+
         public SkillBoardSpec SkillBoardSpec => ServiceLocator.Resolve<MasterData>().SkillBoardSpecs.Get(SkillBoardMasterDataId);
 
         public string Name => SkillBoardSpec.Name;
@@ -44,6 +47,66 @@ namespace StoryNothing.InstanceData
                 holes.Add(hole);
             }
             return new InstanceSkillBoard(instanceId, skillBoardMasterDataId, holes);
+        }
+
+        public bool CanPlacementSkillPiece(UserData userData, InstanceSkillPiece instanceSkillPiece, Vector2Int positionIndex, int rotationIndex)
+        {
+            var cellPoints = instanceSkillPiece.SkillPieceCellSpec.GetCellPoints(rotationIndex);
+            var skillPieceSize = instanceSkillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
+            var skillPieceCenterIndex = new Vector2Int(skillPieceSize.x / 2, skillPieceSize.y / 2);
+            foreach (var cellPoint in cellPoints)
+            {
+                var boardPosition = positionIndex + cellPoint - skillPieceCenterIndex;
+                if (boardPosition.x < 0 || boardPosition.x >= SkillBoardSpec.X || boardPosition.y < 0 || boardPosition.y >= SkillBoardSpec.Y)
+                {
+                    return false;
+                }
+                if (Holes.Contains(boardPosition))
+                {
+                    return false;
+                }
+                foreach (var placementSkillPiece in PlacementSkillPieces)
+                {
+                    var placedInstanceSkillPiece = userData.GetInstanceSkillPiece(placementSkillPiece.InstanceSkillPieceId);
+                    var placedCellPoints = placedInstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(placementSkillPiece.RotationIndex);
+                    var placedPieceSize = placedInstanceSkillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex);
+                    var placedPieceCenterIndex = new Vector2Int(placedPieceSize.x / 2, placedPieceSize.y / 2);
+                    foreach (var placedCellPoint in placedCellPoints)
+                    {
+                        var placedBoardPosition = placementSkillPiece.PositionIndex + placedCellPoint - placedPieceCenterIndex;
+                        if (boardPosition == placedBoardPosition)
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
+        public void AddPlacementSkillPiece(int instanceSkillPieceId, Vector2Int positionIndex, int rotationIndex)
+        {
+            PlacementSkillPieces.Add(new PlacementSkillPiece(instanceSkillPieceId, positionIndex, rotationIndex));
+        }
+
+        [Serializable]
+        public class PlacementSkillPiece
+        {
+            [field: SerializeField]
+            public int InstanceSkillPieceId { get; private set; }
+
+            [field: SerializeField]
+            public Vector2Int PositionIndex { get; private set; }
+
+            [field: SerializeField]
+            public int RotationIndex { get; private set; }
+
+            public PlacementSkillPiece(int instanceSkillPieceId, Vector2Int positionIndex, int rotationIndex)
+            {
+                InstanceSkillPieceId = instanceSkillPieceId;
+                PositionIndex = positionIndex;
+                RotationIndex = rotationIndex;
+            }
         }
     }
 }
