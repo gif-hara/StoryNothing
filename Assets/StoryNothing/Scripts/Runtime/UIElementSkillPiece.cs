@@ -90,6 +90,14 @@ namespace StoryNothing
         {
             var positionIndex = GetPositionIndexFromMousePosition(skillboardSize, skillPieceSize);
             SetPosition(positionIndex, skillboardSize);
+            if (skillPieceSize.x % 2 == 0)
+            {
+                offset.x -= 50;
+            }
+            if (skillPieceSize.y % 2 == 0)
+            {
+                offset.y -= 50;
+            }
             rectTransform.localPosition += (Vector3)offset;
         }
 
