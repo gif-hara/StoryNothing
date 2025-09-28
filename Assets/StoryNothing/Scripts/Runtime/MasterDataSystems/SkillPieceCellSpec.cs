@@ -16,7 +16,19 @@ namespace StoryNothing.MasterDataSystems
         public List<Vector2Int> GetCellPoints(int rotationIndex)
         {
             var points = ServiceLocator.Resolve<MasterData>().SkillPieceCellPoints.Get(Id).Select(x => new Vector2Int(x.X, x.Y)).ToList();
-            return points.RotateClockwise(rotationIndex);
+            points = points.RotateClockwise(rotationIndex);
+
+            // 負数がある場合、(0,0)基準にする
+            var xMin = points.Count > 0 ? points.Min(x => x.x) : 0;
+            var yMin = points.Count > 0 ? points.Min(x => x.y) : 0;
+            if (xMin < 0 || yMin < 0)
+            {
+                for (var i = 0; i < points.Count; i++)
+                {
+                    points[i] = new Vector2Int(points[i].x - xMin, points[i].y - yMin);
+                }
+            }
+            return points;
         }
 
         public Vector2Int GetSize(int rotationIndex)
