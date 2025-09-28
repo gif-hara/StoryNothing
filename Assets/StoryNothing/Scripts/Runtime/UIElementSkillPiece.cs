@@ -8,7 +8,7 @@ using UnityEngine.InputSystem;
 
 namespace StoryNothing
 {
-    public readonly struct UIElementSkillPiece : IDisposable
+    public class UIElementSkillPiece : IDisposable
     {
         private readonly HKUIDocument document;
 
@@ -18,12 +18,15 @@ namespace StoryNothing
 
         private readonly List<UIElementCell> cells;
 
+        public InstanceSkillPiece InstanceSkillPiece { get; private set; }
+
         public UIElementSkillPiece(HKUIDocument document)
         {
             this.document = document;
             cellPrefab = document.Q<HKUIDocument>("UI.Element.Cell");
             rectTransform = document.GetComponent<RectTransform>();
             cells = new List<UIElementCell>();
+            InstanceSkillPiece = null;
         }
 
         public void Dispose()
@@ -33,6 +36,7 @@ namespace StoryNothing
 
         public void Setup(InstanceSkillPiece instanceSkillPiece, int rotationIndex)
         {
+            InstanceSkillPiece = instanceSkillPiece;
             var cellPoints = instanceSkillPiece.SkillPieceCellSpec.GetCellPoints(rotationIndex);
             foreach (var cell in cells)
             {
