@@ -116,5 +116,14 @@ namespace StoryNothing
         {
             return RectTransformUtility.WorldToScreenPoint(null, rectTransform.position);
         }
+
+        public void Clear()
+        {
+            foreach (var cell in cells)
+            {
+                cell.Dispose();
+            }
+            cells.Clear();
+        }
     }
 }
