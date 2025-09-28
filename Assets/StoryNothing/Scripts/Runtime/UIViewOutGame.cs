@@ -35,6 +35,8 @@ namespace StoryNothing.UIViews
 
         private readonly List<UIElementCell> holeElements = new();
 
+        private readonly List<UIElementSkillPiece> skillPieceElements = new();
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput)
         {
             this.document = document;
@@ -168,8 +170,17 @@ namespace StoryNothing.UIViews
                         uiElementSkillPiece.SetPositionFromMouse(new Vector2(0.0f, 0.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
                         if (playerInput.actions["UI/Submit"].WasPerformedThisFrame())
                         {
-                            Debug.Log($"スキルピース配置: {uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize)}");
-                            break;
+                            if (!skillBoard.CanPlacementSkillPiece(userData, skillPiece, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex))
+                            {
+                                Debug.Log("スキルピース配置不可");
+                            }
+                            else
+                            {
+                                skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex);
+                                Debug.Log("スキルピース配置");
+                                SetSkillBoard(skillBoard);
+                                break;
+                            }
                         }
                         if (playerInput.actions["UI/Cancel"].WasPerformedThisFrame())
                         {
@@ -216,6 +227,11 @@ namespace StoryNothing.UIViews
                 element.Dispose();
             }
             holeElements.Clear();
+            foreach (var element in skillPieceElements)
+            {
+                element.Dispose();
+            }
+            skillPieceElements.Clear();
             skillBoardBackground.sizeDelta = new Vector2(
                 instanceSkillBoard.SkillBoardSpec.X * 100,
                 instanceSkillBoard.SkillBoardSpec.Y * 100
@@ -226,6 +242,14 @@ namespace StoryNothing.UIViews
                 instance.SetPosition(hole, instanceSkillBoard.SkillBoardSpec.X, instanceSkillBoard.SkillBoardSpec.Y);
                 instance.SetBackgroundColor(Define.SkillPieceColor.Gray);
                 holeElements.Add(instance);
+            }
+            foreach (var placementSkillPiece in instanceSkillBoard.PlacementSkillPieces)
+            {
+                var instanceSkillPiece = userData.GetInstanceSkillPiece(placementSkillPiece.InstanceSkillPieceId);
+                var uiElementSkillPiece = new UIElementSkillPiece(Object.Instantiate(skillPiecePrefab, skillBoardBackground));
+                uiElementSkillPiece.Setup(instanceSkillPiece, placementSkillPiece.RotationIndex);
+                uiElementSkillPiece.SetPosition(placementSkillPiece.PositionIndex, instanceSkillBoard.SkillBoardSpec.Size, instanceSkillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex));
+                skillPieceElements.Add(uiElementSkillPiece);
             }
         }
 
