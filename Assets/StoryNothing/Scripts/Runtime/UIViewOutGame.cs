@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using HK;
@@ -132,13 +133,18 @@ namespace StoryNothing.UIViews
                 var selectEditModeScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 uiElementSkillPiece.SetPositionInCenter();
                 skillBoardBlackout.SetActive(true);
+                var availableSkillPieces = userData.SkillPieces
+                    .Where(x => !userData.GetEquipInstanceSkillBoard().PlacementSkillPieces.Any(y => y.InstanceSkillPieceId == x.Value.InstanceId))
+                    .Select(x => x.Value)
+                    .ToList();
                 var selectEditModeResult = await UniTask.WhenAny(
                     UniTask.WhenAny(
-                        userData.SkillPieces.Select(x =>
-                            CreateHKButton(CreateListContent(x.Value.Name, selectEditModeScope.Token))
-                                .OnPointerEnter(_ => uiElementSkillPiece.Setup(x.Value, 0))
+                        availableSkillPieces.Select(x =>
+                            CreateHKButton(CreateListContent(x.Name, selectEditModeScope.Token))
+                                .OnPointerEnter(_ => uiElementSkillPiece.Setup(x, 0))
                                 .OnClickAsync(selectEditModeScope.Token)
                     )),
+                    GetClickedUIElementSkillPieceAsync(selectEditModeScope.Token),
                     playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(selectEditModeScope.Token).AsUniTask()
                 );
                 selectEditModeScope.Cancel();
@@ -146,57 +152,38 @@ namespace StoryNothing.UIViews
                 if (selectEditModeResult.winArgumentIndex == 0)
                 {
                     var skillPiecePlacementScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-                    var skillPiece = userData.SkillPieces[selectEditModeResult.result1];
+                    var skillPiece = availableSkillPieces[selectEditModeResult.result1];
                     skillBoardBlackout.SetActive(false);
                     var rotationIndex = 0;
-                    var skillPieceSize = skillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
                     Mouse.current.WarpCursorPosition(uiElementSkillPiece.WorldToScreenPoint());
-                    while (!skillPiecePlacementScope.IsCancellationRequested)
-                    {
-                        await UniTask.Yield(PlayerLoopTiming.Update, skillPiecePlacementScope.Token);
-                        var scrollValue = playerInput.actions["UI/ScrollWheel"].ReadValue<Vector2>().y;
-                        if (scrollValue > 0.1f)
-                        {
-                            rotationIndex = (rotationIndex + 1) % 4;
-                            skillPieceSize = skillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
-                            uiElementSkillPiece.Setup(skillPiece, rotationIndex);
-                        }
-                        else if (scrollValue < -0.1f)
-                        {
-                            rotationIndex = (rotationIndex + 3) % 4;
-                            skillPieceSize = skillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
-                            uiElementSkillPiece.Setup(skillPiece, rotationIndex);
-                        }
-                        var skillBoard = userData.GetEquipInstanceSkillBoard();
-                        uiElementSkillPiece.SetPositionFromMouse(new Vector2(-20.0f, 20.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
-                        if (playerInput.actions["UI/Submit"].WasPerformedThisFrame())
-                        {
-                            if (!skillBoard.CanPlacementSkillPiece(userData, skillPiece, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex))
-                            {
-                                Debug.Log("スキルピース配置不可");
-                            }
-                            else
-                            {
-                                skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex);
-                                Debug.Log("スキルピース配置");
-                                SetSkillBoard(skillBoard);
-                                uiElementSkillPiece.Clear();
-                                await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: skillPiecePlacementScope.Token);
-                                break;
-                            }
-                        }
-                        if (playerInput.actions["UI/Cancel"].WasPerformedThisFrame())
-                        {
-                            Debug.Log("スキルピース配置キャンセル");
-                            break;
-                        }
-                    }
+                    await BeginSkillPiecePlacementAsync(
+                        rotationIndex,
+                        skillPiece.SkillPieceCellSpec.GetSize(rotationIndex),
+                        skillPiece,
+                        uiElementSkillPiece,
+                        skillPiecePlacementScope.Token
+                        );
                     skillPiecePlacementScope.Cancel();
                     skillPiecePlacementScope.Dispose();
                 }
                 else if (selectEditModeResult.winArgumentIndex == 1)
                 {
-                    Debug.Log("スキルボード編集キャンセル");
+                    uiElementSkillPiece.Dispose();
+                    uiElementSkillPiece = selectEditModeResult.result2;
+                    var skillBoard = userData.GetEquipInstanceSkillBoard();
+                    var skillPiece = uiElementSkillPiece.InstanceSkillPiece;
+                    var placementSkillPiece = skillBoard.PlacementSkillPieces.First(x => x.InstanceSkillPieceId == skillPiece.InstanceId);
+                    skillBoard.RemovePlacementSkillPiece(placementSkillPiece.InstanceSkillPieceId);
+                    await BeginSkillPiecePlacementAsync(
+                        placementSkillPiece.RotationIndex,
+                        skillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex),
+                        skillPiece,
+                        uiElementSkillPiece,
+                        cancellationToken
+                        );
+                }
+                else if (selectEditModeResult.winArgumentIndex == 2)
+                {
                     break;
                 }
             }
@@ -259,6 +246,92 @@ namespace StoryNothing.UIViews
         private static HKButton CreateHKButton(HKUIDocument document)
         {
             return new HKButton(document.Q<Button>("Button"));
+        }
+
+        private Vector2Int GetPositionIndexFromMousePosition(Vector2Int boardSize)
+        {
+            RectTransformUtility.ScreenPointToLocalPointInRectangle(skillBoardBackground, Mouse.current.position.ReadValue(), null, out var localPoint);
+            var position = new Vector2(
+                (localPoint.x + skillBoardBackground.sizeDelta.x * 0.5f) / 100.0f,
+                (localPoint.y + skillBoardBackground.sizeDelta.y * 0.5f) / 100.0f
+                );
+            return new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+        }
+
+        private async UniTask<UIElementSkillPiece> GetClickedUIElementSkillPieceAsync(CancellationToken cancellationToken)
+        {
+            var skillBoard = userData.GetEquipInstanceSkillBoard();
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: cancellationToken);
+                var positionIndex = GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size);
+                if (positionIndex.x < 0 || positionIndex.x >= skillBoard.SkillBoardSpec.X || positionIndex.y < 0 || positionIndex.y >= skillBoard.SkillBoardSpec.Y)
+                {
+                    continue;
+                }
+                foreach (var placementSkillPiece in skillBoard.PlacementSkillPieces)
+                {
+                    if (placementSkillPiece.ContainsPositionIndex(positionIndex, userData))
+                    {
+                        var uiElementSkillPiece = skillPieceElements.Find(x => x.InstanceSkillPiece.InstanceId == placementSkillPiece.InstanceSkillPieceId);
+                        if (uiElementSkillPiece != null && playerInput.actions["UI/Submit"].WasPerformedThisFrame())
+                        {
+                            return uiElementSkillPiece;
+                        }
+                    }
+                }
+            }
+
+            return null;
+        }
+
+        private async UniTask BeginSkillPiecePlacementAsync(
+            int rotationIndex,
+            Vector2Int skillPieceSize,
+            InstanceSkillPiece skillPiece,
+            UIElementSkillPiece uiElementSkillPiece,
+            CancellationToken cancellationToken
+            )
+        {
+            while (!cancellationToken.IsCancellationRequested)
+            {
+                await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken);
+                var scrollValue = playerInput.actions["UI/ScrollWheel"].ReadValue<Vector2>().y;
+                if (scrollValue > 0.1f)
+                {
+                    rotationIndex = (rotationIndex + 1) % 4;
+                    skillPieceSize = skillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
+                    uiElementSkillPiece.Setup(skillPiece, rotationIndex);
+                }
+                else if (scrollValue < -0.1f)
+                {
+                    rotationIndex = (rotationIndex + 3) % 4;
+                    skillPieceSize = skillPiece.SkillPieceCellSpec.GetSize(rotationIndex);
+                    uiElementSkillPiece.Setup(skillPiece, rotationIndex);
+                }
+                var skillBoard = userData.GetEquipInstanceSkillBoard();
+                uiElementSkillPiece.SetPositionFromMouse(new Vector2(-20.0f, 20.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
+                if (playerInput.actions["UI/Submit"].WasPerformedThisFrame())
+                {
+                    if (!skillBoard.CanPlacementSkillPiece(userData, skillPiece, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex))
+                    {
+                        Debug.Log("スキルピース配置不可");
+                    }
+                    else
+                    {
+                        skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex);
+                        SetSkillBoard(skillBoard);
+                        uiElementSkillPiece.Clear();
+                        await UniTask.Delay(TimeSpan.FromSeconds(0.5f), cancellationToken: cancellationToken);
+                        break;
+                    }
+                }
+                if (playerInput.actions["UI/Cancel"].WasPerformedThisFrame())
+                {
+                    Debug.Log("スキルピース配置キャンセル");
+                    break;
+                }
+            }
         }
     }
 }
