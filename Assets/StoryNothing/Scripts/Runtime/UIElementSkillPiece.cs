@@ -31,6 +31,10 @@ namespace StoryNothing
 
         public void Dispose()
         {
+            if (document == null)
+            {
+                return;
+            }
             UnityEngine.Object.Destroy(document.gameObject);
         }
 
