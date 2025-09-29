@@ -170,6 +170,7 @@ namespace StoryNothing.UIViews
                 {
                     uiElementSkillPiece.Dispose();
                     uiElementSkillPiece = selectEditModeResult.result2;
+                    uiElementSkillPiece.SetParent(skillBoardArea.transform);
                     var skillBoard = userData.GetEquipInstanceSkillBoard();
                     var skillPiece = uiElementSkillPiece.InstanceSkillPiece;
                     var placementSkillPiece = skillBoard.PlacementSkillPieces.First(x => x.InstanceSkillPieceId == skillPiece.InstanceId);
@@ -181,6 +182,7 @@ namespace StoryNothing.UIViews
                         uiElementSkillPiece,
                         cancellationToken
                         );
+                    uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, skillBoardArea.transform));
                 }
                 else if (selectEditModeResult.winArgumentIndex == 2)
                 {
