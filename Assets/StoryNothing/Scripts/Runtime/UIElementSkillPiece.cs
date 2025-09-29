@@ -129,5 +129,10 @@ namespace StoryNothing
             }
             cells.Clear();
         }
+
+        public void SetParent(Transform parent)
+        {
+            rectTransform.SetParent(parent);
+        }
     }
 }
