@@ -182,6 +182,7 @@ namespace StoryNothing.UIViews
                         uiElementSkillPiece,
                         cancellationToken
                         );
+                    uiElementSkillPiece.Dispose();
                     uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, skillBoardArea.transform));
                 }
                 else if (selectEditModeResult.winArgumentIndex == 2)
