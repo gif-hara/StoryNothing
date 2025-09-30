@@ -174,6 +174,7 @@ namespace StoryNothing.UIViews
                     var skillBoard = userData.GetEquipInstanceSkillBoard();
                     var skillPiece = uiElementSkillPiece.InstanceSkillPiece;
                     var placementSkillPiece = skillBoard.PlacementSkillPieces.First(x => x.InstanceSkillPieceId == skillPiece.InstanceId);
+                    skillBoardBlackout.SetActive(false);
                     skillBoard.RemovePlacementSkillPiece(placementSkillPiece.InstanceSkillPieceId);
                     await BeginSkillPiecePlacementAsync(
                         placementSkillPiece.RotationIndex,
@@ -261,28 +262,39 @@ namespace StoryNothing.UIViews
             return new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
         }
 
-        private async UniTask<UIElementSkillPiece> GetClickedUIElementSkillPieceAsync(UIElementSkillPiece uIElementSkillPiece, CancellationToken cancellationToken)
+        private async UniTask<UIElementSkillPiece> GetClickedUIElementSkillPieceAsync(UIElementSkillPiece uiElementSkillPiece, CancellationToken cancellationToken)
         {
             var skillBoard = userData.GetEquipInstanceSkillBoard();
+            UIElementSkillPiece placedUiElementSkillPiece = null;
             while (!cancellationToken.IsCancellationRequested)
             {
                 await UniTask.Yield(PlayerLoopTiming.Update, cancellationToken: cancellationToken);
                 var positionIndex = GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size);
                 if (positionIndex.x < 0 || positionIndex.x >= skillBoard.SkillBoardSpec.X || positionIndex.y < 0 || positionIndex.y >= skillBoard.SkillBoardSpec.Y)
                 {
+                    placedUiElementSkillPiece?.SetParent(skillBoardBackground);
+                    placedUiElementSkillPiece = null;
                     continue;
                 }
-                uIElementSkillPiece.Clear();
+                uiElementSkillPiece.Clear();
+                UIElementSkillPiece cachedUiElementSkillPiece = null;
                 foreach (var placementSkillPiece in skillBoard.PlacementSkillPieces)
                 {
                     if (placementSkillPiece.ContainsPositionIndex(positionIndex, userData))
                     {
-                        var uiElementSkillPiece = skillPieceElements.Find(x => x.InstanceSkillPiece.InstanceId == placementSkillPiece.InstanceSkillPieceId);
-                        if (uiElementSkillPiece != null && playerInput.actions["UI/Submit"].WasPerformedThisFrame())
-                        {
-                            return uiElementSkillPiece;
-                        }
+                        cachedUiElementSkillPiece = skillPieceElements.Find(x => x.InstanceSkillPiece.InstanceId == placementSkillPiece.InstanceSkillPieceId);
+                        break;
                     }
+                }
+                if (placedUiElementSkillPiece != cachedUiElementSkillPiece)
+                {
+                    placedUiElementSkillPiece?.SetParent(skillBoardBackground);
+                    placedUiElementSkillPiece = cachedUiElementSkillPiece;
+                    placedUiElementSkillPiece?.SetParent(skillBoardArea.transform);
+                }
+                if (placedUiElementSkillPiece != null && playerInput.actions["UI/Submit"].WasPerformedThisFrame())
+                {
+                    return placedUiElementSkillPiece;
                 }
             }
 
