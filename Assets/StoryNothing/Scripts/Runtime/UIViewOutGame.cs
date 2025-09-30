@@ -144,7 +144,7 @@ namespace StoryNothing.UIViews
                                 .OnPointerEnter(_ => uiElementSkillPiece.Setup(x, 0))
                                 .OnClickAsync(selectEditModeScope.Token)
                     )),
-                    GetClickedUIElementSkillPieceAsync(selectEditModeScope.Token),
+                    GetClickedUIElementSkillPieceAsync(uiElementSkillPiece, selectEditModeScope.Token),
                     playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(selectEditModeScope.Token).AsUniTask()
                 );
                 selectEditModeScope.Cancel();
@@ -261,7 +261,7 @@ namespace StoryNothing.UIViews
             return new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
         }
 
-        private async UniTask<UIElementSkillPiece> GetClickedUIElementSkillPieceAsync(CancellationToken cancellationToken)
+        private async UniTask<UIElementSkillPiece> GetClickedUIElementSkillPieceAsync(UIElementSkillPiece uIElementSkillPiece, CancellationToken cancellationToken)
         {
             var skillBoard = userData.GetEquipInstanceSkillBoard();
             while (!cancellationToken.IsCancellationRequested)
@@ -272,6 +272,7 @@ namespace StoryNothing.UIViews
                 {
                     continue;
                 }
+                uIElementSkillPiece.Clear();
                 foreach (var placementSkillPiece in skillBoard.PlacementSkillPieces)
                 {
                     if (placementSkillPiece.ContainsPositionIndex(positionIndex, userData))
