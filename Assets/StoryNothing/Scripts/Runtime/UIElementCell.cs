@@ -1,6 +1,11 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using HK;
+using LitMotion;
+using LitMotion.Animation;
+using LitMotion.Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -15,6 +20,8 @@ namespace StoryNothing
         private readonly RectTransform rectTransform;
 
         private readonly List<GameObject> connectors;
+
+        private readonly Transform line;
 
         public UIElementCell(HKUIDocument document)
         {
@@ -33,6 +40,7 @@ namespace StoryNothing
             {
                 connector.SetActive(false);
             }
+            line = document.Q<Transform>("Line");
         }
 
         public void Dispose()
@@ -58,6 +66,13 @@ namespace StoryNothing
         public void SetActiveConnector(Define.Direction direction, bool active)
         {
             connectors[(int)direction].SetActive(active);
+        }
+
+        public UniTask PlayLineAnimationAsync(CancellationToken cancellationToken)
+        {
+            return LMotion.Create(new Vector3(-50.0f, 50.0f, 0.0f), new Vector3(50.0f, -50.0f, 0.0f), 0.2f)
+                .BindToLocalPosition(line)
+                .ToUniTask(cancellationToken: cancellationToken);
         }
     }
 }
