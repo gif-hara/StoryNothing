@@ -52,8 +52,14 @@ namespace StoryNothing
         {
             backgroundImage.color = colorType switch
             {
-                Define.SkillPieceColor.Gray => Color.gray,
-                Define.SkillPieceColor.Red => Color.red,
+                Define.SkillPieceColor.Gray => new Color(0.2f, 0.1f, 0.1f),
+                Define.SkillPieceColor.Red => new Color(1.0f, 0.2f, 0.2f),
+                Define.SkillPieceColor.Blue => new Color(0.2f, 0.4f, 1.0f),
+                Define.SkillPieceColor.Orange => new Color(1.0f, 0.6f, 0.2f),
+                Define.SkillPieceColor.WhiteGray => new Color(0.8f, 0.8f, 0.8f),
+                Define.SkillPieceColor.Purple => new Color(0.6f, 0.2f, 0.9f),
+                Define.SkillPieceColor.Water => new Color(0.3f, 0.9f, 1.0f),
+                Define.SkillPieceColor.Green => new Color(0.2f, 0.9f, 0.4f),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(colorType), colorType, null),
             };
         }
