@@ -48,7 +48,12 @@ namespace StoryNothing.InstanceData
                 .Where(x => x.GroupId == skillPieceSpec.SkillPieceCellSpecGroupId)
                 .OrderBy(_ => Guid.NewGuid())
                 .First();
-            return new InstanceSkillPiece(instanceId, skillPieceSpecMasterDataId, skillPieceCellSpec.Id, Define.SkillPieceColor.Red);
+            var colorTypes = Enum.GetValues(typeof(Define.SkillPieceColor))
+                .Cast<Define.SkillPieceColor>()
+                .Where(x => x != Define.SkillPieceColor.Gray)
+                .ToArray();
+            var colorType = colorTypes[UnityEngine.Random.Range(0, colorTypes.Length)];
+            return new InstanceSkillPiece(instanceId, skillPieceSpecMasterDataId, skillPieceCellSpec.Id, colorType);
         }
     }
 }
