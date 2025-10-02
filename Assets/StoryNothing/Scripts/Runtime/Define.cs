@@ -16,5 +16,13 @@ namespace StoryNothing
             Gray,
             Red,
         }
+
+        public enum Direction
+        {
+            Right = 0,
+            Top = 1,
+            Left = 2,
+            Bottom = 3,
+        }
     }
 }
