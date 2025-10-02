@@ -64,16 +64,6 @@ namespace StoryNothing
                 {
                     foreach (var initialSkillPieceMasterDataId in initialSkillPieceMasterDataIds)
                     {
-                    }
-                }
-            }
-
-            // とりあえずスキルピースを作る
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    foreach (var initialSkillPieceMasterDataId in initialSkillPieceMasterDataIds)
-                    {
                         if (initialSkillPieceMasterDataId < 0)
                         {
                             continue;
