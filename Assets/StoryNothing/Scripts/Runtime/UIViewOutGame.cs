@@ -336,10 +336,10 @@ namespace StoryNothing.UIViews
                     else
                     {
                         skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex);
-                        SetSkillBoard(skillBoard);
                         uiElementSkillPiece.SetPositionFromMouse(new Vector2(0.0f, 0.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
                         await uiElementSkillPiece.PlayLineAnimationAsync(cancellationToken);
                         uiElementSkillPiece.Clear();
+                        SetSkillBoard(skillBoard);
                         await UniTask.Delay(TimeSpan.FromSeconds(0.3f), cancellationToken: cancellationToken);
                         break;
                     }
