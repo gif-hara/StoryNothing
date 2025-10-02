@@ -41,12 +41,12 @@ namespace StoryNothing
         public void Setup(InstanceSkillPiece instanceSkillPiece, int rotationIndex)
         {
             InstanceSkillPiece = instanceSkillPiece;
-            var cellPoints = instanceSkillPiece.SkillPieceCellSpec.GetCellPoints(rotationIndex);
             foreach (var cell in cells)
             {
                 cell.Dispose();
             }
             cells.Clear();
+            var cellPoints = instanceSkillPiece.SkillPieceCellSpec.GetCellPoints(rotationIndex);
             var xMax = cellPoints.Count > 0 ? cellPoints.Max(x => x.x) + 1 : 0;
             var yMax = cellPoints.Count > 0 ? cellPoints.Max(x => x.y) + 1 : 0;
             foreach (var cellPoint in cellPoints)
@@ -55,6 +55,21 @@ namespace StoryNothing
                 var cell = new UIElementCell(cellDocument);
                 cell.SetPosition(cellPoint, xMax, yMax);
                 cells.Add(cell);
+                for (var i = 0; i < 4; i++)
+                {
+                    var offset = (Define.Direction)i switch
+                    {
+                        Define.Direction.Right => Vector2Int.right,
+                        Define.Direction.Top => Vector2Int.up,
+                        Define.Direction.Left => Vector2Int.left,
+                        Define.Direction.Bottom => Vector2Int.down,
+                        _ => throw new ArgumentOutOfRangeException(),
+                    };
+                    if (cellPoints.Contains(cellPoint + offset))
+                    {
+                        cell.SetActiveConnector((Define.Direction)i, true);
+                    }
+                }
             }
             foreach (var cell in cells)
             {
