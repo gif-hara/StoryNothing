@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using HK;
 using StoryNothing.InstanceData;
 using UnityEngine;
@@ -152,6 +154,11 @@ namespace StoryNothing
         public void SetParent(Transform parent)
         {
             rectTransform.SetParent(parent);
+        }
+
+        public UniTask PlayLineAnimationAsync(CancellationToken cancellationToken)
+        {
+            return UniTask.WhenAll(cells.Select(x => x.PlayLineAnimationAsync(cancellationToken)));
         }
     }
 }
