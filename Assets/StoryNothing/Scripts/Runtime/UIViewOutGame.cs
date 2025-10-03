@@ -41,6 +41,20 @@ namespace StoryNothing.UIViews
 
         private readonly List<UIElementSkillPiece> skillPieceElements = new();
 
+        private readonly TMP_Text hitPointLabel;
+
+        private readonly TMP_Text magicPointLabel;
+
+        private readonly TMP_Text physicalAttackLabel;
+
+        private readonly TMP_Text physicalDefenseLabel;
+
+        private readonly TMP_Text magicalAttackLabel;
+
+        private readonly TMP_Text magicalDefenseLabel;
+
+        private readonly TMP_Text speedLabel;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
             this.document = document;
@@ -65,6 +79,34 @@ namespace StoryNothing.UIViews
                 .Q<HKUIDocument>("UI.Element.Cell");
             skillPiecePrefab = this.document
                 .Q<HKUIDocument>("UI.Element.SkillPiece");
+            hitPointLabel = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<HKUIDocument>("UI.Element.Parameter.HitPoint")
+                .Q<TMP_Text>("Value");
+            magicPointLabel = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<HKUIDocument>("UI.Element.Parameter.MagicPoint")
+                .Q<TMP_Text>("Value");
+            physicalAttackLabel = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<HKUIDocument>("UI.Element.Parameter.PhysicalAttack")
+                .Q<TMP_Text>("Value");
+            physicalDefenseLabel = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<HKUIDocument>("UI.Element.Parameter.PhysicalDefense")
+                .Q<TMP_Text>("Value");
+            magicalAttackLabel = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<HKUIDocument>("UI.Element.Parameter.MagicalAttack")
+                .Q<TMP_Text>("Value");
+            magicalDefenseLabel = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<HKUIDocument>("UI.Element.Parameter.MagicalDefense")
+                .Q<TMP_Text>("Value");
+            speedLabel = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<HKUIDocument>("UI.Element.Parameter.Speed")
+                .Q<TMP_Text>("Value");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -248,6 +290,14 @@ namespace StoryNothing.UIViews
                 uiElementSkillPiece.SetPosition(placementSkillPiece.PositionIndex, instanceSkillBoard.SkillBoardSpec.Size, instanceSkillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex));
                 skillPieceElements.Add(uiElementSkillPiece);
             }
+            var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
+            hitPointLabel.SetText(instanceCharacter.HitPointMax.ToString());
+            magicPointLabel.SetText(instanceCharacter.MagicPointMax.ToString());
+            physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.ToString());
+            physicalDefenseLabel.SetText(instanceCharacter.CurrentPhysicalDefense.ToString());
+            magicalAttackLabel.SetText(instanceCharacter.CurrentMagicalAttack.ToString());
+            magicalDefenseLabel.SetText(instanceCharacter.CurrentMagicalDefense.ToString());
+            speedLabel.SetText(instanceCharacter.CurrentSpeed.ToString());
         }
 
         private static HKButton CreateHKButton(HKUIDocument document)
