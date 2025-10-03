@@ -1,4 +1,4 @@
-namespace StoryNothing
+namespace StoryNothing.MasterDataSystems
 {
     public sealed class CharacterSpec
     {
