@@ -27,10 +27,7 @@ namespace StoryNothing.InstanceData
 
         public InstanceCharacter CreateInstanceCharacter(int characterSpecId)
         {
-            return new InstanceCharacter
-            {
-                CharacterSpecId = characterSpecId,
-            };
+            return new InstanceCharacter(characterSpecId);
         }
 
         public InstanceSkillBoard(int instanceId, int masterDataSkillBoardId, List<Vector2Int> holes = null)
