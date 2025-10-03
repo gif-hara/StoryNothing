@@ -21,6 +21,8 @@ namespace StoryNothing.UIViews
 
         private readonly PlayerInput playerInput;
 
+        private readonly int playerCharacterSpecId;
+
         private readonly Transform listParent;
 
         private readonly HKUIDocument listContentPrefab;
@@ -39,11 +41,12 @@ namespace StoryNothing.UIViews
 
         private readonly List<UIElementSkillPiece> skillPieceElements = new();
 
-        public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput)
+        public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
             this.document = document;
             this.userData = userData;
             this.playerInput = playerInput;
+            this.playerCharacterSpecId = playerCharacterSpecId;
             listParent = this.document
                 .Q<HKUIDocument>("Area.Left")
                 .Q<HKUIDocument>("List")
