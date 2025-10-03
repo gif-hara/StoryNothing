@@ -33,6 +33,8 @@ namespace StoryNothing.UIViews
 
         private readonly GameObject skillBoardBlackout;
 
+        private readonly RectTransform newSkillPieceParent;
+
         private readonly HKUIDocument cellPrefab;
 
         private readonly HKUIDocument skillPiecePrefab;
@@ -75,6 +77,9 @@ namespace StoryNothing.UIViews
             skillBoardBlackout = skillBoardArea
                 .Q("Blackout");
             skillBoardBlackout.SetActive(false);
+            newSkillPieceParent = this.document
+                .Q<HKUIDocument>("Area.Center")
+                .Q<RectTransform>("NewSkillPieceParent");
             cellPrefab = this.document
                 .Q<HKUIDocument>("UI.Element.Cell");
             skillPiecePrefab = this.document
@@ -172,11 +177,10 @@ namespace StoryNothing.UIViews
 
         private async UniTask StateEditSkillBoardAsync(CancellationToken cancellationToken)
         {
-            var uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, skillBoardArea.transform));
+            var uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, newSkillPieceParent));
             while (!cancellationToken.IsCancellationRequested)
             {
                 var selectEditModeScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-                uiElementSkillPiece.SetPositionInCenter();
                 skillBoardBlackout.SetActive(true);
                 var availableSkillPieces = userData.SkillPieces
                     .Where(x => !userData.GetEquipInstanceSkillBoard().PlacementSkillPieces.Any(y => y.InstanceSkillPieceId == x.Value.InstanceId))
@@ -186,7 +190,11 @@ namespace StoryNothing.UIViews
                     UniTask.WhenAny(
                         availableSkillPieces.Select(x =>
                             CreateHKButton(CreateListContent(x.Name, selectEditModeScope.Token))
-                                .OnPointerEnter(_ => uiElementSkillPiece.Setup(x, 0))
+                                .OnPointerEnter(_ =>
+                                {
+                                    uiElementSkillPiece.Setup(x, 0);
+                                    uiElementSkillPiece.SetPositionInCenter();
+                                })
                                 .OnClickAsync(selectEditModeScope.Token)
                     )),
                     GetClickedUIElementSkillPieceAsync(uiElementSkillPiece, selectEditModeScope.Token),
@@ -215,7 +223,7 @@ namespace StoryNothing.UIViews
                 {
                     uiElementSkillPiece.Dispose();
                     uiElementSkillPiece = selectEditModeResult.result2;
-                    uiElementSkillPiece.SetParent(skillBoardArea.transform);
+                    uiElementSkillPiece.SetParent(newSkillPieceParent);
                     var skillBoard = userData.GetEquipInstanceSkillBoard();
                     var skillPiece = uiElementSkillPiece.InstanceSkillPiece;
                     var placementSkillPiece = skillBoard.PlacementSkillPieces.First(x => x.InstanceSkillPieceId == skillPiece.InstanceId);
@@ -230,7 +238,7 @@ namespace StoryNothing.UIViews
                         cancellationToken
                         );
                     uiElementSkillPiece.Dispose();
-                    uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, skillBoardArea.transform));
+                    uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, newSkillPieceParent));
                 }
                 else if (selectEditModeResult.winArgumentIndex == 2)
                 {
@@ -385,19 +393,20 @@ namespace StoryNothing.UIViews
                     uiElementSkillPiece.Setup(skillPiece, rotationIndex);
                 }
                 var skillBoard = userData.GetEquipInstanceSkillBoard();
-                uiElementSkillPiece.SetPositionFromMouse(new Vector2(-20.0f, 20.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
+                var positionIndex = uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize);
+                uiElementSkillPiece.SetPosition(positionIndex, skillBoard.SkillBoardSpec.Size, skillPieceSize, new Vector2(-20.0f, 20.0f));
                 if (playerInput.actions["UI/Submit"].WasPerformedThisFrame())
                 {
-                    if (!skillBoard.CanPlacementSkillPiece(userData, skillPiece, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex))
+                    if (!skillBoard.CanPlacementSkillPiece(userData, skillPiece, positionIndex, rotationIndex))
                     {
                         Debug.Log("スキルピース配置不可");
                     }
                     else
                     {
-                        skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex, userData);
-                        uiElementSkillPiece.SetPositionFromMouse(new Vector2(5.0f, -5.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
+                        skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, positionIndex, rotationIndex, userData);
+                        uiElementSkillPiece.SetPosition(positionIndex, skillBoard.SkillBoardSpec.Size, skillPieceSize, new Vector2(5.0f, -5.0f));
                         await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: cancellationToken);
-                        uiElementSkillPiece.SetPositionFromMouse(new Vector2(0.0f, 0.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
+                        uiElementSkillPiece.SetPosition(positionIndex, skillBoard.SkillBoardSpec.Size, skillPieceSize, new Vector2(0.0f, 0.0f));
                         await uiElementSkillPiece.PlayLineAnimationAsync(cancellationToken);
                         uiElementSkillPiece.Clear();
                         SetSkillBoard(skillBoard);

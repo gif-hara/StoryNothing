@@ -111,14 +111,7 @@ namespace StoryNothing
             return result;
         }
 
-        public void SetPositionFromMouse(Vector2 offset, Vector2Int skillboardSize, Vector2Int skillPieceSize)
-        {
-            var positionIndex = GetPositionIndexFromMousePosition(skillboardSize, skillPieceSize);
-            SetPosition(positionIndex, skillboardSize, skillPieceSize);
-            rectTransform.localPosition += (Vector3)offset;
-        }
-
-        public void SetPosition(Vector2Int positionIndex, Vector2Int skillboardSize, Vector2Int skillPieceSize)
+        public void SetPosition(Vector2Int positionIndex, Vector2Int skillboardSize, Vector2Int skillPieceSize, Vector3 offset = default)
         {
             var result = new Vector3(positionIndex.x * 100 - (skillboardSize.x * 100) / 2 + 50, positionIndex.y * 100 - (skillboardSize.y * 100) / 2 + 50, 0);
             if (skillPieceSize.x % 2 == 0)
@@ -129,7 +122,7 @@ namespace StoryNothing
             {
                 result.y -= 50;
             }
-            rectTransform.localPosition = result;
+            rectTransform.localPosition = result + offset;
         }
 
         public void SetPositionInCenter()
