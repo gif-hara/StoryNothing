@@ -291,13 +291,13 @@ namespace StoryNothing.UIViews
                 skillPieceElements.Add(uiElementSkillPiece);
             }
             var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
-            hitPointLabel.SetText(instanceCharacter.HitPointMax.ToString());
-            magicPointLabel.SetText(instanceCharacter.MagicPointMax.ToString());
-            physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.ToString());
-            physicalDefenseLabel.SetText(instanceCharacter.CurrentPhysicalDefense.ToString());
-            magicalAttackLabel.SetText(instanceCharacter.CurrentMagicalAttack.ToString());
-            magicalDefenseLabel.SetText(instanceCharacter.CurrentMagicalDefense.ToString());
-            speedLabel.SetText(instanceCharacter.CurrentSpeed.ToString());
+            hitPointLabel.SetText(instanceCharacter.CurrentHitPointMax.Current.ToString());
+            magicPointLabel.SetText(instanceCharacter.CurrentMagicPointMax.Current.ToString());
+            physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.Current.ToString());
+            physicalDefenseLabel.SetText(instanceCharacter.CurrentPhysicalDefense.Current.ToString());
+            magicalAttackLabel.SetText(instanceCharacter.CurrentMagicalAttack.Current.ToString());
+            magicalDefenseLabel.SetText(instanceCharacter.CurrentMagicalDefense.Current.ToString());
+            speedLabel.SetText(instanceCharacter.CurrentSpeed.Current.ToString());
         }
 
         private static HKButton CreateHKButton(HKUIDocument document)
