@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using HK;
 using StoryNothing.MasterDataSystems;
 using UnityEngine;
@@ -27,7 +28,87 @@ namespace StoryNothing.InstanceData
 
         public InstanceCharacter CreateInstanceCharacter(int characterSpecId)
         {
-            return new InstanceCharacter(characterSpecId);
+            var characterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(characterSpecId);
+            var hitPoint = new CharacterParameter(
+                characterSpec.HitPoint,
+                PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Red)
+                    .Sum(x =>
+                    {
+                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                    }) * 20,
+                    0.0f
+            );
+            var magicPoint = new CharacterParameter(
+                characterSpec.MagicPoint,
+                PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Blue)
+                    .Sum(x =>
+                    {
+                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                    }) * 10,
+                    0.0f
+            );
+            var physicalAttack = new CharacterParameter(
+                characterSpec.PhysicalAttack,
+                PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Orange)
+                    .Sum(x =>
+                    {
+                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                    }) * 10,
+                    0.0f
+            );
+            var physicalDefense = new CharacterParameter(
+                characterSpec.PhysicalDefense,
+                PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.WhiteGray)
+                    .Sum(x =>
+                    {
+                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                    }) * 10,
+                    0.0f
+            );
+            var magicalAttack = new CharacterParameter(
+                characterSpec.MagicalAttack,
+                PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Purple)
+                    .Sum(x =>
+                    {
+                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                    }) * 10,
+                    0.0f
+            );
+            var magicalDefense = new CharacterParameter(
+                characterSpec.MagicalDefense,
+                PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Water)
+                    .Sum(x =>
+                    {
+                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                    }) * 10,
+                    0.0f
+            );
+            var speed = new CharacterParameter(
+                characterSpec.Speed,
+                PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Green)
+                    .Sum(x =>
+                    {
+                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                    }) * 10,
+                    0.0f
+            );
+            return new InstanceCharacter(
+                characterSpecId,
+                hitPoint,
+                magicPoint,
+                physicalAttack,
+                physicalDefense,
+                magicalAttack,
+                magicalDefense,
+                speed
+            );
         }
 
         public InstanceSkillBoard(int instanceId, int masterDataSkillBoardId, List<Vector2Int> holes = null)
@@ -89,9 +170,9 @@ namespace StoryNothing.InstanceData
             return true;
         }
 
-        public void AddPlacementSkillPiece(int instanceSkillPieceId, Vector2Int positionIndex, int rotationIndex)
+        public void AddPlacementSkillPiece(int instanceSkillPieceId, Vector2Int positionIndex, int rotationIndex, UserData userData)
         {
-            PlacementSkillPieces.Add(new PlacementSkillPiece(instanceSkillPieceId, positionIndex, rotationIndex));
+            PlacementSkillPieces.Add(new PlacementSkillPiece(instanceSkillPieceId, positionIndex, rotationIndex, userData));
         }
 
         public void RemovePlacementSkillPiece(int instanceSkillPieceId)
@@ -111,11 +192,14 @@ namespace StoryNothing.InstanceData
             [field: SerializeField]
             public int RotationIndex { get; private set; }
 
-            public PlacementSkillPiece(int instanceSkillPieceId, Vector2Int positionIndex, int rotationIndex)
+            public InstanceSkillPiece InstanceSkillPiece { get; private set; }
+
+            public PlacementSkillPiece(int instanceSkillPieceId, Vector2Int positionIndex, int rotationIndex, UserData userData)
             {
                 InstanceSkillPieceId = instanceSkillPieceId;
                 PositionIndex = positionIndex;
                 RotationIndex = rotationIndex;
+                InstanceSkillPiece = userData.GetInstanceSkillPiece(InstanceSkillPieceId);
             }
 
             public bool ContainsPositionIndex(Vector2Int positionIndex, UserData userData)
