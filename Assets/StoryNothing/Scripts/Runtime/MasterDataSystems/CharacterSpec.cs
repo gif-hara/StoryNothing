@@ -1,23 +1,30 @@
+using System;
+using HK;
+
 namespace StoryNothing.MasterDataSystems
 {
+    [Serializable]
     public sealed class CharacterSpec
     {
-        public int HitPoint { get; private set; }
+        public int Id;
 
-        public int MagicPoint { get; private set; }
+        public int HitPoint;
 
-        public int PhysicalAttack { get; private set; }
+        public int MagicPoint;
 
-        public int PhysicalDefense { get; private set; }
+        public int PhysicalAttack;
 
-        public int MagicalAttack { get; private set; }
+        public int PhysicalDefense;
 
-        public int MagicalDefense { get; private set; }
+        public int MagicalAttack;
 
-        public int Speed { get; private set; }
+        public int MagicalDefense;
 
-        public CharacterSpec(int hitPoint, int magicPoint, int physicalAttack, int physicalDefense, int magicalAttack, int magicalDefense, int speed)
+        public int Speed;
+
+        public CharacterSpec(int id, int hitPoint, int magicPoint, int physicalAttack, int physicalDefense, int magicalAttack, int magicalDefense, int speed)
         {
+            Id = id;
             HitPoint = hitPoint;
             MagicPoint = magicPoint;
             PhysicalAttack = physicalAttack;
@@ -25,6 +32,14 @@ namespace StoryNothing.MasterDataSystems
             MagicalAttack = magicalAttack;
             MagicalDefense = magicalDefense;
             Speed = speed;
+        }
+
+        [Serializable]
+        public class DictionaryList : DictionaryList<int, CharacterSpec>
+        {
+            public DictionaryList() : base(x => x.Id)
+            {
+            }
         }
     }
 }
