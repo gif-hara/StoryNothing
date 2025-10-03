@@ -9,9 +9,13 @@ namespace StoryNothing.InstanceData
 
         public CharacterSpec CharacterSpec { get; private set; }
 
-        public readonly CharacterParameter CurrentHitPoint;
+        public readonly CharacterParameter CurrentHitPointMax;
 
-        public readonly CharacterParameter CurrentMagicPoint;
+        public readonly CharacterParameter CurrentMagicPointMax;
+
+        public int CurrentHitPoint;
+
+        public int CurrentMagicPoint;
 
         public readonly CharacterParameter CurrentPhysicalAttack;
 
@@ -27,13 +31,39 @@ namespace StoryNothing.InstanceData
         {
             CharacterSpecId = characterSpecId;
             CharacterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(CharacterSpecId);
-            CurrentHitPoint = new CharacterParameter(CharacterSpec.HitPoint);
-            CurrentMagicPoint = new CharacterParameter(CharacterSpec.MagicPoint);
+            CurrentHitPointMax = new CharacterParameter(CharacterSpec.HitPoint);
+            CurrentMagicPointMax = new CharacterParameter(CharacterSpec.MagicPoint);
+            CurrentHitPoint = CurrentHitPointMax.Current;
+            CurrentMagicPoint = CurrentMagicPointMax.Current;
             CurrentPhysicalAttack = new CharacterParameter(CharacterSpec.PhysicalAttack);
             CurrentPhysicalDefense = new CharacterParameter(CharacterSpec.PhysicalDefense);
             CurrentMagicalAttack = new CharacterParameter(CharacterSpec.MagicalAttack);
             CurrentMagicalDefense = new CharacterParameter(CharacterSpec.MagicalDefense);
             CurrentSpeed = new CharacterParameter(CharacterSpec.Speed);
+        }
+
+        public InstanceCharacter(
+            int characterSpecId,
+            CharacterParameter currentHitPointMax,
+            CharacterParameter currentMagicPointMax,
+            CharacterParameter currentPhysicalAttack,
+            CharacterParameter currentPhysicalDefense,
+            CharacterParameter currentMagicalAttack,
+            CharacterParameter currentMagicalDefense,
+            CharacterParameter currentSpeed
+            )
+        {
+            CharacterSpecId = characterSpecId;
+            CharacterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(CharacterSpecId);
+            CurrentHitPointMax = currentHitPointMax;
+            CurrentMagicPointMax = currentMagicPointMax;
+            CurrentHitPoint = CurrentHitPointMax.Current;
+            CurrentMagicPoint = CurrentMagicPointMax.Current;
+            CurrentPhysicalAttack = currentPhysicalAttack;
+            CurrentPhysicalDefense = currentPhysicalDefense;
+            CurrentMagicalAttack = currentMagicalAttack;
+            CurrentMagicalDefense = currentMagicalDefense;
+            CurrentSpeed = currentSpeed;
         }
     }
 }
