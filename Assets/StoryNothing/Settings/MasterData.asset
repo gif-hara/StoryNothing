@@ -16,6 +16,32 @@ MonoBehaviour:
     list:
     - Id: 101001
       Name: "\u8D64\u8272\u306E\u5C0F\u3055\u306A\u30D4\u30FC\u30B9"
+  <CharacterSpecs>k__BackingField:
+    list:
+    - Id: 10101
+      HitPoint: 500
+      MagicPoint: 50
+      PhysicalAttack: 100
+      PhysicalDefense: 100
+      MagicalAttack: 100
+      MagicalDefense: 100
+      Speed: 100
+    - Id: 10201
+      HitPoint: 190
+      MagicPoint: 0
+      PhysicalAttack: 83
+      PhysicalDefense: 0
+      MagicalAttack: 25
+      MagicalDefense: 0
+      Speed: 85
+    - Id: 10202
+      HitPoint: 198
+      MagicPoint: 0
+      PhysicalAttack: 57
+      PhysicalDefense: 26
+      MagicalAttack: 71
+      MagicalDefense: 12
+      Speed: 78
   <SkillBoardSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -28,6 +54,11 @@ MonoBehaviour:
       X: 5
       Y: 5
       HoleCount: 2
+    - Id: 10301
+      Name: "\u5DE8\u5927\u306A\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
+      X: 6
+      Y: 6
+      HoleCount: 3
   <SkillPieceSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -47,6 +78,52 @@ MonoBehaviour:
       GroupId: 3
     - Id: 10201
       GroupId: 4
+    - Id: 10202
+      GroupId: 4
+    - Id: 10203
+      GroupId: 4
+    - Id: 10204
+      GroupId: 4
+    - Id: 10205
+      GroupId: 4
+    - Id: 10206
+      GroupId: 4
+    - Id: 10207
+      GroupId: 4
+    - Id: 10301
+      GroupId: 5
+    - Id: 10302
+      GroupId: 5
+    - Id: 10303
+      GroupId: 5
+    - Id: 10304
+      GroupId: 5
+    - Id: 10305
+      GroupId: 5
+    - Id: 10306
+      GroupId: 5
+    - Id: 10307
+      GroupId: 5
+    - Id: 10308
+      GroupId: 5
+    - Id: 10309
+      GroupId: 5
+    - Id: 10310
+      GroupId: 5
+    - Id: 10311
+      GroupId: 5
+    - Id: 10312
+      GroupId: 5
+    - Id: 10313
+      GroupId: 5
+    - Id: 10314
+      GroupId: 5
+    - Id: 10315
+      GroupId: 5
+    - Id: 10316
+      GroupId: 5
+    - Id: 10317
+      GroupId: 5
   <SkillPieceCellPoints>k__BackingField:
     list:
     - Key: 10101
@@ -85,3 +162,376 @@ MonoBehaviour:
       - Id: 10201
         X: 3
         Y: 0
+    - Key: 10202
+      Value:
+      - Id: 10202
+        X: 0
+        Y: 0
+      - Id: 10202
+        X: 1
+        Y: 0
+      - Id: 10202
+        X: 2
+        Y: 0
+      - Id: 10202
+        X: 2
+        Y: 1
+    - Key: 10203
+      Value:
+      - Id: 10203
+        X: 0
+        Y: 0
+      - Id: 10203
+        X: 1
+        Y: 0
+      - Id: 10203
+        X: 2
+        Y: 0
+      - Id: 10203
+        X: 1
+        Y: 1
+    - Key: 10204
+      Value:
+      - Id: 10204
+        X: 0
+        Y: 0
+      - Id: 10204
+        X: 1
+        Y: 0
+      - Id: 10204
+        X: 2
+        Y: 0
+      - Id: 10204
+        X: 0
+        Y: 1
+    - Key: 10205
+      Value:
+      - Id: 10205
+        X: 0
+        Y: 0
+      - Id: 10205
+        X: 1
+        Y: 0
+      - Id: 10205
+        X: 1
+        Y: 1
+      - Id: 10205
+        X: 2
+        Y: 1
+    - Key: 10206
+      Value:
+      - Id: 10206
+        X: 0
+        Y: 1
+      - Id: 10206
+        X: 1
+        Y: 1
+      - Id: 10206
+        X: 1
+        Y: 0
+      - Id: 10206
+        X: 2
+        Y: 0
+    - Key: 10207
+      Value:
+      - Id: 10207
+        X: 0
+        Y: 0
+      - Id: 10207
+        X: 1
+        Y: 0
+      - Id: 10207
+        X: 0
+        Y: 1
+      - Id: 10207
+        X: 1
+        Y: 1
+    - Key: 10301
+      Value:
+      - Id: 10301
+        X: 0
+        Y: 0
+      - Id: 10301
+        X: 1
+        Y: 0
+      - Id: 10301
+        X: 2
+        Y: 0
+      - Id: 10301
+        X: 3
+        Y: 0
+      - Id: 10301
+        X: 4
+        Y: 0
+    - Key: 10302
+      Value:
+      - Id: 10302
+        X: 0
+        Y: 0
+      - Id: 10302
+        X: 1
+        Y: 0
+      - Id: 10302
+        X: 2
+        Y: 0
+      - Id: 10302
+        X: 3
+        Y: 0
+      - Id: 10302
+        X: 0
+        Y: 1
+    - Key: 10303
+      Value:
+      - Id: 10303
+        X: 0
+        Y: 0
+      - Id: 10303
+        X: 1
+        Y: 0
+      - Id: 10303
+        X: 2
+        Y: 0
+      - Id: 10303
+        X: 3
+        Y: 0
+      - Id: 10303
+        X: 1
+        Y: 1
+    - Key: 10304
+      Value:
+      - Id: 10304
+        X: 0
+        Y: 0
+      - Id: 10304
+        X: 1
+        Y: 0
+      - Id: 10304
+        X: 2
+        Y: 0
+      - Id: 10304
+        X: 3
+        Y: 0
+      - Id: 10304
+        X: 2
+        Y: 1
+    - Key: 10305
+      Value:
+      - Id: 10305
+        X: 0
+        Y: 0
+      - Id: 10305
+        X: 1
+        Y: 0
+      - Id: 10305
+        X: 2
+        Y: 0
+      - Id: 10305
+        X: 3
+        Y: 0
+      - Id: 10305
+        X: 3
+        Y: 1
+    - Key: 10306
+      Value:
+      - Id: 10306
+        X: 0
+        Y: 0
+      - Id: 10306
+        X: 1
+        Y: 0
+      - Id: 10306
+        X: 2
+        Y: 0
+      - Id: 10306
+        X: 0
+        Y: 1
+      - Id: 10306
+        X: 1
+        Y: 1
+    - Key: 10307
+      Value:
+      - Id: 10307
+        X: 0
+        Y: 0
+      - Id: 10307
+        X: 1
+        Y: 0
+      - Id: 10307
+        X: 0
+        Y: 1
+      - Id: 10307
+        X: 1
+        Y: 1
+      - Id: 10307
+        X: 2
+        Y: 1
+    - Key: 10308
+      Value:
+      - Id: 10308
+        X: 0
+        Y: 0
+      - Id: 10308
+        X: 1
+        Y: 0
+      - Id: 10308
+        X: 2
+        Y: 0
+      - Id: 10308
+        X: 2
+        Y: 1
+      - Id: 10308
+        X: 2
+        Y: 2
+    - Key: 10309
+      Value:
+      - Id: 10309
+        X: 0
+        Y: 0
+      - Id: 10309
+        X: 1
+        Y: 0
+      - Id: 10309
+        X: 2
+        Y: 0
+      - Id: 10309
+        X: 1
+        Y: 1
+      - Id: 10309
+        X: 1
+        Y: 2
+    - Key: 10310
+      Value:
+      - Id: 10310
+        X: 0
+        Y: 0
+      - Id: 10310
+        X: 1
+        Y: 0
+      - Id: 10310
+        X: 2
+        Y: 0
+      - Id: 10310
+        X: 0
+        Y: 1
+      - Id: 10310
+        X: 2
+        Y: 1
+    - Key: 10311
+      Value:
+      - Id: 10311
+        X: 0
+        Y: 0
+      - Id: 10311
+        X: 1
+        Y: 0
+      - Id: 10311
+        X: 1
+        Y: 1
+      - Id: 10311
+        X: 2
+        Y: 1
+      - Id: 10311
+        X: 3
+        Y: 1
+    - Key: 10312
+      Value:
+      - Id: 10312
+        X: 1
+        Y: 0
+      - Id: 10312
+        X: 2
+        Y: 0
+      - Id: 10312
+        X: 3
+        Y: 0
+      - Id: 10312
+        X: 0
+        Y: 1
+      - Id: 10312
+        X: 1
+        Y: 1
+    - Key: 10313
+      Value:
+      - Id: 10313
+        X: 0
+        Y: 0
+      - Id: 10313
+        X: 1
+        Y: 0
+      - Id: 10313
+        X: 1
+        Y: 1
+      - Id: 10313
+        X: 1
+        Y: 2
+      - Id: 10313
+        X: 2
+        Y: 2
+    - Key: 10314
+      Value:
+      - Id: 10314
+        X: 1
+        Y: 0
+      - Id: 10314
+        X: 2
+        Y: 0
+      - Id: 10314
+        X: 1
+        Y: 1
+      - Id: 10314
+        X: 0
+        Y: 2
+      - Id: 10314
+        X: 1
+        Y: 2
+    - Key: 10315
+      Value:
+      - Id: 10315
+        X: 0
+        Y: 0
+      - Id: 10315
+        X: 1
+        Y: 0
+      - Id: 10315
+        X: 1
+        Y: 1
+      - Id: 10315
+        X: 2
+        Y: 1
+      - Id: 10315
+        X: 1
+        Y: 2
+    - Key: 10316
+      Value:
+      - Id: 10316
+        X: 1
+        Y: 0
+      - Id: 10316
+        X: 0
+        Y: 1
+      - Id: 10316
+        X: 1
+        Y: 1
+      - Id: 10316
+        X: 2
+        Y: 1
+      - Id: 10316
+        X: 1
+        Y: 2
+    - Key: 10317
+      Value:
+      - Id: 10317
+        X: 1
+        Y: 0
+      - Id: 10317
+        X: 1
+        Y: 1
+      - Id: 10317
+        X: 2
+        Y: 1
+      - Id: 10317
+        X: 0
+        Y: 2
+      - Id: 10317
+        X: 1
+        Y: 2
