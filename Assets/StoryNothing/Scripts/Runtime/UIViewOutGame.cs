@@ -221,6 +221,7 @@ namespace StoryNothing.UIViews
                     var placementSkillPiece = skillBoard.PlacementSkillPieces.First(x => x.InstanceSkillPieceId == skillPiece.InstanceId);
                     skillBoardBlackout.SetActive(false);
                     skillBoard.RemovePlacementSkillPiece(placementSkillPiece.InstanceSkillPieceId);
+                    UpdateParameterLabels(userData.GetEquipInstanceSkillBoard().CreateInstanceCharacter(playerCharacterSpecId));
                     await BeginSkillPiecePlacementAsync(
                         placementSkillPiece.RotationIndex,
                         skillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex),
@@ -291,6 +292,11 @@ namespace StoryNothing.UIViews
                 skillPieceElements.Add(uiElementSkillPiece);
             }
             var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
+            UpdateParameterLabels(instanceCharacter);
+        }
+
+        private void UpdateParameterLabels(InstanceCharacter instanceCharacter)
+        {
             hitPointLabel.SetText(instanceCharacter.CurrentHitPointMax.Current.ToString());
             magicPointLabel.SetText(instanceCharacter.CurrentMagicPointMax.Current.ToString());
             physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.Current.ToString());
@@ -388,7 +394,7 @@ namespace StoryNothing.UIViews
                     }
                     else
                     {
-                        skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex);
+                        skillBoard.AddPlacementSkillPiece(skillPiece.InstanceId, uiElementSkillPiece.GetPositionIndexFromMousePosition(skillBoard.SkillBoardSpec.Size, skillPieceSize), rotationIndex, userData);
                         uiElementSkillPiece.SetPositionFromMouse(new Vector2(5.0f, -5.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
                         await UniTask.Delay(TimeSpan.FromSeconds(0.1f), cancellationToken: cancellationToken);
                         uiElementSkillPiece.SetPositionFromMouse(new Vector2(0.0f, 0.0f), skillBoard.SkillBoardSpec.Size, skillPieceSize);
