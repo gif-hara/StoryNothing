@@ -19,6 +19,9 @@ namespace StoryNothing.MasterDataSystems
         public ItemSpec.DictionaryList ItemSpecs { get; private set; }
 
         [field: SerializeField]
+        public CharacterSpec.DictionaryList CharacterSpecs { get; private set; }
+
+        [field: SerializeField]
         public SkillBoardSpec.DictionaryList SkillBoardSpecs { get; private set; }
 
         [field: SerializeField]
@@ -54,6 +57,7 @@ namespace StoryNothing.MasterDataSystems
                     "SkillPieceSpec",
                     "SkillPieceCellSpec",
                     "SkillPieceCellPoint",
+                    "CharacterSpec"
                 };
                 var database = await UniTask.WhenAll(
                     masterDataNames.Select(GoogleSpreadSheetDownloader.DownloadAsync)
@@ -63,6 +67,7 @@ namespace StoryNothing.MasterDataSystems
                 SkillPieceSpecs.Set(JsonHelper.FromJson<SkillPieceSpec>(database[2]));
                 SkillPieceCellSpecs.Set(JsonHelper.FromJson<SkillPieceCellSpec>(database[3]));
                 SkillPieceCellPoints.Set(JsonHelper.FromJson<SkillPieceCellPoint>(database[4]));
+                CharacterSpecs.Set(JsonHelper.FromJson<CharacterSpec>(database[5]));
                 EditorUtility.SetDirty(this);
                 AssetDatabase.SaveAssets();
                 Debug.Log("End MasterData Update");
