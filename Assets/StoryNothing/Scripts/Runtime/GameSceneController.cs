@@ -27,6 +27,9 @@ namespace StoryNothing
         [field: SerializeField]
         private int[] initialSkillPieceMasterDataIds;
 
+        [field: SerializeField]
+        private int playerCharacterSpecId;
+
         private UserData userData;
 
         private Subject<Unit> updateGameState = new();
@@ -85,7 +88,7 @@ namespace StoryNothing
                 .RegisterTo(destroyCancellationToken);
 #endif
 
-            var uiViewOutGame = new UIViewOutGame(outGameDocument, userData, playerInput);
+            var uiViewOutGame = new UIViewOutGame(outGameDocument, userData, playerInput, playerCharacterSpecId);
             await uiViewOutGame.BeginAsync(destroyCancellationToken);
         }
     }
