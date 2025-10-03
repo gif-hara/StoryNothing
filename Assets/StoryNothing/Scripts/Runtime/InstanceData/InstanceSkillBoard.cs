@@ -25,6 +25,14 @@ namespace StoryNothing.InstanceData
 
         public string Name => SkillBoardSpec.Name;
 
+        public InstanceCharacter CreateInstanceCharacter(int characterSpecId)
+        {
+            return new InstanceCharacter
+            {
+                CharacterSpecId = characterSpecId,
+            };
+        }
+
         public InstanceSkillBoard(int instanceId, int masterDataSkillBoardId, List<Vector2Int> holes = null)
         {
             InstanceId = instanceId;
