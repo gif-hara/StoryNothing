@@ -1,6 +1,5 @@
 using HK;
 using StoryNothing.MasterDataSystems;
-using UnityEngine;
 
 namespace StoryNothing.InstanceData
 {
@@ -10,52 +9,31 @@ namespace StoryNothing.InstanceData
 
         public CharacterSpec CharacterSpec { get; private set; }
 
-        public int HitPointMax => CharacterSpec.HitPoint + AdditionalHitPoint + (int)(CharacterSpec.HitPoint * AdditionalHitPointRate);
+        public readonly CharacterParameter CurrentHitPoint;
 
-        public int MagicPointMax => CharacterSpec.MagicPoint + AdditionalMagicPoint + (int)(CharacterSpec.MagicPoint * AdditionalMagicPointRate);
+        public readonly CharacterParameter CurrentMagicPoint;
 
-        public int CurrentPhysicalAttack => CharacterSpec.PhysicalAttack + AdditionalPhysicalAttack + (int)(CharacterSpec.PhysicalAttack * AdditionalPhysicalAttackRate);
+        public readonly CharacterParameter CurrentPhysicalAttack;
 
-        public int CurrentPhysicalDefense => CharacterSpec.PhysicalDefense + AdditionalPhysicalDefense + (int)(CharacterSpec.PhysicalDefense * AdditionalPhysicalDefenseRate);
+        public readonly CharacterParameter CurrentPhysicalDefense;
 
-        public int CurrentMagicalAttack => CharacterSpec.MagicalAttack + AdditionalMagicalAttack + (int)(CharacterSpec.MagicalAttack * AdditionalMagicalAttackRate);
+        public readonly CharacterParameter CurrentMagicalAttack;
 
-        public int CurrentMagicalDefense => CharacterSpec.MagicalDefense + AdditionalMagicalDefense + (int)(CharacterSpec.MagicalDefense * AdditionalMagicalDefenseRate);
+        public readonly CharacterParameter CurrentMagicalDefense;
 
-        public int CurrentSpeed => CharacterSpec.Speed + AdditionalSpeed + (int)(CharacterSpec.Speed * AdditionalSpeedRate);
-
-        public int AdditionalHitPoint { get; set; }
-
-        public int AdditionalMagicPoint { get; set; }
-
-        public int AdditionalPhysicalAttack { get; set; }
-
-        public int AdditionalPhysicalDefense { get; set; }
-
-        public int AdditionalMagicalAttack { get; set; }
-
-        public int AdditionalMagicalDefense { get; set; }
-
-        public int AdditionalSpeed { get; set; }
-
-        public float AdditionalHitPointRate { get; set; }
-
-        public float AdditionalMagicPointRate { get; set; }
-
-        public float AdditionalPhysicalAttackRate { get; set; }
-
-        public float AdditionalPhysicalDefenseRate { get; set; }
-
-        public float AdditionalMagicalAttackRate { get; set; }
-
-        public float AdditionalMagicalDefenseRate { get; set; }
-
-        public float AdditionalSpeedRate { get; set; }
+        public readonly CharacterParameter CurrentSpeed;
 
         public InstanceCharacter(int characterSpecId)
         {
             CharacterSpecId = characterSpecId;
             CharacterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(CharacterSpecId);
+            CurrentHitPoint = new CharacterParameter(CharacterSpec.HitPoint);
+            CurrentMagicPoint = new CharacterParameter(CharacterSpec.MagicPoint);
+            CurrentPhysicalAttack = new CharacterParameter(CharacterSpec.PhysicalAttack);
+            CurrentPhysicalDefense = new CharacterParameter(CharacterSpec.PhysicalDefense);
+            CurrentMagicalAttack = new CharacterParameter(CharacterSpec.MagicalAttack);
+            CurrentMagicalDefense = new CharacterParameter(CharacterSpec.MagicalDefense);
+            CurrentSpeed = new CharacterParameter(CharacterSpec.Speed);
         }
     }
 }
