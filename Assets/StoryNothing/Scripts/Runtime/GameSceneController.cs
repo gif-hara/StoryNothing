@@ -25,7 +25,7 @@ namespace StoryNothing
         private int[] initialSkillBoardMasterDataIds;
 
         [field: SerializeField]
-        private int[] initialSkillPieceMasterDataIds;
+        private int[] initialCreateSkillPieceSpecIds;
 
         [field: SerializeField]
         private int playerCharacterSpecId;
@@ -65,7 +65,7 @@ namespace StoryNothing
             {
                 for (int i = 0; i < 500; i++)
                 {
-                    foreach (var initialSkillPieceMasterDataId in initialSkillPieceMasterDataIds)
+                    foreach (var initialSkillPieceMasterDataId in initialCreateSkillPieceSpecIds)
                     {
                         if (initialSkillPieceMasterDataId < 0)
                         {
