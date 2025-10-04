@@ -20,7 +20,6 @@ MonoBehaviour:
     list:
     - Id: 10101
       HitPoint: 500
-      MagicPoint: 50
       PhysicalAttack: 100
       PhysicalDefense: 100
       MagicalAttack: 100
@@ -28,7 +27,6 @@ MonoBehaviour:
       Speed: 100
     - Id: 10201
       HitPoint: 190
-      MagicPoint: 0
       PhysicalAttack: 83
       PhysicalDefense: 0
       MagicalAttack: 25
@@ -36,7 +34,6 @@ MonoBehaviour:
       Speed: 85
     - Id: 10202
       HitPoint: 198
-      MagicPoint: 0
       PhysicalAttack: 57
       PhysicalDefense: 26
       MagicalAttack: 71
@@ -535,3 +532,21 @@ MonoBehaviour:
       - Id: 10317
         X: 1
         Y: 2
+  <SkillSpecs>k__BackingField:
+    list:
+    - Id: 10101
+      Name: "\u7269\u7406\u653B\u6483\u529B20\u4E0A\u6607"
+    - Id: 10102
+      Name: "\u7269\u7406\u653B\u6483\u529B40\u4E0A\u6607"
+    - Id: 10201
+      Name: "\u7269\u7406\u9632\u5FA1\u529B20\u4E0A\u6607"
+    - Id: 10202
+      Name: "\u7269\u7406\u9632\u5FA1\u529B40\u4E0A\u6607"
+    - Id: 10301
+      Name: "\u9B54\u6CD5\u653B\u6483\u529B20\u4E0A\u6607"
+    - Id: 10401
+      Name: "\u9B54\u6CD5\u9632\u5FA1\u529B20\u4E0A\u6607"
+    - Id: 10501
+      Name: "HP100\u4E0A\u6607"
+    - Id: 10601
+      Name: "\u7D20\u65E9\u305520\u4E0A\u6607"
