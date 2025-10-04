@@ -6,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using HK;
 using R3;
 using StoryNothing.InstanceData;
+using StoryNothing.MasterDataSystems;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -54,6 +55,16 @@ namespace StoryNothing.UIViews
         private readonly TMP_Text magicalDefenseLabel;
 
         private readonly TMP_Text speedLabel;
+
+        private readonly TMP_Text instanceSkillPieceNameLabel;
+
+        private readonly HKUIDocument instanceSkillPieceSkillLabelPrefab;
+
+        private readonly List<HKUIDocument> instanceSkillPieceSkillLabels = new();
+
+        private readonly Transform instanceSkillPieceSkillLabelParent;
+
+        private readonly GameObject instanceSkillPieceInformationArea;
 
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
@@ -106,6 +117,22 @@ namespace StoryNothing.UIViews
                 .Q<HKUIDocument>("Area.Right")
                 .Q<HKUIDocument>("UI.Element.Parameter.Speed")
                 .Q<TMP_Text>("Value");
+            instanceSkillPieceNameLabel = this.document
+                .Q<HKUIDocument>("Area.Center")
+                .Q<HKUIDocument>("Area.Information")
+                .Q<HKUIDocument>("Area.SkillPiece")
+                .Q<TMP_Text>("Name");
+            instanceSkillPieceSkillLabelPrefab = this.document
+                .Q<HKUIDocument>("UI.Element.Message");
+            instanceSkillPieceSkillLabelParent = this.document
+                .Q<HKUIDocument>("Area.Center")
+                .Q<HKUIDocument>("Area.Information")
+                .Q<HKUIDocument>("Area.SkillPiece")
+                .Q<Transform>("Skills");
+            instanceSkillPieceInformationArea = this.document
+                .Q<HKUIDocument>("Area.Center")
+                .Q<HKUIDocument>("Area.Information")
+                .Q("Area.SkillPiece");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -116,6 +143,7 @@ namespace StoryNothing.UIViews
         private async UniTask StateRootAsync(CancellationToken cancellationToken)
         {
             document.gameObject.SetActive(true);
+            SetActiveInstanceSkillPieceInformation(false);
             SetSkillBoard(userData.GetEquipInstanceSkillBoard());
             while (!cancellationToken.IsCancellationRequested)
             {
@@ -172,6 +200,7 @@ namespace StoryNothing.UIViews
         private async UniTask StateEditSkillBoardAsync(CancellationToken cancellationToken)
         {
             var uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, newSkillPieceParent));
+            SetActiveInstanceSkillPieceInformation(true);
             while (!cancellationToken.IsCancellationRequested)
             {
                 var selectEditModeScope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -188,6 +217,7 @@ namespace StoryNothing.UIViews
                                 {
                                     uiElementSkillPiece.Setup(x, 0);
                                     uiElementSkillPiece.SetPositionInCenter();
+                                    SetupSkillPieceInformation(x);
                                 })
                                 .OnClickAsync(selectEditModeScope.Token)
                     )),
@@ -241,6 +271,7 @@ namespace StoryNothing.UIViews
             }
             uiElementSkillPiece.Dispose();
             skillBoardBlackout.SetActive(false);
+            SetActiveInstanceSkillPieceInformation(false);
         }
 
         private UniTask StateSelectBattleAsync(CancellationToken cancellationToken)
@@ -413,6 +444,28 @@ namespace StoryNothing.UIViews
                     break;
                 }
             }
+        }
+
+        private void SetupSkillPieceInformation(InstanceSkillPiece instanceSkillPiece)
+        {
+            instanceSkillPieceNameLabel.SetText(instanceSkillPiece.Name);
+            foreach (var label in instanceSkillPieceSkillLabels)
+            {
+                UnityEngine.Object.Destroy(label.gameObject);
+            }
+            instanceSkillPieceSkillLabels.Clear();
+            foreach (var skillSpecId in instanceSkillPiece.SkillSpecIds)
+            {
+                var skillSpec = ServiceLocator.Resolve<MasterData>().SkillSpecs.Get(skillSpecId);
+                var messageInstance = UnityEngine.Object.Instantiate(instanceSkillPieceSkillLabelPrefab, instanceSkillPieceSkillLabelParent);
+                messageInstance.Q<TMP_Text>("Text").SetText(skillSpec.Name);
+                instanceSkillPieceSkillLabels.Add(messageInstance);
+            }
+        }
+
+        private void SetActiveInstanceSkillPieceInformation(bool isActive)
+        {
+            instanceSkillPieceInformationArea.SetActive(isActive);
         }
     }
 }
