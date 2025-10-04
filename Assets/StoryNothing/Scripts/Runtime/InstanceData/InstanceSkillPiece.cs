@@ -14,31 +14,36 @@ namespace StoryNothing.InstanceData
         public int InstanceId { get; private set; }
 
         [field: SerializeField]
-        public int SkillPieceSpecMasterDataId { get; private set; }
+        public int SkillPieceSpecId { get; private set; }
 
         [field: SerializeField]
-        public int SkillPieceCellSpecMasterDataId { get; private set; }
+        public int SkillPieceCellSpecId { get; private set; }
 
         [field: SerializeField]
         public Define.SkillPieceColor ColorType { get; private set; }
 
-        public SkillPieceSpec SkillPieceSpec => ServiceLocator.Resolve<MasterData>().SkillPieceSpecs.Get(SkillPieceSpecMasterDataId);
+        [field: SerializeField]
+        public List<int> SkillSpecIds { get; private set; } = new();
 
-        public SkillPieceCellSpec SkillPieceCellSpec => ServiceLocator.Resolve<MasterData>().SkillPieceCellSpecs.Get(SkillPieceCellSpecMasterDataId);
+        public SkillPieceSpec SkillPieceSpec => ServiceLocator.Resolve<MasterData>().SkillPieceSpecs.Get(SkillPieceSpecId);
+
+        public SkillPieceCellSpec SkillPieceCellSpec => ServiceLocator.Resolve<MasterData>().SkillPieceCellSpecs.Get(SkillPieceCellSpecId);
 
         public string Name => SkillPieceSpec.Name;
 
         public InstanceSkillPiece(
             int instanceId,
-            int skillPieceSpecMasterDataId,
-            int skillPieceCellSpecMasterDataId,
-            Define.SkillPieceColor colorType
+            int skillPieceSpecId,
+            int skillPieceCellSpecId,
+            Define.SkillPieceColor colorType,
+            IEnumerable<int> skillSpecIds
             )
         {
             InstanceId = instanceId;
-            SkillPieceSpecMasterDataId = skillPieceSpecMasterDataId;
-            SkillPieceCellSpecMasterDataId = skillPieceCellSpecMasterDataId;
+            SkillPieceSpecId = skillPieceSpecId;
+            SkillPieceCellSpecId = skillPieceCellSpecId;
             ColorType = colorType;
+            SkillSpecIds.AddRange(skillSpecIds);
         }
 
         public static InstanceSkillPiece Create(int instanceId, int createSkillPieceSpecId)
@@ -57,11 +62,20 @@ namespace StoryNothing.InstanceData
             if (createSkillPieceSpec.Purple) { availableColorTypes.Add(Define.SkillPieceColor.Purple); }
             if (createSkillPieceSpec.Water) { availableColorTypes.Add(Define.SkillPieceColor.Water); }
             if (createSkillPieceSpec.Green) { availableColorTypes.Add(Define.SkillPieceColor.Green); }
+            var skillAttachCount = UnityEngine.Random.Range(createSkillPieceSpec.SkillAttachCountMin, createSkillPieceSpec.SkillAttachCountMax + 1);
+            var skillSpecIds = new List<int>();
+            for (int i = 0; i < skillAttachCount; i++)
+            {
+                var skillAttachGroup = masterData.SkillAttachGroups.Get(createSkillPieceSpec.SkillAttachGroupId);
+                var skillSpecId = skillAttachGroup[UnityEngine.Random.Range(0, skillAttachGroup.Count)].SkillSpecId;
+                skillSpecIds.Add(skillSpecId);
+            }
             return new InstanceSkillPiece(
                 instanceId,
                 createSkillPieceSpec.SkillPieceSpecId,
                 skillPieceCellSpec.Id,
-                availableColorTypes[UnityEngine.Random.Range(0, availableColorTypes.Count)]
+                availableColorTypes[UnityEngine.Random.Range(0, availableColorTypes.Count)],
+                skillSpecIds
                 );
         }
     }
