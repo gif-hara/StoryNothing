@@ -8,7 +8,7 @@ namespace StoryNothing
 
         public float AdditionalRate;
 
-        public int Current => Base + Additional + (int)(Base * AdditionalRate);
+        public int Current => Base + Additional + (int)((Base + Additional) * AdditionalRate);
 
         public CharacterParameter(int baseValue)
         {
