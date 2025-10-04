@@ -36,6 +36,9 @@ namespace StoryNothing.MasterDataSystems
         [field: SerializeField]
         public SkillSpec.DictionaryList SkillSpecs { get; private set; }
 
+        [field: SerializeField]
+        public SkillAttachGroup.Group SkillAttachGroups { get; private set; }
+
 #if UNITY_EDITOR
         [ContextMenu("Update")]
         private async void UpdateMasterData()
@@ -62,6 +65,7 @@ namespace StoryNothing.MasterDataSystems
                     "SkillPieceCellPoint",
                     "CharacterSpec",
                     "SkillSpec",
+                    "SkillAttachGroup",
                 };
                 var database = await UniTask.WhenAll(
                     masterDataNames.Select(GoogleSpreadSheetDownloader.DownloadAsync)
@@ -73,6 +77,7 @@ namespace StoryNothing.MasterDataSystems
                 SkillPieceCellPoints.Set(JsonHelper.FromJson<SkillPieceCellPoint>(database[4]));
                 CharacterSpecs.Set(JsonHelper.FromJson<CharacterSpec>(database[5]));
                 SkillSpecs.Set(JsonHelper.FromJson<SkillSpec>(database[6]));
+                SkillAttachGroups.Set(JsonHelper.FromJson<SkillAttachGroup>(database[7]));
                 EditorUtility.SetDirty(this);
                 AssetDatabase.SaveAssets();
                 Debug.Log("End MasterData Update");
