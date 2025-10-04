@@ -45,8 +45,6 @@ namespace StoryNothing.UIViews
 
         private readonly TMP_Text hitPointLabel;
 
-        private readonly TMP_Text magicPointLabel;
-
         private readonly TMP_Text physicalAttackLabel;
 
         private readonly TMP_Text physicalDefenseLabel;
@@ -87,10 +85,6 @@ namespace StoryNothing.UIViews
             hitPointLabel = this.document
                 .Q<HKUIDocument>("Area.Right")
                 .Q<HKUIDocument>("UI.Element.Parameter.HitPoint")
-                .Q<TMP_Text>("Value");
-            magicPointLabel = this.document
-                .Q<HKUIDocument>("Area.Right")
-                .Q<HKUIDocument>("UI.Element.Parameter.MagicPoint")
                 .Q<TMP_Text>("Value");
             physicalAttackLabel = this.document
                 .Q<HKUIDocument>("Area.Right")
@@ -306,7 +300,6 @@ namespace StoryNothing.UIViews
         private void UpdateParameterLabels(InstanceCharacter instanceCharacter)
         {
             hitPointLabel.SetText(instanceCharacter.CurrentHitPointMax.Current.ToString());
-            magicPointLabel.SetText(instanceCharacter.CurrentMagicPointMax.Current.ToString());
             physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.Current.ToString());
             physicalDefenseLabel.SetText(instanceCharacter.CurrentPhysicalDefense.Current.ToString());
             magicalAttackLabel.SetText(instanceCharacter.CurrentMagicalAttack.Current.ToString());

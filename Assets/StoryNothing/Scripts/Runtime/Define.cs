@@ -15,13 +15,11 @@ namespace StoryNothing
         {
             Gray,
             Red,
-            Blue,
             Orange,
             WhiteGray,
             Purple,
             Water,
             Green,
-
         }
 
         public enum Direction

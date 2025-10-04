@@ -54,7 +54,6 @@ namespace StoryNothing
             {
                 Define.SkillPieceColor.Gray => new Color(0.2f, 0.2f, 0.2f),
                 Define.SkillPieceColor.Red => new Color(1.0f, 0.2f, 0.2f),
-                Define.SkillPieceColor.Blue => new Color(0.2f, 0.4f, 1.0f),
                 Define.SkillPieceColor.Orange => new Color(1.0f, 0.6f, 0.2f),
                 Define.SkillPieceColor.WhiteGray => new Color(0.9f, 0.9f, 0.9f),
                 Define.SkillPieceColor.Purple => new Color(0.6f, 0.2f, 0.9f),

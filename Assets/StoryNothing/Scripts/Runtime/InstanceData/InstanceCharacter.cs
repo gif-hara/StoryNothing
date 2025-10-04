@@ -11,11 +11,7 @@ namespace StoryNothing.InstanceData
 
         public readonly CharacterParameter CurrentHitPointMax;
 
-        public readonly CharacterParameter CurrentMagicPointMax;
-
         public int CurrentHitPoint;
-
-        public int CurrentMagicPoint;
 
         public readonly CharacterParameter CurrentPhysicalAttack;
 
@@ -32,9 +28,7 @@ namespace StoryNothing.InstanceData
             CharacterSpecId = characterSpecId;
             CharacterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(CharacterSpecId);
             CurrentHitPointMax = new CharacterParameter(CharacterSpec.HitPoint);
-            CurrentMagicPointMax = new CharacterParameter(CharacterSpec.MagicPoint);
             CurrentHitPoint = CurrentHitPointMax.Current;
-            CurrentMagicPoint = CurrentMagicPointMax.Current;
             CurrentPhysicalAttack = new CharacterParameter(CharacterSpec.PhysicalAttack);
             CurrentPhysicalDefense = new CharacterParameter(CharacterSpec.PhysicalDefense);
             CurrentMagicalAttack = new CharacterParameter(CharacterSpec.MagicalAttack);
@@ -45,7 +39,6 @@ namespace StoryNothing.InstanceData
         public InstanceCharacter(
             int characterSpecId,
             CharacterParameter currentHitPointMax,
-            CharacterParameter currentMagicPointMax,
             CharacterParameter currentPhysicalAttack,
             CharacterParameter currentPhysicalDefense,
             CharacterParameter currentMagicalAttack,
@@ -56,9 +49,7 @@ namespace StoryNothing.InstanceData
             CharacterSpecId = characterSpecId;
             CharacterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(CharacterSpecId);
             CurrentHitPointMax = currentHitPointMax;
-            CurrentMagicPointMax = currentMagicPointMax;
             CurrentHitPoint = CurrentHitPointMax.Current;
-            CurrentMagicPoint = CurrentMagicPointMax.Current;
             CurrentPhysicalAttack = currentPhysicalAttack;
             CurrentPhysicalDefense = currentPhysicalDefense;
             CurrentMagicalAttack = currentMagicalAttack;

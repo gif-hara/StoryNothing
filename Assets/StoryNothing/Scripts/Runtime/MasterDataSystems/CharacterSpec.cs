@@ -10,8 +10,6 @@ namespace StoryNothing.MasterDataSystems
 
         public int HitPoint;
 
-        public int MagicPoint;
-
         public int PhysicalAttack;
 
         public int PhysicalDefense;

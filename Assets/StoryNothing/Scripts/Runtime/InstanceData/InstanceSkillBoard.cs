@@ -39,16 +39,6 @@ namespace StoryNothing.InstanceData
                     }) * 20,
                     0.0f
             );
-            var magicPoint = new CharacterParameter(
-                characterSpec.MagicPoint,
-                PlacementSkillPieces
-                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Blue)
-                    .Sum(x =>
-                    {
-                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * 10,
-                    0.0f
-            );
             var physicalAttack = new CharacterParameter(
                 characterSpec.PhysicalAttack,
                 PlacementSkillPieces
@@ -102,7 +92,6 @@ namespace StoryNothing.InstanceData
             return new InstanceCharacter(
                 characterSpecId,
                 hitPoint,
-                magicPoint,
                 physicalAttack,
                 physicalDefense,
                 magicalAttack,
