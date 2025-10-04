@@ -29,7 +29,24 @@ namespace StoryNothing.InstanceData
 
         public SkillPieceCellSpec SkillPieceCellSpec => ServiceLocator.Resolve<MasterData>().SkillPieceCellSpecs.Get(SkillPieceCellSpecId);
 
-        public string Name => SkillPieceSpec.Name;
+        public string Name
+        {
+            get
+            {
+                var prefix = ColorType switch
+                {
+                    Define.SkillPieceColor.Red => "赤の",
+                    Define.SkillPieceColor.Orange => "橙の",
+                    Define.SkillPieceColor.WhiteGray => "白灰の",
+                    Define.SkillPieceColor.Purple => "紫の",
+                    Define.SkillPieceColor.Water => "水の",
+                    Define.SkillPieceColor.Green => "緑の",
+                    _ => throw new ArgumentOutOfRangeException()
+                };
+
+                return $"{prefix}{SkillPieceSpec.Name}";
+            }
+        }
 
         public InstanceSkillPiece(
             int instanceId,
