@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using HK;
 using StoryNothing.MasterDataSystems;
@@ -40,20 +41,28 @@ namespace StoryNothing.InstanceData
             ColorType = colorType;
         }
 
-        public static InstanceSkillPiece Create(int instanceId, int skillPieceSpecMasterDataId)
+        public static InstanceSkillPiece Create(int instanceId, int createSkillPieceSpecId)
         {
             var masterData = ServiceLocator.Resolve<MasterData>();
-            var skillPieceSpec = masterData.SkillPieceSpecs.Get(skillPieceSpecMasterDataId);
+            var createSkillPieceSpec = masterData.CreateSkillPieceSpecs.Get(createSkillPieceSpecId);
+            var skillPieceSpec = masterData.SkillPieceSpecs.Get(createSkillPieceSpec.SkillPieceSpecId);
             var skillPieceCellSpec = masterData.SkillPieceCellSpecs.List
                 .Where(x => x.GroupId == skillPieceSpec.SkillPieceCellSpecGroupId)
                 .OrderBy(_ => Guid.NewGuid())
                 .First();
-            var colorTypes = Enum.GetValues(typeof(Define.SkillPieceColor))
-                .Cast<Define.SkillPieceColor>()
-                .Where(x => x != Define.SkillPieceColor.Gray)
-                .ToArray();
-            var colorType = colorTypes[UnityEngine.Random.Range(0, colorTypes.Length)];
-            return new InstanceSkillPiece(instanceId, skillPieceSpecMasterDataId, skillPieceCellSpec.Id, colorType);
+            var availableColorTypes = new List<Define.SkillPieceColor>();
+            if (createSkillPieceSpec.Red) { availableColorTypes.Add(Define.SkillPieceColor.Red); }
+            if (createSkillPieceSpec.Orange) { availableColorTypes.Add(Define.SkillPieceColor.Orange); }
+            if (createSkillPieceSpec.WhiteGray) { availableColorTypes.Add(Define.SkillPieceColor.WhiteGray); }
+            if (createSkillPieceSpec.Purple) { availableColorTypes.Add(Define.SkillPieceColor.Purple); }
+            if (createSkillPieceSpec.Water) { availableColorTypes.Add(Define.SkillPieceColor.Water); }
+            if (createSkillPieceSpec.Green) { availableColorTypes.Add(Define.SkillPieceColor.Green); }
+            return new InstanceSkillPiece(
+                instanceId,
+                createSkillPieceSpec.SkillPieceSpecId,
+                skillPieceCellSpec.Id,
+                availableColorTypes[UnityEngine.Random.Range(0, availableColorTypes.Count)]
+                );
         }
     }
 }
