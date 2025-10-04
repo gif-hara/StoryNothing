@@ -66,6 +66,12 @@ namespace StoryNothing.UIViews
 
         private readonly GameObject instanceSkillPieceInformationArea;
 
+        private readonly HKUIDocument skillNameLabelPrefab;
+
+        private readonly List<HKUIDocument> skillNameLabels = new();
+
+        private readonly Transform skillNameLabelParent;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
             this.document = document;
@@ -124,6 +130,8 @@ namespace StoryNothing.UIViews
                 .Q<TMP_Text>("Name");
             instanceSkillPieceSkillLabelPrefab = this.document
                 .Q<HKUIDocument>("UI.Element.Message");
+            skillNameLabelPrefab = this.document
+                .Q<HKUIDocument>("UI.Element.Message");
             instanceSkillPieceSkillLabelParent = this.document
                 .Q<HKUIDocument>("Area.Center")
                 .Q<HKUIDocument>("Area.Information")
@@ -133,6 +141,9 @@ namespace StoryNothing.UIViews
                 .Q<HKUIDocument>("Area.Center")
                 .Q<HKUIDocument>("Area.Information")
                 .Q("Area.SkillPiece");
+            skillNameLabelParent = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<Transform>("Skills");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -305,6 +316,11 @@ namespace StoryNothing.UIViews
                 element.Dispose();
             }
             skillPieceElements.Clear();
+            foreach (var label in skillNameLabels)
+            {
+                UnityEngine.Object.Destroy(label.gameObject);
+            }
+            skillNameLabels.Clear();
             skillBoardBackground.sizeDelta = new Vector2(
                 instanceSkillBoard.SkillBoardSpec.X * 100,
                 instanceSkillBoard.SkillBoardSpec.Y * 100
@@ -323,6 +339,13 @@ namespace StoryNothing.UIViews
                 uiElementSkillPiece.Setup(instanceSkillPiece, placementSkillPiece.RotationIndex);
                 uiElementSkillPiece.SetPosition(placementSkillPiece.PositionIndex, instanceSkillBoard.SkillBoardSpec.Size, instanceSkillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex));
                 skillPieceElements.Add(uiElementSkillPiece);
+                foreach (var skillSpecId in instanceSkillPiece.SkillSpecIds)
+                {
+                    var skillSpec = ServiceLocator.Resolve<MasterData>().SkillSpecs.Get(skillSpecId);
+                    var skillNameLabel = UnityEngine.Object.Instantiate(skillNameLabelPrefab, skillNameLabelParent);
+                    skillNameLabel.Q<TMP_Text>("Text").SetText(skillSpec.Name);
+                    skillNameLabels.Add(skillNameLabel);
+                }
             }
             var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
             UpdateParameterLabels(instanceCharacter);
