@@ -52,7 +52,7 @@ namespace StoryNothing
         {
             backgroundImage.color = colorType switch
             {
-                Define.SkillPieceColor.Gray => new Color(0.2f, 0.1f, 0.1f),
+                Define.SkillPieceColor.Gray => new Color(0.2f, 0.2f, 0.2f),
                 Define.SkillPieceColor.Red => new Color(1.0f, 0.2f, 0.2f),
                 Define.SkillPieceColor.Blue => new Color(0.2f, 0.4f, 1.0f),
                 Define.SkillPieceColor.Orange => new Color(1.0f, 0.6f, 0.2f),
