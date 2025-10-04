@@ -550,3 +550,19 @@ MonoBehaviour:
       Name: "HP100\u4E0A\u6607"
     - Id: 10601
       Name: "\u7D20\u65E9\u305520\u4E0A\u6607"
+  <SkillAttachGroups>k__BackingField:
+    list:
+    - Key: 1
+      Value:
+      - Id: 1
+        SkillSpecId: 10101
+      - Id: 1
+        SkillSpecId: 10201
+      - Id: 1
+        SkillSpecId: 10301
+      - Id: 1
+        SkillSpecId: 10401
+      - Id: 1
+        SkillSpecId: 10501
+      - Id: 1
+        SkillSpecId: 10601
