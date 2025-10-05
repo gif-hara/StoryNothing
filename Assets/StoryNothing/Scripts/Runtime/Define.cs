@@ -29,5 +29,15 @@ namespace StoryNothing
             Left = 2,
             Bottom = 3,
         }
+
+        public enum SkillEffectType
+        {
+            PhysicalAttackUp,
+            PhysicalDefenseUp,
+            MagicalAttackUp,
+            MagicalDefenseUp,
+            HitPointUp,
+            SpeedUp,
+        }
     }
 }
