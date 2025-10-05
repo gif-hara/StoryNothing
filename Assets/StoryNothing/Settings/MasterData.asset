@@ -601,3 +601,35 @@ MonoBehaviour:
       Purple: 1
       Water: 1
       Green: 1
+  <SkillEffects>k__BackingField:
+    list:
+    - Key: 10101
+      Value:
+      - Id: 10101
+        SkillEffectType: 0
+        Amount: 20
+    - Key: 10201
+      Value:
+      - Id: 10201
+        SkillEffectType: 1
+        Amount: 20
+    - Key: 10301
+      Value:
+      - Id: 10301
+        SkillEffectType: 2
+        Amount: 20
+    - Key: 10401
+      Value:
+      - Id: 10401
+        SkillEffectType: 3
+        Amount: 20
+    - Key: 10501
+      Value:
+      - Id: 10501
+        SkillEffectType: 4
+        Amount: 100
+    - Key: 10601
+      Value:
+      - Id: 10601
+        SkillEffectType: 5
+        Amount: 20
