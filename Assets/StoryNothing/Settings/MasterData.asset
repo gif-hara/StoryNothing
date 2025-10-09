@@ -56,6 +56,11 @@ MonoBehaviour:
       X: 6
       Y: 6
       HoleCount: 3
+    - Id: 10401
+      Name: "\u5F29\u7D1A\u306E\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
+      X: 7
+      Y: 7
+      HoleCount: 3
   <SkillPieceSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -538,18 +543,134 @@ MonoBehaviour:
       Name: "\u7269\u7406\u653B\u6483\u529B20\u4E0A\u6607"
     - Id: 10102
       Name: "\u7269\u7406\u653B\u6483\u529B40\u4E0A\u6607"
+    - Id: 10103
+      Name: "\u7269\u7406\u653B\u6483\u529B80\u4E0A\u6607"
+    - Id: 10104
+      Name: "\u7269\u7406\u653B\u6483\u529B100\u4E0A\u6607"
     - Id: 10201
       Name: "\u7269\u7406\u9632\u5FA1\u529B20\u4E0A\u6607"
     - Id: 10202
       Name: "\u7269\u7406\u9632\u5FA1\u529B40\u4E0A\u6607"
+    - Id: 10203
+      Name: "\u7269\u7406\u9632\u5FA1\u529B80\u4E0A\u6607"
+    - Id: 10204
+      Name: "\u7269\u7406\u9632\u5FA1\u529B100\u4E0A\u6607"
     - Id: 10301
       Name: "\u9B54\u6CD5\u653B\u6483\u529B20\u4E0A\u6607"
+    - Id: 10302
+      Name: "\u9B54\u6CD5\u653B\u6483\u529B40\u4E0A\u6607"
+    - Id: 10303
+      Name: "\u9B54\u6CD5\u653B\u6483\u529B80\u4E0A\u6607"
+    - Id: 10304
+      Name: "\u9B54\u6CD5\u653B\u6483\u529B100\u4E0A\u6607"
     - Id: 10401
       Name: "\u9B54\u6CD5\u9632\u5FA1\u529B20\u4E0A\u6607"
+    - Id: 10402
+      Name: "\u9B54\u6CD5\u9632\u5FA1\u529B40\u4E0A\u6607"
+    - Id: 10403
+      Name: "\u9B54\u6CD5\u9632\u5FA1\u529B80\u4E0A\u6607"
+    - Id: 10404
+      Name: "\u9B54\u6CD5\u9632\u5FA1\u529B100\u4E0A\u6607"
     - Id: 10501
       Name: "HP100\u4E0A\u6607"
+    - Id: 10502
+      Name: "HP250\u4E0A\u6607"
+    - Id: 10503
+      Name: "HP500\u4E0A\u6607"
+    - Id: 10504
+      Name: "HP700\u4E0A\u6607"
     - Id: 10601
       Name: "\u7D20\u65E9\u305520\u4E0A\u6607"
+    - Id: 10602
+      Name: "\u7D20\u65E9\u305540\u4E0A\u6607"
+    - Id: 10603
+      Name: "\u7D20\u65E9\u305580\u4E0A\u6607"
+    - Id: 10604
+      Name: "\u7D20\u65E9\u3055100\u4E0A\u6607"
+    - Id: 10701
+      Name: "\u300C\u6226\u3046\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10702
+      Name: "\u300C\u30B7\u30E7\u30C3\u30C8\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10703
+      Name: "\u300C\u6BD2\u7A81\u304D\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10704
+      Name: "\u300C\u75FA\u308C\u7C89\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10705
+      Name: "\u300C\u56DE\u5FA9\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10706
+      Name: "\u300C\u4E2D\u56DE\u5FA9\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10707
+      Name: "\u300C\u30A2\u30BF\u30C3\u30AF\u30D6\u30EC\u30A4\u30AF\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10708
+      Name: "\u300C\u30DE\u30A4\u30F3\u30C9\u30D6\u30EC\u30A4\u30AF\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10709
+      Name: "\u300C\u5F37\u653B\u6483\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10710
+      Name: "\u300C\u4E8C\u9023\u65AC\u308A\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10711
+      Name: "\u300C\u6E3E\u8EAB\u306E\u4E00\u6483\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10712
+      Name: "\u300C\u30A2\u30A4\u30B9\u30D0\u30FC\u30F3\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10713
+      Name: "\u300C\u6EFE\u308B\u529B\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10714
+      Name: "\u300C\u9244\u306E\u610F\u5FD7\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10715
+      Name: "\u300C\u7814\u304E\u6F84\u307E\u3059\u529B\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10716
+      Name: "\u300C\u6E05\u3044\u610F\u5FD7\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10717
+      Name: "\u300C\u30AF\u30A4\u30C3\u30AF\u30B7\u30E7\u30C3\u30C8\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10718
+      Name: "\u300C\u6B63\u62F3\u7A81\u304D\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10719
+      Name: "\u300C\u751F\u547D\u5438\u3044\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10801
+      Name: "\u4E0D\u5B9A\u5F62\u306B\u5BFE\u3059\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B"
+    - Id: 10901
+      Name: "\u4EBA\u578B\u306B\u5BFE\u3059\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B"
+    - Id: 11001
+      Name: "\u7ADC\u306B\u5BFE\u3059\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B"
+    - Id: 11101
+      Name: "\u9CE5\u985E\u306B\u5BFE\u3059\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B"
+    - Id: 11201
+      Name: "\u7363\u306B\u5BFE\u3059\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B"
+    - Id: 11301
+      Name: "\u6BD2\u306E\u8010\u6027\u5024\u3092\u4E0A\u6607\u3059\u308B"
+    - Id: 11401
+      Name: "\u9EBB\u75FA\u306E\u8010\u6027\u5024\u3092\u4E0A\u6607\u3059\u308B"
+    - Id: 11501
+      Name: "\u75B2\u52B4\u306E\u8010\u6027\u5024\u3092\u4E0A\u6607\u3059\u308B"
+    - Id: 11601
+      Name: "\u5D29\u58CA\u306E\u8010\u6027\u5024\u3092\u4E0A\u6607\u3059\u308B"
+    - Id: 11701
+      Name: "\u30B3\u30DE\u30F3\u30C9\u30B2\u30FC\u30B8\u304C\u5C11\u3057\u6E9C\u307E\u3063\u305F\u72B6\u614B\u3067\u30D0\u30C8\u30EB\u3092\u958B\u59CB"
+    - Id: 11801
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u5C11\u3057\u3060\u3051HP\u304C\u56DE\u5FA9\u3059\u308B"
+    - Id: 11901
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u53D7\u3051\u305F\u969B\u306B\u30B3\u30DE\u30F3\u30C9\u30B2\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B"
+    - Id: 12001
+      Name: "\u6BD2\u3092\u4ED8\u4E0E\u3057\u305F\u6642\u306B\u653B\u6483\u529B\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 12101
+      Name: "\u6B7B\u306B\u81F3\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u53D7\u3051\u305F\u6642\u3001\u4E00\u5EA6\u3060\u3051\u305D\u308C\u3092\u56DE\u907F\u3059\u308B"
+    - Id: 12201
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u3001\u3055\u3089\u306B\u8FFD\u6483\u3092\u884C\u3046"
+    - Id: 12301
+      Name: "\u72B6\u614B\u7570\u5E38\u306B\u7F79\u3063\u305F\u969B\u306B\u4E00\u5B9A\u6642\u9593\u7D20\u65E9\u3055\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 12401
+      Name: "\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C\u5C11\u3057\u6E1B\u308B\u304C\u3001\u6BD2\u3092\u84C4\u7A4D\u3059\u308B"
+    - Id: 12501
+      Name: "\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C\u5C11\u3057\u6E1B\u308B\u304C\u3001\u9EBB\u75FA\u3092\u84C4\u7A4D\u3059\u308B"
+    - Id: 12601
+      Name: "\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C\u5C11\u3057\u6E1B\u308B\u304C\u3001\u75B2\u52B4\u3092\u84C4\u7A4D\u3059\u308B"
+    - Id: 12701
+      Name: "\u4E0E\u3048\u308B\u30C0\u30E1\u30FC\u30B8\u304C\u5C11\u3057\u6E1B\u308B\u304C\u3001\u5D29\u58CA\u3092\u84C4\u7A4D\u3059\u308B"
+    - Id: 12801
+      Name: "\u4F4E\u3044\u78BA\u7387\u3067\u76F8\u624B\u306E\u653B\u6483\u3092\u56DE\u907F\u3059\u308B"
+    - Id: 12901
+      Name: "\u4F4E\u3044\u78BA\u7387\u3067\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u30C0\u30E1\u30FC\u30B8\u306B\u306A\u308B"
+    - Id: 13001
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u5C11\u3057\u3060\u3051\u7D20\u65E9\u3055\u304C\u4E0A\u6607\u3059\u308B"
   <SkillAttachGroups>k__BackingField:
     list:
     - Key: 1
@@ -608,28 +729,118 @@ MonoBehaviour:
       - Id: 10101
         SkillEffectType: 0
         Amount: 20
+    - Key: 10102
+      Value:
+      - Id: 10102
+        SkillEffectType: 0
+        Amount: 40
+    - Key: 10103
+      Value:
+      - Id: 10103
+        SkillEffectType: 0
+        Amount: 80
+    - Key: 10104
+      Value:
+      - Id: 10104
+        SkillEffectType: 0
+        Amount: 100
     - Key: 10201
       Value:
       - Id: 10201
         SkillEffectType: 1
         Amount: 20
+    - Key: 10202
+      Value:
+      - Id: 10202
+        SkillEffectType: 1
+        Amount: 40
+    - Key: 10203
+      Value:
+      - Id: 10203
+        SkillEffectType: 1
+        Amount: 80
+    - Key: 10204
+      Value:
+      - Id: 10204
+        SkillEffectType: 1
+        Amount: 100
     - Key: 10301
       Value:
       - Id: 10301
         SkillEffectType: 2
         Amount: 20
+    - Key: 10302
+      Value:
+      - Id: 10302
+        SkillEffectType: 2
+        Amount: 40
+    - Key: 10303
+      Value:
+      - Id: 10303
+        SkillEffectType: 2
+        Amount: 80
+    - Key: 10304
+      Value:
+      - Id: 10304
+        SkillEffectType: 2
+        Amount: 100
     - Key: 10401
       Value:
       - Id: 10401
         SkillEffectType: 3
         Amount: 20
+    - Key: 10402
+      Value:
+      - Id: 10402
+        SkillEffectType: 3
+        Amount: 40
+    - Key: 10403
+      Value:
+      - Id: 10403
+        SkillEffectType: 3
+        Amount: 80
+    - Key: 10404
+      Value:
+      - Id: 10404
+        SkillEffectType: 3
+        Amount: 100
     - Key: 10501
       Value:
       - Id: 10501
         SkillEffectType: 4
         Amount: 100
+    - Key: 10502
+      Value:
+      - Id: 10502
+        SkillEffectType: 4
+        Amount: 250
+    - Key: 10503
+      Value:
+      - Id: 10503
+        SkillEffectType: 4
+        Amount: 500
+    - Key: 10504
+      Value:
+      - Id: 10504
+        SkillEffectType: 4
+        Amount: 700
     - Key: 10601
       Value:
       - Id: 10601
         SkillEffectType: 5
         Amount: 20
+    - Key: 10602
+      Value:
+      - Id: 10602
+        SkillEffectType: 5
+        Amount: 40
+    - Key: 10603
+      Value:
+      - Id: 10603
+        SkillEffectType: 5
+        Amount: 80
+    - Key: 10604
+      Value:
+      - Id: 10604
+        SkillEffectType: 5
+        Amount: 100
