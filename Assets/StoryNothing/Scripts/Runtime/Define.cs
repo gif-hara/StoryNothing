@@ -4,6 +4,8 @@ namespace StoryNothing
 {
     public static class Define
     {
+        public const float CellSize = 90.0f;
+
         public enum ButtonBehavior
         {
             OnClick,

@@ -87,8 +87,8 @@ namespace StoryNothing
                 null,
                 out Vector2 localPoint);
             var result = new Vector2Int(
-                Mathf.Clamp(Mathf.FloorToInt((localPoint.x + (skillboardSize.x * 100) / 2) / 100), 0, skillboardSize.x - 1),
-                Mathf.Clamp(Mathf.FloorToInt((localPoint.y + (skillboardSize.y * 100) / 2) / 100), 0, skillboardSize.y - 1)
+                Mathf.Clamp(Mathf.FloorToInt((localPoint.x + (skillboardSize.x * Define.CellSize) / 2) / Define.CellSize), 0, skillboardSize.x - 1),
+                Mathf.Clamp(Mathf.FloorToInt((localPoint.y + (skillboardSize.y * Define.CellSize) / 2) / Define.CellSize), 0, skillboardSize.y - 1)
                 );
             var skillPieceCenterIndex = new Vector2Int(skillPieceSize.x / 2, skillPieceSize.y / 2);
             if (result.x - skillPieceCenterIndex.x < 0)
@@ -113,14 +113,16 @@ namespace StoryNothing
 
         public void SetPosition(Vector2Int positionIndex, Vector2Int skillboardSize, Vector2Int skillPieceSize, Vector3 offset = default)
         {
-            var result = new Vector3(positionIndex.x * 100 - (skillboardSize.x * 100) / 2 + 50, positionIndex.y * 100 - (skillboardSize.y * 100) / 2 + 50, 0);
+            var cellSize = Define.CellSize;
+            var halfCellSize = cellSize / 2;
+            var result = new Vector3(positionIndex.x * cellSize - (skillboardSize.x * cellSize) / 2 + halfCellSize, positionIndex.y * cellSize - (skillboardSize.y * cellSize) / 2 + halfCellSize, 0);
             if (skillPieceSize.x % 2 == 0)
             {
-                result.x -= 50;
+                result.x -= halfCellSize;
             }
             if (skillPieceSize.y % 2 == 0)
             {
-                result.y -= 50;
+                result.y -= halfCellSize;
             }
             rectTransform.localPosition = result + offset;
         }

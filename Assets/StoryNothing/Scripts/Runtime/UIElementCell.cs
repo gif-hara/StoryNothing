@@ -65,7 +65,9 @@ namespace StoryNothing
 
         public void SetPosition(Vector2Int index, int xMax, int yMax)
         {
-            rectTransform.localPosition = new Vector3(index.x * 100 - (xMax * 100) / 2 + 50, index.y * 100 - (yMax * 100) / 2 + 50, 0);
+            var size = Define.CellSize;
+            var halfSize = size / 2;
+            rectTransform.localPosition = new Vector3(index.x * size - (xMax * size) / 2 + halfSize, index.y * size - (yMax * size) / 2 + halfSize, 0);
         }
 
         public void SetActiveConnector(Define.Direction direction, bool active)

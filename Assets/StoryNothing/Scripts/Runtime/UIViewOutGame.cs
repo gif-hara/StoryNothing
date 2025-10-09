@@ -322,8 +322,8 @@ namespace StoryNothing.UIViews
             }
             skillNameLabels.Clear();
             skillBoardBackground.sizeDelta = new Vector2(
-                instanceSkillBoard.SkillBoardSpec.X * 100,
-                instanceSkillBoard.SkillBoardSpec.Y * 100
+                instanceSkillBoard.SkillBoardSpec.X * Define.CellSize,
+                instanceSkillBoard.SkillBoardSpec.Y * Define.CellSize
                 );
             foreach (var hole in instanceSkillBoard.Holes)
             {
@@ -370,8 +370,8 @@ namespace StoryNothing.UIViews
         {
             RectTransformUtility.ScreenPointToLocalPointInRectangle(skillBoardBackground, Mouse.current.position.ReadValue(), null, out var localPoint);
             var position = new Vector2(
-                (localPoint.x + skillBoardBackground.sizeDelta.x * 0.5f) / 100.0f,
-                (localPoint.y + skillBoardBackground.sizeDelta.y * 0.5f) / 100.0f
+                (localPoint.x + skillBoardBackground.sizeDelta.x * 0.5f) / Define.CellSize,
+                (localPoint.y + skillBoardBackground.sizeDelta.y * 0.5f) / Define.CellSize
                 );
             return new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
         }
