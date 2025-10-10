@@ -29,6 +29,9 @@ namespace StoryNothing.InstanceData
 
         public SkillPieceCellSpec SkillPieceCellSpec => ServiceLocator.Resolve<MasterData>().SkillPieceCellSpecs.Get(SkillPieceCellSpecId);
 
+        public IEnumerable<SkillEffect> SkillEffects => SkillSpecIds
+            .SelectMany(x => ServiceLocator.Resolve<MasterData>().SkillEffects.Get(x));
+
         public string Name
         {
             get
