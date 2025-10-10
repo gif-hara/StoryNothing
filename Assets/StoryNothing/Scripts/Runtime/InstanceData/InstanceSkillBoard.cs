@@ -30,66 +30,101 @@ namespace StoryNothing.InstanceData
         {
             var gameRule = ServiceLocator.Resolve<GameRule>();
             var characterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(characterSpecId);
-            var hitPointAdditional = PlacementSkillPieces
+            var hitPointAdditional = 0;
+            hitPointAdditional += PlacementSkillPieces
                 .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Red)
                 .Sum(x =>
                 {
                     return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
                 }) * gameRule.SkillPieceHitPointUp;
+            hitPointAdditional += PlacementSkillPieces
+                .SelectMany(x => x.InstanceSkillPiece.SkillEffects)
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.HitPointUp)
+                .Sum(x => (int)x.Amount);
             var hitPoint = new CharacterParameter(
                 characterSpec.HitPoint,
                 hitPointAdditional,
                 0.0f
             );
+            var physicalAttackAdditional = 0;
+            physicalAttackAdditional += PlacementSkillPieces
+                .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Orange)
+                .Sum(x =>
+                {
+                    return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                }) * gameRule.SkillPiecePhysicalAttackUp;
+            physicalAttackAdditional += PlacementSkillPieces
+                .SelectMany(x => x.InstanceSkillPiece.SkillEffects)
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.PhysicalAttackUp)
+                .Sum(x => (int)x.Amount);
             var physicalAttack = new CharacterParameter(
                 characterSpec.PhysicalAttack,
-                PlacementSkillPieces
-                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Orange)
-                    .Sum(x =>
-                    {
-                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * gameRule.SkillPiecePhysicalAttackUp,
-                    0.0f
+                physicalAttackAdditional,
+                0.0f
             );
+            var physicalDefenseAdditional = 0;
+            physicalDefenseAdditional += PlacementSkillPieces
+                .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.WhiteGray)
+                .Sum(x =>
+                {
+                    return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                }) * gameRule.SkillPiecePhysicalDefenseUp;
+            physicalDefenseAdditional += PlacementSkillPieces
+                .SelectMany(x => x.InstanceSkillPiece.SkillEffects)
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.PhysicalDefenseUp)
+                .Sum(x => (int)x.Amount);
             var physicalDefense = new CharacterParameter(
                 characterSpec.PhysicalDefense,
-                PlacementSkillPieces
-                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.WhiteGray)
-                    .Sum(x =>
-                    {
-                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * gameRule.SkillPiecePhysicalDefenseUp,
-                    0.0f
+                physicalDefenseAdditional,
+                0.0f
             );
+            var magicalAttackAdditional = 0;
+            magicalAttackAdditional += PlacementSkillPieces
+                .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Purple)
+                .Sum(x =>
+                {
+                    return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                }) * gameRule.SkillPieceMagicalAttackUp;
+            magicalAttackAdditional += PlacementSkillPieces
+                .SelectMany(x => x.InstanceSkillPiece.SkillEffects)
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.MagicalAttackUp)
+                .Sum(x => (int)x.Amount);
             var magicalAttack = new CharacterParameter(
                 characterSpec.MagicalAttack,
-                PlacementSkillPieces
-                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Purple)
-                    .Sum(x =>
-                    {
-                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * gameRule.SkillPieceMagicalAttackUp,
-                    0.0f
+                magicalAttackAdditional,
+                0.0f
             );
+            var magicalDefenseAdditional = 0;
+            magicalDefenseAdditional += PlacementSkillPieces
+                .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Water)
+                .Sum(x =>
+                {
+                    return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                }) * gameRule.SkillPieceMagicalDefenseUp;
+            magicalDefenseAdditional += PlacementSkillPieces
+                .SelectMany(x => x.InstanceSkillPiece.SkillEffects)
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.MagicalDefenseUp)
+                .Sum(x => (int)x.Amount);
             var magicalDefense = new CharacterParameter(
                 characterSpec.MagicalDefense,
-                PlacementSkillPieces
-                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Water)
-                    .Sum(x =>
-                    {
-                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * gameRule.SkillPieceMagicalDefenseUp,
-                    0.0f
+                magicalDefenseAdditional,
+                0.0f
             );
+            var speedAdditional = 0;
+            speedAdditional += PlacementSkillPieces
+                .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Green)
+                .Sum(x =>
+                {
+                    return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                }) * gameRule.SkillPieceSpeedUp;
+            speedAdditional += PlacementSkillPieces
+                .SelectMany(x => x.InstanceSkillPiece.SkillEffects)
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.SpeedUp)
+                .Sum(x => (int)x.Amount);
             var speed = new CharacterParameter(
                 characterSpec.Speed,
-                PlacementSkillPieces
-                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Green)
-                    .Sum(x =>
-                    {
-                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * gameRule.SkillPieceSpeedUp,
-                    0.0f
+                speedAdditional,
+                0.0f
             );
             return new InstanceCharacter(
                 characterSpecId,
