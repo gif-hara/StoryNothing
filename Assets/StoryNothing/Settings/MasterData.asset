@@ -26,18 +26,18 @@ MonoBehaviour:
       MagicalDefense: 100
       Speed: 100
     - Id: 10201
-      HitPoint: 190
-      PhysicalAttack: 83
-      PhysicalDefense: 0
-      MagicalAttack: 25
-      MagicalDefense: 0
+      HitPoint: 211
+      PhysicalAttack: 91
+      PhysicalDefense: 90
+      MagicalAttack: 84
+      MagicalDefense: 82
       Speed: 85
     - Id: 10202
-      HitPoint: 198
-      PhysicalAttack: 57
-      PhysicalDefense: 26
-      MagicalAttack: 71
-      MagicalDefense: 12
+      HitPoint: 203
+      PhysicalAttack: 84
+      PhysicalDefense: 123
+      MagicalAttack: 91
+      MagicalDefense: 87
       Speed: 78
   <SkillBoardSpecs>k__BackingField:
     list:
@@ -125,6 +125,8 @@ MonoBehaviour:
     - Id: 10316
       GroupId: 5
     - Id: 10317
+      GroupId: 5
+    - Id: 10318
       GroupId: 5
   <SkillPieceCellPoints>k__BackingField:
     list:
@@ -537,6 +539,23 @@ MonoBehaviour:
       - Id: 10317
         X: 1
         Y: 2
+    - Key: 10318
+      Value:
+      - Id: 10318
+        X: 0
+        Y: 1
+      - Id: 10318
+        X: 1
+        Y: 0
+      - Id: 10318
+        X: 1
+        Y: 1
+      - Id: 10318
+        X: 1
+        Y: 2
+      - Id: 10318
+        X: 2
+        Y: 2
   <SkillSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -625,6 +644,14 @@ MonoBehaviour:
       Name: "\u300C\u6B63\u62F3\u7A81\u304D\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
     - Id: 10719
       Name: "\u300C\u751F\u547D\u5438\u3044\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10720
+      Name: "\u300C\u30E1\u30C6\u30AA\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10721
+      Name: "\u300C\u30B8\u30E3\u30D6\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10722
+      Name: "\u300C\u9244\u58C1\u306E\u76FE\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
+    - Id: 10723
+      Name: "\u300C\u76FE\u69CB\u3048\u7A81\u304D\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
     - Id: 10801
       Name: "\u4E0D\u5B9A\u5F62\u306B\u5BFE\u3059\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B"
     - Id: 10901
@@ -652,7 +679,7 @@ MonoBehaviour:
     - Id: 12001
       Name: "\u6BD2\u3092\u4ED8\u4E0E\u3057\u305F\u6642\u306B\u653B\u6483\u529B\u304C\u4E0A\u6607\u3059\u308B"
     - Id: 12101
-      Name: "\u6B7B\u306B\u81F3\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u53D7\u3051\u305F\u6642\u3001\u4E00\u5EA6\u3060\u3051\u305D\u308C\u3092\u56DE\u907F\u3059\u308B"
+      Name: "\u6B7B\u306B\u81F3\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u53D7\u3051\u305F\u6642\u3001\u4E00\u5EA6\u3060\u3051\u305D\u308C\u3092\u56DE\u907F\u3057\u3001\u56DE\u5FA9\u3059\u308B"
     - Id: 12201
       Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u3001\u3055\u3089\u306B\u8FFD\u6483\u3092\u884C\u3046"
     - Id: 12301
@@ -670,7 +697,43 @@ MonoBehaviour:
     - Id: 12901
       Name: "\u4F4E\u3044\u78BA\u7387\u3067\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u30C0\u30E1\u30FC\u30B8\u306B\u306A\u308B"
     - Id: 13001
-      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u5C11\u3057\u3060\u3051\u7D20\u65E9\u3055\u304C\u4E0A\u6607\u3059\u308B"
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u5C11\u3057\u3060\u3051\u30B3\u30DE\u30F3\u30C9\u30B2\u30FC\u30B8\u304C\u5897\u52A0\u3059\u308B"
+    - Id: 13101
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u7269\u7406\u653B\u6483\u529B\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 13201
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u7269\u7406\u9632\u5FA1\u529B\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 13301
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u9B54\u6CD5\u653B\u6483\u529B\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 13401
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u9B54\u6CD5\u9632\u5FA1\u529B\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 13501
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051HP\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 13601
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u7D20\u65E9\u3055\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 13602
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u3001\u3055\u3089\u306B\u8FFD\u6483\u3092\u884C\u3046"
+    - Id: 13701
+      Name: "HP\u304C\u81EA\u52D5\u7684\u306B\u56DE\u5FA9\u3059\u308B"
+    - Id: 13801
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u53D7\u3051\u305F\u969B\u306B\u4E00\u5B9A\u6642\u9593\u9632\u5FA1\u529B\u304C\u4E0A\u6607\u3059\u308B"
+    - Id: 13901
+      Name: "\u8D64\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7D20\u65E9\u3055\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+    - Id: 14001
+      Name: "\u7DD1\u306E\u30D4\u30FC\u30B9\u306F\u3001HP\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+    - Id: 14101
+      Name: "\u6A59\u306E\u30D4\u30FC\u30B9\u306F\u3001\u9B54\u6CD5\u9632\u5FA1\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+    - Id: 14201
+      Name: "\u767D\u7070\u306E\u30D4\u30FC\u30B9\u306F\u3001\u9B54\u6CD5\u653B\u6483\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+    - Id: 14301
+      Name: "\u7D2B\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7269\u7406\u9632\u5FA1\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+    - Id: 14401
+      Name: "\u6C34\u8272\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7269\u7406\u653B\u6483\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+    - Id: 14501
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u76F8\u624B\u306E\u30B3\u30DE\u30F3\u30C9\u30B2\u30FC\u30B8\u3092\u5C11\u3057\u6E1B\u5C11\u3059\u308B"
+    - Id: 14601
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u30AC\u30FC\u30C9\u30DD\u30A4\u30F3\u30C8\u304C\u5897\u52A0\u3059\u308B"
+    - Id: 14701
+      Name: "\u30AC\u30FC\u30C9\u30DD\u30A4\u30F3\u30C8\u304C\u5C11\u3057\u6E9C\u307E\u3063\u305F\u72B6\u614B\u3067\u30D0\u30C8\u30EB\u3092\u958B\u59CB"
   <SkillAttachGroups>k__BackingField:
     list:
     - Key: 1
@@ -687,6 +750,132 @@ MonoBehaviour:
         SkillSpecId: 10501
       - Id: 1
         SkillSpecId: 10601
+      - Id: 1
+        SkillSpecId: 10801
+      - Id: 1
+        SkillSpecId: 10901
+      - Id: 1
+        SkillSpecId: 11001
+      - Id: 1
+        SkillSpecId: 11101
+      - Id: 1
+        SkillSpecId: 11201
+    - Key: 2
+      Value:
+      - Id: 2
+        SkillSpecId: 10102
+      - Id: 2
+        SkillSpecId: 10202
+      - Id: 2
+        SkillSpecId: 10302
+      - Id: 2
+        SkillSpecId: 10402
+      - Id: 2
+        SkillSpecId: 10502
+      - Id: 2
+        SkillSpecId: 10602
+      - Id: 2
+        SkillSpecId: 10801
+      - Id: 2
+        SkillSpecId: 10901
+      - Id: 2
+        SkillSpecId: 11001
+      - Id: 2
+        SkillSpecId: 11101
+      - Id: 2
+        SkillSpecId: 11201
+      - Id: 2
+        SkillSpecId: 11301
+      - Id: 2
+        SkillSpecId: 11401
+      - Id: 2
+        SkillSpecId: 11501
+      - Id: 2
+        SkillSpecId: 11601
+      - Id: 2
+        SkillSpecId: 11701
+      - Id: 2
+        SkillSpecId: 11801
+      - Id: 2
+        SkillSpecId: 11901
+      - Id: 2
+        SkillSpecId: 14701
+    - Key: 3
+      Value:
+      - Id: 3
+        SkillSpecId: 10103
+      - Id: 3
+        SkillSpecId: 10203
+      - Id: 3
+        SkillSpecId: 10303
+      - Id: 3
+        SkillSpecId: 10403
+      - Id: 3
+        SkillSpecId: 10503
+      - Id: 3
+        SkillSpecId: 10603
+      - Id: 3
+        SkillSpecId: 10104
+      - Id: 3
+        SkillSpecId: 10204
+      - Id: 3
+        SkillSpecId: 10304
+      - Id: 3
+        SkillSpecId: 10404
+      - Id: 3
+        SkillSpecId: 10504
+      - Id: 3
+        SkillSpecId: 10604
+      - Id: 3
+        SkillSpecId: 10801
+      - Id: 3
+        SkillSpecId: 10901
+      - Id: 3
+        SkillSpecId: 11001
+      - Id: 3
+        SkillSpecId: 11101
+      - Id: 3
+        SkillSpecId: 11201
+      - Id: 3
+        SkillSpecId: 11301
+      - Id: 3
+        SkillSpecId: 11401
+      - Id: 3
+        SkillSpecId: 11501
+      - Id: 3
+        SkillSpecId: 11601
+      - Id: 3
+        SkillSpecId: 11701
+      - Id: 3
+        SkillSpecId: 11801
+      - Id: 3
+        SkillSpecId: 11901
+      - Id: 3
+        SkillSpecId: 12001
+      - Id: 3
+        SkillSpecId: 12101
+      - Id: 3
+        SkillSpecId: 12201
+      - Id: 3
+        SkillSpecId: 12301
+      - Id: 3
+        SkillSpecId: 12401
+      - Id: 3
+        SkillSpecId: 12501
+      - Id: 3
+        SkillSpecId: 12601
+      - Id: 3
+        SkillSpecId: 12701
+      - Id: 3
+        SkillSpecId: 12801
+      - Id: 3
+        SkillSpecId: 12901
+      - Id: 3
+        SkillSpecId: 13001
+      - Id: 3
+        SkillSpecId: 13801
+      - Id: 3
+        SkillSpecId: 14701
   <CreateSkillPieceSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -703,7 +892,7 @@ MonoBehaviour:
     - Id: 10201
       SkillPieceSpecId: 10201
       SkillAttachGroupId: 1
-      SkillAttachCountMin: 0
+      SkillAttachCountMin: 1
       SkillAttachCountMax: 1
       Red: 1
       Orange: 1
@@ -714,8 +903,8 @@ MonoBehaviour:
     - Id: 10301
       SkillPieceSpecId: 10301
       SkillAttachGroupId: 1
-      SkillAttachCountMin: 0
-      SkillAttachCountMax: 1
+      SkillAttachCountMin: 2
+      SkillAttachCountMax: 2
       Red: 1
       Orange: 1
       WhiteGray: 1
@@ -844,3 +1033,118 @@ MonoBehaviour:
       - Id: 10604
         SkillEffectType: 5
         Amount: 100
+    - Key: 10701
+      Value:
+      - Id: 10701
+        SkillEffectType: 6
+        Amount: 10101
+    - Key: 10702
+      Value:
+      - Id: 10702
+        SkillEffectType: 6
+        Amount: 10102
+    - Key: 10703
+      Value:
+      - Id: 10703
+        SkillEffectType: 6
+        Amount: 10103
+    - Key: 10704
+      Value:
+      - Id: 10704
+        SkillEffectType: 6
+        Amount: 10104
+    - Key: 10705
+      Value:
+      - Id: 10705
+        SkillEffectType: 6
+        Amount: 10105
+    - Key: 10706
+      Value:
+      - Id: 10706
+        SkillEffectType: 6
+        Amount: 10106
+    - Key: 10707
+      Value:
+      - Id: 10707
+        SkillEffectType: 6
+        Amount: 10107
+    - Key: 10708
+      Value:
+      - Id: 10708
+        SkillEffectType: 6
+        Amount: 10108
+    - Key: 10709
+      Value:
+      - Id: 10709
+        SkillEffectType: 6
+        Amount: 10109
+    - Key: 10710
+      Value:
+      - Id: 10710
+        SkillEffectType: 6
+        Amount: 10110
+    - Key: 10711
+      Value:
+      - Id: 10711
+        SkillEffectType: 6
+        Amount: 10111
+    - Key: 10712
+      Value:
+      - Id: 10712
+        SkillEffectType: 6
+        Amount: 10112
+    - Key: 10713
+      Value:
+      - Id: 10713
+        SkillEffectType: 6
+        Amount: 10113
+    - Key: 10714
+      Value:
+      - Id: 10714
+        SkillEffectType: 6
+        Amount: 10114
+    - Key: 10715
+      Value:
+      - Id: 10715
+        SkillEffectType: 6
+        Amount: 10115
+    - Key: 10716
+      Value:
+      - Id: 10716
+        SkillEffectType: 6
+        Amount: 10116
+    - Key: 10717
+      Value:
+      - Id: 10717
+        SkillEffectType: 6
+        Amount: 10117
+    - Key: 10718
+      Value:
+      - Id: 10718
+        SkillEffectType: 6
+        Amount: 10118
+    - Key: 10719
+      Value:
+      - Id: 10719
+        SkillEffectType: 6
+        Amount: 10119
+    - Key: 10720
+      Value:
+      - Id: 10720
+        SkillEffectType: 6
+        Amount: 10120
+    - Key: 10721
+      Value:
+      - Id: 10721
+        SkillEffectType: 6
+        Amount: 10121
+    - Key: 10722
+      Value:
+      - Id: 10722
+        SkillEffectType: 6
+        Amount: 10122
+    - Key: 10723
+      Value:
+      - Id: 10723
+        SkillEffectType: 6
+        Amount: 10123
