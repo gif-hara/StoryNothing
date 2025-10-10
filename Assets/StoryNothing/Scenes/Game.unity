@@ -985,6 +985,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   masterData: {fileID: 11400000, guid: e7d875bf0eaf8bd4aaa4a7d2a9adcd30, type: 2}
+  gameRule: {fileID: 11400000, guid: 5b4164949b561f24aa9d5f936fa22564, type: 2}
   outGameDocument: {fileID: 2096770642}
   playerInput: {fileID: 682451005}
   initialSkillBoardMasterDataIds: 75270000d92700003d280000a1280000
