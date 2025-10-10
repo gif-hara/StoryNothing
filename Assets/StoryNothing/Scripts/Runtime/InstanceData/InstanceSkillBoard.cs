@@ -28,16 +28,18 @@ namespace StoryNothing.InstanceData
 
         public InstanceCharacter CreateInstanceCharacter(int characterSpecId)
         {
+            var gameRule = ServiceLocator.Resolve<GameRule>();
             var characterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(characterSpecId);
+            var hitPointAdditional = PlacementSkillPieces
+                .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Red)
+                .Sum(x =>
+                {
+                    return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
+                }) * gameRule.SkillPieceHitPointUp;
             var hitPoint = new CharacterParameter(
                 characterSpec.HitPoint,
-                PlacementSkillPieces
-                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Red)
-                    .Sum(x =>
-                    {
-                        return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * 20,
-                    0.0f
+                hitPointAdditional,
+                0.0f
             );
             var physicalAttack = new CharacterParameter(
                 characterSpec.PhysicalAttack,
@@ -46,7 +48,7 @@ namespace StoryNothing.InstanceData
                     .Sum(x =>
                     {
                         return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * 10,
+                    }) * gameRule.SkillPiecePhysicalAttackUp,
                     0.0f
             );
             var physicalDefense = new CharacterParameter(
@@ -56,7 +58,7 @@ namespace StoryNothing.InstanceData
                     .Sum(x =>
                     {
                         return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * 10,
+                    }) * gameRule.SkillPiecePhysicalDefenseUp,
                     0.0f
             );
             var magicalAttack = new CharacterParameter(
@@ -66,7 +68,7 @@ namespace StoryNothing.InstanceData
                     .Sum(x =>
                     {
                         return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * 10,
+                    }) * gameRule.SkillPieceMagicalAttackUp,
                     0.0f
             );
             var magicalDefense = new CharacterParameter(
@@ -76,7 +78,7 @@ namespace StoryNothing.InstanceData
                     .Sum(x =>
                     {
                         return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * 10,
+                    }) * gameRule.SkillPieceMagicalDefenseUp,
                     0.0f
             );
             var speed = new CharacterParameter(
@@ -86,7 +88,7 @@ namespace StoryNothing.InstanceData
                     .Sum(x =>
                     {
                         return x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count;
-                    }) * 10,
+                    }) * gameRule.SkillPieceSpeedUp,
                     0.0f
             );
             return new InstanceCharacter(
