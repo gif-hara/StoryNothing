@@ -16,6 +16,9 @@ namespace StoryNothing
         private MasterData masterData;
 
         [SerializeField]
+        private GameRule gameRule;
+
+        [SerializeField]
         private HKUIDocument outGameDocument;
 
         [SerializeField]
@@ -38,6 +41,7 @@ namespace StoryNothing
         private async UniTaskVoid Start()
         {
             ServiceLocator.Register(masterData, destroyCancellationToken);
+            ServiceLocator.Register(gameRule, destroyCancellationToken);
 
             userData = new UserData();
 
