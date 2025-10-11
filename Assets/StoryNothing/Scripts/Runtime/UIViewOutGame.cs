@@ -372,14 +372,7 @@ namespace StoryNothing.UIViews
                 var bingoBonusSkillLabel = UnityEngine.Object.Instantiate(bingoBonusSkillLabelPrefab, bingoBonusSkillLabelParent);
                 var text = bingoBonusSkillLabel.Q<TMP_Text>("Text");
                 text.SetText(skillSpec.Name);
-                if (i < bingoBonusCount)
-                {
-                    text.color = Color.yellow;
-                }
-                else
-                {
-                    text.color = Color.black;
-                }
+                text.color = i < bingoBonusCount ? Color.yellow : Color.black;
                 bingoBonusSkillLabels.Add(bingoBonusSkillLabel);
             }
             var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
