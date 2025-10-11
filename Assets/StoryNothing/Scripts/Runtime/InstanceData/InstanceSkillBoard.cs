@@ -184,6 +184,92 @@ namespace StoryNothing.InstanceData
             PlacementSkillPieces.RemoveAll(x => x.InstanceSkillPieceId == instanceSkillPieceId);
         }
 
+        public List<int> GetHorizontalBingoIndexes(UserData userData)
+        {
+            var bingoIndices = new List<int>();
+            for (int y = 0; y < SkillBoardSpec.Y; y++)
+            {
+                var isBingo = true;
+                var colorType = Define.SkillPieceColor.Gray;
+                for (int x = 0; x < SkillBoardSpec.X; x++)
+                {
+                    if (Holes.Contains(new Vector2Int(x, y)))
+                    {
+                        isBingo = false;
+                        break;
+                    }
+                    var isFilled = false;
+                    foreach (var placementSkillPiece in PlacementSkillPieces)
+                    {
+                        if (placementSkillPiece.ContainsPositionIndex(new Vector2Int(x, y), userData))
+                        {
+                            if (colorType != Define.SkillPieceColor.Gray && colorType != placementSkillPiece.InstanceSkillPiece.ColorType)
+                            {
+                                isBingo = false;
+                                break;
+                            }
+                            isFilled = true;
+                            colorType = placementSkillPiece.InstanceSkillPiece.ColorType;
+                            break;
+                        }
+                    }
+                    if (!isFilled)
+                    {
+                        isBingo = false;
+                        break;
+                    }
+                }
+                if (isBingo)
+                {
+                    bingoIndices.Add(y);
+                }
+            }
+            return bingoIndices;
+        }
+
+        public List<int> GetVerticalBingoIndexes(UserData userData)
+        {
+            var bingoIndices = new List<int>();
+            for (int x = 0; x < SkillBoardSpec.X; x++)
+            {
+                var isBingo = true;
+                var colorType = Define.SkillPieceColor.Gray;
+                for (int y = 0; y < SkillBoardSpec.Y; y++)
+                {
+                    if (Holes.Contains(new Vector2Int(x, y)))
+                    {
+                        isBingo = false;
+                        break;
+                    }
+                    var isFilled = false;
+                    foreach (var placementSkillPiece in PlacementSkillPieces)
+                    {
+                        if (placementSkillPiece.ContainsPositionIndex(new Vector2Int(x, y), userData))
+                        {
+                            if (colorType != Define.SkillPieceColor.Gray && colorType != placementSkillPiece.InstanceSkillPiece.ColorType)
+                            {
+                                isBingo = false;
+                                break;
+                            }
+                            isFilled = true;
+                            colorType = placementSkillPiece.InstanceSkillPiece.ColorType;
+                            break;
+                        }
+                    }
+                    if (!isFilled)
+                    {
+                        isBingo = false;
+                        break;
+                    }
+                }
+                if (isBingo)
+                {
+                    bingoIndices.Add(x);
+                }
+            }
+            return bingoIndices;
+        }
+
         [Serializable]
         public class PlacementSkillPiece
         {
