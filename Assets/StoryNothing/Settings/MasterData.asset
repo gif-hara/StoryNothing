@@ -46,21 +46,25 @@ MonoBehaviour:
       X: 4
       Y: 4
       HoleCount: 1
+      BingoBonusGroupId: 1
     - Id: 10201
       Name: "\u5927\u304D\u306A\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
       X: 5
       Y: 5
       HoleCount: 2
+      BingoBonusGroupId: 2
     - Id: 10301
       Name: "\u5DE8\u5927\u306A\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
       X: 6
       Y: 6
       HoleCount: 3
+      BingoBonusGroupId: 3
     - Id: 10401
       Name: "\u5F29\u7D1A\u306E\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
       X: 7
       Y: 7
       HoleCount: 3
+      BingoBonusGroupId: 4
   <SkillPieceSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -697,7 +701,7 @@ MonoBehaviour:
     - Id: 12901
       Name: "\u4F4E\u3044\u78BA\u7387\u3067\u30AF\u30EA\u30C6\u30A3\u30AB\u30EB\u30C0\u30E1\u30FC\u30B8\u306B\u306A\u308B"
     - Id: 13001
-      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u5C11\u3057\u3060\u3051\u30B3\u30DE\u30F3\u30C9\u30B2\u30FC\u30B8\u304C\u5897\u52A0\u3059\u308B"
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u30B3\u30DE\u30F3\u30C9\u30B2\u30FC\u30B8\u304C\u5C11\u3057\u5897\u52A0\u3059\u308B"
     - Id: 13101
       Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u7269\u7406\u653B\u6483\u529B\u304C\u4E0A\u6607\u3059\u308B"
     - Id: 13201
@@ -713,7 +717,7 @@ MonoBehaviour:
     - Id: 13701
       Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u3001\u3055\u3089\u306B\u8FFD\u6483\u3092\u884C\u3046"
     - Id: 13801
-      Name: "HP\u304C\u81EA\u52D5\u7684\u306B\u56DE\u5FA9\u3059\u308B"
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051HP\u304C\u81EA\u52D5\u7684\u306B\u56DE\u5FA9\u3059\u308B"
     - Id: 13901
       Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u53D7\u3051\u305F\u969B\u306B\u4E00\u5B9A\u6642\u9593\u9632\u5FA1\u529B\u304C\u4E0A\u6607\u3059\u308B"
     - Id: 14001
@@ -853,8 +857,6 @@ MonoBehaviour:
       - Id: 3
         SkillSpecId: 12001
       - Id: 3
-        SkillSpecId: 12101
-      - Id: 3
         SkillSpecId: 12201
       - Id: 3
         SkillSpecId: 12301
@@ -871,11 +873,49 @@ MonoBehaviour:
       - Id: 3
         SkillSpecId: 12901
       - Id: 3
-        SkillSpecId: 13001
-      - Id: 3
-        SkillSpecId: 13801
+        SkillSpecId: 13901
       - Id: 3
         SkillSpecId: 14701
+    - Key: 4
+      Value:
+      - Id: 4
+        SkillSpecId: 13101
+      - Id: 4
+        SkillSpecId: 13201
+      - Id: 4
+        SkillSpecId: 13301
+      - Id: 4
+        SkillSpecId: 13401
+      - Id: 4
+        SkillSpecId: 13501
+      - Id: 4
+        SkillSpecId: 13601
+    - Key: 5
+      Value:
+      - Id: 5
+        SkillSpecId: 14001
+      - Id: 5
+        SkillSpecId: 14101
+      - Id: 5
+        SkillSpecId: 14201
+      - Id: 5
+        SkillSpecId: 14301
+      - Id: 5
+        SkillSpecId: 14401
+      - Id: 5
+        SkillSpecId: 14501
+    - Key: 6
+      Value:
+      - Id: 6
+        SkillSpecId: 13001
+      - Id: 6
+        SkillSpecId: 14601
+      - Id: 6
+        SkillSpecId: 13801
+      - Id: 6
+        SkillSpecId: 13701
+      - Id: 6
+        SkillSpecId: 12101
   <CreateSkillPieceSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -1353,3 +1393,41 @@ MonoBehaviour:
       - Id: 14801
         SkillEffectType: 47
         Amount: 0.25
+  <BingoBonusGroups>k__BackingField:
+    list:
+    - Key: 1
+      Value:
+      - Id: 1
+        SkillAttachGroupId: 4
+      - Id: 1
+        SkillAttachGroupId: 5
+    - Key: 2
+      Value:
+      - Id: 2
+        SkillAttachGroupId: 4
+      - Id: 2
+        SkillAttachGroupId: 4
+      - Id: 2
+        SkillAttachGroupId: 5
+    - Key: 3
+      Value:
+      - Id: 3
+        SkillAttachGroupId: 4
+      - Id: 3
+        SkillAttachGroupId: 4
+      - Id: 3
+        SkillAttachGroupId: 5
+      - Id: 3
+        SkillAttachGroupId: 5
+    - Key: 4
+      Value:
+      - Id: 4
+        SkillAttachGroupId: 4
+      - Id: 4
+        SkillAttachGroupId: 4
+      - Id: 4
+        SkillAttachGroupId: 5
+      - Id: 4
+        SkillAttachGroupId: 5
+      - Id: 4
+        SkillAttachGroupId: 4
