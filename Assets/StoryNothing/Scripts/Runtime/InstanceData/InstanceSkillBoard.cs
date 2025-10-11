@@ -186,7 +186,7 @@ namespace StoryNothing.InstanceData
 
         public List<int> GetHorizontalBingoIndexes(UserData userData)
         {
-            var bingoIndices = new List<int>();
+            var bingoIndexes = new List<int>();
             for (int y = 0; y < SkillBoardSpec.Y; y++)
             {
                 var isBingo = true;
@@ -221,10 +221,10 @@ namespace StoryNothing.InstanceData
                 }
                 if (isBingo)
                 {
-                    bingoIndices.Add(y);
+                    bingoIndexes.Add(y);
                 }
             }
-            return bingoIndices;
+            return bingoIndexes;
         }
 
         public List<int> GetVerticalBingoIndexes(UserData userData)
