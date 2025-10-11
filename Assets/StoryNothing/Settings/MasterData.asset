@@ -710,29 +710,29 @@ MonoBehaviour:
       Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051HP\u304C\u4E0A\u6607\u3059\u308B"
     - Id: 13601
       Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u7D20\u65E9\u3055\u304C\u4E0A\u6607\u3059\u308B"
-    - Id: 13602
-      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u3001\u3055\u3089\u306B\u8FFD\u6483\u3092\u884C\u3046"
     - Id: 13701
-      Name: "HP\u304C\u81EA\u52D5\u7684\u306B\u56DE\u5FA9\u3059\u308B"
+      Name: "\u30D3\u30F3\u30B4\u30DC\u30FC\u30CA\u30B9\u306E\u6570\u3060\u3051\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u3001\u3055\u3089\u306B\u8FFD\u6483\u3092\u884C\u3046"
     - Id: 13801
-      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u53D7\u3051\u305F\u969B\u306B\u4E00\u5B9A\u6642\u9593\u9632\u5FA1\u529B\u304C\u4E0A\u6607\u3059\u308B"
+      Name: "HP\u304C\u81EA\u52D5\u7684\u306B\u56DE\u5FA9\u3059\u308B"
     - Id: 13901
-      Name: "\u8D64\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7D20\u65E9\u3055\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u53D7\u3051\u305F\u969B\u306B\u4E00\u5B9A\u6642\u9593\u9632\u5FA1\u529B\u304C\u4E0A\u6607\u3059\u308B"
     - Id: 14001
-      Name: "\u7DD1\u306E\u30D4\u30FC\u30B9\u306F\u3001HP\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+      Name: "\u8D64\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7D20\u65E9\u3055\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
     - Id: 14101
-      Name: "\u6A59\u306E\u30D4\u30FC\u30B9\u306F\u3001\u9B54\u6CD5\u9632\u5FA1\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+      Name: "\u7DD1\u306E\u30D4\u30FC\u30B9\u306F\u3001HP\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
     - Id: 14201
-      Name: "\u767D\u7070\u306E\u30D4\u30FC\u30B9\u306F\u3001\u9B54\u6CD5\u653B\u6483\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+      Name: "\u6A59\u306E\u30D4\u30FC\u30B9\u306F\u3001\u9B54\u6CD5\u9632\u5FA1\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
     - Id: 14301
-      Name: "\u7D2B\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7269\u7406\u9632\u5FA1\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+      Name: "\u767D\u7070\u306E\u30D4\u30FC\u30B9\u306F\u3001\u9B54\u6CD5\u653B\u6483\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
     - Id: 14401
-      Name: "\u6C34\u8272\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7269\u7406\u653B\u6483\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
+      Name: "\u7D2B\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7269\u7406\u9632\u5FA1\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
     - Id: 14501
-      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u76F8\u624B\u306E\u30B3\u30DE\u30F3\u30C9\u30B2\u30FC\u30B8\u3092\u5C11\u3057\u6E1B\u5C11\u3059\u308B"
+      Name: "\u6C34\u8272\u306E\u30D4\u30FC\u30B9\u306F\u3001\u7269\u7406\u653B\u6483\u529B\u3082\u4E0A\u6607\u3059\u308B\u3088\u3046\u306B\u306A\u308B"
     - Id: 14601
-      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u30AC\u30FC\u30C9\u30DD\u30A4\u30F3\u30C8\u304C\u5897\u52A0\u3059\u308B"
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u76F8\u624B\u306E\u30B3\u30DE\u30F3\u30C9\u30B2\u30FC\u30B8\u3092\u5C11\u3057\u6E1B\u5C11\u3059\u308B"
     - Id: 14701
+      Name: "\u30C0\u30E1\u30FC\u30B8\u3092\u4E0E\u3048\u305F\u969B\u306B\u30AC\u30FC\u30C9\u30DD\u30A4\u30F3\u30C8\u304C\u5897\u52A0\u3059\u308B"
+    - Id: 14801
       Name: "\u30AC\u30FC\u30C9\u30DD\u30A4\u30F3\u30C8\u304C\u5C11\u3057\u6E9C\u307E\u3063\u305F\u72B6\u614B\u3067\u30D0\u30C8\u30EB\u3092\u958B\u59CB"
   <SkillAttachGroups>k__BackingField:
     list:
@@ -1148,3 +1148,208 @@ MonoBehaviour:
       - Id: 10723
         SkillEffectType: 6
         Amount: 10123
+    - Key: 10801
+      Value:
+      - Id: 10801
+        SkillEffectType: 7
+        Amount: 1.5
+    - Key: 10901
+      Value:
+      - Id: 10901
+        SkillEffectType: 8
+        Amount: 1.5
+    - Key: 11001
+      Value:
+      - Id: 11001
+        SkillEffectType: 9
+        Amount: 1.5
+    - Key: 11101
+      Value:
+      - Id: 11101
+        SkillEffectType: 10
+        Amount: 1.5
+    - Key: 11201
+      Value:
+      - Id: 11201
+        SkillEffectType: 11
+        Amount: 1.5
+    - Key: 11301
+      Value:
+      - Id: 11301
+        SkillEffectType: 12
+        Amount: 50
+    - Key: 11401
+      Value:
+      - Id: 11401
+        SkillEffectType: 13
+        Amount: 50
+    - Key: 11501
+      Value:
+      - Id: 11501
+        SkillEffectType: 14
+        Amount: 50
+    - Key: 11601
+      Value:
+      - Id: 11601
+        SkillEffectType: 15
+        Amount: 50
+    - Key: 11701
+      Value:
+      - Id: 11701
+        SkillEffectType: 16
+        Amount: 0.05
+    - Key: 11801
+      Value:
+      - Id: 11801
+        SkillEffectType: 17
+        Amount: 0.01
+    - Key: 11901
+      Value:
+      - Id: 11901
+        SkillEffectType: 18
+        Amount: 0.1
+    - Key: 12001
+      Value:
+      - Id: 12001
+        SkillEffectType: 19
+        Amount: 0.5
+    - Key: 12101
+      Value:
+      - Id: 12101
+        SkillEffectType: 20
+        Amount: 0.5
+    - Key: 12201
+      Value:
+      - Id: 12201
+        SkillEffectType: 21
+        Amount: 0.05
+    - Key: 12301
+      Value:
+      - Id: 12301
+        SkillEffectType: 22
+        Amount: 0.5
+    - Key: 12401
+      Value:
+      - Id: 12401
+        SkillEffectType: 23
+        Amount: 50
+    - Key: 12501
+      Value:
+      - Id: 12501
+        SkillEffectType: 24
+        Amount: 50
+    - Key: 12601
+      Value:
+      - Id: 12601
+        SkillEffectType: 25
+        Amount: 50
+    - Key: 12701
+      Value:
+      - Id: 12701
+        SkillEffectType: 26
+        Amount: 50
+    - Key: 12801
+      Value:
+      - Id: 12801
+        SkillEffectType: 27
+        Amount: 0.05
+    - Key: 12901
+      Value:
+      - Id: 12901
+        SkillEffectType: 28
+        Amount: 0.05
+    - Key: 13001
+      Value:
+      - Id: 13001
+        SkillEffectType: 29
+        Amount: 0.01
+    - Key: 13101
+      Value:
+      - Id: 13101
+        SkillEffectType: 30
+        Amount: 0.1
+    - Key: 13201
+      Value:
+      - Id: 13201
+        SkillEffectType: 31
+        Amount: 0.1
+    - Key: 13301
+      Value:
+      - Id: 13301
+        SkillEffectType: 32
+        Amount: 0.1
+    - Key: 13401
+      Value:
+      - Id: 13401
+        SkillEffectType: 33
+        Amount: 0.1
+    - Key: 13501
+      Value:
+      - Id: 13501
+        SkillEffectType: 34
+        Amount: 0.1
+    - Key: 13601
+      Value:
+      - Id: 13601
+        SkillEffectType: 35
+        Amount: 0.1
+    - Key: 13701
+      Value:
+      - Id: 13701
+        SkillEffectType: 36
+        Amount: 0.1
+    - Key: 13801
+      Value:
+      - Id: 13801
+        SkillEffectType: 37
+        Amount: 50
+    - Key: 13901
+      Value:
+      - Id: 13901
+        SkillEffectType: 38
+        Amount: 0.5
+    - Key: 14001
+      Value:
+      - Id: 14001
+        SkillEffectType: 39
+        Amount: 0
+    - Key: 14101
+      Value:
+      - Id: 14101
+        SkillEffectType: 40
+        Amount: 0
+    - Key: 14201
+      Value:
+      - Id: 14201
+        SkillEffectType: 41
+        Amount: 0
+    - Key: 14301
+      Value:
+      - Id: 14301
+        SkillEffectType: 42
+        Amount: 0
+    - Key: 14401
+      Value:
+      - Id: 14401
+        SkillEffectType: 43
+        Amount: 0
+    - Key: 14501
+      Value:
+      - Id: 14501
+        SkillEffectType: 44
+        Amount: 0
+    - Key: 14601
+      Value:
+      - Id: 14601
+        SkillEffectType: 45
+        Amount: 0.05
+    - Key: 14701
+      Value:
+      - Id: 14701
+        SkillEffectType: 46
+        Amount: 0.2
+    - Key: 14801
+      Value:
+      - Id: 14801
+        SkillEffectType: 47
+        Amount: 0.25
