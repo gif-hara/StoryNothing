@@ -275,7 +275,7 @@ namespace StoryNothing.UIViews
                     var placementSkillPiece = skillBoard.PlacementSkillPieces.First(x => x.InstanceSkillPieceId == skillPiece.InstanceId);
                     skillBoardBlackout.SetActive(false);
                     skillBoard.RemovePlacementSkillPiece(placementSkillPiece.InstanceSkillPieceId);
-                    UpdateParameterLabels(userData.GetEquipInstanceSkillBoard().CreateInstanceCharacter(playerCharacterSpecId));
+                    UpdateParameterLabels(skillBoard);
                     await BeginSkillPiecePlacementAsync(
                         placementSkillPiece.RotationIndex,
                         skillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex),
@@ -327,16 +327,6 @@ namespace StoryNothing.UIViews
                 element.Dispose();
             }
             skillPieceElements.Clear();
-            foreach (var label in skillNameLabels)
-            {
-                UnityEngine.Object.Destroy(label.gameObject);
-            }
-            skillNameLabels.Clear();
-            foreach (var label in bingoBonusSkillLabels)
-            {
-                UnityEngine.Object.Destroy(label.gameObject);
-            }
-            bingoBonusSkillLabels.Clear();
             skillBoardBackground.sizeDelta = new Vector2(
                 instanceSkillBoard.SkillBoardSpec.X * Define.CellSize,
                 instanceSkillBoard.SkillBoardSpec.Y * Define.CellSize
@@ -348,6 +338,30 @@ namespace StoryNothing.UIViews
                 instance.SetBackgroundColor(Define.SkillPieceColor.Gray);
                 holeElements.Add(instance);
             }
+            UpdateParameterLabels(instanceSkillBoard);
+        }
+
+        private void UpdateParameterLabels(InstanceSkillBoard instanceSkillBoard)
+        {
+            var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
+            hitPointLabel.SetText(instanceCharacter.CurrentHitPointMax.Current.ToString());
+            physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.Current.ToString());
+            physicalDefenseLabel.SetText(instanceCharacter.CurrentPhysicalDefense.Current.ToString());
+            magicalAttackLabel.SetText(instanceCharacter.CurrentMagicalAttack.Current.ToString());
+            magicalDefenseLabel.SetText(instanceCharacter.CurrentMagicalDefense.Current.ToString());
+            speedLabel.SetText(instanceCharacter.CurrentSpeed.Current.ToString());
+
+            foreach (var label in skillNameLabels)
+            {
+                UnityEngine.Object.Destroy(label.gameObject);
+            }
+            skillNameLabels.Clear();
+            foreach (var label in bingoBonusSkillLabels)
+            {
+                UnityEngine.Object.Destroy(label.gameObject);
+            }
+            bingoBonusSkillLabels.Clear();
+
             foreach (var placementSkillPiece in instanceSkillBoard.PlacementSkillPieces)
             {
                 var instanceSkillPiece = userData.GetInstanceSkillPiece(placementSkillPiece.InstanceSkillPieceId);
@@ -375,18 +389,6 @@ namespace StoryNothing.UIViews
                 text.color = i < bingoBonusCount ? Color.yellow : Color.black;
                 bingoBonusSkillLabels.Add(bingoBonusSkillLabel);
             }
-            var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
-            UpdateParameterLabels(instanceCharacter);
-        }
-
-        private void UpdateParameterLabels(InstanceCharacter instanceCharacter)
-        {
-            hitPointLabel.SetText(instanceCharacter.CurrentHitPointMax.Current.ToString());
-            physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.Current.ToString());
-            physicalDefenseLabel.SetText(instanceCharacter.CurrentPhysicalDefense.Current.ToString());
-            magicalAttackLabel.SetText(instanceCharacter.CurrentMagicalAttack.Current.ToString());
-            magicalDefenseLabel.SetText(instanceCharacter.CurrentMagicalDefense.Current.ToString());
-            speedLabel.SetText(instanceCharacter.CurrentSpeed.Current.ToString());
         }
 
         private static HKButton CreateHKButton(HKUIDocument document)
