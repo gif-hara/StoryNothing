@@ -17,6 +17,8 @@ namespace StoryNothing.MasterDataSystems
 
         public int HoleCount;
 
+        public int BingoBonusGroupId;
+
         public Vector2Int Size => new(X, Y);
 
         [Serializable]
