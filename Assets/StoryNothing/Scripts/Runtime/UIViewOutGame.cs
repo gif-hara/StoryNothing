@@ -72,6 +72,12 @@ namespace StoryNothing.UIViews
 
         private readonly Transform skillNameLabelParent;
 
+        private readonly HKUIDocument bingoBonusSkillLabelPrefab;
+
+        private readonly List<HKUIDocument> bingoBonusSkillLabels = new();
+
+        private readonly Transform bingoBonusSkillLabelParent;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
             this.document = document;
@@ -144,6 +150,11 @@ namespace StoryNothing.UIViews
             skillNameLabelParent = this.document
                 .Q<HKUIDocument>("Area.Right")
                 .Q<Transform>("Skills");
+            bingoBonusSkillLabelPrefab = this.document
+                .Q<HKUIDocument>("UI.Element.Message");
+            bingoBonusSkillLabelParent = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<Transform>("BingoBonuses");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -321,6 +332,11 @@ namespace StoryNothing.UIViews
                 UnityEngine.Object.Destroy(label.gameObject);
             }
             skillNameLabels.Clear();
+            foreach (var label in bingoBonusSkillLabels)
+            {
+                UnityEngine.Object.Destroy(label.gameObject);
+            }
+            bingoBonusSkillLabels.Clear();
             skillBoardBackground.sizeDelta = new Vector2(
                 instanceSkillBoard.SkillBoardSpec.X * Define.CellSize,
                 instanceSkillBoard.SkillBoardSpec.Y * Define.CellSize
@@ -346,6 +362,25 @@ namespace StoryNothing.UIViews
                     skillNameLabel.Q<TMP_Text>("Text").SetText(skillSpec.Name);
                     skillNameLabels.Add(skillNameLabel);
                 }
+            }
+            var bingoBonusCount = instanceSkillBoard.GetHorizontalBingoIndexes(userData).Count +
+                instanceSkillBoard.GetVerticalBingoIndexes(userData).Count;
+            for (var i = 0; i < instanceSkillBoard.BingoBonusSkillSpecIds.Count; i++)
+            {
+                var skillSpecId = instanceSkillBoard.BingoBonusSkillSpecIds[i];
+                var skillSpec = ServiceLocator.Resolve<MasterData>().SkillSpecs.Get(skillSpecId);
+                var bingoBonusSkillLabel = UnityEngine.Object.Instantiate(bingoBonusSkillLabelPrefab, bingoBonusSkillLabelParent);
+                var text = bingoBonusSkillLabel.Q<TMP_Text>("Text");
+                text.SetText(skillSpec.Name);
+                if (i < bingoBonusCount)
+                {
+                    text.color = Color.yellow;
+                }
+                else
+                {
+                    text.color = Color.black;
+                }
+                bingoBonusSkillLabels.Add(bingoBonusSkillLabel);
             }
             var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
             UpdateParameterLabels(instanceCharacter);
