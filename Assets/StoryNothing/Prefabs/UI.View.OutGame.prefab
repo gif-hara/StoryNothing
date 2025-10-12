@@ -1842,6 +1842,8 @@ MonoBehaviour:
     overrideName: 
   - document: {fileID: 3662928654702609855}
     overrideName: 
+  - document: {fileID: 7755415071228499001}
+    overrideName: Header.BingoBonus
 --- !u!1 &7606666257871922349
 GameObject:
   m_ObjectHideFlags: 0

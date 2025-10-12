@@ -78,6 +78,8 @@ namespace StoryNothing.UIViews
 
         private readonly Transform bingoBonusSkillLabelParent;
 
+        private readonly TMP_Text bingoBonusHeaderLabel;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
             this.document = document;
@@ -155,6 +157,9 @@ namespace StoryNothing.UIViews
             bingoBonusSkillLabelParent = this.document
                 .Q<HKUIDocument>("Area.Right")
                 .Q<Transform>("BingoBonuses");
+            bingoBonusHeaderLabel = this.document
+                .Q<HKUIDocument>("Area.Right")
+                .Q<TMP_Text>("Header.BingoBonus");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -379,6 +384,7 @@ namespace StoryNothing.UIViews
             }
             var bingoBonusCount = instanceSkillBoard.GetHorizontalBingoIndexes(userData).Count +
                 instanceSkillBoard.GetVerticalBingoIndexes(userData).Count;
+            bingoBonusHeaderLabel.SetText($"ビンゴボーナス: [{bingoBonusCount}]");
             for (var i = 0; i < instanceSkillBoard.BingoBonusSkillSpecIds.Count; i++)
             {
                 var skillSpecId = instanceSkillBoard.BingoBonusSkillSpecIds[i];
