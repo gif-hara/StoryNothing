@@ -68,7 +68,7 @@ namespace StoryNothing.InstanceData
             attackAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.AttackUp)
                 .Sum(x => (int)x.Amount);
-            if (skillEffects.Any(x => x.SkillEffectType == Define.SkillEffectType.WhiteGrayPieceMagicalAttackUp))
+            if (skillEffects.Any(x => x.SkillEffectType == Define.SkillEffectType.WhiteGrayPieceAttackUp))
             {
                 attackAdditional += PlacementSkillPieces
                     .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.WhiteGray)
@@ -90,7 +90,7 @@ namespace StoryNothing.InstanceData
             defenseAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.DefenseUp)
                 .Sum(x => (int)x.Amount);
-            if (skillEffects.Any(x => x.SkillEffectType == Define.SkillEffectType.OrangePieceMagicalDefenseUp))
+            if (skillEffects.Any(x => x.SkillEffectType == Define.SkillEffectType.OrangePieceDefenseUp))
             {
                 defenseAdditional += PlacementSkillPieces
                     .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Orange)
