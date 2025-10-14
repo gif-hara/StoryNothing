@@ -3158,7 +3158,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 645455198022310848, guid: a499987eebc6b4f49a1b166e2fd9dcd4, type: 3}
       propertyPath: m_Name
-      value: UI.Element.Parameter.PhysicalAttack
+      value: UI.Element.Parameter.Attack
       objectReference: {fileID: 0}
     - target: {fileID: 870136798654563189, guid: a499987eebc6b4f49a1b166e2fd9dcd4, type: 3}
       propertyPath: m_Pivot.x
@@ -3258,7 +3258,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6682594591851780326, guid: a499987eebc6b4f49a1b166e2fd9dcd4, type: 3}
       propertyPath: m_text
-      value: "\u7269\u7406\u653B\u6483\u529B"
+      value: "\u653B\u6483\u529B"
       objectReference: {fileID: 0}
     - target: {fileID: 8070236892555117257, guid: a499987eebc6b4f49a1b166e2fd9dcd4, type: 3}
       propertyPath: m_Color.b
@@ -3293,7 +3293,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 645455198022310848, guid: a499987eebc6b4f49a1b166e2fd9dcd4, type: 3}
       propertyPath: m_Name
-      value: UI.Element.Parameter.PhysicalDefense
+      value: UI.Element.Parameter.Defense
       objectReference: {fileID: 0}
     - target: {fileID: 870136798654563189, guid: a499987eebc6b4f49a1b166e2fd9dcd4, type: 3}
       propertyPath: m_Pivot.x
@@ -3393,7 +3393,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6682594591851780326, guid: a499987eebc6b4f49a1b166e2fd9dcd4, type: 3}
       propertyPath: m_text
-      value: "\u7269\u7406\u9632\u5FA1\u529B"
+      value: "\u9632\u5FA1\u529B"
       objectReference: {fileID: 0}
     - target: {fileID: 8070236892555117257, guid: a499987eebc6b4f49a1b166e2fd9dcd4, type: 3}
       propertyPath: m_Color.b

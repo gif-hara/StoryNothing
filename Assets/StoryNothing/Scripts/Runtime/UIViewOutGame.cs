@@ -46,9 +46,9 @@ namespace StoryNothing.UIViews
 
         private readonly TMP_Text hitPointLabel;
 
-        private readonly TMP_Text physicalAttackLabel;
+        private readonly TMP_Text attackLabel;
 
-        private readonly TMP_Text physicalDefenseLabel;
+        private readonly TMP_Text defenseLabel;
 
         private readonly TMP_Text speedLabel;
 
@@ -113,13 +113,13 @@ namespace StoryNothing.UIViews
                 .Q<HKUIDocument>("Area.Right")
                 .Q<HKUIDocument>("UI.Element.Parameter.HitPoint")
                 .Q<TMP_Text>("Value");
-            physicalAttackLabel = this.document
+            attackLabel = this.document
                 .Q<HKUIDocument>("Area.Right")
-                .Q<HKUIDocument>("UI.Element.Parameter.PhysicalAttack")
+                .Q<HKUIDocument>("UI.Element.Parameter.Attack")
                 .Q<TMP_Text>("Value");
-            physicalDefenseLabel = this.document
+            defenseLabel = this.document
                 .Q<HKUIDocument>("Area.Right")
-                .Q<HKUIDocument>("UI.Element.Parameter.PhysicalDefense")
+                .Q<HKUIDocument>("UI.Element.Parameter.Defense")
                 .Q<TMP_Text>("Value");
             speedLabel = this.document
                 .Q<HKUIDocument>("Area.Right")
@@ -377,8 +377,8 @@ namespace StoryNothing.UIViews
         {
             var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
             hitPointLabel.SetText(instanceCharacter.CurrentHitPointMax.Current.ToString());
-            physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.Current.ToString());
-            physicalDefenseLabel.SetText(instanceCharacter.CurrentPhysicalDefense.Current.ToString());
+            attackLabel.SetText(instanceCharacter.CurrentAttack.Current.ToString());
+            defenseLabel.SetText(instanceCharacter.CurrentDefense.Current.ToString());
             speedLabel.SetText(instanceCharacter.CurrentSpeed.Current.ToString());
 
             foreach (var label in skillNameLabels)

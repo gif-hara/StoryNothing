@@ -55,7 +55,7 @@ namespace StoryNothing.InstanceData
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.AttackUp)
                 .Sum(x => (int)x.Amount);
             var physicalAttack = new CharacterParameter(
-                characterSpec.PhysicalAttack,
+                characterSpec.Attack,
                 physicalAttackAdditional,
                 0.0f
             );
@@ -67,7 +67,7 @@ namespace StoryNothing.InstanceData
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.DefenseUp)
                 .Sum(x => (int)x.Amount);
             var physicalDefense = new CharacterParameter(
-                characterSpec.PhysicalDefense,
+                characterSpec.Defense,
                 physicalDefenseAdditional,
                 0.0f
             );

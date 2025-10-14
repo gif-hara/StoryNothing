@@ -22,10 +22,6 @@ namespace StoryNothing.MasterDataSystems
 
         public bool WhiteGray;
 
-        public bool Purple;
-
-        public bool Water;
-
         public bool Green;
 
 

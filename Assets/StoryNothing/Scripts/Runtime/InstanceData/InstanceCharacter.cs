@@ -13,9 +13,9 @@ namespace StoryNothing.InstanceData
 
         public int CurrentHitPoint;
 
-        public readonly CharacterParameter CurrentPhysicalAttack;
+        public readonly CharacterParameter CurrentAttack;
 
-        public readonly CharacterParameter CurrentPhysicalDefense;
+        public readonly CharacterParameter CurrentDefense;
 
         public readonly CharacterParameter CurrentSpeed;
 
@@ -25,8 +25,8 @@ namespace StoryNothing.InstanceData
             CharacterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(CharacterSpecId);
             CurrentHitPointMax = new CharacterParameter(CharacterSpec.HitPoint);
             CurrentHitPoint = CurrentHitPointMax.Current;
-            CurrentPhysicalAttack = new CharacterParameter(CharacterSpec.PhysicalAttack);
-            CurrentPhysicalDefense = new CharacterParameter(CharacterSpec.PhysicalDefense);
+            CurrentAttack = new CharacterParameter(CharacterSpec.Attack);
+            CurrentDefense = new CharacterParameter(CharacterSpec.Defense);
             CurrentSpeed = new CharacterParameter(CharacterSpec.Speed);
         }
 
@@ -42,8 +42,8 @@ namespace StoryNothing.InstanceData
             CharacterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(CharacterSpecId);
             CurrentHitPointMax = currentHitPointMax;
             CurrentHitPoint = CurrentHitPointMax.Current;
-            CurrentPhysicalAttack = currentPhysicalAttack;
-            CurrentPhysicalDefense = currentPhysicalDefense;
+            CurrentAttack = currentPhysicalAttack;
+            CurrentDefense = currentPhysicalDefense;
             CurrentSpeed = currentSpeed;
         }
     }
