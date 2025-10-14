@@ -29,47 +29,63 @@ namespace StoryNothing.InstanceData
 
         public string Name => SkillBoardSpec.Name;
 
-        public InstanceCharacter CreateInstanceCharacter(int characterSpecId)
+        public InstanceCharacter CreateInstanceCharacter(int characterSpecId, UserData userData)
         {
             var gameRule = ServiceLocator.Resolve<GameRule>();
             var characterSpec = ServiceLocator.Resolve<MasterData>().CharacterSpecs.Get(characterSpecId);
-            var hitPointAdditional = 0;
+            var bingoCount = GetHorizontalBingoIndexes(userData).Count + GetVerticalBingoIndexes(userData).Count;
             var skillEffects = PlacementSkillPieces
-                .SelectMany(x => x.InstanceSkillPiece.SkillEffects);
+                .SelectMany(x => x.InstanceSkillPiece.SkillEffects)
+                .Concat(BingoBonusSkillSpecIds
+                    .Take(bingoCount)
+                    .SelectMany(x => ServiceLocator.Resolve<MasterData>().SkillEffects.Get(x)));
+            var hitPointAdditional = 0;
             hitPointAdditional += PlacementSkillPieces
                 .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Red)
                 .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPieceHitPointUp;
             hitPointAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.HitPointUp)
                 .Sum(x => (int)x.Amount);
+            var hitPointAdditionalRate = 0.0f;
+            hitPointAdditionalRate += skillEffects
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.BingoBonusHitPointUp)
+                .Sum(x => x.Amount * bingoCount);
             var hitPoint = new CharacterParameter(
                 characterSpec.HitPoint,
                 hitPointAdditional,
-                0.0f
+                hitPointAdditionalRate
             );
-            var physicalAttackAdditional = 0;
-            physicalAttackAdditional += PlacementSkillPieces
+            var attackAdditional = 0;
+            attackAdditional += PlacementSkillPieces
                 .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Orange)
                 .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPiecePhysicalAttackUp;
-            physicalAttackAdditional += skillEffects
+            attackAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.AttackUp)
                 .Sum(x => (int)x.Amount);
-            var physicalAttack = new CharacterParameter(
+            var attackAdditionalRate = 0.0f;
+            attackAdditionalRate += skillEffects
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.BingoBonusAttackUp)
+                .Sum(x => x.Amount * bingoCount);
+            var attack = new CharacterParameter(
                 characterSpec.Attack,
-                physicalAttackAdditional,
-                0.0f
+                attackAdditional,
+                attackAdditionalRate
             );
-            var physicalDefenseAdditional = 0;
-            physicalDefenseAdditional += PlacementSkillPieces
+            var defenseAdditional = 0;
+            defenseAdditional += PlacementSkillPieces
                 .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.WhiteGray)
                 .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPiecePhysicalDefenseUp;
-            physicalDefenseAdditional += skillEffects
+            defenseAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.DefenseUp)
                 .Sum(x => (int)x.Amount);
-            var physicalDefense = new CharacterParameter(
+            var defenseAdditionalRate = 0.0f;
+            defenseAdditionalRate += skillEffects
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.BingoBonusDefenseUp)
+                .Sum(x => x.Amount * bingoCount);
+            var defense = new CharacterParameter(
                 characterSpec.Defense,
-                physicalDefenseAdditional,
-                0.0f
+                defenseAdditional,
+                defenseAdditionalRate
             );
             var speedAdditional = 0;
             speedAdditional += PlacementSkillPieces
@@ -78,16 +94,20 @@ namespace StoryNothing.InstanceData
             speedAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.SpeedUp)
                 .Sum(x => (int)x.Amount);
+            var speedAdditionalRate = 0.0f;
+            speedAdditionalRate += skillEffects
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.BingoBonusSpeedUp)
+                .Sum(x => x.Amount * bingoCount);
             var speed = new CharacterParameter(
                 characterSpec.Speed,
                 speedAdditional,
-                0.0f
+                speedAdditionalRate
             );
             return new InstanceCharacter(
                 characterSpecId,
                 hitPoint,
-                physicalAttack,
-                physicalDefense,
+                attack,
+                defense,
                 speed
             );
         }

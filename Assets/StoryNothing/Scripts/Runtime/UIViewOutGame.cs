@@ -375,7 +375,7 @@ namespace StoryNothing.UIViews
 
         private void UpdateParameterLabels(InstanceSkillBoard instanceSkillBoard)
         {
-            var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId);
+            var instanceCharacter = instanceSkillBoard.CreateInstanceCharacter(playerCharacterSpecId, userData);
             hitPointLabel.SetText(instanceCharacter.CurrentHitPointMax.Current.ToString());
             attackLabel.SetText(instanceCharacter.CurrentAttack.Current.ToString());
             defenseLabel.SetText(instanceCharacter.CurrentDefense.Current.ToString());
