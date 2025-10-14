@@ -469,6 +469,7 @@ namespace StoryNothing.UIViews
                 {
                     placedUiElementSkillPiece?.SetParent(skillBoardBackground);
                     placedUiElementSkillPiece = cachedUiElementSkillPiece;
+                    SetupSkillPieceInformation(placedUiElementSkillPiece?.InstanceSkillPiece);
                     placedUiElementSkillPiece?.SetParent(skillBoardArea.transform);
                 }
                 if (placedUiElementSkillPiece != null && playerInput.actions["UI/Submit"].WasPerformedThisFrame())
@@ -536,6 +537,12 @@ namespace StoryNothing.UIViews
 
         private void SetupSkillPieceInformation(InstanceSkillPiece instanceSkillPiece)
         {
+            if (instanceSkillPiece == null)
+            {
+                SetActiveInstanceSkillPieceInformation(false);
+                return;
+            }
+            SetActiveInstanceSkillPieceInformation(true);
             instanceSkillPieceNameLabel.SetText(instanceSkillPiece.Name);
             foreach (var label in instanceSkillPieceSkillLabels)
             {
