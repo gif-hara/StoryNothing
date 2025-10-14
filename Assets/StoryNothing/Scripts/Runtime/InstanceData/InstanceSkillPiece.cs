@@ -45,7 +45,7 @@ namespace StoryNothing.InstanceData
                     _ => throw new ArgumentOutOfRangeException()
                 };
 
-                return $"{prefix}{SkillPieceSpec.Name}";
+                return $"{prefix}{SkillPieceSpec.Name}【{SkillPieceCellSpec.Name}】";
             }
         }
 
