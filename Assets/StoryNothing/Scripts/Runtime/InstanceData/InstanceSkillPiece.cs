@@ -41,8 +41,6 @@ namespace StoryNothing.InstanceData
                     Define.SkillPieceColor.Red => "赤の",
                     Define.SkillPieceColor.Orange => "橙の",
                     Define.SkillPieceColor.WhiteGray => "白灰の",
-                    Define.SkillPieceColor.Purple => "紫の",
-                    Define.SkillPieceColor.Water => "水の",
                     Define.SkillPieceColor.Green => "緑の",
                     _ => throw new ArgumentOutOfRangeException()
                 };
@@ -79,8 +77,6 @@ namespace StoryNothing.InstanceData
             if (createSkillPieceSpec.Red) { availableColorTypes.Add(Define.SkillPieceColor.Red); }
             if (createSkillPieceSpec.Orange) { availableColorTypes.Add(Define.SkillPieceColor.Orange); }
             if (createSkillPieceSpec.WhiteGray) { availableColorTypes.Add(Define.SkillPieceColor.WhiteGray); }
-            if (createSkillPieceSpec.Purple) { availableColorTypes.Add(Define.SkillPieceColor.Purple); }
-            if (createSkillPieceSpec.Water) { availableColorTypes.Add(Define.SkillPieceColor.Water); }
             if (createSkillPieceSpec.Green) { availableColorTypes.Add(Define.SkillPieceColor.Green); }
             var skillAttachCount = UnityEngine.Random.Range(createSkillPieceSpec.SkillAttachCountMin, createSkillPieceSpec.SkillAttachCountMax + 1);
             var skillSpecIds = new List<int>();

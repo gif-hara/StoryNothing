@@ -56,8 +56,6 @@ namespace StoryNothing
                 Define.SkillPieceColor.Red => new Color(1.0f, 0.2f, 0.2f),
                 Define.SkillPieceColor.Orange => new Color(1.0f, 0.6f, 0.2f),
                 Define.SkillPieceColor.WhiteGray => new Color(0.9f, 0.9f, 0.9f),
-                Define.SkillPieceColor.Purple => new Color(0.6f, 0.2f, 0.9f),
-                Define.SkillPieceColor.Water => new Color(0.3f, 0.9f, 1.0f),
                 Define.SkillPieceColor.Green => new Color(0.2f, 0.9f, 0.4f),
                 _ => throw new System.ArgumentOutOfRangeException(nameof(colorType), colorType, null),
             };

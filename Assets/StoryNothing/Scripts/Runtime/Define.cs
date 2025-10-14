@@ -19,8 +19,6 @@ namespace StoryNothing
             Red,
             Orange,
             WhiteGray,
-            Purple,
-            Water,
             Green,
         }
 
@@ -36,8 +34,6 @@ namespace StoryNothing
         {
             PhysicalAttackUp,
             PhysicalDefenseUp,
-            MagicalAttackUp,
-            MagicalDefenseUp,
             HitPointUp,
             SpeedUp,
         }

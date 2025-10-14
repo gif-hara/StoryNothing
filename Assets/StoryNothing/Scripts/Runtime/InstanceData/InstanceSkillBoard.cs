@@ -71,30 +71,6 @@ namespace StoryNothing.InstanceData
                 physicalDefenseAdditional,
                 0.0f
             );
-            var magicalAttackAdditional = 0;
-            magicalAttackAdditional += PlacementSkillPieces
-                .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Purple)
-                .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPieceMagicalAttackUp;
-            magicalAttackAdditional += skillEffects
-                .Where(x => x.SkillEffectType == Define.SkillEffectType.MagicalAttackUp)
-                .Sum(x => (int)x.Amount);
-            var magicalAttack = new CharacterParameter(
-                characterSpec.MagicalAttack,
-                magicalAttackAdditional,
-                0.0f
-            );
-            var magicalDefenseAdditional = 0;
-            magicalDefenseAdditional += PlacementSkillPieces
-                .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Water)
-                .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPieceMagicalDefenseUp;
-            magicalDefenseAdditional += skillEffects
-                .Where(x => x.SkillEffectType == Define.SkillEffectType.MagicalDefenseUp)
-                .Sum(x => (int)x.Amount);
-            var magicalDefense = new CharacterParameter(
-                characterSpec.MagicalDefense,
-                magicalDefenseAdditional,
-                0.0f
-            );
             var speedAdditional = 0;
             speedAdditional += PlacementSkillPieces
                 .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Green)
@@ -112,8 +88,6 @@ namespace StoryNothing.InstanceData
                 hitPoint,
                 physicalAttack,
                 physicalDefense,
-                magicalAttack,
-                magicalDefense,
                 speed
             );
         }

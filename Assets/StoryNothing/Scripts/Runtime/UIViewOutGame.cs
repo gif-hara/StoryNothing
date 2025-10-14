@@ -50,10 +50,6 @@ namespace StoryNothing.UIViews
 
         private readonly TMP_Text physicalDefenseLabel;
 
-        private readonly TMP_Text magicalAttackLabel;
-
-        private readonly TMP_Text magicalDefenseLabel;
-
         private readonly TMP_Text speedLabel;
 
         private readonly TMP_Text instanceSkillPieceNameLabel;
@@ -124,14 +120,6 @@ namespace StoryNothing.UIViews
             physicalDefenseLabel = this.document
                 .Q<HKUIDocument>("Area.Right")
                 .Q<HKUIDocument>("UI.Element.Parameter.PhysicalDefense")
-                .Q<TMP_Text>("Value");
-            magicalAttackLabel = this.document
-                .Q<HKUIDocument>("Area.Right")
-                .Q<HKUIDocument>("UI.Element.Parameter.MagicalAttack")
-                .Q<TMP_Text>("Value");
-            magicalDefenseLabel = this.document
-                .Q<HKUIDocument>("Area.Right")
-                .Q<HKUIDocument>("UI.Element.Parameter.MagicalDefense")
                 .Q<TMP_Text>("Value");
             speedLabel = this.document
                 .Q<HKUIDocument>("Area.Right")
@@ -391,8 +379,6 @@ namespace StoryNothing.UIViews
             hitPointLabel.SetText(instanceCharacter.CurrentHitPointMax.Current.ToString());
             physicalAttackLabel.SetText(instanceCharacter.CurrentPhysicalAttack.Current.ToString());
             physicalDefenseLabel.SetText(instanceCharacter.CurrentPhysicalDefense.Current.ToString());
-            magicalAttackLabel.SetText(instanceCharacter.CurrentMagicalAttack.Current.ToString());
-            magicalDefenseLabel.SetText(instanceCharacter.CurrentMagicalDefense.Current.ToString());
             speedLabel.SetText(instanceCharacter.CurrentSpeed.Current.ToString());
 
             foreach (var label in skillNameLabels)

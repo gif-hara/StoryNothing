@@ -17,10 +17,6 @@ namespace StoryNothing.InstanceData
 
         public readonly CharacterParameter CurrentPhysicalDefense;
 
-        public readonly CharacterParameter CurrentMagicalAttack;
-
-        public readonly CharacterParameter CurrentMagicalDefense;
-
         public readonly CharacterParameter CurrentSpeed;
 
         public InstanceCharacter(int characterSpecId)
@@ -31,8 +27,6 @@ namespace StoryNothing.InstanceData
             CurrentHitPoint = CurrentHitPointMax.Current;
             CurrentPhysicalAttack = new CharacterParameter(CharacterSpec.PhysicalAttack);
             CurrentPhysicalDefense = new CharacterParameter(CharacterSpec.PhysicalDefense);
-            CurrentMagicalAttack = new CharacterParameter(CharacterSpec.MagicalAttack);
-            CurrentMagicalDefense = new CharacterParameter(CharacterSpec.MagicalDefense);
             CurrentSpeed = new CharacterParameter(CharacterSpec.Speed);
         }
 
@@ -41,8 +35,6 @@ namespace StoryNothing.InstanceData
             CharacterParameter currentHitPointMax,
             CharacterParameter currentPhysicalAttack,
             CharacterParameter currentPhysicalDefense,
-            CharacterParameter currentMagicalAttack,
-            CharacterParameter currentMagicalDefense,
             CharacterParameter currentSpeed
             )
         {
@@ -52,8 +44,6 @@ namespace StoryNothing.InstanceData
             CurrentHitPoint = CurrentHitPointMax.Current;
             CurrentPhysicalAttack = currentPhysicalAttack;
             CurrentPhysicalDefense = currentPhysicalDefense;
-            CurrentMagicalAttack = currentMagicalAttack;
-            CurrentMagicalDefense = currentMagicalDefense;
             CurrentSpeed = currentSpeed;
         }
     }
