@@ -84,6 +84,11 @@ namespace StoryNothing.InstanceData
             {
                 var skillAttachGroup = masterData.SkillAttachGroups.Get(createSkillPieceSpec.SkillAttachGroupId);
                 var skillSpecId = skillAttachGroup[UnityEngine.Random.Range(0, skillAttachGroup.Count)].SkillSpecId;
+                if (skillSpecIds.Contains(skillSpecId))
+                {
+                    i--;
+                    continue;
+                }
                 skillSpecIds.Add(skillSpecId);
             }
             return new InstanceSkillPiece(
