@@ -46,6 +46,12 @@ namespace StoryNothing.InstanceData
             hitPointAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.HitPointUp)
                 .Sum(x => (int)x.Amount);
+            if (skillEffects.Any(x => x.SkillEffectType == Define.SkillEffectType.GreenPieceHitPointUp))
+            {
+                hitPointAdditional += PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Green)
+                    .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPieceHitPointUp;
+            }
             var hitPointAdditionalRate = 0.0f;
             hitPointAdditionalRate += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.BingoBonusHitPointUp)
@@ -62,6 +68,12 @@ namespace StoryNothing.InstanceData
             attackAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.AttackUp)
                 .Sum(x => (int)x.Amount);
+            if (skillEffects.Any(x => x.SkillEffectType == Define.SkillEffectType.WhiteGrayPieceMagicalAttackUp))
+            {
+                attackAdditional += PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.WhiteGray)
+                    .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPiecePhysicalAttackUp;
+            }
             var attackAdditionalRate = 0.0f;
             attackAdditionalRate += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.BingoBonusAttackUp)
@@ -78,6 +90,12 @@ namespace StoryNothing.InstanceData
             defenseAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.DefenseUp)
                 .Sum(x => (int)x.Amount);
+            if (skillEffects.Any(x => x.SkillEffectType == Define.SkillEffectType.OrangePieceMagicalDefenseUp))
+            {
+                defenseAdditional += PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Orange)
+                    .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPiecePhysicalDefenseUp;
+            }
             var defenseAdditionalRate = 0.0f;
             defenseAdditionalRate += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.BingoBonusDefenseUp)
@@ -94,6 +112,12 @@ namespace StoryNothing.InstanceData
             speedAdditional += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.SpeedUp)
                 .Sum(x => (int)x.Amount);
+            if (skillEffects.Any(x => x.SkillEffectType == Define.SkillEffectType.RedPieceSpeedUp))
+            {
+                speedAdditional += PlacementSkillPieces
+                    .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Red)
+                    .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPieceSpeedUp;
+            }
             var speedAdditionalRate = 0.0f;
             speedAdditionalRate += skillEffects
                 .Where(x => x.SkillEffectType == Define.SkillEffectType.BingoBonusSpeedUp)
