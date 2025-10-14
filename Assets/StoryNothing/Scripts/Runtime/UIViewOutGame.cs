@@ -80,6 +80,12 @@ namespace StoryNothing.UIViews
 
         private readonly TMP_Text bingoBonusHeaderLabel;
 
+        private readonly HKUIDocument bingoBonusLinePrefab;
+
+        private readonly RectTransform bingoBonusLineParent;
+
+        private readonly List<UIElementBingoLine> bingoBonusLines = new();
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
             this.document = document;
@@ -160,6 +166,12 @@ namespace StoryNothing.UIViews
             bingoBonusHeaderLabel = this.document
                 .Q<HKUIDocument>("Area.Right")
                 .Q<TMP_Text>("Header.BingoBonus");
+            bingoBonusLinePrefab = this.document
+                .Q<HKUIDocument>("UI.Element.BingoLine");
+            bingoBonusLineParent = this.document
+                .Q<HKUIDocument>("Area.Center")
+                .Q<HKUIDocument>("Area.SkillBoard")
+                .Q<RectTransform>("BingoBonus");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -280,6 +292,7 @@ namespace StoryNothing.UIViews
                     var placementSkillPiece = skillBoard.PlacementSkillPieces.First(x => x.InstanceSkillPieceId == skillPiece.InstanceId);
                     skillBoardBlackout.SetActive(false);
                     skillBoard.RemovePlacementSkillPiece(placementSkillPiece.InstanceSkillPieceId);
+                    SetupBingoBonusLine(skillBoard);
                     UpdateParameterLabels(skillBoard);
                     await BeginSkillPiecePlacementAsync(
                         placementSkillPiece.RotationIndex,
@@ -343,7 +356,33 @@ namespace StoryNothing.UIViews
                 instance.SetBackgroundColor(Define.SkillPieceColor.Gray);
                 holeElements.Add(instance);
             }
+            SetupBingoBonusLine(instanceSkillBoard);
             UpdateParameterLabels(instanceSkillBoard);
+        }
+
+        private void SetupBingoBonusLine(InstanceSkillBoard instanceSkillBoard)
+        {
+            foreach (var line in bingoBonusLines)
+            {
+                line.Dispose();
+            }
+            bingoBonusLines.Clear();
+            bingoBonusLineParent.sizeDelta = new Vector2(
+                instanceSkillBoard.SkillBoardSpec.X * Define.CellSize,
+                instanceSkillBoard.SkillBoardSpec.Y * Define.CellSize
+                );
+            foreach (var bingoIndex in instanceSkillBoard.GetHorizontalBingoIndexes(userData))
+            {
+                var line = new UIElementBingoLine(UnityEngine.Object.Instantiate(bingoBonusLinePrefab, bingoBonusLineParent));
+                line.SetupAsHorizontalLine(bingoIndex, instanceSkillBoard.SkillBoardSpec.Y);
+                bingoBonusLines.Add(line);
+            }
+            foreach (var bingoIndex in instanceSkillBoard.GetVerticalBingoIndexes(userData))
+            {
+                var line = new UIElementBingoLine(UnityEngine.Object.Instantiate(bingoBonusLinePrefab, bingoBonusLineParent));
+                line.SetupAsVerticalLine(bingoIndex, instanceSkillBoard.SkillBoardSpec.X);
+                bingoBonusLines.Add(line);
+            }
         }
 
         private void UpdateParameterLabels(InstanceSkillBoard instanceSkillBoard)
