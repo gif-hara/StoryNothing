@@ -717,19 +717,15 @@ MonoBehaviour:
       - Id: 1
         SkillSpecId: 10401
       - Id: 1
-        SkillSpecId: 10501
-      - Id: 1
         SkillSpecId: 10601
+      - Id: 1
+        SkillSpecId: 10701
       - Id: 1
         SkillSpecId: 10801
       - Id: 1
         SkillSpecId: 10901
       - Id: 1
         SkillSpecId: 11001
-      - Id: 1
-        SkillSpecId: 11101
-      - Id: 1
-        SkillSpecId: 11201
     - Key: 2
       Value:
       - Id: 2
@@ -741,9 +737,7 @@ MonoBehaviour:
       - Id: 2
         SkillSpecId: 10402
       - Id: 2
-        SkillSpecId: 10502
-      - Id: 2
-        SkillSpecId: 10602
+        SkillSpecId: 10701
       - Id: 2
         SkillSpecId: 10801
       - Id: 2
@@ -767,9 +761,9 @@ MonoBehaviour:
       - Id: 2
         SkillSpecId: 11801
       - Id: 2
-        SkillSpecId: 11901
+        SkillSpecId: 14201
       - Id: 2
-        SkillSpecId: 14701
+        SkillSpecId: 12101
     - Key: 3
       Value:
       - Id: 3
@@ -781,10 +775,6 @@ MonoBehaviour:
       - Id: 3
         SkillSpecId: 10403
       - Id: 3
-        SkillSpecId: 10503
-      - Id: 3
-        SkillSpecId: 10603
-      - Id: 3
         SkillSpecId: 10104
       - Id: 3
         SkillSpecId: 10204
@@ -792,10 +782,6 @@ MonoBehaviour:
         SkillSpecId: 10304
       - Id: 3
         SkillSpecId: 10404
-      - Id: 3
-        SkillSpecId: 10504
-      - Id: 3
-        SkillSpecId: 10604
       - Id: 3
         SkillSpecId: 10801
       - Id: 3
@@ -818,8 +804,6 @@ MonoBehaviour:
         SkillSpecId: 11701
       - Id: 3
         SkillSpecId: 11801
-      - Id: 3
-        SkillSpecId: 11901
       - Id: 3
         SkillSpecId: 12001
       - Id: 3
@@ -841,47 +825,39 @@ MonoBehaviour:
       - Id: 3
         SkillSpecId: 13901
       - Id: 3
-        SkillSpecId: 14701
+        SkillSpecId: 14101
     - Key: 4
       Value:
+      - Id: 4
+        SkillSpecId: 12901
+      - Id: 4
+        SkillSpecId: 13001
       - Id: 4
         SkillSpecId: 13101
       - Id: 4
         SkillSpecId: 13201
-      - Id: 4
-        SkillSpecId: 13301
-      - Id: 4
-        SkillSpecId: 13401
-      - Id: 4
-        SkillSpecId: 13501
-      - Id: 4
-        SkillSpecId: 13601
     - Key: 5
       Value:
       - Id: 5
-        SkillSpecId: 14001
+        SkillSpecId: 13601
       - Id: 5
-        SkillSpecId: 14101
+        SkillSpecId: 13701
       - Id: 5
-        SkillSpecId: 14201
+        SkillSpecId: 13801
       - Id: 5
-        SkillSpecId: 14301
-      - Id: 5
-        SkillSpecId: 14401
-      - Id: 5
-        SkillSpecId: 14501
+        SkillSpecId: 13901
     - Key: 6
       Value:
       - Id: 6
-        SkillSpecId: 13001
+        SkillSpecId: 13301
       - Id: 6
-        SkillSpecId: 14601
+        SkillSpecId: 14001
       - Id: 6
-        SkillSpecId: 13801
+        SkillSpecId: 11901
       - Id: 6
-        SkillSpecId: 13701
+        SkillSpecId: 12801
       - Id: 6
-        SkillSpecId: 12101
+        SkillSpecId: 13401
   <CreateSkillPieceSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -1217,22 +1193,22 @@ MonoBehaviour:
       Value:
       - Id: 12901
         SkillEffectType: 28
-        Amount: 0.1
+        Amount: 0.25
     - Key: 13001
       Value:
       - Id: 13001
         SkillEffectType: 29
-        Amount: 0.1
+        Amount: 0.25
     - Key: 13101
       Value:
       - Id: 13101
         SkillEffectType: 30
-        Amount: 0.1
+        Amount: 0.25
     - Key: 13201
       Value:
       - Id: 13201
         SkillEffectType: 31
-        Amount: 0.1
+        Amount: 0.25
     - Key: 13301
       Value:
       - Id: 13301
