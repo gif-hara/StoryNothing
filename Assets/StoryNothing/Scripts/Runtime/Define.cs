@@ -32,8 +32,8 @@ namespace StoryNothing
 
         public enum SkillEffectType
         {
-            PhysicalAttackUp,
-            PhysicalDefenseUp,
+            AttackUp,
+            DefenseUp,
             HitPointUp,
             SpeedUp,
         }

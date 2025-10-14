@@ -52,7 +52,7 @@ namespace StoryNothing.InstanceData
                 .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.Orange)
                 .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPiecePhysicalAttackUp;
             physicalAttackAdditional += skillEffects
-                .Where(x => x.SkillEffectType == Define.SkillEffectType.PhysicalAttackUp)
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.AttackUp)
                 .Sum(x => (int)x.Amount);
             var physicalAttack = new CharacterParameter(
                 characterSpec.PhysicalAttack,
@@ -64,7 +64,7 @@ namespace StoryNothing.InstanceData
                 .Where(x => x.InstanceSkillPiece.ColorType == Define.SkillPieceColor.WhiteGray)
                 .Sum(x => x.InstanceSkillPiece.SkillPieceCellSpec.GetCellPoints(0).Count) * gameRule.SkillPiecePhysicalDefenseUp;
             physicalDefenseAdditional += skillEffects
-                .Where(x => x.SkillEffectType == Define.SkillEffectType.PhysicalDefenseUp)
+                .Where(x => x.SkillEffectType == Define.SkillEffectType.DefenseUp)
                 .Sum(x => (int)x.Amount);
             var physicalDefense = new CharacterParameter(
                 characterSpec.PhysicalDefense,
