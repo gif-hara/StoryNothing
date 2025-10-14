@@ -183,7 +183,7 @@ namespace StoryNothing.UIViews
         {
             document.gameObject.SetActive(true);
             SetActiveInstanceSkillPieceInformation(false);
-            SetSkillBoard(userData.GetEquipInstanceSkillBoard());
+            SetupSkillBoard(userData.GetEquipInstanceSkillBoard());
             while (!cancellationToken.IsCancellationRequested)
             {
                 var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -219,7 +219,7 @@ namespace StoryNothing.UIViews
                 UniTask.WhenAny(
                     userData.SkillBoards.Select(x =>
                         CreateHKButton(CreateListContent(x.Value.Name, scope.Token))
-                            .OnPointerEnter(hkButton => SetSkillBoard(x.Value))
+                            .OnPointerEnter(hkButton => SetupSkillBoard(x.Value))
                             .OnClickAsync(cancellationToken)
                 )),
                 playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(cancellationToken).AsUniTask()
@@ -230,7 +230,7 @@ namespace StoryNothing.UIViews
             }
             else if (result.winArgumentIndex == 1)
             {
-                SetSkillBoard(userData.GetEquipInstanceSkillBoard());
+                SetupSkillBoard(userData.GetEquipInstanceSkillBoard());
             }
             scope.Cancel();
             scope.Dispose();
@@ -333,7 +333,7 @@ namespace StoryNothing.UIViews
             return instance;
         }
 
-        private void SetSkillBoard(InstanceSkillBoard instanceSkillBoard)
+        private void SetupSkillBoard(InstanceSkillBoard instanceSkillBoard)
         {
             foreach (var element in holeElements)
             {
@@ -531,7 +531,7 @@ namespace StoryNothing.UIViews
                         uiElementSkillPiece.SetPosition(positionIndex, skillBoard.SkillBoardSpec.Size, skillPieceSize, new Vector2(0.0f, 0.0f));
                         await uiElementSkillPiece.PlayLineAnimationAsync(cancellationToken);
                         uiElementSkillPiece.Clear();
-                        SetSkillBoard(skillBoard);
+                        SetupSkillBoard(skillBoard);
                         await UniTask.Delay(TimeSpan.FromSeconds(0.3f), cancellationToken: cancellationToken);
                         break;
                     }
