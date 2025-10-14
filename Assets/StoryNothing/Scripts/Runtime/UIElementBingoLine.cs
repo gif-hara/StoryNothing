@@ -21,16 +21,16 @@ namespace StoryNothing
             UnityEngine.Object.Destroy(document.gameObject);
         }
 
-        public void SetupAsHorizontalLine(int index, Vector2Int skillBoardSize)
+        public void SetupAsHorizontalLine(int index, int yMax)
         {
             var cellSize = Define.CellSize;
-            rectTransform.localPosition = new Vector3(0, (skillBoardSize.y - 1) * cellSize / 2f - index * cellSize, 0);
+            rectTransform.localPosition = new Vector3(0, -((yMax - 1) * cellSize / 2f - index * cellSize), 0);
         }
 
-        public void SetupAsVerticalLine(int index, Vector2Int skillBoardSize)
+        public void SetupAsVerticalLine(int index, int xMax)
         {
             var cellSize = Define.CellSize;
-            rectTransform.localPosition = new Vector3(-(skillBoardSize.x - 1) * cellSize / 2f + index * cellSize, 0, 0);
+            rectTransform.localPosition = new Vector3(-(xMax - 1) * cellSize / 2f + index * cellSize, 0, 0);
             rectTransform.localEulerAngles = new Vector3(0, 0, 90);
         }
     }
