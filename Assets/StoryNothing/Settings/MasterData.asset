@@ -74,58 +74,85 @@ MonoBehaviour:
     list:
     - Id: 10101
       GroupId: 3
+      Name: I
     - Id: 10102
       GroupId: 3
+      Name: L
     - Id: 10201
       GroupId: 4
+      Name: I
     - Id: 10202
       GroupId: 4
+      Name: L
     - Id: 10203
       GroupId: 4
+      Name: T
     - Id: 10204
       GroupId: 4
+      Name: J
     - Id: 10205
       GroupId: 4
+      Name: S
     - Id: 10206
       GroupId: 4
+      Name: Z
     - Id: 10207
       GroupId: 4
+      Name: O
     - Id: 10301
       GroupId: 5
+      Name: I
     - Id: 10302
       GroupId: 5
+      Name: J
     - Id: 10303
       GroupId: 5
+      Name: "Y\u2019"
     - Id: 10304
       GroupId: 5
+      Name: Y
     - Id: 10305
       GroupId: 5
+      Name: L
     - Id: 10306
       GroupId: 5
+      Name: P
     - Id: 10307
       GroupId: 5
+      Name: q
     - Id: 10308
       GroupId: 5
+      Name: V
     - Id: 10309
       GroupId: 5
+      Name: T
     - Id: 10310
       GroupId: 5
+      Name: U
     - Id: 10311
       GroupId: 5
+      Name: "N\u2019"
     - Id: 10312
       GroupId: 5
+      Name: N
     - Id: 10313
       GroupId: 5
+      Name: S
     - Id: 10314
       GroupId: 5
+      Name: Z
     - Id: 10315
       GroupId: 5
+      Name: W
     - Id: 10316
       GroupId: 5
+      Name: X
     - Id: 10317
       GroupId: 5
+      Name: F
     - Id: 10318
       GroupId: 5
+      Name: "F\u2019"
   <SkillPieceCellPoints>k__BackingField:
     list:
     - Key: 10101
