@@ -819,12 +819,6 @@ MonoBehaviour:
       - Id: 3
         SkillSpecId: 12701
       - Id: 3
-        SkillSpecId: 12801
-      - Id: 3
-        SkillSpecId: 12901
-      - Id: 3
-        SkillSpecId: 13901
-      - Id: 3
         SkillSpecId: 14101
     - Key: 4
       Value:
@@ -871,7 +865,7 @@ MonoBehaviour:
       Green: 1
     - Id: 10201
       SkillPieceSpecId: 10201
-      SkillAttachGroupId: 1
+      SkillAttachGroupId: 2
       SkillAttachCountMin: 1
       SkillAttachCountMax: 1
       Red: 1
@@ -880,7 +874,7 @@ MonoBehaviour:
       Green: 1
     - Id: 10301
       SkillPieceSpecId: 10301
-      SkillAttachGroupId: 1
+      SkillAttachGroupId: 3
       SkillAttachCountMin: 2
       SkillAttachCountMax: 2
       Red: 1
