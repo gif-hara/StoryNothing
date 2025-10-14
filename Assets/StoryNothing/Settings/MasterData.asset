@@ -1399,16 +1399,12 @@ MonoBehaviour:
       Value:
       - Id: 1
         SkillAttachGroupId: 4
-      - Id: 1
-        SkillAttachGroupId: 5
     - Key: 2
       Value:
       - Id: 2
         SkillAttachGroupId: 4
       - Id: 2
         SkillAttachGroupId: 4
-      - Id: 2
-        SkillAttachGroupId: 5
     - Key: 3
       Value:
       - Id: 3
@@ -1417,16 +1413,10 @@ MonoBehaviour:
         SkillAttachGroupId: 4
       - Id: 3
         SkillAttachGroupId: 5
-      - Id: 3
-        SkillAttachGroupId: 5
     - Key: 4
       Value:
       - Id: 4
         SkillAttachGroupId: 4
-      - Id: 4
-        SkillAttachGroupId: 4
-      - Id: 4
-        SkillAttachGroupId: 5
       - Id: 4
         SkillAttachGroupId: 5
       - Id: 4
