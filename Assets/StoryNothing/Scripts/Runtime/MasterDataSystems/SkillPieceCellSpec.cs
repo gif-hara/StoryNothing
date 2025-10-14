@@ -13,6 +13,8 @@ namespace StoryNothing.MasterDataSystems
 
         public int GroupId;
 
+        public string Name;
+
         public List<Vector2Int> GetCellPoints(int rotationIndex)
         {
             var points = ServiceLocator.Resolve<MasterData>().SkillPieceCellPoints.Get(Id).Select(x => new Vector2Int(x.X, x.Y)).ToList();
