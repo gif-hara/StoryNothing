@@ -333,6 +333,14 @@ namespace StoryNothing.UIViews
                 element.Dispose();
             }
             skillPieceElements.Clear();
+            foreach (var placementSkillPiece in instanceSkillBoard.PlacementSkillPieces)
+            {
+                var instanceSkillPiece = userData.GetInstanceSkillPiece(placementSkillPiece.InstanceSkillPieceId);
+                var uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, skillBoardBackground));
+                uiElementSkillPiece.Setup(instanceSkillPiece, placementSkillPiece.RotationIndex);
+                uiElementSkillPiece.SetPosition(placementSkillPiece.PositionIndex, instanceSkillBoard.SkillBoardSpec.Size, instanceSkillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex));
+                skillPieceElements.Add(uiElementSkillPiece);
+            }
             skillBoardBackground.sizeDelta = new Vector2(
                 instanceSkillBoard.SkillBoardSpec.X * Define.CellSize,
                 instanceSkillBoard.SkillBoardSpec.Y * Define.CellSize
@@ -392,21 +400,17 @@ namespace StoryNothing.UIViews
             }
             bingoBonusSkillLabels.Clear();
 
-            foreach (var placementSkillPiece in instanceSkillBoard.PlacementSkillPieces)
+            var skillSpecs = instanceSkillBoard.PlacementSkillPieces
+                .SelectMany(x => userData.GetInstanceSkillPiece(x.InstanceSkillPieceId).SkillSpecIds)
+                .Select(x => ServiceLocator.Resolve<MasterData>().SkillSpecs.Get(x))
+                .GroupBy(x => x.Id);
+            foreach (var skillGroup in skillSpecs)
             {
-                var instanceSkillPiece = userData.GetInstanceSkillPiece(placementSkillPiece.InstanceSkillPieceId);
-                var uiElementSkillPiece = new UIElementSkillPiece(UnityEngine.Object.Instantiate(skillPiecePrefab, skillBoardBackground));
-                uiElementSkillPiece.Setup(instanceSkillPiece, placementSkillPiece.RotationIndex);
-                uiElementSkillPiece.SetPosition(placementSkillPiece.PositionIndex, instanceSkillBoard.SkillBoardSpec.Size, instanceSkillPiece.SkillPieceCellSpec.GetSize(placementSkillPiece.RotationIndex));
-                skillPieceElements.Add(uiElementSkillPiece);
-                foreach (var skillSpecId in instanceSkillPiece.SkillSpecIds)
-                {
-                    var skillSpec = ServiceLocator.Resolve<MasterData>().SkillSpecs.Get(skillSpecId);
-                    var skillNameLabel = UnityEngine.Object.Instantiate(skillNameLabelPrefab, skillNameLabelParent);
-                    skillNameLabel.Q<TMP_Text>("Text").SetText(skillSpec.Name);
-                    skillNameLabels.Add(skillNameLabel);
-                }
+                var skillNameLabel = UnityEngine.Object.Instantiate(skillNameLabelPrefab, skillNameLabelParent);
+                skillNameLabel.Q<TMP_Text>("Text").SetText($"[{skillGroup.Count()}] {skillGroup.First().Name}");
+                skillNameLabels.Add(skillNameLabel);
             }
+
             var bingoBonusCount = instanceSkillBoard.GetHorizontalBingoIndexes(userData).Count +
                 instanceSkillBoard.GetVerticalBingoIndexes(userData).Count;
             bingoBonusHeaderLabel.SetText($"ビンゴボーナス: [{bingoBonusCount}]");
