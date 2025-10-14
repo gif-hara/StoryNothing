@@ -403,7 +403,8 @@ namespace StoryNothing.UIViews
             var skillSpecs = instanceSkillBoard.PlacementSkillPieces
                 .SelectMany(x => userData.GetInstanceSkillPiece(x.InstanceSkillPieceId).SkillSpecIds)
                 .Select(x => ServiceLocator.Resolve<MasterData>().SkillSpecs.Get(x))
-                .GroupBy(x => x.Id);
+                .GroupBy(x => x.Id)
+                .OrderBy(x => x.Key);
             foreach (var skillGroup in skillSpecs)
             {
                 var skillNameLabel = UnityEngine.Object.Instantiate(skillNameLabelPrefab, skillNameLabelParent);
