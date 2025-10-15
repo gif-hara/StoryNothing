@@ -528,7 +528,7 @@ MonoBehaviour:
         X: 2
         Y: 1
       - Id: 10315
-        X: 1
+        X: 2
         Y: 2
     - Key: 10316
       Value:
@@ -1305,7 +1305,7 @@ MonoBehaviour:
       - Id: 4
         SkillAttachGroupId: 4
       - Id: 4
-        SkillAttachGroupId: 5
+        SkillAttachGroupId: 4
       - Id: 4
         SkillAttachGroupId: 5
       - Id: 4
