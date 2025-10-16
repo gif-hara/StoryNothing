@@ -74,20 +74,20 @@ namespace StoryNothing
 
 
             // とりあえずスキルピースを作る
-            // {
-            //     for (int i = 0; i < 500; i++)
-            //     {
-            //         foreach (var initialSkillPieceMasterDataId in initialCreateSkillPieceSpecIds)
-            //         {
-            //             if (initialSkillPieceMasterDataId < 0)
-            //             {
-            //                 continue;
-            //             }
-            //             var instanceSkillPiece = InstanceSkillPiece.Create(userData.AddInstanceSkillPieceCount, initialSkillPieceMasterDataId);
-            //             userData.AddInstanceSkillPiece(instanceSkillPiece);
-            //         }
-            //     }
-            // }
+            {
+                for (int i = 0; i < 1; i++)
+                {
+                    foreach (var initialSkillPieceMasterDataId in initialCreateSkillPieceSpecIds)
+                    {
+                        if (initialSkillPieceMasterDataId < 0)
+                        {
+                            continue;
+                        }
+                        var instanceSkillPiece = InstanceSkillPiece.Create(userData.AddInstanceSkillPieceCount, initialSkillPieceMasterDataId);
+                        userData.AddInstanceSkillPiece(instanceSkillPiece);
+                    }
+                }
+            }
 
 #if DEBUG
             this.UpdateAsObservable()
