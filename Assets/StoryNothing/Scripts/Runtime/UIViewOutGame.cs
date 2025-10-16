@@ -82,6 +82,8 @@ namespace StoryNothing.UIViews
 
         private readonly List<UIElementBingoLine> bingoBonusLines = new();
 
+        private readonly UIElementDialog uiElementDialog;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
             this.document = document;
@@ -160,6 +162,7 @@ namespace StoryNothing.UIViews
                 .Q<HKUIDocument>("Area.Center")
                 .Q<HKUIDocument>("Area.SkillBoard")
                 .Q<RectTransform>("BingoBonus");
+            uiElementDialog = new UIElementDialog(this.document.Q<HKUIDocument>("Area.Dialog"));
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
