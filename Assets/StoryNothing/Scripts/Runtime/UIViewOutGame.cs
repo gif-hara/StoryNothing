@@ -305,9 +305,9 @@ namespace StoryNothing.UIViews
             SetActiveInstanceSkillPieceInformation(false);
         }
 
-        private UniTask StateSelectBattleAsync(CancellationToken cancellationToken)
+        private async UniTask StateSelectBattleAsync(CancellationToken cancellationToken)
         {
-            return UniTask.Never(cancellationToken);
+            await uiElementDialog.ShowAsync("どうやらまだ行けないようだ！", new[] { "OK" }, cancellationToken);
         }
 
         private HKUIDocument CreateListContent(string text, CancellationToken cancellationToken)
