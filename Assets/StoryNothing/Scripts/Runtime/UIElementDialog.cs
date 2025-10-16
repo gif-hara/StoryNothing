@@ -21,8 +21,8 @@ namespace StoryNothing
         public UIElementDialog(HKUIDocument document)
         {
             this.document = document;
-            buttonParent = document.Q<RectTransform>("Area.Buttons");
-            buttonPrefab = document.Q<HKUIDocument>("UIElement.Button");
+            buttonParent = document.Q<RectTransform>("Area.Button");
+            buttonPrefab = document.Q<HKUIDocument>("UI.Element.Button");
             message = document.Q<TMP_Text>("Message");
             document.gameObject.SetActive(false);
         }
