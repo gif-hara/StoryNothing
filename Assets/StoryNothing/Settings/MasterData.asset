@@ -36,25 +36,25 @@ MonoBehaviour:
   <SkillBoardSpecs>k__BackingField:
     list:
     - Id: 10101
-      Name: "\u5C0F\u3055\u306A\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
+      Name: "\u5C0F\u3055\u306A\u30DC\u30FC\u30C9"
       X: 4
       Y: 4
       HoleCount: 1
       BingoBonusGroupId: 1
     - Id: 10201
-      Name: "\u5927\u304D\u306A\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
+      Name: "\u5927\u304D\u306A\u30DC\u30FC\u30C9"
       X: 5
       Y: 5
       HoleCount: 2
       BingoBonusGroupId: 2
     - Id: 10301
-      Name: "\u5DE8\u5927\u306A\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
+      Name: "\u5DE8\u5927\u306A\u30DC\u30FC\u30C9"
       X: 6
       Y: 6
       HoleCount: 3
       BingoBonusGroupId: 3
     - Id: 10401
-      Name: "\u5F29\u7D1A\u306E\u30B9\u30AD\u30EB\u30DC\u30FC\u30C9"
+      Name: "\u5F29\u7D1A\u306E\u30DC\u30FC\u30C9"
       X: 7
       Y: 7
       HoleCount: 3
@@ -618,44 +618,42 @@ MonoBehaviour:
     - Id: 10501
       Name: "\u300C\u6226\u3046\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
     - Id: 10502
-      Name: "\u300C\u30B7\u30E7\u30C3\u30C8\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10503
       Name: "\u300C\u6BD2\u7A81\u304D\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10504
+    - Id: 10503
       Name: "\u300C\u75FA\u308C\u7C89\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10505
+    - Id: 10504
       Name: "\u300C\u56DE\u5FA9\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10506
+    - Id: 10505
       Name: "\u300C\u4E2D\u56DE\u5FA9\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10507
+    - Id: 10506
       Name: "\u300C\u30A2\u30BF\u30C3\u30AF\u30D6\u30EC\u30A4\u30AF\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10508
+    - Id: 10507
       Name: "\u300C\u30DE\u30A4\u30F3\u30C9\u30D6\u30EC\u30A4\u30AF\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10509
+    - Id: 10508
       Name: "\u300C\u5F37\u653B\u6483\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10510
+    - Id: 10509
       Name: "\u300C\u4E8C\u9023\u65AC\u308A\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10511
+    - Id: 10510
       Name: "\u300C\u6E3E\u8EAB\u306E\u4E00\u6483\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10512
+    - Id: 10511
       Name: "\u300C\u30A2\u30A4\u30B9\u30D0\u30FC\u30F3\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10513
+    - Id: 10512
       Name: "\u300C\u6EFE\u308B\u529B\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10514
+    - Id: 10513
       Name: "\u300C\u9244\u306E\u610F\u5FD7\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10515
+    - Id: 10514
       Name: "\u300C\u30AF\u30A4\u30C3\u30AF\u30B7\u30E7\u30C3\u30C8\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10516
+    - Id: 10515
       Name: "\u300C\u6B63\u62F3\u7A81\u304D\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10517
+    - Id: 10516
       Name: "\u300C\u751F\u547D\u5438\u3044\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10518
+    - Id: 10517
       Name: "\u300C\u30E1\u30C6\u30AA\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10519
+    - Id: 10518
       Name: "\u300C\u30B8\u30E3\u30D6\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10520
+    - Id: 10519
       Name: "\u300C\u9244\u58C1\u306E\u76FE\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
-    - Id: 10521
+    - Id: 10520
       Name: "\u300C\u76FE\u69CB\u3048\u7A81\u304D\u300D\u30B3\u30DE\u30F3\u30C9\u3092\u8FFD\u52A0"
     - Id: 10601
       Name: "\u4E0D\u5B9A\u5F62\u306B\u5BFE\u3059\u308B\u30C0\u30E1\u30FC\u30B8\u3092\u5897\u52A0\u3059\u308B"
@@ -869,6 +867,36 @@ MonoBehaviour:
         SkillSpecId: 12801
       - Id: 6
         SkillSpecId: 13401
+    - Key: 7
+      Value:
+      - Id: 7
+        SkillSpecId: 10501
+    - Key: 8
+      Value:
+      - Id: 8
+        SkillSpecId: 10502
+      - Id: 8
+        SkillSpecId: 10503
+      - Id: 8
+        SkillSpecId: 10506
+      - Id: 8
+        SkillSpecId: 10507
+      - Id: 8
+        SkillSpecId: 10504
+      - Id: 8
+        SkillSpecId: 10508
+      - Id: 8
+        SkillSpecId: 10519
+    - Key: 9
+      Value:
+      - Id: 9
+        SkillSpecId: 10502
+      - Id: 9
+        SkillSpecId: 10502
+      - Id: 9
+        SkillSpecId: 10502
+      - Id: 9
+        SkillSpecId: 10502
   <CreateSkillPieceSpecs>k__BackingField:
     list:
     - Id: 10101
@@ -1080,11 +1108,6 @@ MonoBehaviour:
       - Id: 10520
         SkillEffectType: 4
         Amount: 10120
-    - Key: 10521
-      Value:
-      - Id: 10521
-        SkillEffectType: 4
-        Amount: 10121
     - Key: 10601
       Value:
       - Id: 10601
