@@ -46,40 +46,48 @@ namespace StoryNothing
             userData = new UserData();
 
             // とりあえずスキルボードを作る
+            // {
+            //     for (int i = 0; i < 10; i++)
+            //     {
+            //         foreach (var initialSkillBoardMasterDataId in initialSkillBoardMasterDataIds)
+            //         {
+            //             if (initialSkillBoardMasterDataId < 0)
+            //             {
+            //                 continue;
+            //             }
+            //             var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
+            //             userData.AddInstanceSkillBoard(instanceSkillBoard);
+            //             if (userData.EquipInstanceSkillBoardId == -1)
+            //             {
+            //                 userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
+            //             }
+            //         }
+            //     }
+            // }
+
+            var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, 10101);
+            userData.AddInstanceSkillBoard(instanceSkillBoard);
+            if (userData.EquipInstanceSkillBoardId == -1)
             {
-                for (int i = 0; i < 10; i++)
-                {
-                    foreach (var initialSkillBoardMasterDataId in initialSkillBoardMasterDataIds)
-                    {
-                        if (initialSkillBoardMasterDataId < 0)
-                        {
-                            continue;
-                        }
-                        var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
-                        userData.AddInstanceSkillBoard(instanceSkillBoard);
-                        if (userData.EquipInstanceSkillBoardId == -1)
-                        {
-                            userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
-                        }
-                    }
-                }
+                userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
             }
 
+
             // とりあえずスキルピースを作る
-            {
-                for (int i = 0; i < 500; i++)
-                {
-                    foreach (var initialSkillPieceMasterDataId in initialCreateSkillPieceSpecIds)
-                    {
-                        if (initialSkillPieceMasterDataId < 0)
-                        {
-                            continue;
-                        }
-                        var instanceSkillPiece = InstanceSkillPiece.Create(userData.AddInstanceSkillPieceCount, initialSkillPieceMasterDataId);
-                        userData.AddInstanceSkillPiece(instanceSkillPiece);
-                    }
-                }
-            }
+            // {
+            //     for (int i = 0; i < 500; i++)
+            //     {
+            //         foreach (var initialSkillPieceMasterDataId in initialCreateSkillPieceSpecIds)
+            //         {
+            //             if (initialSkillPieceMasterDataId < 0)
+            //             {
+            //                 continue;
+            //             }
+            //             var instanceSkillPiece = InstanceSkillPiece.Create(userData.AddInstanceSkillPieceCount, initialSkillPieceMasterDataId);
+            //             userData.AddInstanceSkillPiece(instanceSkillPiece);
+            //         }
+            //     }
+            // }
 
 #if DEBUG
             this.UpdateAsObservable()
