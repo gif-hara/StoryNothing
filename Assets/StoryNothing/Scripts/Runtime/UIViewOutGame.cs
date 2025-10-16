@@ -177,7 +177,7 @@ namespace StoryNothing.UIViews
             SetupSkillBoard(userData.GetEquipInstanceSkillBoard());
             while (!cancellationToken.IsCancellationRequested)
             {
-                var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+                using var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 var result = await UniTask.WhenAny(
                     CreateHKButton(CreateListContent("ボード変更", scope.Token))
                         .OnClickAsync(cancellationToken),
@@ -189,7 +189,6 @@ namespace StoryNothing.UIViews
                         .OnClickAsync(cancellationToken)
                 );
                 scope.Cancel();
-                scope.Dispose();
                 switch (result)
                 {
                     case 0:
