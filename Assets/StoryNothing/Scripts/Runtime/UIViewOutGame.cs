@@ -179,11 +179,13 @@ namespace StoryNothing.UIViews
             {
                 var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 var result = await UniTask.WhenAny(
-                    CreateHKButton(CreateListContent("スキルボード変更", scope.Token))
+                    CreateHKButton(CreateListContent("ボード変更", scope.Token))
                         .OnClickAsync(cancellationToken),
-                    CreateHKButton(CreateListContent("スキルボード編集", scope.Token))
+                    CreateHKButton(CreateListContent("ボード編集", scope.Token))
                         .OnClickAsync(cancellationToken),
                     CreateHKButton(CreateListContent("闘技場へ", scope.Token))
+                        .OnClickAsync(cancellationToken),
+                    CreateHKButton(CreateListContent("ボード獲得（今だけだよ）", scope.Token))
                         .OnClickAsync(cancellationToken)
                 );
                 scope.Cancel();
@@ -198,6 +200,11 @@ namespace StoryNothing.UIViews
                         break;
                     case 2:
                         await StateSelectBattleAsync(cancellationToken);
+                        break;
+                    case 3:
+                        var skillBoardSpecIds = new[] { 10101, 10201, 10301 };
+                        var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, skillBoardSpecIds[UnityEngine.Random.Range(0, skillBoardSpecIds.Length)]);
+                        userData.AddInstanceSkillBoard(instanceSkillBoard);
                         break;
                 }
             }
