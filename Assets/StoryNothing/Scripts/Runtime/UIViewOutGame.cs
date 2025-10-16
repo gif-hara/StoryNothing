@@ -186,6 +186,8 @@ namespace StoryNothing.UIViews
                     CreateHKButton(CreateListContent("闘技場へ", scope.Token))
                         .OnClickAsync(cancellationToken),
                     CreateHKButton(CreateListContent("ボード獲得（今だけだよ）", scope.Token))
+                        .OnClickAsync(cancellationToken),
+                    CreateHKButton(CreateListContent("ピース獲得（今だけだよ）", scope.Token))
                         .OnClickAsync(cancellationToken)
                 );
                 scope.Cancel();
@@ -204,6 +206,13 @@ namespace StoryNothing.UIViews
                         var skillBoardSpecIds = new[] { 10101, 10201, 10301 };
                         var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, skillBoardSpecIds[UnityEngine.Random.Range(0, skillBoardSpecIds.Length)]);
                         userData.AddInstanceSkillBoard(instanceSkillBoard);
+                        await uiElementDialog.ShowAsync($"{instanceSkillBoard.Name}を獲得した！", new[] { "OK" }, cancellationToken);
+                        break;
+                    case 4:
+                        var createSkillPieceSpecIds = new[] { 10101, 10201, 10301 };
+                        var instanceSkillPiece = InstanceSkillPiece.Create(userData.AddInstanceSkillPieceCount, createSkillPieceSpecIds[UnityEngine.Random.Range(0, createSkillPieceSpecIds.Length)]);
+                        userData.AddInstanceSkillPiece(instanceSkillPiece);
+                        await uiElementDialog.ShowAsync($"{instanceSkillPiece.Name}を獲得した！", new[] { "OK" }, cancellationToken);
                         break;
                 }
             }
