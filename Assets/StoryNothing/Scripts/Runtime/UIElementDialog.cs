@@ -32,16 +32,16 @@ namespace StoryNothing
             document.gameObject.SetActive(true);
             this.message.text = message;
 
-            var buttons = new List<Button>();
+            var buttons = new List<HKUIDocument>();
             foreach (var buttonMessage in buttonMessages)
             {
                 var button = Object.Instantiate(buttonPrefab, buttonParent);
-                button.Q<TMP_Text>("Message").text = buttonMessage;
-                buttons.Add(button.Q<Button>("Button"));
+                button.Q<TMP_Text>("Text").text = buttonMessage;
+                buttons.Add(button);
             }
 
             using var scope = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-            var result = await UniTask.WhenAny(buttons.Select(b => b.OnClickAsync(cancellationToken: scope.Token)));
+            var result = await UniTask.WhenAny(buttons.Select(b => b.Q<Button>("Button").OnClickAsync(cancellationToken: scope.Token)));
             scope.Cancel();
             foreach (var button in buttons)
             {
