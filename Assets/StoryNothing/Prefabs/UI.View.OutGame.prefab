@@ -426,7 +426,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'TODO: TIPS'
+  m_text: "\u5DE6\u30AF\u30EA\u30C3\u30AF\uFF1A\u6C7A\u5B9A\u3000\u53F3\u30AF\u30EA\u30C3\u30AF\uFF1A\u623B\u308B"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6194126497f355b439f0fb623eba75fa, type: 2}
   m_sharedMaterial: {fileID: -7621177700258744374, guid: 6194126497f355b439f0fb623eba75fa, type: 2}
