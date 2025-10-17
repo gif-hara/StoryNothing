@@ -35,35 +35,12 @@ namespace StoryNothing
 
         private UserData userData;
 
-        private Subject<Unit> updateGameState = new();
-        public Observable<Unit> UpdateGameState => updateGameState;
-
         private async UniTaskVoid Start()
         {
             ServiceLocator.Register(masterData, destroyCancellationToken);
             ServiceLocator.Register(gameRule, destroyCancellationToken);
 
             userData = new UserData();
-
-            // とりあえずスキルボードを作る
-            // {
-            //     for (int i = 0; i < 10; i++)
-            //     {
-            //         foreach (var initialSkillBoardMasterDataId in initialSkillBoardMasterDataIds)
-            //         {
-            //             if (initialSkillBoardMasterDataId < 0)
-            //             {
-            //                 continue;
-            //             }
-            //             var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
-            //             userData.AddInstanceSkillBoard(instanceSkillBoard);
-            //             if (userData.EquipInstanceSkillBoardId == -1)
-            //             {
-            //                 userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
-            //             }
-            //         }
-            //     }
-            // }
 
             var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, 10101);
             userData.AddInstanceSkillBoard(instanceSkillBoard);
@@ -95,6 +72,39 @@ namespace StoryNothing
                 {
                     if (Keyboard.current.f1Key.wasPressedThisFrame)
                     {
+                        for (int i = 0; i < 500; i++)
+                        {
+                            foreach (var initialSkillPieceMasterDataId in initialCreateSkillPieceSpecIds)
+                            {
+                                if (initialSkillPieceMasterDataId < 0)
+                                {
+                                    continue;
+                                }
+                                var instanceSkillPiece = InstanceSkillPiece.Create(userData.AddInstanceSkillPieceCount, initialSkillPieceMasterDataId);
+                                userData.AddInstanceSkillPiece(instanceSkillPiece);
+                            }
+                        }
+                        Debug.Log("Added SkillPieces");
+                    }
+                    if (Keyboard.current.f2Key.wasPressedThisFrame)
+                    {
+                        for (int i = 0; i < 10; i++)
+                        {
+                            foreach (var initialSkillBoardMasterDataId in initialSkillBoardMasterDataIds)
+                            {
+                                if (initialSkillBoardMasterDataId < 0)
+                                {
+                                    continue;
+                                }
+                                var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, initialSkillBoardMasterDataId);
+                                userData.AddInstanceSkillBoard(instanceSkillBoard);
+                                if (userData.EquipInstanceSkillBoardId == -1)
+                                {
+                                    userData.EquipInstanceSkillBoardId = instanceSkillBoard.InstanceId;
+                                }
+                            }
+                        }
+                        Debug.Log("Added SkillBoards");
                     }
                 })
                 .RegisterTo(destroyCancellationToken);
