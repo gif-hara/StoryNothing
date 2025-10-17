@@ -14,7 +14,7 @@ namespace StoryNothing.InstanceData
         public int InstanceId { get; private set; }
 
         [field: SerializeField]
-        public int SkillBoardMasterDataId { get; private set; }
+        public int SkillBoardSpecId { get; private set; }
 
         [field: SerializeField]
         public List<Vector2Int> Holes { get; private set; } = new();
@@ -25,7 +25,7 @@ namespace StoryNothing.InstanceData
         [field: SerializeField]
         public List<int> BingoBonusSkillSpecIds { get; private set; } = new();
 
-        public SkillBoardSpec SkillBoardSpec => ServiceLocator.Resolve<MasterData>().SkillBoardSpecs.Get(SkillBoardMasterDataId);
+        public SkillBoardSpec SkillBoardSpec => ServiceLocator.Resolve<MasterData>().SkillBoardSpecs.Get(SkillBoardSpecId);
 
         public string Name => SkillBoardSpec.Name;
 
@@ -136,19 +136,19 @@ namespace StoryNothing.InstanceData
             );
         }
 
-        public InstanceSkillBoard(int instanceId, int masterDataSkillBoardId, List<Vector2Int> holes, List<int> bingoBonusSkillSpecIds)
+        public InstanceSkillBoard(int instanceId, int skillBoardSpecId, List<Vector2Int> holes, List<int> bingoBonusSkillSpecIds)
         {
             InstanceId = instanceId;
-            SkillBoardMasterDataId = masterDataSkillBoardId;
+            SkillBoardSpecId = skillBoardSpecId;
             Holes = holes;
             BingoBonusSkillSpecIds = bingoBonusSkillSpecIds;
         }
 
-        public static InstanceSkillBoard Create(int instanceId, int skillBoardMasterDataId)
+        public static InstanceSkillBoard Create(int instanceId, int skillBoardSpecId)
         {
             var masterData = ServiceLocator.Resolve<MasterData>();
             var holes = new List<Vector2Int>();
-            var skillBoardSpec = masterData.SkillBoardSpecs.Get(skillBoardMasterDataId);
+            var skillBoardSpec = masterData.SkillBoardSpecs.Get(skillBoardSpecId);
             for (int i = 0; i < skillBoardSpec.HoleCount; i++)
             {
                 var hole = new Vector2Int(UnityEngine.Random.Range(0, skillBoardSpec.X), UnityEngine.Random.Range(0, skillBoardSpec.Y));
@@ -176,7 +176,7 @@ namespace StoryNothing.InstanceData
                 }
             }
 
-            return new InstanceSkillBoard(instanceId, skillBoardMasterDataId, holes, bingoBonusSkillSpecIds);
+            return new InstanceSkillBoard(instanceId, skillBoardSpecId, holes, bingoBonusSkillSpecIds);
         }
 
         public bool CanPlacementSkillPiece(UserData userData, InstanceSkillPiece instanceSkillPiece, Vector2Int positionIndex, int rotationIndex)
