@@ -3540,7 +3540,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: elements.Array.size
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: elements.Array.data[0].document
@@ -3578,6 +3578,10 @@ PrefabInstance:
       propertyPath: elements.Array.data[8].document
       value: 
       objectReference: {fileID: 791288410961309822}
+    - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
+      propertyPath: elements.Array.data[9].document
+      value: 
+      objectReference: {fileID: 7592830736064122369}
     - target: {fileID: 8316915584728943080, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: m_Name
       value: UI.View.OutGame
