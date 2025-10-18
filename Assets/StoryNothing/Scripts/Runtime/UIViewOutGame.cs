@@ -84,6 +84,8 @@ namespace StoryNothing.UIViews
 
         private readonly UIElementDialog uiElementDialog;
 
+        private readonly UIElementNotification uiElementNotification;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
         {
             this.document = document;
@@ -163,6 +165,7 @@ namespace StoryNothing.UIViews
                 .Q<HKUIDocument>("Area.SkillBoard")
                 .Q<RectTransform>("BingoBonus");
             uiElementDialog = new UIElementDialog(this.document.Q<HKUIDocument>("Area.Dialog"));
+            uiElementNotification = new UIElementNotification(this.document.Q<HKUIDocument>("Area.Notification"));
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -206,13 +209,13 @@ namespace StoryNothing.UIViews
                         var skillBoardSpecIds = new[] { 10101, 10201, 10301 };
                         var instanceSkillBoard = InstanceSkillBoard.Create(userData.AddInstanceSkillBoardCount, skillBoardSpecIds[UnityEngine.Random.Range(0, skillBoardSpecIds.Length)]);
                         userData.AddInstanceSkillBoard(instanceSkillBoard);
-                        await uiElementDialog.ShowAsync($"{instanceSkillBoard.Name}を獲得した！", new[] { "OK" }, cancellationToken);
+                        uiElementNotification.Add($"{instanceSkillBoard.Name}を獲得した！");
                         break;
                     case 4:
                         var createSkillPieceSpecIds = new[] { 10101, 10201, 10301 };
                         var instanceSkillPiece = InstanceSkillPiece.Create(userData.AddInstanceSkillPieceCount, createSkillPieceSpecIds[UnityEngine.Random.Range(0, createSkillPieceSpecIds.Length)]);
                         userData.AddInstanceSkillPiece(instanceSkillPiece);
-                        await uiElementDialog.ShowAsync($"{instanceSkillPiece.Name}を獲得した！", new[] { "OK" }, cancellationToken);
+                        uiElementNotification.Add($"{instanceSkillPiece.Name}を獲得した！");
                         break;
                 }
             }
