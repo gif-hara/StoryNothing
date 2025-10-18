@@ -6,18 +6,14 @@ namespace StoryNothing
 {
     public sealed class UIElementNotification
     {
-        private readonly HKUIDocument document;
-
         private readonly RectTransform labelParent;
 
         private readonly HKUIDocument labelPrefab;
 
         public UIElementNotification(HKUIDocument document)
         {
-            this.document = document;
             labelParent = document.Q<RectTransform>("Area.Label");
-            labelPrefab = document.Q<HKUIDocument>("UI.Element.Label");
-            document.gameObject.SetActive(false);
+            labelPrefab = document.Q<HKUIDocument>("UI.Element.Notification");
         }
 
         public void Add(string message)
