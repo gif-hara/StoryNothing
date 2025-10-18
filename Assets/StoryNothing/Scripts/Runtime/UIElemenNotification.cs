@@ -19,7 +19,7 @@ namespace StoryNothing
         public void Add(string message)
         {
             var labelInstance = Object.Instantiate(labelPrefab, labelParent);
-            var textComponent = labelInstance.Q<TMP_Text>("Text");
+            var textComponent = labelInstance.Q<TMP_Text>("Message");
             textComponent.text = message;
         }
     }
