@@ -86,7 +86,9 @@ namespace StoryNothing.UIViews
 
         private readonly UIElementNotification uiElementNotification;
 
-        public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId)
+        private readonly string initialMessage;
+
+        public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId, string initialMessage)
         {
             this.document = document;
             this.userData = userData;
@@ -166,10 +168,12 @@ namespace StoryNothing.UIViews
                 .Q<RectTransform>("BingoBonus");
             uiElementDialog = new UIElementDialog(this.document.Q<HKUIDocument>("Area.Dialog"));
             uiElementNotification = new UIElementNotification(this.document.Q<HKUIDocument>("Area.Notification"));
+            this.initialMessage = initialMessage;
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
         {
+            await uiElementDialog.ShowAsync(this.initialMessage, new[] { "OK" }, cancellationToken);
             await StateRootAsync(cancellationToken);
         }
 

@@ -33,6 +33,9 @@ namespace StoryNothing
         [field: SerializeField]
         private int playerCharacterSpecId;
 
+        [field: SerializeField, Multiline]
+        private string initialMessage;
+
         private UserData userData;
 
         private async UniTaskVoid Start()
@@ -110,7 +113,7 @@ namespace StoryNothing
                 .RegisterTo(destroyCancellationToken);
 #endif
 
-            var uiViewOutGame = new UIViewOutGame(outGameDocument, userData, playerInput, playerCharacterSpecId);
+            var uiViewOutGame = new UIViewOutGame(outGameDocument, userData, playerInput, playerCharacterSpecId, initialMessage);
             await uiViewOutGame.BeginAsync(destroyCancellationToken);
         }
     }
