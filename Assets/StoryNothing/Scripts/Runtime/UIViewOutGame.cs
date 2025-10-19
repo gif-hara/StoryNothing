@@ -267,18 +267,19 @@ namespace StoryNothing.UIViews
                     .Where(x => !userData.GetEquipInstanceSkillBoard().PlacementSkillPieces.Any(y => y.InstanceSkillPieceId == x.Value.InstanceId))
                     .Select(x => x.Value)
                     .ToList();
+                var selectAvailableSkillPieceIndex = availableSkillPieces.Count > 0 ? UniTask.WhenAny(
+                    availableSkillPieces.Select(x =>
+                        CreateHKButton(CreateListContent(x.Name, selectEditModeScope.Token))
+                            .OnPointerEnter(_ =>
+                            {
+                                uiElementSkillPiece.Setup(x, 0);
+                                uiElementSkillPiece.SetPositionInCenter();
+                                SetupSkillPieceInformation(x);
+                            })
+                            .OnClickAsync(selectEditModeScope.Token)
+                )) : UniTask.Never<int>(cancellationToken: selectEditModeScope.Token);
                 var selectEditModeResult = await UniTask.WhenAny(
-                    UniTask.WhenAny(
-                        availableSkillPieces.Select(x =>
-                            CreateHKButton(CreateListContent(x.Name, selectEditModeScope.Token))
-                                .OnPointerEnter(_ =>
-                                {
-                                    uiElementSkillPiece.Setup(x, 0);
-                                    uiElementSkillPiece.SetPositionInCenter();
-                                    SetupSkillPieceInformation(x);
-                                })
-                                .OnClickAsync(selectEditModeScope.Token)
-                    )),
+                    selectAvailableSkillPieceIndex,
                     GetClickedUIElementSkillPieceAsync(uiElementSkillPiece, selectEditModeScope.Token),
                     playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(selectEditModeScope.Token).AsUniTask()
                 );
