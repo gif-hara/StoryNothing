@@ -88,6 +88,8 @@ namespace StoryNothing.UIViews
 
         private readonly string initialMessage;
 
+        private TMP_Text tipsRightLabel;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId, string initialMessage)
         {
             this.document = document;
@@ -169,10 +171,14 @@ namespace StoryNothing.UIViews
             uiElementDialog = new UIElementDialog(this.document.Q<HKUIDocument>("Area.Dialog"));
             uiElementNotification = new UIElementNotification(this.document.Q<HKUIDocument>("Area.Notification"));
             this.initialMessage = initialMessage;
+            tipsRightLabel = this.document
+                .Q<HKUIDocument>("Area.Tips")
+                .Q<TMP_Text>("Text.Right");
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
         {
+            tipsRightLabel.SetText($"Version {Application.version}");
             await uiElementDialog.ShowAsync(this.initialMessage, new[] { "OK" }, cancellationToken);
             await StateRootAsync(cancellationToken);
         }
