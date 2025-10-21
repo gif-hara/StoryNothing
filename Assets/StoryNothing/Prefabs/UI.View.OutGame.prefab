@@ -4085,7 +4085,7 @@ GameObject:
   - component: {fileID: 5212947578666352399}
   - component: {fileID: 4509218125059726857}
   m_Layer: 0
-  m_Name: Area.SelectFilter
+  m_Name: Area.SkillPieceFilter
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
