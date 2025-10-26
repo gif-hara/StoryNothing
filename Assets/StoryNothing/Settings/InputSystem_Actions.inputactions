@@ -498,6 +498,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "SubMenu",
+                    "type": "Button",
+                    "id": "97880abc-b547-4d91-9972-0c05a4d1a0fc",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Cancel",
                     "type": "Button",
                     "id": "15cef263-9014-4fd5-94d9-4e4a6234a6ef",
@@ -854,6 +863,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Submit",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "31fb85be-aaa2-48e6-b18d-33819e941262",
+                    "path": "<Mouse>/middleButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse;Gamepad;Touch;Joystick;XR",
+                    "action": "SubMenu",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
