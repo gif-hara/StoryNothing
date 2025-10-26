@@ -4730,7 +4730,7 @@ GameObject:
   - component: {fileID: 8742744633657750343}
   - component: {fileID: 8593338716713064533}
   m_Layer: 0
-  m_Name: CelNumber
+  m_Name: CellNumber
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9367,7 +9367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: elements.Array.size
-      value: 11
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: elements.Array.data[0].document
@@ -9413,6 +9413,10 @@ PrefabInstance:
       propertyPath: elements.Array.data[10].document
       value: 
       objectReference: {fileID: 4417237950500239012}
+    - target: {fileID: 4714837244518537179, guid: 436e622de486bb54484999dc04d3521c, type: 3}
+      propertyPath: elements.Array.data[11].document
+      value: 
+      objectReference: {fileID: 7808751522539330568}
     - target: {fileID: 8316915584728943080, guid: 436e622de486bb54484999dc04d3521c, type: 3}
       propertyPath: m_Name
       value: UI.View.OutGame
