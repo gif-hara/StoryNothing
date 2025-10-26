@@ -90,6 +90,8 @@ namespace StoryNothing.UIViews
 
         private TMP_Text tipsRightLabel;
 
+        private UIElementSkillPieceFilter uiElementSkillPieceFilter;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId, string initialMessage)
         {
             this.document = document;
@@ -174,6 +176,7 @@ namespace StoryNothing.UIViews
             tipsRightLabel = this.document
                 .Q<HKUIDocument>("Area.Tips")
                 .Q<TMP_Text>("Text.Right");
+            uiElementSkillPieceFilter = new UIElementSkillPieceFilter(this.document.Q<HKUIDocument>("Area.SkillPieceFilter"));
         }
 
         public async UniTask BeginAsync(CancellationToken cancellationToken)
@@ -281,7 +284,8 @@ namespace StoryNothing.UIViews
                 var selectEditModeResult = await UniTask.WhenAny(
                     selectAvailableSkillPieceIndex,
                     GetClickedUIElementSkillPieceAsync(uiElementSkillPiece, selectEditModeScope.Token),
-                    playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(selectEditModeScope.Token).AsUniTask()
+                    playerInput.actions["UI/Cancel"].OnPerformedAsObservable().FirstAsync(selectEditModeScope.Token).AsUniTask(),
+                    playerInput.actions["UI/SubMenu"].OnPerformedAsObservable().FirstAsync(selectEditModeScope.Token).AsUniTask()
                 );
                 selectEditModeScope.Cancel();
                 selectEditModeScope.Dispose();
@@ -327,6 +331,11 @@ namespace StoryNothing.UIViews
                 else if (selectEditModeResult.winArgumentIndex == 2)
                 {
                     break;
+                }
+                else if (selectEditModeResult.winArgumentIndex == 3)
+                {
+                    var filterData = await uiElementSkillPieceFilter.ShowAsync(cancellationToken);
+                    Debug.Log($"フィルター結果: セル数={filterData.cellName}, 色={filterData.color}, 形状={string.Join(",", filterData.cellName)}");
                 }
             }
             uiElementSkillPiece.Dispose();
