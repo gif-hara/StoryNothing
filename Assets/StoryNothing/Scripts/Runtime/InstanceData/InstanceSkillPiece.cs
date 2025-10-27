@@ -99,5 +99,29 @@ namespace StoryNothing.InstanceData
                 skillSpecIds
                 );
         }
+
+        public bool IsMatch(SkillPieceFilterData filter)
+        {
+            if (filter == null)
+            {
+                return true;
+            }
+            if (filter.cellNumber != 0 && SkillPieceCellSpec.GroupId != filter.cellNumber)
+            {
+                return false;
+            }
+
+            if (filter.color != Define.SkillPieceColor.Gray && ColorType != filter.color)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(filter.cellName) && SkillPieceCellSpec.Name != filter.cellName)
+            {
+                return false;
+            }
+
+            return true;
+        }
     }
 }
