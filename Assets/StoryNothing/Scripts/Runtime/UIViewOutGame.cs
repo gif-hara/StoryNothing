@@ -92,6 +92,8 @@ namespace StoryNothing.UIViews
 
         private UIElementSkillPieceFilter uiElementSkillPieceFilter;
 
+        private SkillPieceFilterData filterData;
+
         public UIViewOutGame(HKUIDocument document, UserData userData, PlayerInput playerInput, int playerCharacterSpecId, string initialMessage)
         {
             this.document = document;
@@ -268,6 +270,7 @@ namespace StoryNothing.UIViews
                 skillBoardBlackout.SetActive(true);
                 var availableSkillPieces = userData.SkillPieces
                     .Where(x => !userData.GetEquipInstanceSkillBoard().PlacementSkillPieces.Any(y => y.InstanceSkillPieceId == x.Value.InstanceId))
+                    .Where(x => x.Value.IsMatch(filterData))
                     .Select(x => x.Value)
                     .ToList();
                 var selectAvailableSkillPieceIndex = availableSkillPieces.Count > 0 ? UniTask.WhenAny(
@@ -334,8 +337,7 @@ namespace StoryNothing.UIViews
                 }
                 else if (selectEditModeResult.winArgumentIndex == 3)
                 {
-                    var filterData = await uiElementSkillPieceFilter.ShowAsync(cancellationToken);
-                    Debug.Log($"フィルター結果: セル数={filterData.cellName}, 色={filterData.color}, 形状={string.Join(",", filterData.cellName)}");
+                    filterData = await uiElementSkillPieceFilter.ShowAsync(filterData, cancellationToken);
                 }
             }
             uiElementSkillPiece.Dispose();
