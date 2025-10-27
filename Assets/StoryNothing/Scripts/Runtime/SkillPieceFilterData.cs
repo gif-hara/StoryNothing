@@ -1,13 +1,11 @@
-#nullable enable
-
 namespace StoryNothing
 {
-    public struct SkillPieceFilterData
+    public class SkillPieceFilterData
     {
-        public int? cellNumber;
+        public int cellNumber;
 
-        public Define.SkillPieceColor? color;
+        public Define.SkillPieceColor color;
 
-        public string? cellName;
+        public string cellName;
     }
 }
